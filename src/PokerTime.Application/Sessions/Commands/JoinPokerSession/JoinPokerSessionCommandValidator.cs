@@ -17,8 +17,8 @@ namespace PokerTime.Application.Sessions.Commands.JoinPokerSession {
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1710:Identifiers should have correct suffix", Justification = "This is a validation rule set.")]
     public sealed class JoinPokerSessionCommandValidator : AbstractValidator<JoinPokerSessionCommand> {
-        private static readonly Expression<Func<Retrospective, string?>> GetFacilitatorHash = r => r.FacilitatorHashedPassphrase;
-        private static readonly Expression<Func<Retrospective, string?>> GetParticipantHash = r => r.HashedPassphrase;
+        private static readonly Expression<Func<Session, string?>> GetFacilitatorHash = r => r.FacilitatorHashedPassphrase;
+        private static readonly Expression<Func<Session, string?>> GetParticipantHash = r => r.HashedPassphrase;
 
         private readonly IPokerTimeDbContextFactory _pokerTimeDbContext;
         private readonly IPassphraseService _passphraseService;
@@ -46,7 +46,7 @@ namespace PokerTime.Application.Sessions.Commands.JoinPokerSession {
         private bool MustBeAValidPassphrase(string sessionId, in bool isFacilitatorRole, string passphrase) {
             using IPokerTimeDbContext dbContext = this._pokerTimeDbContext.CreateForEditContext();
 
-            Expression<Func<Retrospective, string?>> property = isFacilitatorRole ? GetFacilitatorHash : GetParticipantHash;
+            Expression<Func<Session, string?>> property = isFacilitatorRole ? GetFacilitatorHash : GetParticipantHash;
             string? hash = dbContext.Retrospectives.Where(x => x.UrlId.StringId == sessionId).Select(property).FirstOrDefault();
 
             if (hash == null) {

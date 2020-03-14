@@ -19,7 +19,7 @@ namespace PokerTime.Application.Tests.Unit.SessionWorkflows.Commands {
 
     public abstract class RetrospectiveWorkflowCommandTestBase : CommandTestBase {
 #nullable disable
-        protected Retrospective Retrospective { get; private set; }
+        protected Session Session { get; private set; }
         protected string SessionId { get; private set; }
         protected ISessionStatusUpdateDispatcher SessionStatusUpdateDispatcherMock { get; set; }
         protected ISystemClock SystemClockMock { get; set; }
@@ -27,7 +27,7 @@ namespace PokerTime.Application.Tests.Unit.SessionWorkflows.Commands {
 
         [OneTimeSetUp]
         public async Task OneTimeSetup() {
-            var retro = new Retrospective {
+            var retro = new Session {
                 Title = "Yet another test",
                 Participants =
                 {
@@ -39,7 +39,7 @@ namespace PokerTime.Application.Tests.Unit.SessionWorkflows.Commands {
             };
 
             this.SessionId = retro.UrlId.StringId;
-            this.Retrospective = retro;
+            this.Session = retro;
             this.ConfigureRetrospective(retro);
 
             this.Context.Retrospectives.Add(retro);
@@ -54,9 +54,9 @@ namespace PokerTime.Application.Tests.Unit.SessionWorkflows.Commands {
 
         protected void RefreshObject() {
             using IPokerTimeDbContext newEditContext = this.Context.CreateForEditContext();
-            this.Retrospective = newEditContext.Retrospectives.Find(this.Retrospective.Id);
+            this.Session = newEditContext.Retrospectives.Find(this.Session.Id);
         }
 
-        protected virtual void ConfigureRetrospective(Retrospective retrospective) { }
+        protected virtual void ConfigureRetrospective(Session session) { }
     }
 }

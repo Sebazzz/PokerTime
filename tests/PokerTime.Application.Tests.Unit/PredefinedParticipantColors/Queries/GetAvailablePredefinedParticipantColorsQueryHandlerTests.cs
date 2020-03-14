@@ -23,7 +23,7 @@ namespace PokerTime.Application.Tests.Unit.PredefinedParticipantColors.Queries {
         [Test]
         public async Task GetAvailablePredefinedParticipantColorsTest() {
             // Given
-            var retro = new Domain.Entities.Retrospective {
+            var retro = new Domain.Entities.Session {
                 CreationTimestamp = DateTimeOffset.UtcNow,
                 FacilitatorHashedPassphrase = "xxx",
                 Title = "xxx",

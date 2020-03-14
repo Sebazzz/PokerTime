@@ -16,7 +16,7 @@ namespace PokerTime.Application.Sessions.Queries.GetSessionStatus {
     using Microsoft.EntityFrameworkCore;
 
     public interface ISessionStatusMapper {
-        Task<SessionStatus> GetSessionStatus(Retrospective retrospective, CancellationToken cancellationToken);
+        Task<SessionStatus> GetSessionStatus(Session session, CancellationToken cancellationToken);
     }
 
     public sealed class SessionStatusMapper : ISessionStatusMapper {
@@ -28,10 +28,10 @@ namespace PokerTime.Application.Sessions.Queries.GetSessionStatus {
             this._mapper = mapper;
         }
 
-        public Task<SessionStatus> GetSessionStatus(Retrospective retrospective, CancellationToken cancellationToken) {
-            if (retrospective == null) throw new ArgumentNullException(nameof(retrospective));
+        public Task<SessionStatus> GetSessionStatus(Session session, CancellationToken cancellationToken) {
+            if (session == null) throw new ArgumentNullException(nameof(session));
 
-            var retrospectiveStatus = new SessionStatus(retrospective.UrlId.StringId, retrospective.Title, retrospective.CurrentStage);
+            var retrospectiveStatus = new SessionStatus(session.UrlId.StringId, session.Title, session.CurrentStage);
 
             return Task.FromResult(retrospectiveStatus);
         }

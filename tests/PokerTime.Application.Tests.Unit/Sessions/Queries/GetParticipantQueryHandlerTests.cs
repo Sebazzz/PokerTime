@@ -21,7 +21,7 @@ namespace PokerTime.Application.Tests.Unit.Sessions.Queries {
 
         [OneTimeSetUp]
         public async Task OneTimeSetUp() {
-            var retro = new Retrospective {
+            var retro = new Session {
                 Title = "What",
                 Participants =
                 {
@@ -33,7 +33,7 @@ namespace PokerTime.Application.Tests.Unit.Sessions.Queries {
             this._retro1Id = retro.UrlId.StringId;
             this.Context.Retrospectives.Add(retro);
 
-            var retro2 = new Retrospective {
+            var retro2 = new Session {
                 Title = "Who",
                 Participants =
                 {

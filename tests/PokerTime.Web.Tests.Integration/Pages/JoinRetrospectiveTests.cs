@@ -191,7 +191,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
             Assert.That(() => secondInstance.OnlineList.GetListItem(facilitator.Id).FindElements(By.ClassName("fa-crown")), Is.Not.Empty.Retry());
         }
 
-        private Task SetRetrospective(string sessionId, Action<Retrospective> action) {
+        private Task SetRetrospective(string sessionId, Action<Session> action) {
             using IServiceScope scope = this.App.CreateTestServiceScope();
             return scope.SetRetrospective(sessionId, action);
         }

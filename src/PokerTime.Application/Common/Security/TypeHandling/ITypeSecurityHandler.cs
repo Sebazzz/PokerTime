@@ -10,6 +10,6 @@ namespace PokerTime.Application.Common.Security.TypeHandling {
     using Models;
 
     internal interface ITypeSecurityHandler {
-        void HandleOperation(SecurityOperation operation, Retrospective retrospective, object entity, in CurrentParticipantModel currentParticipant);
+        void HandleOperation(SecurityOperation operation, Session session, object entity, in CurrentParticipantModel currentParticipant);
     }
 }

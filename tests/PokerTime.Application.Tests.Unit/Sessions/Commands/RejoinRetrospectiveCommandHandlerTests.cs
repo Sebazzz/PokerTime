@@ -25,7 +25,7 @@ namespace PokerTime.Application.Tests.Unit.Sessions.Commands {
 
         [OneTimeSetUp]
         public async Task OneTimeSetUp() {
-            var retro = new Retrospective {
+            var retro = new Session {
                 Title = "What",
                 Participants =
                 {
@@ -38,7 +38,7 @@ namespace PokerTime.Application.Tests.Unit.Sessions.Commands {
             this.Context.Retrospectives.Add(retro);
             await this.Context.SaveChangesAsync(CancellationToken.None);
 
-            var retro2 = new Retrospective {
+            var retro2 = new Session {
                 Title = "Who",
                 Participants =
                 {

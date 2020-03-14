@@ -11,13 +11,13 @@ namespace PokerTime.Application.Common.Security {
     using Domain.Entities;
 
     public static class SecurityValidatorExtensions {
-        public static ValueTask EnsureAddOrUpdate(this ISecurityValidator securityValidator, Retrospective retrospective, object entity) {
+        public static ValueTask EnsureAddOrUpdate(this ISecurityValidator securityValidator, Session session, object entity) {
             if (securityValidator == null) throw new ArgumentNullException(nameof(securityValidator));
-            return securityValidator.EnsureOperation(retrospective, SecurityOperation.AddOrUpdate, entity);
+            return securityValidator.EnsureOperation(session, SecurityOperation.AddOrUpdate, entity);
         }
-        public static ValueTask EnsureDelete(this ISecurityValidator securityValidator, Retrospective retrospective, object entity) {
+        public static ValueTask EnsureDelete(this ISecurityValidator securityValidator, Session session, object entity) {
             if (securityValidator == null) throw new ArgumentNullException(nameof(securityValidator));
-            return securityValidator.EnsureOperation(retrospective, SecurityOperation.Delete, entity);
+            return securityValidator.EnsureOperation(session, SecurityOperation.Delete, entity);
         }
 
     }

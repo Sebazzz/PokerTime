@@ -70,7 +70,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
                 Task.Run(() => WaitNavigatedToLobby(this.Client2))
             );
 
-        protected Task SetRetrospective(Action<Retrospective> action) {
+        protected Task SetRetrospective(Action<Session> action) {
             using IServiceScope scope = this.App.CreateTestServiceScope();
             return scope.SetRetrospective(this.SessionId, action);
         }

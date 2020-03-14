@@ -34,9 +34,9 @@ namespace PokerTime.Application.Common.Security.TypeHandling {
             }
         }
 
-        public static void HandleOperation(SecurityOperation operation, Retrospective retrospective, object entity, in CurrentParticipantModel currentParticipant) {
+        public static void HandleOperation(SecurityOperation operation, Session session, object entity, in CurrentParticipantModel currentParticipant) {
             foreach (ITypeSecurityHandler handler in All) {
-                handler.HandleOperation(operation, retrospective, entity, currentParticipant);
+                handler.HandleOperation(operation, session, entity, currentParticipant);
             }
         }
     }

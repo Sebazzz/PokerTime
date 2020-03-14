@@ -28,11 +28,11 @@ namespace PokerTime.Application.Tests.Unit.Sessions.Commands {
 
     [TestFixture]
     public sealed class JoinPokerSessionCommandHandlerTests : CommandTestBase {
-        private Retrospective _retrospective;
+        private Session _session;
 
         [OneTimeSetUp]
         public async Task OneTimeSetUp() {
-            var retro = new Retrospective {
+            var retro = new Session {
                 Title = "What",
                 Participants =
                 {
@@ -45,7 +45,7 @@ namespace PokerTime.Application.Tests.Unit.Sessions.Commands {
             this.Context.Retrospectives.Add(retro);
             await this.Context.SaveChangesAsync(CancellationToken.None);
 
-            this._retrospective = retro;
+            this._session = retro;
         }
 
         [Test]
@@ -66,7 +66,7 @@ namespace PokerTime.Application.Tests.Unit.Sessions.Commands {
         [Test]
         public async Task JoinPokerSessionCommand_SetsParticipantId_WhenJoiningRetrospective() {
             // Given
-            var retro = this._retrospective ?? throw new InvalidOperationException("OneTimeSetup not executed");
+            var retro = this._session ?? throw new InvalidOperationException("OneTimeSetup not executed");
 
             var mediator = Substitute.For<IMediator>();
             var mapper = Substitute.For<IMapper>();
@@ -94,7 +94,7 @@ namespace PokerTime.Application.Tests.Unit.Sessions.Commands {
             currentParticipantService.ReceivedWithAnyArgs(Quantity.Exactly(1))
                 .SetParticipant(Arg.Any<CurrentParticipantModel>());
 
-            Retrospective checkRetro = await this.Context.Retrospectives.AsNoTracking().
+            Session checkRetro = await this.Context.Retrospectives.AsNoTracking().
                 Include(x => x.Participants).
                 FindBySessionId(retro.UrlId.StringId, CancellationToken.None).
                 ConfigureAwait(false);
@@ -108,7 +108,7 @@ namespace PokerTime.Application.Tests.Unit.Sessions.Commands {
         [Test]
         public async Task JoinPokerSessionCommand_DuplicateJoin_DoesNotCreateNewParticipant() {
             // Given
-            var retro = this._retrospective ?? throw new InvalidOperationException("OneTimeSetup not executed");
+            var retro = this._session ?? throw new InvalidOperationException("OneTimeSetup not executed");
 
             var mediator = Substitute.For<IMediator>();
             var mapper = Substitute.For<IMapper>();

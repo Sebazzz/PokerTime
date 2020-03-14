@@ -21,8 +21,8 @@
         public async Task<JoinPokerSessionInfo?> Handle(GetJoinPokerSessionInfoQuery request, CancellationToken cancellationToken) {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
-            Retrospective retrospective = await this._dbContext.Retrospectives.FindBySessionId(request.SessionId, cancellationToken);
-            if (retrospective == null) {
+            Session Session = await this._dbContext.Retrospectives.FindBySessionId(request.SessionId, cancellationToken);
+            if (Session == null) {
                 this._logger.LogWarning($"Session with id {request.SessionId} was not found");
 
                 return null;
@@ -30,10 +30,10 @@
 
             this._logger.LogInformation($"Session with id {request.SessionId} was found");
             return new JoinPokerSessionInfo(
-                retrospective.Title,
-                retrospective.HashedPassphrase != null,
-                retrospective.IsStarted(),
-                retrospective.CurrentStage == SessionStage.Finished);
+                Session.Title,
+                Session.HashedPassphrase != null,
+                Session.IsStarted(),
+                Session.CurrentStage == SessionStage.Finished);
         }
     }
 }

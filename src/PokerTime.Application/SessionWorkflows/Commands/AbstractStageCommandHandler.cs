@@ -34,7 +34,7 @@ namespace PokerTime.Application.SessionWorkflows.Commands {
 
             try {
                 this.DbContext = this._dbContextFactory.CreateForEditContext();
-                Retrospective? retrospective = await this.DbContext.Retrospectives.FindBySessionId(request.SessionId, cancellationToken);
+                Session? retrospective = await this.DbContext.Retrospectives.FindBySessionId(request.SessionId, cancellationToken);
 
                 if (retrospective == null) {
                     throw new NotFoundException();
@@ -47,8 +47,8 @@ namespace PokerTime.Application.SessionWorkflows.Commands {
             }
         }
 
-        protected abstract Task<Unit> HandleCore(TRequest request, Retrospective retrospective, CancellationToken cancellationToken);
+        protected abstract Task<Unit> HandleCore(TRequest request, Session session, CancellationToken cancellationToken);
 
-        protected Task DispatchUpdate(Retrospective retrospective, CancellationToken cancellationToken) => this._retrospectiveStatusUpdateDispatcher.DispatchUpdate(retrospective, cancellationToken);
+        protected Task DispatchUpdate(Session session, CancellationToken cancellationToken) => this._retrospectiveStatusUpdateDispatcher.DispatchUpdate(session, cancellationToken);
     }
 }

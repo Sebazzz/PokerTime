@@ -167,7 +167,7 @@ namespace PokerTime.Web.Tests.Integration.Common {
             this._lastAddedItem = (typeof(T), id);
         }
 
-        private TestCaseBuilder EnqueueRetrospectiveAction(Action<Retrospective> action) {
+        private TestCaseBuilder EnqueueRetrospectiveAction(Action<Session> action) {
             this._actions.Enqueue(() => this._scope.SetRetrospective(this._retrospectiveId, action));
 
             return this;

@@ -29,8 +29,8 @@ namespace PokerTime.Application.Tests.Unit.Common.Security {
         [SetUp]
         public void SetUp() => this._currentParticipantService.Reset();
 
-        private static Retrospective GetRetrospectiveInStage(SessionStage sessionStage) {
-            return new Retrospective {
+        private static Session GetRetrospectiveInStage(SessionStage sessionStage) {
+            return new Session {
                 CurrentStage = sessionStage
             };
         }

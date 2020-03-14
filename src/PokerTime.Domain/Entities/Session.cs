@@ -17,7 +17,7 @@ namespace PokerTime.Domain.Entities {
     /// A retrospective consists of notes created by participants. A retrospective has a unique identifier.
     /// </summary>
     [SuppressMessage("ReSharper", "UnusedMember.Global", Justification = "EFCore")]
-    public class Retrospective {
+    public class Session {
         private ICollection<Participant>? _participants;
 
         private readonly SessionIdentifier _urlId = SessionIdentifierService.CreateNewInternal();

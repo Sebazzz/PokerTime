@@ -61,7 +61,7 @@ namespace PokerTime.Persistence {
 
         public DbSet<PredefinedParticipantColor> PredefinedParticipantColors { get; set; }
         public DbSet<Participant> Participants { get; set; }
-        public DbSet<Retrospective> Retrospectives { get; set; }
+        public DbSet<Session> Retrospectives { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             if (modelBuilder == null) throw new ArgumentNullException(nameof(modelBuilder));

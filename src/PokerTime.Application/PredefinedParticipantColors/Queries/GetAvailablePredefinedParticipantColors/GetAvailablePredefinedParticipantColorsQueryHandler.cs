@@ -25,9 +25,9 @@
         public async Task<IList<AvailableParticipantColorModel>> Handle(GetAvailablePredefinedParticipantColorsQuery query, CancellationToken cancellationToken) {
             if (query == null) throw new ArgumentNullException(nameof(query));
 
-            Retrospective? retrospective = await this._dbContext.Retrospectives.Include(x => x.Participants).FindBySessionId(query.RetrospectiveId, cancellationToken);
+            Session? retrospective = await this._dbContext.Retrospectives.Include(x => x.Participants).FindBySessionId(query.RetrospectiveId, cancellationToken);
             if (retrospective == null) {
-                throw new NotFoundException(nameof(Retrospective), query.RetrospectiveId);
+                throw new NotFoundException(nameof(Session), query.RetrospectiveId);
             }
 
             // This looks weird, but is necessary to work around "System.ArgumentException : must be reducible node" EF bug

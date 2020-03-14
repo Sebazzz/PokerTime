@@ -34,7 +34,7 @@ namespace PokerTime.Application.Tests.Unit.Sessions.Queries {
         [Test]
         public async Task GetJoinPokerSessionInfoCommandHandler_ReturnsInfo_OnRetrospectiveFound() {
             // Given
-            var retrospective = new Retrospective {
+            var retrospective = new Session {
                 Title = "Hello",
                 CreationTimestamp = DateTimeOffset.Now,
                 HashedPassphrase = "hello"

@@ -45,9 +45,9 @@ namespace PokerTime.Application.Tests.Unit.SessionWorkflows.Commands {
             this.RefreshObject();
 
             // Then
-            Assert.That(this.Retrospective.CurrentStage, Is.EqualTo(SessionStage.Discuss));
+            Assert.That(this.Session.CurrentStage, Is.EqualTo(SessionStage.Discuss));
 
-            await this.SessionStatusUpdateDispatcherMock.Received().DispatchUpdate(Arg.Any<Retrospective>(), CancellationToken.None);
+            await this.SessionStatusUpdateDispatcherMock.Received().DispatchUpdate(Arg.Any<Session>(), CancellationToken.None);
         }
     }
 }

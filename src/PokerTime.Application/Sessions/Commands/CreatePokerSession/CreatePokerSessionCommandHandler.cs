@@ -41,7 +41,7 @@ namespace PokerTime.Application.Sessions.Commands.CreatePokerSession {
             }
 
             using var qrCodeGenerator = new QRCodeGenerator();
-            var retrospective = new Retrospective {
+            var retrospective = new Session {
                 CreationTimestamp = this._systemClock.CurrentTimeOffset,
                 Title = request.Title,
                 HashedPassphrase = HashOptionalPassphrase(request.Passphrase),

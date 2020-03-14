@@ -16,7 +16,7 @@ namespace PokerTime.Application.Common.Security {
     using TypeHandling;
 
     public interface ISecurityValidator {
-        ValueTask EnsureOperation(Retrospective retrospective, SecurityOperation operation, object entity);
+        ValueTask EnsureOperation(Session session, SecurityOperation operation, object entity);
     }
 
     public sealed class SecurityValidator : ISecurityValidator {
@@ -28,8 +28,8 @@ namespace PokerTime.Application.Common.Security {
             this._logger = logger;
         }
 
-        public async ValueTask EnsureOperation(Retrospective retrospective, SecurityOperation operation, object entity) {
-            if (retrospective == null) throw new ArgumentNullException(nameof(retrospective));
+        public async ValueTask EnsureOperation(Session session, SecurityOperation operation, object entity) {
+            if (session == null) throw new ArgumentNullException(nameof(session));
             if (entity == null) throw new ArgumentNullException(nameof(entity));
 
             CurrentParticipantModel participant = await this.GetAuthenticatedParticipant(operation, entity.GetType());
@@ -38,7 +38,7 @@ namespace PokerTime.Application.Common.Security {
                 this.EnsureOperationSecurity(operation, entity, participant);
             }
 
-            this.InvokeTypeSecurityChecks(operation, retrospective, participant, entity);
+            this.InvokeTypeSecurityChecks(operation, session, participant, entity);
         }
 
         private async ValueTask<CurrentParticipantModel> GetAuthenticatedParticipant(SecurityOperation operation, Type entityType) {
@@ -74,9 +74,9 @@ namespace PokerTime.Application.Common.Security {
             }
         }
 
-        private void InvokeTypeSecurityChecks(SecurityOperation operation, Retrospective retrospective, in CurrentParticipantModel participant, object entity) {
+        private void InvokeTypeSecurityChecks(SecurityOperation operation, Session session, in CurrentParticipantModel participant, object entity) {
             try {
-                SecurityTypeHandlers.HandleOperation(operation, retrospective, entity, participant);
+                SecurityTypeHandlers.HandleOperation(operation, session, entity, participant);
 
                 if (this._logger.IsEnabled(LogLevel.Trace)) {
                     this._logger.LogTrace($"Operation {operation} granted for entity {entity.GetType()} for participant #{participant.Id}");

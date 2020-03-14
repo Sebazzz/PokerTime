@@ -34,7 +34,7 @@ namespace PokerTime.Application.Tests.Unit.Sessions.Queries {
         [Test]
         public async Task GetParticipantsInfoCommand_ReturnsList_OnRetrospectiveFound() {
             // Given
-            var retro = new Retrospective {
+            var retro = new Session {
                 Title = "What",
                 Participants =
                 {

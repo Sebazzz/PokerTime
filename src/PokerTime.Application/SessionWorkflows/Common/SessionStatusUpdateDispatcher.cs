@@ -14,7 +14,7 @@ namespace PokerTime.Application.SessionWorkflows.Common {
     using Sessions.Queries.GetSessionStatus;
 
     public interface ISessionStatusUpdateDispatcher {
-        Task DispatchUpdate(Retrospective retrospective, CancellationToken cancellationToken);
+        Task DispatchUpdate(Session session, CancellationToken cancellationToken);
     }
 
     public sealed class SessionStatusUpdateDispatcher : ISessionStatusUpdateDispatcher {
@@ -26,8 +26,8 @@ namespace PokerTime.Application.SessionWorkflows.Common {
             this._mediator = mediator;
         }
 
-        public async Task DispatchUpdate(Retrospective retrospective, CancellationToken cancellationToken) {
-            SessionStatus SessionStatus = await this._sessionStatusMapper.GetSessionStatus(retrospective, cancellationToken);
+        public async Task DispatchUpdate(Session session, CancellationToken cancellationToken) {
+            SessionStatus SessionStatus = await this._sessionStatusMapper.GetSessionStatus(session, cancellationToken);
 
             await this._mediator.Publish(new SessionStatusUpdatedNotification(SessionStatus), cancellationToken);
         }

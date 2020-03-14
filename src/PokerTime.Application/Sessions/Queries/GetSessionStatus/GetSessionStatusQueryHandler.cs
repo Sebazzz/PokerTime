@@ -28,13 +28,13 @@ namespace PokerTime.Application.Sessions.Queries.GetSessionStatus {
         public async Task<SessionStatus> Handle(GetSessionStatusQuery request, CancellationToken cancellationToken) {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
-            Retrospective retrospective = await this._pokerTimeDbContext.Retrospectives.FindBySessionId(request.SessionId, cancellationToken);
+            Session Session = await this._pokerTimeDbContext.Retrospectives.FindBySessionId(request.SessionId, cancellationToken);
 
-            if (retrospective == null) {
+            if (Session == null) {
                 throw new NotFoundException();
             }
 
-            return await this._mapper.GetSessionStatus(retrospective, cancellationToken);
+            return await this._mapper.GetSessionStatus(Session, cancellationToken);
         }
     }
 }

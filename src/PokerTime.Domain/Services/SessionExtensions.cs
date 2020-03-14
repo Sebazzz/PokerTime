@@ -10,10 +10,10 @@ namespace PokerTime.Domain.Services {
     using Entities;
 
     public static class SessionExtensions {
-        public static bool IsStarted(this Retrospective retrospective) {
-            if (retrospective == null) throw new ArgumentNullException(nameof(retrospective));
+        public static bool IsStarted(this Session session) {
+            if (session == null) throw new ArgumentNullException(nameof(session));
 
-            switch (retrospective.CurrentStage) {
+            switch (session.CurrentStage) {
                 case SessionStage.NotStarted:
                 case SessionStage.Finished:
                     return false;
@@ -23,7 +23,7 @@ namespace PokerTime.Domain.Services {
                 case SessionStage.Voting:
                     return true;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(retrospective));
+                    throw new ArgumentOutOfRangeException(nameof(session));
             }
         }
     }

@@ -22,14 +22,14 @@ namespace PokerTime.Application.SessionWorkflows.Commands {
             this._systemClock = systemClock;
         }
 
-        protected override async Task<Unit> HandleCore(InitiateVotingStageCommand request, Retrospective retrospective, CancellationToken cancellationToken) {
-            if (retrospective == null) throw new ArgumentNullException(nameof(retrospective));
+        protected override async Task<Unit> HandleCore(InitiateVotingStageCommand request, Session session, CancellationToken cancellationToken) {
+            if (session == null) throw new ArgumentNullException(nameof(session));
 
-            retrospective.CurrentStage = SessionStage.Voting;
+            session.CurrentStage = SessionStage.Voting;
 
             await this.DbContext.SaveChangesAsync(cancellationToken);
 
-            await this.DispatchUpdate(retrospective, cancellationToken);
+            await this.DispatchUpdate(session, cancellationToken);
 
             return Unit.Value;
         }

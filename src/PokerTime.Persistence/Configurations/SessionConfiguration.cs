@@ -12,8 +12,8 @@ namespace PokerTime.Persistence.Configurations {
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-    public sealed class SessionConfiguration : IEntityTypeConfiguration<Retrospective> {
-        public void Configure(EntityTypeBuilder<Retrospective> builder) {
+    public sealed class SessionConfiguration : IEntityTypeConfiguration<Session> {
+        public void Configure(EntityTypeBuilder<Session> builder) {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
 
             builder.HasKey(e => e.Id);

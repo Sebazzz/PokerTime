@@ -18,14 +18,14 @@ namespace PokerTime.Application.SessionWorkflows.Commands {
         public InitiateDiscussionStageCommandHandler(IPokerTimeDbContextFactory pokerTimeDbContext, ISessionStatusUpdateDispatcher retrospectiveStatusUpdateDispatcher) : base(pokerTimeDbContext, retrospectiveStatusUpdateDispatcher) {
         }
 
-        protected override async Task<Unit> HandleCore(InitiateDiscussionStageCommand request, Retrospective retrospective, CancellationToken cancellationToken) {
-            if (retrospective == null) throw new ArgumentNullException(nameof(retrospective));
+        protected override async Task<Unit> HandleCore(InitiateDiscussionStageCommand request, Session session, CancellationToken cancellationToken) {
+            if (session == null) throw new ArgumentNullException(nameof(session));
 
-            retrospective.CurrentStage = SessionStage.Discuss;
+            session.CurrentStage = SessionStage.Discuss;
 
             await this.DbContext.SaveChangesAsync(cancellationToken);
 
-            await this.DispatchUpdate(retrospective, cancellationToken);
+            await this.DispatchUpdate(session, cancellationToken);
 
             return Unit.Value;
         }

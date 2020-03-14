@@ -29,9 +29,9 @@ namespace PokerTime.Application.Tests.Unit.Sessions.Queries {
         }
 
         [Test]
-        public async Task SessionStatusMapper_ReturnsRetrospectiveInfo() {
+        public async Task SessionStatusMapper_ReturnsSessionInfo() {
             // Given
-            var retro = new Retrospective {
+            var retro = new Session {
                 Title = "Yet another test",
                 Participants =
                 {

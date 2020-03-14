@@ -38,10 +38,10 @@ namespace PokerTime.Application.Sessions.Commands.JoinPokerSession {
 
         public async Task<ParticipantInfo> Handle(JoinPokerSessionCommand request, CancellationToken cancellationToken) {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            Retrospective retrospective = await this._pokerTimeDbContext.Retrospectives.FindBySessionId(request.SessionId, cancellationToken);
+            Session Session = await this._pokerTimeDbContext.Retrospectives.FindBySessionId(request.SessionId, cancellationToken);
 
-            if (retrospective == null) {
-                throw new NotFoundException(nameof(Retrospective), request.SessionId);
+            if (Session == null) {
+                throw new NotFoundException(nameof(Session), request.SessionId);
             }
 
             // Create domain object
@@ -49,7 +49,7 @@ namespace PokerTime.Application.Sessions.Commands.JoinPokerSession {
 
             participant.IsFacilitator = request.JoiningAsFacilitator;
             participant.Name = request.Name;
-            participant.Session = retrospective;
+            participant.Session = Session;
             participant.Color = new ParticipantColor {
                 R = Byte.Parse(request.Color[0..2], NumberStyles.AllowHexSpecifier, Culture.Invariant),
                 G = Byte.Parse(request.Color[2..4], NumberStyles.AllowHexSpecifier, Culture.Invariant),

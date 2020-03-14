@@ -15,7 +15,7 @@ namespace PokerTime.Domain.Entities {
 
         public ParticipantColor Color { get; set; }
 
-        public Retrospective Session { get; set; }
+        public Session Session { get; set; }
 
         public string Name { get; set; }
 
