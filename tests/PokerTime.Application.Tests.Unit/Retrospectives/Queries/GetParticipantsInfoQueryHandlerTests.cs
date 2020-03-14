@@ -10,7 +10,7 @@ namespace PokerTime.Application.Tests.Unit.Retrospectives.Queries {
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
-    using Application.Retrospectives.Queries.GetParticipantsInfo;
+    using Sessions.Queries.GetParticipantsInfo;
     using Domain.Entities;
     using NUnit.Framework;
     using Support;

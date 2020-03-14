@@ -10,7 +10,7 @@ namespace PokerTime.Web.Tests.Integration.Common {
     using System.Threading;
     using System.Threading.Tasks;
     using Application.Common.Abstractions;
-    using Application.Retrospectives.Commands.CreatePokerSession;
+    using Application.Sessions.Commands.CreatePokerSession;
     using Application.Services;
     using Domain.Entities;
     using Microsoft.Extensions.DependencyInjection;

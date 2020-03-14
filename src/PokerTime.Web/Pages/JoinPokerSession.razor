@@ -1,16 +1,16 @@
 @page "/pokertime-session/{sessionId}/join"
-@implements PokerTime.Application.Notifications.RetrospectiveJoined.IRetrospectiveJoinedSubscriber
-@inherits SubscribingComponent<PokerTime.Application.Notifications.RetrospectiveJoined.IRetrospectiveJoinedSubscriber>
+@implements PokerTime.Application.Notifications.SessionJoined.ISessionJoinedSubscriber
+@inherits SubscribingComponent<PokerTime.Application.Notifications.SessionJoined.ISessionJoinedSubscriber>
 @layout PokerSessionLayout
 @inject ILogger<JoinPokerSession> Logger
 @inject NavigationManager NavigationManager;
 @using Microsoft.Extensions.Logging
 @using PokerTime.Application.Notifications
 @using PokerTime.Application.PredefinedParticipantColors.Queries.GetAvailablePredefinedParticipantColors
-@using PokerTime.Application.Retrospectives.Commands.JoinPokerSession
-@using PokerTime.Application.Retrospectives.Queries.GetJoinPokerSessionInfo
-@using PokerTime.Application.Retrospectives.Queries.GetParticipant
-@using PokerTime.Application.Retrospectives.Queries.GetParticipantsInfo
+@using PokerTime.Application.Sessions.Commands.JoinPokerSession
+@using PokerTime.Application.Sessions.Queries.GetJoinPokerSessionInfo
+@using PokerTime.Application.Sessions.Queries.GetParticipant
+@using PokerTime.Application.Sessions.Queries.GetParticipantsInfo
 @using PokerTime.Web.Components.Layout
 
 @if (this.RetrospectiveInfo == null)
@@ -267,7 +267,7 @@ else
         this.ShowErrorMessage = false;
     }
 
-    public Task OnParticipantJoinedRetrospective(RetrospectiveEvent<ParticipantInfo> eventArgs)
+    public Task OnParticipantJoinedRetrospective(SessionEvent<ParticipantInfo> eventArgs)
     {
         if (eventArgs.SessionId != this.SessionId)
         {

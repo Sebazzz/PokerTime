@@ -14,7 +14,7 @@ namespace PokerTime.Web.Pages {
     using Application.Common.Models;
     using Application.Notifications;
     using Application.Notifications.SessionStatusUpdated;
-    using Application.Retrospectives.Queries.GetSessionStatus;
+    using Application.Sessions.Queries.GetSessionStatus;
     using Components;
     using Components.Layout;
     using Domain.ValueObjects;

@@ -9,7 +9,7 @@ namespace PokerTime.Application.Tests.Unit.Retrospectives.Queries {
     using System.Drawing;
     using System.Threading;
     using System.Threading.Tasks;
-    using Application.Retrospectives.Queries.GetSessionStatus;
+    using Sessions.Queries.GetSessionStatus;
     using Domain.Entities;
     using NUnit.Framework;
     using Support;

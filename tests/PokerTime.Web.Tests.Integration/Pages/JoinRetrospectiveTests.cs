@@ -14,8 +14,8 @@ namespace PokerTime.Web.Tests.Integration.Pages {
     using System.Threading;
     using System.Threading.Tasks;
     using Application.PredefinedParticipantColors.Queries.GetAvailablePredefinedParticipantColors;
-    using Application.Retrospectives.Commands.CreatePokerSession;
-    using Application.Retrospectives.Queries.GetParticipantsInfo;
+    using Application.Sessions.Commands.CreatePokerSession;
+    using Application.Sessions.Queries.GetParticipantsInfo;
     using Common;
     using Components;
     using Domain.Entities;

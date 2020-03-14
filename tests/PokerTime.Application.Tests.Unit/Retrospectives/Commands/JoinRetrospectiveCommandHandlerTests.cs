@@ -14,8 +14,8 @@ namespace PokerTime.Application.Tests.Unit.Retrospectives.Commands {
     using Application.Common;
     using Application.Common.Abstractions;
     using Application.Common.Models;
-    using Application.Notifications.RetrospectiveJoined;
-    using Application.Retrospectives.Commands.JoinPokerSession;
+    using Application.Notifications.SessionJoined;
+    using Sessions.Commands.JoinPokerSession;
     using AutoMapper;
     using Domain.Entities;
     using MediatR;
@@ -102,7 +102,7 @@ namespace PokerTime.Application.Tests.Unit.Retrospectives.Commands {
             Assert.That(checkRetro.Participants.Select(x => x.Name), Contains.Item("The BOSS"));
 
             await mediator.Received().
-                Publish(Arg.Any<RetrospectiveJoinedNotification>(), Arg.Any<CancellationToken>());
+                Publish(Arg.Any<SessionJoinedNotification>(), Arg.Any<CancellationToken>());
         }
 
         [Test]

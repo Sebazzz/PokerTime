@@ -16,8 +16,8 @@ namespace PokerTime.Web.Tests.Integration.Common {
     using Application.Common.Abstractions;
     using Application.Common.Models;
     using Application.PredefinedParticipantColors.Queries.GetAvailablePredefinedParticipantColors;
-    using Application.Retrospectives.Commands.JoinPokerSession;
-    using Application.Retrospectives.Queries.GetParticipantsInfo;
+    using Application.Sessions.Commands.JoinPokerSession;
+    using Application.Sessions.Queries.GetParticipantsInfo;
     using Domain.Entities;
     using MediatR;
     using Microsoft.EntityFrameworkCore;

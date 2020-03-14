@@ -1,0 +1,91 @@
+@implements ISessionJoinedSubscriber
+@inherits SubscribingComponent<ISessionJoinedSubscriber>
+@using PokerTime.Application.Notifications.SessionJoined
+
+@using System.Diagnostics
+@using PokerTime.Application.Common.Models
+@using PokerTime.Application.Notifications
+@using PokerTime.Application.Sessions.Queries.GetParticipantsInfo
+
+@if (this.Participants == null)
+{
+    return;
+}
+
+<article class="message is-dark" id="retrospective-online-list">
+    <div class="message-header">
+        Who already joined?
+    </div>
+    <div class="message-body">
+        @if (this.Participants.Participants.Count == 0)
+        {
+            <text>No one. You are the first to join this planning poker session.</text>
+        }
+        else if (this.Participants.Participants.Count == 1)
+        {
+            ParticipantInfo participant = this.Participants.Participants[0];
+
+            <text>@RenderParticipant(participant) has already joined the retrospective</text>
+        }
+        else
+        {
+            <text>
+                These people have already joined the planning poker session:
+            </text>
+
+            <ul class="online-list">
+                @foreach (ParticipantInfo participant in this.Participants.Participants)
+                {
+                    <li class="@(participant.Name == this.CurrentParticipant.Name ? "online-list__item--is-self" : null)">
+                        @RenderParticipant(participant)
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+</article>
+
+@code {
+#nullable disable
+
+    protected override async Task OnInitializedAsync()
+    {
+        this.Participants = await this.Mediator.Send(new GetParticipantsInfoQuery(this.SessionId));
+        Debug.Assert(this.Participants != null);
+    }
+
+    protected readonly RenderFragment<ParticipantInfo> RenderParticipant = participantInfo =>
+        @<span style="color: #@participantInfo.Color.HexString" data-participant-id="@participantInfo.Id">
+            @if (participantInfo.IsFacilitator) { <span class="fas fa-crown"></span> }
+            @participantInfo.Name
+         </span>;
+
+    #nullable disable
+
+    public ParticipantsInfoList Participants { get; set; }
+
+    [Parameter]
+    public string SessionId { get; set; }
+
+    [Parameter]
+    public CurrentParticipantModel CurrentParticipant { get; set; }
+
+    public Task OnParticipantJoinedRetrospective(SessionEvent<ParticipantInfo> eventArgs)
+    {
+        if (eventArgs.SessionId != this.SessionId)
+        {
+            return Task.CompletedTask;
+        }
+
+        ParticipantInfo participantInfo = eventArgs.Argument;
+
+        return this.InvokeAsync(() =>
+        {
+            this.Participants.Participants.Add(participantInfo);
+            this.Participants.Participants.Sort((a, b) => StringComparer.CurrentCulture.Compare(a.Name, b.Name));
+
+            this.NotificationIsHandled();
+        });
+    }
+
+}

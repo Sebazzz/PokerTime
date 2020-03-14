@@ -1,7 +1,7 @@
 ﻿// ******************************************************************************
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : RetrospectiveOnlineList.cs
+//  File:           : SessionOnlineList.cs
 //  Project         : PokerTime.Web.Tests.Integration
 // ******************************************************************************
 

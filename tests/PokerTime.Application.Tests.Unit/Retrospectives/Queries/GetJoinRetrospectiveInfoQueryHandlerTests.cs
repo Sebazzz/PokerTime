@@ -9,7 +9,7 @@ namespace PokerTime.Application.Tests.Unit.Retrospectives.Queries {
     using System;
     using System.Threading;
     using System.Threading.Tasks;
-    using Application.Retrospectives.Queries.GetJoinPokerSessionInfo;
+    using Sessions.Queries.GetJoinPokerSessionInfo;
     using Domain.Entities;
     using Microsoft.Extensions.Logging.Abstractions;
     using NUnit.Framework;

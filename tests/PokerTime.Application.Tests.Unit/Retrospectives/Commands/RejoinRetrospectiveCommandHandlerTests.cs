@@ -12,7 +12,7 @@ namespace PokerTime.Application.Tests.Unit.Retrospectives.Commands {
     using Application.Common;
     using Application.Common.Abstractions;
     using Application.Common.Models;
-    using Application.Retrospectives.Commands.RejoinPokerSession;
+    using Sessions.Commands.RejoinPokerSession;
     using Domain.Entities;
     using NSubstitute;
     using NUnit.Framework;

@@ -13,7 +13,7 @@ namespace PokerTime.Application {
     using MediatR;
     using Microsoft.Extensions.DependencyInjection;
     using Notifications;
-    using Retrospectives.Queries.GetSessionStatus;
+    using Sessions.Queries.GetSessionStatus;
     using RetrospectiveWorkflows.Common;
 
     public static class ServiceCollectionExtensions {

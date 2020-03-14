@@ -10,7 +10,7 @@ namespace PokerTime.Application.Tests.Unit.Retrospectives.Commands {
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
-    using Application.Retrospectives.Commands.CreatePokerSession;
+    using Sessions.Commands.CreatePokerSession;
     using Domain.Services;
     using Domain.ValueObjects;
     using Microsoft.Extensions.Logging.Abstractions;

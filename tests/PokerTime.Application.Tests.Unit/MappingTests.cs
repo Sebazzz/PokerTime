@@ -13,7 +13,7 @@ namespace PokerTime.Application.Tests.Unit {
     using System.Linq;
     using Application.Common.Models;
     using Application.PredefinedParticipantColors.Queries.GetAvailablePredefinedParticipantColors;
-    using Application.Retrospectives.Queries.GetParticipantsInfo;
+    using Sessions.Queries.GetParticipantsInfo;
     using Domain.Entities;
     using NUnit.Framework;
     using Support;

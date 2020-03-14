@@ -6,7 +6,7 @@
 // ******************************************************************************
 
 namespace PokerTime.Web.Components {
-    using Application.Retrospectives.Queries.GetSessionStatus;
+    using Application.Sessions.Queries.GetSessionStatus;
     using Domain.Entities;
     using Microsoft.AspNetCore.Components;
     using Microsoft.AspNetCore.Components.Rendering;

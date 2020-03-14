@@ -11,7 +11,7 @@ namespace PokerTime.Application.RetrospectiveWorkflows.Common {
     using Domain.Entities;
     using MediatR;
     using Notifications.SessionStatusUpdated;
-    using Retrospectives.Queries.GetSessionStatus;
+    using Sessions.Queries.GetSessionStatus;
 
     public interface ISessionStatusUpdateDispatcher {
         Task DispatchUpdate(Retrospective retrospective, CancellationToken cancellationToken);
