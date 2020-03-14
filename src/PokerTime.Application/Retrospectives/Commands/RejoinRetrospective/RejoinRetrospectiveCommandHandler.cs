@@ -19,18 +19,18 @@ namespace PokerTime.Application.Retrospectives.Commands.RejoinPokerSession {
     using Microsoft.EntityFrameworkCore;
 
     public sealed class RejoinPokerSessionCommandHandler : IRequestHandler<RejoinPokerSessionCommand> {
-        private readonly IReturnDbContext _returnDbContext;
+        private readonly IPokerTimeDbContext _pokerTimeDbContext;
         private readonly ICurrentParticipantService _currentParticipantService;
 
-        public RejoinPokerSessionCommandHandler(IReturnDbContext returnDbContext, ICurrentParticipantService currentParticipantService) {
-            this._returnDbContext = returnDbContext;
+        public RejoinPokerSessionCommandHandler(IPokerTimeDbContext pokerTimeDbContext, ICurrentParticipantService currentParticipantService) {
+            this._pokerTimeDbContext = pokerTimeDbContext;
             this._currentParticipantService = currentParticipantService;
         }
 
         public async Task<Unit> Handle(RejoinPokerSessionCommand request, CancellationToken cancellationToken) {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
-            Participant? result = await this._returnDbContext.Participants.AsNoTracking().
+            Participant? result = await this._pokerTimeDbContext.Participants.AsNoTracking().
                 Where(x => x.Retrospective.UrlId.StringId == request.SessionId && x.Id == request.ParticipantId).
                 FirstOrDefaultAsync(cancellationToken);
 

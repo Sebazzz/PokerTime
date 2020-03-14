@@ -10,10 +10,10 @@
     using Services;
 
     public sealed class GetJoinPokerSessionInfoQueryHandler : IRequestHandler<GetJoinPokerSessionInfoQuery, JoinPokerSessionInfo?> {
-        private readonly IReturnDbContext _dbContext;
+        private readonly IPokerTimeDbContext _dbContext;
         private readonly ILogger<GetJoinPokerSessionInfoQueryHandler> _logger;
 
-        public GetJoinPokerSessionInfoQueryHandler(IReturnDbContext dbContext, ILogger<GetJoinPokerSessionInfoQueryHandler> logger) {
+        public GetJoinPokerSessionInfoQueryHandler(IPokerTimeDbContext dbContext, ILogger<GetJoinPokerSessionInfoQueryHandler> logger) {
             this._dbContext = dbContext;
             this._logger = logger;
         }

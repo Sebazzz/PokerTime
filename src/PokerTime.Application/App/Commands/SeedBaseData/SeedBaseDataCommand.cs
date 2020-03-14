@@ -15,14 +15,14 @@ namespace PokerTime.Application.App.Commands.SeedBaseData {
     }
 
     public sealed class SeedBaseDataCommandHandler : IRequestHandler<SeedBaseDataCommand> {
-        private readonly IReturnDbContext _returnDbContext;
+        private readonly IPokerTimeDbContext _pokerTimeDbContext;
 
-        public SeedBaseDataCommandHandler(IReturnDbContext returnDbContext) {
-            this._returnDbContext = returnDbContext;
+        public SeedBaseDataCommandHandler(IPokerTimeDbContext pokerTimeDbContext) {
+            this._pokerTimeDbContext = pokerTimeDbContext;
         }
 
         public async Task<Unit> Handle(SeedBaseDataCommand request, CancellationToken cancellationToken) {
-            var seeder = new BaseDataSeeder(this._returnDbContext);
+            var seeder = new BaseDataSeeder(this._pokerTimeDbContext);
 
             await seeder.SeedAllAsync(cancellationToken);
 

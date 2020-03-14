@@ -24,13 +24,13 @@ namespace PokerTime.Application.Retrospectives.Commands.JoinPokerSession {
     using Services;
 
     public sealed class JoinPokerSessionCommandHandler : IRequestHandler<JoinPokerSessionCommand, ParticipantInfo> {
-        private readonly IReturnDbContext _returnDbContext;
+        private readonly IPokerTimeDbContext _pokerTimeDbContext;
         private readonly ICurrentParticipantService _currentParticipantService;
         private readonly IMapper _mapper;
         private readonly IMediator _mediator;
 
-        public JoinPokerSessionCommandHandler(IReturnDbContext returnDbContext, ICurrentParticipantService currentParticipantService, IMediator mediator, IMapper mapper) {
-            this._returnDbContext = returnDbContext;
+        public JoinPokerSessionCommandHandler(IPokerTimeDbContext pokerTimeDbContext, ICurrentParticipantService currentParticipantService, IMediator mediator, IMapper mapper) {
+            this._pokerTimeDbContext = pokerTimeDbContext;
             this._currentParticipantService = currentParticipantService;
             this._mediator = mediator;
             this._mapper = mapper;
@@ -38,7 +38,7 @@ namespace PokerTime.Application.Retrospectives.Commands.JoinPokerSession {
 
         public async Task<ParticipantInfo> Handle(JoinPokerSessionCommand request, CancellationToken cancellationToken) {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            Retrospective retrospective = await this._returnDbContext.Retrospectives.FindBySessionId(request.SessionId, cancellationToken);
+            Retrospective retrospective = await this._pokerTimeDbContext.Retrospectives.FindBySessionId(request.SessionId, cancellationToken);
 
             if (retrospective == null) {
                 throw new NotFoundException(nameof(Retrospective), request.SessionId);
@@ -57,10 +57,10 @@ namespace PokerTime.Application.Retrospectives.Commands.JoinPokerSession {
             };
 
             // Save it
-            bool isNew = !this._returnDbContext.Participants.Local.Contains(participant);
-            if (isNew) this._returnDbContext.Participants.Add(participant);
+            bool isNew = !this._pokerTimeDbContext.Participants.Local.Contains(participant);
+            if (isNew) this._pokerTimeDbContext.Participants.Add(participant);
 
-            await this._returnDbContext.SaveChangesAsync(cancellationToken);
+            await this._pokerTimeDbContext.SaveChangesAsync(cancellationToken);
 
             // Update auth info
             this._currentParticipantService.SetParticipant(new CurrentParticipantModel(participant.Id, participant.Name, request.JoiningAsFacilitator));
@@ -76,7 +76,7 @@ namespace PokerTime.Application.Retrospectives.Commands.JoinPokerSession {
         }
 
         private async Task<Participant> GetOrCreateParticipantAsync(string sessionId, string name, CancellationToken cancellationToken) {
-            Participant? existingParticipant = await this._returnDbContext.Participants.FirstOrDefaultAsync(x => x.Name == name && x.Retrospective.UrlId.StringId == sessionId, cancellationToken);
+            Participant? existingParticipant = await this._pokerTimeDbContext.Participants.FirstOrDefaultAsync(x => x.Name == name && x.Retrospective.UrlId.StringId == sessionId, cancellationToken);
 
             if (existingParticipant == null) {
                 return new Participant();

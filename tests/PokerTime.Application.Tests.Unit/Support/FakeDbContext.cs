@@ -13,12 +13,12 @@ namespace PokerTime.Application.Tests.Unit.Support {
     using Persistence;
 
     public static class ReturnDbContextFactory {
-        public static ReturnDbContext Create() {
-            DbContextOptions<ReturnDbContext> options = new DbContextOptionsBuilder<ReturnDbContext>()
+        public static PokerTimeDbContext Create() {
+            DbContextOptions<PokerTimeDbContext> options = new DbContextOptionsBuilder<PokerTimeDbContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .Options;
 
-            var context = new ReturnDbContext(options);
+            var context = new PokerTimeDbContext(options);
 
             context.Database.EnsureCreated();
 
@@ -32,7 +32,7 @@ namespace PokerTime.Application.Tests.Unit.Support {
             return context;
         }
 
-        public static void Destroy(ReturnDbContext context) {
+        public static void Destroy(PokerTimeDbContext context) {
             if (context == null) throw new ArgumentNullException(nameof(context));
 
             context.Database.EnsureDeleted();

@@ -11,7 +11,7 @@ namespace PokerTime.Application.Tests.Unit.Support {
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1063:Implement IDisposable Correctly", Justification = "Not necessary for test base class")]
     public class CommandTestBase : IDisposable {
-        protected ReturnDbContext Context { get; }
+        protected PokerTimeDbContext Context { get; }
 
         public CommandTestBase() {
             this.Context = ReturnDbContextFactory.Create();

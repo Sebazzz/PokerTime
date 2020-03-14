@@ -14,10 +14,10 @@ namespace PokerTime.Persistence {
         public static IServiceCollection AddPersistence(this IServiceCollection services) {
             services.AddEntityFrameworkSqlServer();
 
-            services.AddScoped(svc => new ReturnDbContext(svc.GetRequiredService<IDatabaseOptions>()));
-            services.ChainInterfaceImplementation<IReturnDbContext, ReturnDbContext>();
-            services.ChainInterfaceImplementation<IEntityStateFacilitator, ReturnDbContext>();
-            services.ChainInterfaceImplementation<IReturnDbContextFactory, ReturnDbContext>();
+            services.AddScoped(svc => new PokerTimeDbContext(svc.GetRequiredService<IDatabaseOptions>()));
+            services.ChainInterfaceImplementation<IPokerTimeDbContext, PokerTimeDbContext>();
+            services.ChainInterfaceImplementation<IEntityStateFacilitator, PokerTimeDbContext>();
+            services.ChainInterfaceImplementation<IPokerTimeDbContextFactory, PokerTimeDbContext>();
 
             return services;
         }

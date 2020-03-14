@@ -37,7 +37,7 @@ namespace PokerTime.Web {
                     var currentParticipantService = (CurrentParticipantService)services.GetRequiredService<ICurrentParticipantService>();
                     currentParticipantService.SetNoHttpContext();
 
-                    var returnDbContext = services.GetRequiredService<ReturnDbContext>();
+                    var returnDbContext = services.GetRequiredService<PokerTimeDbContext>();
                     returnDbContext.Initialize();
 
                     var mediator = services.GetRequiredService<IMediator>();

@@ -17,16 +17,16 @@ namespace PokerTime.Application.Retrospectives.Queries.GetParticipant {
     using Microsoft.EntityFrameworkCore;
 
     public sealed class GetParticipantQueryHandler : IRequestHandler<GetParticipantQuery, ParticipantInfo?> {
-        private readonly IReturnDbContext _returnDbContext;
+        private readonly IPokerTimeDbContext _pokerTimeDbContext;
         private readonly IMapper _mapper;
 
-        public GetParticipantQueryHandler(IReturnDbContext returnDbContext, IMapper mapper) {
-            this._returnDbContext = returnDbContext;
+        public GetParticipantQueryHandler(IPokerTimeDbContext pokerTimeDbContext, IMapper mapper) {
+            this._pokerTimeDbContext = pokerTimeDbContext;
             this._mapper = mapper;
         }
 
         public async Task<ParticipantInfo?> Handle(GetParticipantQuery request, CancellationToken cancellationToken) {
-            ParticipantInfo? result = await this._returnDbContext.Participants.
+            ParticipantInfo? result = await this._pokerTimeDbContext.Participants.
                     Where(x => x.Retrospective.UrlId.StringId == request.SessionId && x.Name == request.Name).
                     ProjectTo<ParticipantInfo>(this._mapper.ConfigurationProvider).
                     FirstOrDefaultAsync(cancellationToken);

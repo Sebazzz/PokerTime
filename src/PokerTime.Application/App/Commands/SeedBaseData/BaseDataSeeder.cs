@@ -14,26 +14,26 @@ namespace PokerTime.Application.App.Commands.SeedBaseData {
     using Microsoft.EntityFrameworkCore;
 
     internal sealed class BaseDataSeeder {
-        private readonly IReturnDbContext _returnDbContext;
+        private readonly IPokerTimeDbContext _pokerTimeDbContext;
 
-        public BaseDataSeeder(IReturnDbContext returnDbContext) {
-            this._returnDbContext = returnDbContext;
+        public BaseDataSeeder(IPokerTimeDbContext pokerTimeDbContext) {
+            this._pokerTimeDbContext = pokerTimeDbContext;
         }
 
         public async Task SeedAllAsync(CancellationToken cancellationToken) {
             await this.SeedNoteLanes(cancellationToken);
             await this.SeedPredefinedParticipantColor(cancellationToken);
 
-            await this._returnDbContext.SaveChangesAsync(cancellationToken);
+            await this._pokerTimeDbContext.SaveChangesAsync(cancellationToken);
         }
 
         private async Task SeedNoteLanes(CancellationToken cancellationToken) {
-            if (await this._returnDbContext.NoteLanes.AnyAsync(cancellationToken)) {
+            if (await this._pokerTimeDbContext.NoteLanes.AnyAsync(cancellationToken)) {
                 return;
             }
 
             // Seed note lanes
-            this._returnDbContext.NoteLanes.AddRange(
+            this._pokerTimeDbContext.NoteLanes.AddRange(
                 new NoteLane { Id = KnownNoteLane.Start, Name = "Start" },
                 new NoteLane { Id = KnownNoteLane.Stop, Name = "Stop" },
                 new NoteLane { Id = KnownNoteLane.Continue, Name = "Continue" }
@@ -41,12 +41,12 @@ namespace PokerTime.Application.App.Commands.SeedBaseData {
         }
 
         private async Task SeedPredefinedParticipantColor(CancellationToken cancellationToken) {
-            if (await this._returnDbContext.PredefinedParticipantColors.AnyAsync(cancellationToken)) {
+            if (await this._pokerTimeDbContext.PredefinedParticipantColors.AnyAsync(cancellationToken)) {
                 return;
             }
 
             // Seed note lanes
-            this._returnDbContext.PredefinedParticipantColors.AddRange(
+            this._pokerTimeDbContext.PredefinedParticipantColors.AddRange(
                 new PredefinedParticipantColor("Driver red", Color.Red),
                 new PredefinedParticipantColor("Analytic blue", Color.Blue),
                 new PredefinedParticipantColor("Amiable green", Color.Green),

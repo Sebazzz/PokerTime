@@ -112,7 +112,7 @@ namespace PokerTime.Web.Tests.Integration.Common {
         public int GetId<TEntity>(Func<DbSet<TEntity>, int> query) where TEntity : class {
             using IServiceScope scope = this.CreateTestServiceScope();
 
-            var returnDbContext = scope.ServiceProvider.GetRequiredService<ReturnDbContext>();
+            var returnDbContext = scope.ServiceProvider.GetRequiredService<PokerTimeDbContext>();
             DbSet<TEntity> dbSet = returnDbContext.Set<TEntity>();
 
             return query.Invoke(dbSet);

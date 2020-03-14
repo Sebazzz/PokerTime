@@ -14,10 +14,10 @@
     using Services;
 
     public sealed class GetAvailablePredefinedParticipantColorsQueryHandler : IRequestHandler<GetAvailablePredefinedParticipantColorsQuery, IList<AvailableParticipantColorModel>> {
-        private readonly IReturnDbContext _dbContext;
+        private readonly IPokerTimeDbContext _dbContext;
         private readonly IMapper _mapper;
 
-        public GetAvailablePredefinedParticipantColorsQueryHandler(IReturnDbContext dbContext, IMapper mapper) {
+        public GetAvailablePredefinedParticipantColorsQueryHandler(IPokerTimeDbContext dbContext, IMapper mapper) {
             this._dbContext = dbContext;
             this._mapper = mapper;
         }

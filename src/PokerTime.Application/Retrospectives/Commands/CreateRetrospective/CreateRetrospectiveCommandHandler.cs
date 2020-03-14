@@ -19,14 +19,14 @@ namespace PokerTime.Application.Retrospectives.Commands.CreatePokerSession {
     using Services;
 
     public sealed class CreatePokerSessionCommandHandler : IRequestHandler<CreatePokerSessionCommand, CreatePokerSessionCommandResponse> {
-        private readonly IReturnDbContext _returnDbContext;
+        private readonly IPokerTimeDbContext _pokerTimeDbContext;
         private readonly ISystemClock _systemClock;
         private readonly IUrlGenerator _urlGenerator;
         private readonly IPassphraseService _passphraseService;
         private readonly ILogger<CreatePokerSessionCommandHandler> _logger;
 
-        public CreatePokerSessionCommandHandler(IReturnDbContext returnDbContext, IPassphraseService passphraseService, ISystemClock systemClock, IUrlGenerator urlGenerator, ILogger<CreatePokerSessionCommandHandler> logger) {
-            this._returnDbContext = returnDbContext;
+        public CreatePokerSessionCommandHandler(IPokerTimeDbContext pokerTimeDbContext, IPassphraseService passphraseService, ISystemClock systemClock, IUrlGenerator urlGenerator, ILogger<CreatePokerSessionCommandHandler> logger) {
+            this._pokerTimeDbContext = pokerTimeDbContext;
             this._passphraseService = passphraseService;
             this._systemClock = systemClock;
             this._urlGenerator = urlGenerator;
@@ -57,9 +57,9 @@ namespace PokerTime.Application.Retrospectives.Commands.CreatePokerSession {
                 new QrCode(qrCodeGenerator.CreateQrCode(payload.ToString(), QRCodeGenerator.ECCLevel.L)),
                 retroLocation);
 
-            this._returnDbContext.Retrospectives.Add(retrospective);
+            this._pokerTimeDbContext.Retrospectives.Add(retrospective);
 
-            await this._returnDbContext.SaveChangesAsync(cancellationToken);
+            await this._pokerTimeDbContext.SaveChangesAsync(cancellationToken);
 
             return result;
         }

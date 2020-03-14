@@ -17,11 +17,11 @@ namespace PokerTime.Application.Retrospectives.Queries.GetParticipantsInfo {
     using Microsoft.EntityFrameworkCore;
 
     public sealed class GetParticipantsInfoQueryHandler : IRequestHandler<GetParticipantsInfoQuery, ParticipantsInfoList> {
-        private readonly IReturnDbContext _returnDbContext;
+        private readonly IPokerTimeDbContext _pokerTimeDbContext;
         private readonly IMapper _mapper;
 
-        public GetParticipantsInfoQueryHandler(IReturnDbContext returnDbContext, IMapper mapper) {
-            this._returnDbContext = returnDbContext;
+        public GetParticipantsInfoQueryHandler(IPokerTimeDbContext pokerTimeDbContext, IMapper mapper) {
+            this._pokerTimeDbContext = pokerTimeDbContext;
             this._mapper = mapper;
         }
 
@@ -30,7 +30,7 @@ namespace PokerTime.Application.Retrospectives.Queries.GetParticipantsInfo {
 
             var returnValue = new ParticipantsInfoList();
             returnValue.Participants.AddRange(
-                await this._returnDbContext.Retrospectives
+                await this._pokerTimeDbContext.Retrospectives
                     .Where(r => r.UrlId.StringId == request.SessionId)
                     .SelectMany(r => r.Participants)
                     .ProjectTo<ParticipantInfo>(this._mapper.ConfigurationProvider)

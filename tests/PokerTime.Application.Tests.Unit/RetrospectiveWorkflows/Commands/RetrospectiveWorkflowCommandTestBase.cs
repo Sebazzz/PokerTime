@@ -53,7 +53,7 @@ namespace PokerTime.Application.Tests.Unit.RetrospectiveWorkflows.Commands {
         }
 
         protected void RefreshObject() {
-            using IReturnDbContext newEditContext = this.Context.CreateForEditContext();
+            using IPokerTimeDbContext newEditContext = this.Context.CreateForEditContext();
             this.Retrospective = newEditContext.Retrospectives.Find(this.Retrospective.Id);
         }
 

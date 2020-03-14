@@ -1,7 +1,7 @@
 ﻿// ******************************************************************************
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : ReturnDbContext.cs
+//  File:           : PokerTimeDbContext.cs
 //  Project         : PokerTime.Persistence
 // ******************************************************************************
 
@@ -21,18 +21,18 @@ namespace PokerTime.Persistence {
     using Microsoft.EntityFrameworkCore.Metadata;
     using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-    public sealed class ReturnDbContext : DbContext, IReturnDbContext, IEntityStateFacilitator {
+    public sealed class PokerTimeDbContext : DbContext, IPokerTimeDbContext, IEntityStateFacilitator {
         private const string SqliteProvider = "Microsoft.EntityFrameworkCore.Sqlite";
 
         private readonly DbContextOptions _options;
         private readonly IDatabaseOptions? _databaseOptions;
 
 #pragma warning disable CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.
-        public ReturnDbContext(DbContextOptions options) : base(options) {
+        public PokerTimeDbContext(DbContextOptions options) : base(options) {
             this._options = options;
         }
 
-        public ReturnDbContext(IDatabaseOptions databaseOptions) {
+        public PokerTimeDbContext(IDatabaseOptions databaseOptions) {
             this._databaseOptions = databaseOptions;
         }
 #pragma warning restore CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.
@@ -60,10 +60,6 @@ namespace PokerTime.Persistence {
         }
 
         public DbSet<PredefinedParticipantColor> PredefinedParticipantColors { get; set; }
-        public DbSet<Note> Notes { get; set; }
-        public DbSet<NoteGroup> NoteGroups { get; set; }
-        public DbSet<NoteVote> NoteVotes { get; set; }
-        public DbSet<NoteLane> NoteLanes { get; set; }
         public DbSet<Participant> Participants { get; set; }
         public DbSet<Retrospective> Retrospectives { get; set; }
 
@@ -71,7 +67,7 @@ namespace PokerTime.Persistence {
             if (modelBuilder == null) throw new ArgumentNullException(nameof(modelBuilder));
 
             // Configurations
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ReturnDbContext).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(PokerTimeDbContext).Assembly);
 
             // Conventions
             modelBuilder.RemovePluralizingTableNameConvention();
@@ -104,7 +100,7 @@ namespace PokerTime.Persistence {
             return entry.ReloadAsync(cancellationToken);
         }
 
-        public IReturnDbContext CreateForEditContext() => this._databaseOptions != null ? new ReturnDbContext(this._databaseOptions) : new ReturnDbContext(this._options);
+        public IPokerTimeDbContext CreateForEditContext() => this._databaseOptions != null ? new PokerTimeDbContext(this._databaseOptions) : new PokerTimeDbContext(this._options);
 
         public void Initialize() {
             if (this.Database.ProviderName == SqliteProvider) {

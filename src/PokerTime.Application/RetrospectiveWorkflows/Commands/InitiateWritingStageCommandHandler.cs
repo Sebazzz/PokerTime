@@ -18,7 +18,7 @@ namespace PokerTime.Application.RetrospectiveWorkflows.Commands {
     public sealed class InitiateWritingStageCommandHandler : AbstractStageCommandHandler<InitiateWritingStageCommand> {
         private readonly ISystemClock _systemClock;
 
-        public InitiateWritingStageCommandHandler(IReturnDbContext returnDbContext, IRetrospectiveStatusUpdateDispatcher retrospectiveStatusUpdateDispatcher, ISystemClock systemClock) : base(returnDbContext, retrospectiveStatusUpdateDispatcher) {
+        public InitiateWritingStageCommandHandler(IPokerTimeDbContext pokerTimeDbContext, IRetrospectiveStatusUpdateDispatcher retrospectiveStatusUpdateDispatcher, ISystemClock systemClock) : base(pokerTimeDbContext, retrospectiveStatusUpdateDispatcher) {
             this._systemClock = systemClock;
         }
 

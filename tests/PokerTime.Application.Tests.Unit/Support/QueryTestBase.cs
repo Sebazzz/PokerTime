@@ -23,7 +23,7 @@ namespace PokerTime.Application.Tests.Unit.Support {
             this.Mapper = configurationProvider.CreateMapper();
         }
 
-        public ReturnDbContext Context { get; }
+        public PokerTimeDbContext Context { get; }
         public IMapper Mapper { get; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA1816:Dispose methods should call SuppressFinalize", Justification = "Not necessary for test")]

@@ -17,18 +17,18 @@ namespace PokerTime.Application.Retrospectives.Queries.GetRetrospectiveStatus {
     using Services;
 
     public sealed class GetRetrospectiveStatusQueryHandler : IRequestHandler<GetRetrospectiveStatusQuery, RetrospectiveStatus> {
-        private readonly IReturnDbContext _returnDbContext;
+        private readonly IPokerTimeDbContext _pokerTimeDbContext;
         private readonly IRetrospectiveStatusMapper _mapper;
 
-        public GetRetrospectiveStatusQueryHandler(IReturnDbContext returnDbContext, IRetrospectiveStatusMapper mapper) {
-            this._returnDbContext = returnDbContext;
+        public GetRetrospectiveStatusQueryHandler(IPokerTimeDbContext pokerTimeDbContext, IRetrospectiveStatusMapper mapper) {
+            this._pokerTimeDbContext = pokerTimeDbContext;
             this._mapper = mapper;
         }
 
         public async Task<RetrospectiveStatus> Handle(GetRetrospectiveStatusQuery request, CancellationToken cancellationToken) {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
-            Retrospective retrospective = await this._returnDbContext.Retrospectives.FindBySessionId(request.SessionId, cancellationToken);
+            Retrospective retrospective = await this._pokerTimeDbContext.Retrospectives.FindBySessionId(request.SessionId, cancellationToken);
 
             if (retrospective == null) {
                 throw new NotFoundException();

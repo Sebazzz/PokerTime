@@ -15,7 +15,7 @@ namespace PokerTime.Application.RetrospectiveWorkflows.Commands {
     using MediatR;
 
     public sealed class InitiateDiscussionStageCommandHandler : AbstractStageCommandHandler<InitiateDiscussionStageCommand> {
-        public InitiateDiscussionStageCommandHandler(IReturnDbContextFactory returnDbContext, IRetrospectiveStatusUpdateDispatcher retrospectiveStatusUpdateDispatcher) : base(returnDbContext, retrospectiveStatusUpdateDispatcher) {
+        public InitiateDiscussionStageCommandHandler(IPokerTimeDbContextFactory pokerTimeDbContext, IRetrospectiveStatusUpdateDispatcher retrospectiveStatusUpdateDispatcher) : base(pokerTimeDbContext, retrospectiveStatusUpdateDispatcher) {
         }
 
         protected override async Task<Unit> HandleCore(InitiateDiscussionStageCommand request, Retrospective retrospective, CancellationToken cancellationToken) {

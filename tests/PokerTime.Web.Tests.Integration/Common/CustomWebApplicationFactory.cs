@@ -70,19 +70,19 @@ namespace PokerTime.Web.Tests.Integration.Common {
                 })
                 .ConfigureTestServices(services => {
                     // Add a database context using an in-memory database for testing.
-                    services.RemoveAll<ReturnDbContext>();
+                    services.RemoveAll<PokerTimeDbContext>();
 
                     services.AddScoped(sp => {
-                        DbContextOptions<ReturnDbContext> options = new DbContextOptionsBuilder<ReturnDbContext>()
+                        DbContextOptions<PokerTimeDbContext> options = new DbContextOptionsBuilder<PokerTimeDbContext>()
                             .UseSqlite(this.ConnectionString)
                             .Options;
 
-                        var context = new ReturnDbContext(options);
+                        var context = new PokerTimeDbContext(options);
 
                         return context;
                     });
-                    services.ChainInterfaceImplementation<IReturnDbContext, ReturnDbContext>();
-                    services.ChainInterfaceImplementation<IReturnDbContextFactory, ReturnDbContext>();
+                    services.ChainInterfaceImplementation<IPokerTimeDbContext, PokerTimeDbContext>();
+                    services.ChainInterfaceImplementation<IPokerTimeDbContextFactory, PokerTimeDbContext>();
 
                     services.Configure<ServerOptions>(s => {
                         s.BaseUrl = "http://localhost:" + endPoint.Port + "/";
@@ -98,7 +98,7 @@ namespace PokerTime.Web.Tests.Integration.Common {
             using IServiceScope scope = this.Services.CreateScope();
 
             IServiceProvider scopedServices = scope.ServiceProvider;
-            var context = scopedServices.GetRequiredService<ReturnDbContext>();
+            var context = scopedServices.GetRequiredService<PokerTimeDbContext>();
             var logger = scopedServices.
                 GetRequiredService<ILogger<CustomWebApplicationFactory<TStartup>>>();
 

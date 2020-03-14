@@ -1,7 +1,7 @@
 ﻿// ******************************************************************************
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : IReturnDbContext.cs
+//  File:           : IPokerTimeDbContext.cs
 //  Project         : PokerTime.Application
 // ******************************************************************************
 
@@ -12,7 +12,7 @@ namespace PokerTime.Application.Common.Abstractions {
     using Domain.Entities;
     using Microsoft.EntityFrameworkCore;
 
-    public interface IReturnDbContext : IReturnDbContextFactory, IDisposable {
+    public interface IPokerTimeDbContext : IPokerTimeDbContextFactory, IDisposable {
         DbSet<PredefinedParticipantColor> PredefinedParticipantColors { get; set; }
         DbSet<Note> Notes { get; set; }
         DbSet<NoteGroup> NoteGroups { get; set; }

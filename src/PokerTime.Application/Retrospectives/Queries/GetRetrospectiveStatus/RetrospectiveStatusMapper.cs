@@ -20,11 +20,11 @@ namespace PokerTime.Application.Retrospectives.Queries.GetRetrospectiveStatus {
     }
 
     public sealed class RetrospectiveStatusMapper : IRetrospectiveStatusMapper {
-        private readonly IReturnDbContext _returnDbContext;
+        private readonly IPokerTimeDbContext _pokerTimeDbContext;
         private readonly IMapper _mapper;
 
-        public RetrospectiveStatusMapper(IReturnDbContext returnDbContext, IMapper mapper) {
-            this._returnDbContext = returnDbContext;
+        public RetrospectiveStatusMapper(IPokerTimeDbContext pokerTimeDbContext, IMapper mapper) {
+            this._pokerTimeDbContext = pokerTimeDbContext;
             this._mapper = mapper;
         }
 
@@ -34,7 +34,7 @@ namespace PokerTime.Application.Retrospectives.Queries.GetRetrospectiveStatus {
             var workflowStatus = RetrospectiveWorkflowStatus.FromDomainWorkflowData(retrospective.WorkflowData);
             var retrospectiveStatus = new RetrospectiveStatus(retrospective.UrlId.StringId, retrospective.Title, retrospective.CurrentStage, workflowStatus, retrospective.Options.MaximumNumberOfVotes);
 
-            retrospectiveStatus.Lanes.AddRange(await this._returnDbContext.NoteLanes.AsNoTracking().ProjectTo<RetrospectiveLane>(this._mapper.ConfigurationProvider).ToListAsync(cancellationToken));
+            retrospectiveStatus.Lanes.AddRange(await this._pokerTimeDbContext.NoteLanes.AsNoTracking().ProjectTo<RetrospectiveLane>(this._mapper.ConfigurationProvider).ToListAsync(cancellationToken));
 
             return retrospectiveStatus;
         }

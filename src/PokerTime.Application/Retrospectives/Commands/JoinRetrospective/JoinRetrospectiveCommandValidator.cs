@@ -20,11 +20,11 @@ namespace PokerTime.Application.Retrospectives.Commands.JoinPokerSession {
         private static readonly Expression<Func<Retrospective, string?>> GetFacilitatorHash = r => r.FacilitatorHashedPassphrase;
         private static readonly Expression<Func<Retrospective, string?>> GetParticipantHash = r => r.HashedPassphrase;
 
-        private readonly IReturnDbContextFactory _returnDbContext;
+        private readonly IPokerTimeDbContextFactory _pokerTimeDbContext;
         private readonly IPassphraseService _passphraseService;
 
-        public JoinPokerSessionCommandValidator(IReturnDbContextFactory returnDbContext, IPassphraseService passphraseService) {
-            this._returnDbContext = returnDbContext;
+        public JoinPokerSessionCommandValidator(IPokerTimeDbContextFactory pokerTimeDbContext, IPassphraseService passphraseService) {
+            this._pokerTimeDbContext = pokerTimeDbContext;
             this._passphraseService = passphraseService;
 
             this.RuleFor(e => e.Name).NotEmpty().MaximumLength(256);
@@ -44,7 +44,7 @@ namespace PokerTime.Application.Retrospectives.Commands.JoinPokerSession {
         }
 
         private bool MustBeAValidPassphrase(string sessionId, in bool isFacilitatorRole, string passphrase) {
-            using IReturnDbContext dbContext = this._returnDbContext.CreateForEditContext();
+            using IPokerTimeDbContext dbContext = this._pokerTimeDbContext.CreateForEditContext();
 
             Expression<Func<Retrospective, string?>> property = isFacilitatorRole ? GetFacilitatorHash : GetParticipantHash;
             string? hash = dbContext.Retrospectives.Where(x => x.UrlId.StringId == sessionId).Select(property).FirstOrDefault();
