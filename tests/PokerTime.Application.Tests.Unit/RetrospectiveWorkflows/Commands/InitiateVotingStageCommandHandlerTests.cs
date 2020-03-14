@@ -47,11 +47,6 @@ namespace PokerTime.Application.Tests.Unit.RetrospectiveWorkflows.Commands {
             // Then
             Assert.That(this.Retrospective.CurrentStage, Is.EqualTo(SessionStage.Voting));
 
-            Assert.That(this.Retrospective.Options.MaximumNumberOfVotes, Is.EqualTo(6));
-
-            Assert.That(this.Retrospective.WorkflowData.CurrentWorkflowInitiationTimestamp, Is.EqualTo(this.SystemClockMock.CurrentTimeOffset));
-            Assert.That(this.Retrospective.WorkflowData.CurrentWorkflowTimeLimitInMinutes, Is.EqualTo(request.TimeInMinutes));
-
             await this.SessionStatusUpdateDispatcherMock.Received().DispatchUpdate(Arg.Any<Retrospective>(), CancellationToken.None);
         }
     }

@@ -51,8 +51,6 @@ namespace PokerTime.Application.Tests.Unit.Retrospectives.Queries {
             var result = await mapper.GetSessionStatus(retro, CancellationToken.None);
 
             // Then
-            Assert.That(result.IsEditingNotesAllowed, Is.True);
-            Assert.That(result.IsViewingOtherNotesAllowed, Is.False);
             Assert.That(result.SessionId, Is.EqualTo(sessionId));
             Assert.That(result.Title, Is.EqualTo(retro.Title));
         }

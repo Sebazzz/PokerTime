@@ -18,14 +18,9 @@ namespace PokerTime.Domain.Entities {
     /// </summary>
     [SuppressMessage("ReSharper", "UnusedMember.Global", Justification = "EFCore")]
     public class Retrospective {
-        private ICollection<Note>? _notes;
-        private ICollection<NoteGroup>? _noteGroups;
-        private ICollection<NoteVote>? _noteVotes;
         private ICollection<Participant>? _participants;
 
         private readonly SessionIdentifier _urlId = SessionIdentifierService.CreateNewInternal();
-        private RetrospectiveOptions? _options;
-        private RetrospectiveWorkflowData? _workflowData;
 
         public int Id { get; set; }
 
@@ -55,32 +50,8 @@ namespace PokerTime.Domain.Entities {
         public string FacilitatorHashedPassphrase { get; set; }
 #pragma warning restore CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.
 
-        public ICollection<Note> Notes => this._notes ??= new Collection<Note>();
         public ICollection<Participant> Participants => this._participants ??= new Collection<Participant>();
-        public ICollection<NoteGroup> NoteGroup => this._noteGroups ??= new Collection<NoteGroup>();
-        public ICollection<NoteVote> NoteVotes => this._noteVotes ??= new Collection<NoteVote>();
-
 
         public DateTimeOffset CreationTimestamp { get; set; }
-
-        public RetrospectiveOptions Options {
-            get => this._options ??= new RetrospectiveOptions();
-            set => this._options = value;
-        }
-
-        public RetrospectiveWorkflowData WorkflowData {
-            get => this._workflowData ??= new RetrospectiveWorkflowData();
-            set => this._workflowData = value;
-        }
-    }
-
-    public class RetrospectiveOptions {
-        public int MaximumNumberOfVotes { get; set; } = 5;
-    }
-
-    public class RetrospectiveWorkflowData {
-        public DateTimeOffset CurrentWorkflowInitiationTimestamp { get; set; }
-
-        public int CurrentWorkflowTimeLimitInMinutes { get; set; }
     }
 }

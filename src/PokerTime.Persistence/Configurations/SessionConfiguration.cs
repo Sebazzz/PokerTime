@@ -34,19 +34,6 @@ namespace PokerTime.Persistence.Configurations {
                 IsRequired().
                 OnDelete(DeleteBehavior.Cascade);
 
-            builder.OwnsOne(e => e.Options,
-                e => {
-                    e.WithOwner();
-                });
-
-            builder.OwnsOne(e => e.WorkflowData,
-                e => {
-                    e.Property(x => x.CurrentWorkflowTimeLimitInMinutes);
-                    e.Property(x => x.CurrentWorkflowInitiationTimestamp);
-
-                    e.WithOwner();
-                });
-
             builder.UsePropertyAccessMode(PropertyAccessMode.PreferProperty);
         }
     }

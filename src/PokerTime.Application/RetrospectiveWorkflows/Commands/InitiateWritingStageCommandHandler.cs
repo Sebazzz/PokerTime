@@ -26,8 +26,6 @@ namespace PokerTime.Application.RetrospectiveWorkflows.Commands {
             if (retrospective == null) throw new ArgumentNullException(nameof(retrospective));
 
             retrospective.CurrentStage = SessionStage.Writing;
-            retrospective.WorkflowData.CurrentWorkflowInitiationTimestamp = this._systemClock.CurrentTimeOffset;
-            retrospective.WorkflowData.CurrentWorkflowTimeLimitInMinutes = request.TimeInMinutes;
 
             await this.DbContext.SaveChangesAsync(cancellationToken);
 

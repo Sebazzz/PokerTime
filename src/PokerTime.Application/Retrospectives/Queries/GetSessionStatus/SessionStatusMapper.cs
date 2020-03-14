@@ -31,8 +31,7 @@ namespace PokerTime.Application.Retrospectives.Queries.GetSessionStatus {
         public Task<SessionStatus> GetSessionStatus(Retrospective retrospective, CancellationToken cancellationToken) {
             if (retrospective == null) throw new ArgumentNullException(nameof(retrospective));
 
-            var workflowStatus = RetrospectiveWorkflowStatus.FromDomainWorkflowData(retrospective.WorkflowData);
-            var retrospectiveStatus = new SessionStatus(retrospective.UrlId.StringId, retrospective.Title, retrospective.CurrentStage, workflowStatus, retrospective.Options.MaximumNumberOfVotes);
+            var retrospectiveStatus = new SessionStatus(retrospective.UrlId.StringId, retrospective.Title, retrospective.CurrentStage);
 
             return Task.FromResult(retrospectiveStatus);
         }
