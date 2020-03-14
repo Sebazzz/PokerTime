@@ -1,0 +1,18 @@
+@using Return.Application.Common.Models
+
+<span class="vote-indicator" data-test-element-id="@TestElementId">
+    <span class="@CssClass fa-star"></span>
+</span>
+
+@code {
+    #nullable disable
+
+    [Parameter]
+    public ColorModel Color { get; set; }
+
+    [Parameter]
+    public bool IsCast { get; set; }
+
+    private string CssClass => this.IsCast ? "fas" : "far";
+    private string TestElementId => this.IsCast ? "cast-vote" : "uncast-vote";
+}

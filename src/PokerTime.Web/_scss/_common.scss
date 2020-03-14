@@ -1,0 +1,43 @@
+.navbar-brand > .navbar-item {
+    font-weight: bold;
+    user-select: none;
+}
+
+.retro-qrcode {
+    width: auto;
+    height: auto;
+}
+
+.form-explanation {
+    margin-bottom: 1.5em;
+}
+
+.hero,
+p {
+    margin-bottom: 1em;
+}
+
+.input {
+    &--retro-color {
+        width: 5em;
+    }
+}
+
+.full-width {
+    width: 100%;
+}
+
+.navbar-retrospective-start {
+    flex-grow: 1;
+    justify-content: center;
+}
+
+.navbar-brand > span.navbar-item {
+    cursor: default;
+}
+
+.footer {
+    &__gh-link {
+        margin-left: 4em;
+    }
+}

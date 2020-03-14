@@ -1,0 +1,37 @@
+{
+    "name": "return.web",
+    "version": "1.0.0",
+    "description": "Retrospective web app",
+    "repository": "https://github.com/Sebazzz/Return",
+    "author": "Sebastiaan Dammann",
+    "license": "GPLv3",
+    "private": true,
+    "devDependencies": {
+        "@fortawesome/fontawesome-free": "^5.12.1",
+        "autoprefixer": "^9.7.4",
+        "bulma": "^0.8.0",
+        "husky": "^4.2.3",
+        "node-sass": "^4.13.1",
+        "postcss-cli": "^7.1.0",
+        "prettier": "^1.19.1",
+        "pretty-quick": "^2.0.1"
+    },
+    "scripts": {
+        "build": "gulp build",
+        "pre-commit": "../../pre-commit",
+        "test": "echo 0",
+        "watch": "gulp sass:watch"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "yarn pre-commit"
+        }
+    },
+    "dependencies": {
+        "blazor.polyfill": "^3.0.7",
+        "gulp": "^4.0.2",
+        "gulp-autoprefixer": "^7.0.1",
+        "gulp-cli": "^2.2.0",
+        "gulp-sass": "^4.0.2"
+    }
+}

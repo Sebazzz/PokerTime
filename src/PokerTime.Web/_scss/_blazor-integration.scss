@@ -1,0 +1,18 @@
+.invalid {
+    @extend .is-danger;
+}
+
+/*
+.valid {
+    @extend .is-success;
+}
+*/
+
+.validation-message {
+    @extend .help;
+    @extend .is-danger;
+}
+
+.navbar-item.active {
+    @extend .navbar-item.is-active;
+}

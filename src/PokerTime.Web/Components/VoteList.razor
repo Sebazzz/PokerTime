@@ -1,0 +1,110 @@
+@using Microsoft.Extensions.Logging
+@using Return.Application.Common.Models
+@using Return.Application.Notifications.VoteChanged
+@using Return.Application.Retrospectives.Queries.GetRetrospectiveStatus
+@using Return.Application.Votes.Commands
+@inherits MediatorComponent
+@inject ILogger<VoteList> Logger
+@using Return.Application.Votes.Queries
+
+@if (!this.RetrospectiveStatus.IsVotingAllowed && !this.RetrospectiveStatus.IsViewingVotesAllowed)
+{
+    return;
+}
+
+<div class="@this.CssClass" data-test-element-id="vote-list" data-id="@this.ItemId">
+    @if (this.RetrospectiveStatus.IsVotingAllowed)
+    {
+        if (this.Votes.CanCastVote(this.CurrentParticipant.Id, this.Lane.Id) && !this.IsSaving) {
+            <span class="vote-list__vote-button" @onclick="@DoVote">
+                <i class="fas fa-thumbs-up"></i>
+            </span>
+        } else {
+            <span class="vote-list__vote-button vote-list__vote-button--disabled">
+                <i class="far fa-thumbs-up"></i>
+            </span>
+        }
+    }
+
+    <ul class="vote-list__list">
+        @foreach (VoteModel vote in this.TheVotes)
+        {
+            if (vote.ParticipantId == this.CurrentParticipant.Id && !this.IsSaving && this.RetrospectiveStatus.IsVotingAllowed)
+            {
+                <li class="vote-list__vote-remove-button"
+                    @onclick="@this.RetractVote"><Vote Color="@vote.ParticipantColor" IsCast="@vote.IsCast" /></li>
+            }
+            else
+            {
+                <li><Vote Color="@vote.ParticipantColor" IsCast="@vote.IsCast" /></li>
+            }
+        }
+    </ul>
+</div>
+
+
+@code {
+    [Parameter]
+    public RetrospectiveNote? Note { get; set; }
+
+    [Parameter]
+    public RetrospectiveNoteGroup? NoteGroup { get; set; }
+
+#nullable disable
+    [CascadingParameter]
+    public RetrospectiveLane Lane { get; set; }
+
+    [CascadingParameter]
+    public RetrospectiveVoteStatus Votes { get; set; }
+
+    [CascadingParameter]
+    public CurrentParticipantModel CurrentParticipant { get; set;  }
+
+    [CascadingParameter]
+    public RetrospectiveStatus RetrospectiveStatus { get; set; }
+#nullable restore
+
+    // Considered using generic instead, but this is more simple.
+    private int ItemId => this.GetItem(this.Note?.Id, this.NoteGroup?.Id) ?? 0;
+    private VoteLookup Lookup => this.GetItem(this.Votes.VotesByNote, this.Votes.VotesByNoteGroup);
+    private IEnumerable<VoteModel> TheVotes => this.Lookup.Get(this.ItemId).Where(x => x.IsCast);
+    private string CssClass => this.GetItem("note__vote-list vote-list", "note-group__vote-list vote-list");
+    private bool IsSaving { get; set; }
+
+    private T GetItem<T>(T ifNote, T ifGroup)
+    {
+        if (this.Note != null)
+        {
+            return ifNote;
+        }
+
+        if (this.NoteGroup != null)
+        {
+            return ifGroup;
+        }
+
+        throw new InvalidOperationException("Component not initialized");
+    }
+
+    private Task DoVote() => this.ExecuteVoteCommand(VoteMutationType.Added);
+    private Task RetractVote() => this.ExecuteVoteCommand(VoteMutationType.Removed);
+
+    private async Task ExecuteVoteCommand(VoteMutationType mutationType) {
+        CastVoteCommand voteCommand = GetItem(CastVoteCommand.ForNote(this.ItemId, mutationType), CastVoteCommand.ForNoteGroup(this.ItemId, mutationType));
+
+        this.IsSaving = true;
+        try
+        {
+            await this.Mediator.Send(voteCommand);
+        }
+        catch (Exception ex)
+        {
+            this.Logger.LogError(ex, $"Error casting vote {mutationType} for item #{this.ItemId} [{this.CssClass}]");
+        }
+        finally
+        {
+            this.IsSaving = false;
+        }
+        
+    }
+}

@@ -1,0 +1,69 @@
+@mixin box-textarea {
+    color: #fafafa;
+    text-shadow: 1px 1px 2px #000;
+    border: none;
+}
+
+.note {
+    padding: 0.5rem;
+    font-size: $size-7;
+    filter: grayscale(25%);
+
+    &:focus-within,
+    &--editable:hover {
+        box-shadow: 2px 2px 15px rgba(10, 10, 10, 0.5);
+    }
+
+    .browser-compat &__content.textarea {
+        background-color: #333;
+    }
+
+    &__content {
+        background-color: inherit;
+        margin: 0;
+        box-shadow: none;
+        min-height: 1.5rem;
+
+        @include box-textarea;
+
+        &::placeholder {
+            @include box-textarea;
+        }
+
+        &::-moz-placeholder {
+            @include box-textarea;
+        }
+
+        &::-webkit-input-placeholder {
+            @include box-textarea;
+        }
+
+        &:-moz-placeholder {
+            @include box-textarea;
+        }
+
+        &:-ms-input-placeholder {
+            @include box-textarea;
+        }
+    }
+
+    &--blurred &__content {
+        filter: blur(2px);
+        text-shadow: 0 0 8px #fff;
+        color: transparent;
+    }
+
+    &__delete-icon {
+        color: white;
+        display: inline-block;
+        position: absolute;
+        top: 1px;
+        right: 2px;
+        cursor: pointer;
+        z-index: 1;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+}

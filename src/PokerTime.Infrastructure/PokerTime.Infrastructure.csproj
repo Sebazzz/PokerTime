@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../Common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PokerTime.Application\PokerTime.Application.csproj" />
+    <ProjectReference Include="..\PokerTime.Common\PokerTime.Common.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,155 @@
+@page "/create-retro"
+@inherits MediatorComponent
+@using Microsoft.Extensions.Logging
+@using Return.Application.Retrospectives.Commands.CreateRetrospective
+@inject ILogger<CreateRetrospective> Logger
+
+@if (ShowCompletionMessage)
+{
+    <section class="hero is-success">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    Success
+                </h1>
+                <h2 class="subtitle">
+                    Your retrospective lobby has been created.
+                </h2>
+            </div>
+        </div>
+    </section>
+
+    if (Result != null)
+    {
+        <p class="form-explanation">
+            Please share the following URL and QR code with your team.
+        </p>
+
+        <div class="control">
+            <input class="input" id="retro-location" type="text" readonly="readonly" value="@Result.Location">
+        </div>
+
+        <div>
+            <p>
+                <img src="@Result.QrCode.ToBase64()" class="retro-qrcode" />
+            </p>
+        </div>
+
+        if (!String.IsNullOrEmpty(Model.Passphrase))
+        {
+            <p data-test-element-id="participator instructions">
+                To enter the retrospective, the participants need to enter the following password: <code >@Model.Passphrase</code>.
+            </p>
+        }
+        else
+        {
+            <p data-test-element-id="participator instructions">
+                To enter the retrospective no password is required.
+            </p>
+        }
+
+        <p data-test-element-id="facilitator instructions">
+            To start the retrospective, you need to enter the following password: <code>@Model.FacilitatorPassphrase</code>.
+        </p>
+
+        <p>
+            Have a good retrospective!
+        </p>
+    }
+}
+else
+{
+    <h1 class="title">Create a retrospective</h1>
+    <h2 class="subtitle">A safe space to reflect on the past sprint</h2>
+
+    <p class="form-explanation">
+        Create a retrospective with the form below. After completion you will receive a url to share with your team members.
+    </p>
+
+    if (ShowErrorMessage)
+    {
+        <ErrorMessage Text="Something went wrong creating the retrospective. Please try again."/>
+    }
+
+    <EditForm Model="@Model" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
+        <Blazored.FluentValidation.FluentValidationValidator  />
+
+        <div class="field">
+            <label class="label" for="retro-title">Title</label>
+            <div class="control">
+                <InputText id="retro-title" class="input" type="text" @bind-Value="@Model.Title" placeholder="Give the retrospective a title" />
+            </div>
+
+            <ValidationMessage For="() => Model.Title"></ValidationMessage>
+        </div>
+
+        <div class="columns">
+            <div class="column">
+                <div class="field">
+                    <label class="label" for="retro-facilitator-passphrase">Facilitator passphrase</label>
+                    <div class="control">
+                        <InputText id="retro-facilitator-passphrase" class="input" type="text" @bind-Value="@Model.FacilitatorPassphrase" placeholder="" />
+                    </div>
+
+                    <ValidationMessage For="() => Model.FacilitatorPassphrase"></ValidationMessage>
+                    <p class="help">This is the password you need to start and control the progress of the retrospective.</p>
+                </div>
+            </div>
+            <div class="column">
+                <div class="field">
+                    <label class="label" for="retro-passphrase">Participant passphrase</label>
+                    <div class="control">
+                        <InputText id="retro-passphrase" class="input" type="text" @bind-Value="@Model.Passphrase" placeholder="" />
+                    </div>
+                    <ValidationMessage For="() => Model.Passphrase"></ValidationMessage>
+                    <p class="help">Optional passphrase required for participants to enter the lobby.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="field is-grouped">
+            <div class="control">
+                <button class="button is-link" id="create-retro-button">Submit</button>
+            </div>
+        </div>
+    </EditForm>
+}
+
+@code {
+
+#nullable disable
+
+    Task HandleInvalidSubmit()
+    {
+        this.ShowErrorMessage = false;
+
+        return Task.CompletedTask;
+    }
+
+    async Task HandleValidSubmit()
+    {
+        this.ShowErrorMessage = false;
+
+        try
+        {
+            CreateRetrospectiveCommandResponse response = await this.Mediator.Send(this.Model);
+
+            this.Result = response;
+            this.ShowCompletionMessage = true;
+        }
+        catch (Exception ex)
+        {
+            this.ShowErrorMessage = true;
+
+            Logger.LogError(ex, "Error creating retrospective");
+        }
+    }
+
+    public CreateRetrospectiveCommandResponse Result { get; set; }
+
+    public bool ShowCompletionMessage;
+    public bool ShowErrorMessage;
+
+    [Parameter]
+    public CreateRetrospectiveCommand Model { get; set; } = new CreateRetrospectiveCommand();
+}

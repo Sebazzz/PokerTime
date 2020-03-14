@@ -1,0 +1,34 @@
+﻿@page "/"
+@using Microsoft.AspNetCore.Hosting
+@using Microsoft.Extensions.Hosting
+@namespace Return.Web.Pages
+@inject IWebHostEnvironment HostEnvironment
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Return retrospectives</title>
+  <base href="~/" />
+  <link href="build/css/main.css" rel="stylesheet" />
+</head>
+<body>
+<app>
+  @(await Html.RenderComponentAsync<App>(renderMode: RenderMode.ServerPrerendered))
+</app>
+  
+<script>
+  window.Promise || (function () {
+    var tag = document.createElement('script');
+    tag.src = 'build/js/compat/blazor.polyfill.min.js';
+    document.body.appendChild(tag);
+    document.body.classList.add('browser-compat');
+  })();
+</script>
+<script src="_framework/blazor.server.js"></script>
+<script src="js/retro.js"></script>
+</body>
+</html>

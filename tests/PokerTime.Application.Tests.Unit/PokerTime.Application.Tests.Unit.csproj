@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../Common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\PokerTime.Application\PokerTime.Application.csproj" />
+    <ProjectReference Include="..\..\src\PokerTime.Persistence\PokerTime.Persistence.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.2" />
+    <PackageReference Include="NSubstitute " Version="4.2.1" />
+    <PackageReference Include="NSubstitute.Analyzers.CSharp " Version="1.0.12" />
+  </ItemGroup>
+</Project>
