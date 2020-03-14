@@ -1,36 +1,36 @@
 ﻿// ******************************************************************************
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : RetrospectiveRolePanel.cs
+//  File:           : RetrospectiveStageText2.cs
 //  Project         : PokerTime.Web
 // ******************************************************************************
 
 namespace PokerTime.Web.Components {
-    using Application.Common.Models;
-    using Application.Retrospectives.Queries.GetParticipantsInfo;
+    using Application.Retrospectives.Queries.GetSessionStatus;
+    using Domain.Entities;
     using Microsoft.AspNetCore.Components;
     using Microsoft.AspNetCore.Components.Rendering;
 
 #nullable disable
 
     /// <summary>
-    /// Represents a panel which will only render one content or the other based on the role of the user
+    /// Represents a panel which will only render in the case the retrospective is in a certain stage
     /// </summary>
-    public sealed class RetrospectiveRolePanel : ComponentBase {
+    public sealed class SessionStagePanel : ComponentBase {
         [Parameter]
-        public RenderFragment Facilitator { get; set; }
+        public SessionStage ApplicableTo { get; set; }
 
         [Parameter]
-        public RenderFragment Participant { get; set; }
+        public RenderFragment ChildContent { get; set; }
 
         [CascadingParameter]
-        public CurrentParticipantModel CurrentParticipantInfo { get; set; }
+        public SessionStatus SessionStatus { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "Framework infrastructure provides argument")]
         protected override void BuildRenderTree(RenderTreeBuilder builder) {
-            RenderFragment applicableRenderFragment = this.CurrentParticipantInfo.IsFacilitator ? this.Facilitator : this.Participant;
-
-            applicableRenderFragment.Invoke(builder);
+            if (this.SessionStatus?.Stage == this.ApplicableTo) {
+                this.ChildContent.Invoke(builder);
+            }
         }
     }
 }

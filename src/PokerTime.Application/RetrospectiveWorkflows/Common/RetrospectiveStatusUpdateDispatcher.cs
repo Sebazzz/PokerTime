@@ -1,7 +1,7 @@
 ﻿// ******************************************************************************
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : RetrospectiveStatusUpdateDispatcher.cs
+//  File:           : SessionStatusUpdateDispatcher.cs
 //  Project         : PokerTime.Application
 // ******************************************************************************
 
@@ -10,26 +10,26 @@ namespace PokerTime.Application.RetrospectiveWorkflows.Common {
     using System.Threading.Tasks;
     using Domain.Entities;
     using MediatR;
-    using Notifications.RetrospectiveStatusUpdated;
-    using Retrospectives.Queries.GetRetrospectiveStatus;
+    using Notifications.SessionStatusUpdated;
+    using Retrospectives.Queries.GetSessionStatus;
 
-    public interface IRetrospectiveStatusUpdateDispatcher {
+    public interface ISessionStatusUpdateDispatcher {
         Task DispatchUpdate(Retrospective retrospective, CancellationToken cancellationToken);
     }
 
-    public sealed class RetrospectiveStatusUpdateDispatcher : IRetrospectiveStatusUpdateDispatcher {
-        private readonly IRetrospectiveStatusMapper _retrospectiveStatusMapper;
+    public sealed class SessionStatusUpdateDispatcher : ISessionStatusUpdateDispatcher {
+        private readonly ISessionStatusMapper _retrospectiveStatusMapper;
         private readonly IMediator _mediator;
 
-        public RetrospectiveStatusUpdateDispatcher(IRetrospectiveStatusMapper retrospectiveStatusMapper, IMediator mediator) {
+        public SessionStatusUpdateDispatcher(ISessionStatusMapper retrospectiveStatusMapper, IMediator mediator) {
             this._retrospectiveStatusMapper = retrospectiveStatusMapper;
             this._mediator = mediator;
         }
 
         public async Task DispatchUpdate(Retrospective retrospective, CancellationToken cancellationToken) {
-            RetrospectiveStatus retrospectiveStatus = await this._retrospectiveStatusMapper.GetRetrospectiveStatus(retrospective, cancellationToken);
+            SessionStatus SessionStatus = await this._retrospectiveStatusMapper.GetSessionStatus(retrospective, cancellationToken);
 
-            await this._mediator.Publish(new RetrospectiveStatusUpdatedNotification(retrospectiveStatus), cancellationToken);
+            await this._mediator.Publish(new SessionStatusUpdatedNotification(SessionStatus), cancellationToken);
         }
     }
 }

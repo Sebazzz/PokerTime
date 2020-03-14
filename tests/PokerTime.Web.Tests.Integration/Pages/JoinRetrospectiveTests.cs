@@ -68,7 +68,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         public async Task JoinPokerSessionPage_KnownRetrospectiveAlreadyStarted_ShowMessage() {
             // Given
             string sessionId = await this.CreatePokerSession("scrummaster", "secret");
-            await this.SetRetrospective(sessionId, retro => retro.CurrentStage = RetrospectiveStage.Writing);
+            await this.SetRetrospective(sessionId, retro => retro.CurrentStage = SessionStage.Writing);
 
             // When
             this.Page.Navigate(this.App, sessionId);
@@ -81,7 +81,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         public async Task JoinPokerSessionPage_KnownRetrospectiveFinished_ShowMessage() {
             // Given
             string sessionId = await this.CreatePokerSession("scrummaster", "secret");
-            await this.SetRetrospective(sessionId, retro => retro.CurrentStage = RetrospectiveStage.Finished);
+            await this.SetRetrospective(sessionId, retro => retro.CurrentStage = SessionStage.Finished);
 
             // When
             this.Page.Navigate(this.App, sessionId);

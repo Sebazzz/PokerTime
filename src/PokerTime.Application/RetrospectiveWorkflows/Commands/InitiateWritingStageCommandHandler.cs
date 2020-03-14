@@ -18,14 +18,14 @@ namespace PokerTime.Application.RetrospectiveWorkflows.Commands {
     public sealed class InitiateWritingStageCommandHandler : AbstractStageCommandHandler<InitiateWritingStageCommand> {
         private readonly ISystemClock _systemClock;
 
-        public InitiateWritingStageCommandHandler(IPokerTimeDbContext pokerTimeDbContext, IRetrospectiveStatusUpdateDispatcher retrospectiveStatusUpdateDispatcher, ISystemClock systemClock) : base(pokerTimeDbContext, retrospectiveStatusUpdateDispatcher) {
+        public InitiateWritingStageCommandHandler(IPokerTimeDbContext pokerTimeDbContext, ISessionStatusUpdateDispatcher retrospectiveStatusUpdateDispatcher, ISystemClock systemClock) : base(pokerTimeDbContext, retrospectiveStatusUpdateDispatcher) {
             this._systemClock = systemClock;
         }
 
         protected override async Task<Unit> HandleCore(InitiateWritingStageCommand request, Retrospective retrospective, CancellationToken cancellationToken) {
             if (retrospective == null) throw new ArgumentNullException(nameof(retrospective));
 
-            retrospective.CurrentStage = RetrospectiveStage.Writing;
+            retrospective.CurrentStage = SessionStage.Writing;
             retrospective.WorkflowData.CurrentWorkflowInitiationTimestamp = this._systemClock.CurrentTimeOffset;
             retrospective.WorkflowData.CurrentWorkflowTimeLimitInMinutes = request.TimeInMinutes;
 

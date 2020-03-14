@@ -10,30 +10,30 @@
 
         <div class="navbar-end">
             <div class="navbar-item retrospective-progress-container">
-                <div class="retrospective-progress @(this.CurrentStage == RetrospectiveStage.NotStarted ? "retrospective-progress--inactive" : String.Empty)">
+                <div class="retrospective-progress @(this.CurrentStage == SessionStage.NotStarted ? "retrospective-progress--inactive" : String.Empty)">
                     <PokerSessionProgressItem 
                         CurrentStage="@this.CurrentStage"
-                        ApplicableTo="@RetrospectiveStage.Writing"
+                        ApplicableTo="@SessionStage.Writing"
                         Text="Write"/>
 
                     <PokerSessionProgressItem 
                         CurrentStage="@this.CurrentStage"
-                        ApplicableTo="@RetrospectiveStage.Discuss"
+                        ApplicableTo="@SessionStage.Discuss"
                         Text="Discuss"/>
 
                     <PokerSessionProgressItem 
                         CurrentStage="@this.CurrentStage"
-                        ApplicableTo="@RetrospectiveStage.Grouping"
+                        ApplicableTo="@SessionStage.Grouping"
                         Text="Group"/>
 
                     <PokerSessionProgressItem 
                         CurrentStage="@this.CurrentStage"
-                        ApplicableTo="@RetrospectiveStage.Voting"
+                        ApplicableTo="@SessionStage.Voting"
                         Text="Vote"/>
 
                     <PokerSessionProgressItem 
                         CurrentStage="@this.CurrentStage"
-                        ApplicableTo="@RetrospectiveStage.Finished"
+                        ApplicableTo="@SessionStage.Finished"
                         Text="Finished"/>
                 </div>
             </div>
@@ -46,7 +46,7 @@
     #nullable disable
     private PokerSessionLayoutInfo _layoutInfo = new PokerSessionLayoutInfo("Loading...");
 
-    private RetrospectiveStage CurrentStage => this._layoutInfo.Stage ?? RetrospectiveStage.NotStarted;
+    private SessionStage CurrentStage => this._layoutInfo.Stage ?? SessionStage.NotStarted;
 
     public void Update(in PokerSessionLayoutInfo layoutInfo)
     {

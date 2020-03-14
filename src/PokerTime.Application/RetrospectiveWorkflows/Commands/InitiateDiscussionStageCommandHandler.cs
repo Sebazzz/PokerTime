@@ -15,13 +15,13 @@ namespace PokerTime.Application.RetrospectiveWorkflows.Commands {
     using MediatR;
 
     public sealed class InitiateDiscussionStageCommandHandler : AbstractStageCommandHandler<InitiateDiscussionStageCommand> {
-        public InitiateDiscussionStageCommandHandler(IPokerTimeDbContextFactory pokerTimeDbContext, IRetrospectiveStatusUpdateDispatcher retrospectiveStatusUpdateDispatcher) : base(pokerTimeDbContext, retrospectiveStatusUpdateDispatcher) {
+        public InitiateDiscussionStageCommandHandler(IPokerTimeDbContextFactory pokerTimeDbContext, ISessionStatusUpdateDispatcher retrospectiveStatusUpdateDispatcher) : base(pokerTimeDbContext, retrospectiveStatusUpdateDispatcher) {
         }
 
         protected override async Task<Unit> HandleCore(InitiateDiscussionStageCommand request, Retrospective retrospective, CancellationToken cancellationToken) {
             if (retrospective == null) throw new ArgumentNullException(nameof(retrospective));
 
-            retrospective.CurrentStage = RetrospectiveStage.Discuss;
+            retrospective.CurrentStage = SessionStage.Discuss;
 
             await this.DbContext.SaveChangesAsync(cancellationToken);
 

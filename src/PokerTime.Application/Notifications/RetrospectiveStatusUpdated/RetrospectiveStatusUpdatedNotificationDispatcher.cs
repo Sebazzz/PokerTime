@@ -1,23 +1,23 @@
 ﻿// ******************************************************************************
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : RetrospectiveStatusUpdatedNotificationDispatcher.cs
+//  File:           : SessionStatusUpdatedNotificationDispatcher.cs
 //  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace PokerTime.Application.Notifications.RetrospectiveStatusUpdated {
+namespace PokerTime.Application.Notifications.SessionStatusUpdated {
     using System.Threading.Tasks;
     using Microsoft.Extensions.Logging;
 
-    public sealed class RetrospectiveStatusUpdatedNotificationDispatcher : NotificationDispatcher<
-        RetrospectiveStatusUpdatedNotification, IRetrospectiveStatusUpdatedSubscriber> {
-        public RetrospectiveStatusUpdatedNotificationDispatcher(ILogger<NotificationDispatcher<RetrospectiveStatusUpdatedNotification, IRetrospectiveStatusUpdatedSubscriber>> logger) : base(logger)
+    public sealed class SessionStatusUpdatedNotificationDispatcher : NotificationDispatcher<
+        SessionStatusUpdatedNotification, ISessionStatusUpdatedSubscriber> {
+        public SessionStatusUpdatedNotificationDispatcher(ILogger<NotificationDispatcher<SessionStatusUpdatedNotification, ISessionStatusUpdatedSubscriber>> logger) : base(logger)
         {
         }
 
         protected override Task DispatchCore(
-            IRetrospectiveStatusUpdatedSubscriber subscriber,
-            RetrospectiveStatusUpdatedNotification notification
-        ) => subscriber.OnRetrospectiveStatusUpdated(notification.RetrospectiveStatus);
+            ISessionStatusUpdatedSubscriber subscriber,
+            SessionStatusUpdatedNotification notification
+        ) => subscriber.OnSessionStatusUpdated(notification.SessionStatus);
     }
 }

@@ -21,7 +21,7 @@ namespace PokerTime.Application.Common.Security.TypeHandling {
             in CurrentParticipantModel currentParticipant
         ) {
             switch (retrospective.CurrentStage) {
-                case RetrospectiveStage.Voting:
+                case SessionStage.Voting:
                     break;
                 default:
                     throw new OperationSecurityException(
@@ -35,7 +35,7 @@ namespace PokerTime.Application.Common.Security.TypeHandling {
             in CurrentParticipantModel currentParticipant
         ) {
             switch (retrospective.CurrentStage) {
-                case RetrospectiveStage.Voting:
+                case SessionStage.Voting:
                     break;
                 default:
                     throw new OperationSecurityException(

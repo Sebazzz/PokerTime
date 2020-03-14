@@ -21,7 +21,7 @@ namespace PokerTime.Application.Tests.Unit.RetrospectiveWorkflows.Commands {
         public void InitiateDiscussionStageCommandHandler_InvalidSessionId_ThrowsNotFoundException() {
             // Given
             const string sessionId = "not found surely :)";
-            var handler = new InitiateDiscussionStageCommandHandler(this.Context, this.RetrospectiveStatusUpdateDispatcherMock);
+            var handler = new InitiateDiscussionStageCommandHandler(this.Context, this.SessionStatusUpdateDispatcherMock);
             var request = new InitiateDiscussionStageCommand { SessionId = sessionId };
 
             // When
@@ -34,7 +34,7 @@ namespace PokerTime.Application.Tests.Unit.RetrospectiveWorkflows.Commands {
         [Test]
         public async Task InitiateDiscussionStageCommandHandler_OnStatusChange_UpdatesRetroStageAndInvokesNotification() {
             // Given
-            var handler = new InitiateDiscussionStageCommandHandler(this.Context, this.RetrospectiveStatusUpdateDispatcherMock);
+            var handler = new InitiateDiscussionStageCommandHandler(this.Context, this.SessionStatusUpdateDispatcherMock);
             var request = new InitiateDiscussionStageCommand { SessionId = this.SessionId };
 
             this.SystemClockMock.CurrentTimeOffset.Returns(DateTimeOffset.UnixEpoch);
@@ -45,9 +45,9 @@ namespace PokerTime.Application.Tests.Unit.RetrospectiveWorkflows.Commands {
             this.RefreshObject();
 
             // Then
-            Assert.That(this.Retrospective.CurrentStage, Is.EqualTo(RetrospectiveStage.Discuss));
+            Assert.That(this.Retrospective.CurrentStage, Is.EqualTo(SessionStage.Discuss));
 
-            await this.RetrospectiveStatusUpdateDispatcherMock.Received().DispatchUpdate(Arg.Any<Retrospective>(), CancellationToken.None);
+            await this.SessionStatusUpdateDispatcherMock.Received().DispatchUpdate(Arg.Any<Retrospective>(), CancellationToken.None);
         }
     }
 }

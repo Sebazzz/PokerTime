@@ -1,36 +1,35 @@
 ﻿// ******************************************************************************
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : RetrospectiveStageText2.cs
+//  File:           : SessionRolePanel.cs
 //  Project         : PokerTime.Web
 // ******************************************************************************
 
 namespace PokerTime.Web.Components {
-    using Application.Retrospectives.Queries.GetRetrospectiveStatus;
-    using Domain.Entities;
+    using Application.Common.Models;
     using Microsoft.AspNetCore.Components;
     using Microsoft.AspNetCore.Components.Rendering;
 
 #nullable disable
 
     /// <summary>
-    /// Represents a panel which will only render in the case the retrospective is in a certain stage
+    /// Represents a panel which will only render one content or the other based on the role of the user
     /// </summary>
-    public sealed class RetrospectiveStagePanel : ComponentBase {
+    public sealed class SessionRolePanel : ComponentBase {
         [Parameter]
-        public RetrospectiveStage ApplicableTo { get; set; }
+        public RenderFragment Facilitator { get; set; }
 
         [Parameter]
-        public RenderFragment ChildContent { get; set; }
+        public RenderFragment Participant { get; set; }
 
         [CascadingParameter]
-        public RetrospectiveStatus RetrospectiveStatus { get; set; }
+        public CurrentParticipantModel CurrentParticipantInfo { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "Framework infrastructure provides argument")]
         protected override void BuildRenderTree(RenderTreeBuilder builder) {
-            if (this.RetrospectiveStatus?.Stage == this.ApplicableTo) {
-                this.ChildContent.Invoke(builder);
-            }
+            RenderFragment applicableRenderFragment = this.CurrentParticipantInfo.IsFacilitator ? this.Facilitator : this.Participant;
+
+            applicableRenderFragment.Invoke(builder);
         }
     }
 }

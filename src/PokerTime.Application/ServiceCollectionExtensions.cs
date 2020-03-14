@@ -13,7 +13,7 @@ namespace PokerTime.Application {
     using MediatR;
     using Microsoft.Extensions.DependencyInjection;
     using Notifications;
-    using Retrospectives.Queries.GetRetrospectiveStatus;
+    using Retrospectives.Queries.GetSessionStatus;
     using RetrospectiveWorkflows.Common;
 
     public static class ServiceCollectionExtensions {
@@ -24,8 +24,8 @@ namespace PokerTime.Application {
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(RequestPerformanceBehaviour<,>));
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehaviour<,>));
 
-            services.AddScoped<IRetrospectiveStatusMapper, RetrospectiveStatusMapper>();
-            services.AddScoped<IRetrospectiveStatusUpdateDispatcher, RetrospectiveStatusUpdateDispatcher>();
+            services.AddScoped<ISessionStatusMapper, SessionStatusMapper>();
+            services.AddScoped<ISessionStatusUpdateDispatcher, SessionStatusUpdateDispatcher>();
             services.AddScoped<ISecurityValidator, SecurityValidator>();
 
             services.AddNotificationDispatchers();

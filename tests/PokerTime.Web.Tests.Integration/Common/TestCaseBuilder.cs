@@ -47,7 +47,7 @@ namespace PokerTime.Web.Tests.Integration.Common {
                 TestContext.WriteLine($"[{nameof(TestCaseBuilder)}] attempting to record presence of existing participant [{participantName}]");
 
                 var dbContext = this._scope.ServiceProvider.GetRequiredService<IPokerTimeDbContext>();
-                Participant participant = await dbContext.Participants.FirstAsync(x => x.Name == participantName && x.Retrospective.UrlId.StringId == this._retrospectiveId);
+                Participant participant = await dbContext.Participants.FirstAsync(x => x.Name == participantName && x.Session.UrlId.StringId == this._retrospectiveId);
 
                 this._participators.Add(participant.Name, new ParticipantInfo {
                     Id = participant.Id,
@@ -137,7 +137,7 @@ namespace PokerTime.Web.Tests.Integration.Common {
 
             return this;
         }
-        public TestCaseBuilder WithRetrospectiveStage(RetrospectiveStage stage) => this.EnqueueRetrospectiveAction(r => r.CurrentStage = stage);
+        public TestCaseBuilder WithRetrospectiveStage(SessionStage stage) => this.EnqueueRetrospectiveAction(r => r.CurrentStage = stage);
 
         private ParticipantInfo GetParticipatorInfo(string name) {
             if (!this._participators.TryGetValue(name, out ParticipantInfo val)) {

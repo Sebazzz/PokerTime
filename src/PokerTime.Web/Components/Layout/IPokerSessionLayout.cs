@@ -14,7 +14,7 @@ namespace PokerTime.Web.Components.Layout {
     }
 
     public readonly struct PokerSessionLayoutInfo : IEquatable<PokerSessionLayoutInfo> {
-        public RetrospectiveStage? Stage { get; }
+        public SessionStage? Stage { get; }
 
         public string Title { get; }
 
@@ -22,7 +22,7 @@ namespace PokerTime.Web.Components.Layout {
             this.Title = title;
         }
 
-        public PokerSessionLayoutInfo(string title, RetrospectiveStage? stage) {
+        public PokerSessionLayoutInfo(string title, SessionStage? stage) {
             this.Stage = stage;
             this.Title = title;
         }

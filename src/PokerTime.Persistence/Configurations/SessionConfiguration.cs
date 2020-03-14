@@ -1,7 +1,7 @@
 ﻿// ******************************************************************************
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : RetrospectiveConfiguration.cs
+//  File:           : SessionConfiguration.cs
 //  Project         : PokerTime.Persistence
 // ******************************************************************************
 
@@ -12,7 +12,7 @@ namespace PokerTime.Persistence.Configurations {
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-    public sealed class RetrospectiveConfiguration : IEntityTypeConfiguration<Retrospective> {
+    public sealed class SessionConfiguration : IEntityTypeConfiguration<Retrospective> {
         public void Configure(EntityTypeBuilder<Retrospective> builder) {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
 
@@ -30,7 +30,7 @@ namespace PokerTime.Persistence.Configurations {
             builder.Property(e => e.FacilitatorHashedPassphrase).IsRequired().HasMaxLength(64).IsUnicode(false).IsFixedLength();
 
             builder.HasMany(e => e.Participants).
-                WithOne(e => e.Retrospective).
+                WithOne(e => e.Session).
                 IsRequired().
                 OnDelete(DeleteBehavior.Cascade);
 

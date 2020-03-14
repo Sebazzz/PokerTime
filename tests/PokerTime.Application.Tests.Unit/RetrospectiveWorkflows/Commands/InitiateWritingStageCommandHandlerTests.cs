@@ -21,7 +21,7 @@ namespace PokerTime.Application.Tests.Unit.RetrospectiveWorkflows.Commands {
         public void InitiateWritingStageCommandHandler_InvalidSessionId_ThrowsNotFoundException() {
             // Given
             const string sessionId = "not found surely :)";
-            var handler = new InitiateWritingStageCommandHandler(this.Context, this.RetrospectiveStatusUpdateDispatcherMock, this.SystemClockMock);
+            var handler = new InitiateWritingStageCommandHandler(this.Context, this.SessionStatusUpdateDispatcherMock, this.SystemClockMock);
             var request = new InitiateWritingStageCommand { SessionId = sessionId, TimeInMinutes = 10 };
 
             // When
@@ -34,7 +34,7 @@ namespace PokerTime.Application.Tests.Unit.RetrospectiveWorkflows.Commands {
         [Test]
         public async Task InitiateWritingStageCommandHandler_OnStatusChange_UpdatesRetroStageAndInvokesNotification() {
             // Given
-            var handler = new InitiateWritingStageCommandHandler(this.Context, this.RetrospectiveStatusUpdateDispatcherMock, this.SystemClockMock);
+            var handler = new InitiateWritingStageCommandHandler(this.Context, this.SessionStatusUpdateDispatcherMock, this.SystemClockMock);
             var request = new InitiateWritingStageCommand { SessionId = this.SessionId, TimeInMinutes = 10 };
 
             this.SystemClockMock.CurrentTimeOffset.Returns(DateTimeOffset.UnixEpoch);
@@ -45,12 +45,12 @@ namespace PokerTime.Application.Tests.Unit.RetrospectiveWorkflows.Commands {
             this.RefreshObject();
 
             // Then
-            Assert.That(this.Retrospective.CurrentStage, Is.EqualTo(RetrospectiveStage.Writing));
+            Assert.That(this.Retrospective.CurrentStage, Is.EqualTo(SessionStage.Writing));
 
             Assert.That(this.Retrospective.WorkflowData.CurrentWorkflowInitiationTimestamp, Is.EqualTo(this.SystemClockMock.CurrentTimeOffset));
             Assert.That(this.Retrospective.WorkflowData.CurrentWorkflowTimeLimitInMinutes, Is.EqualTo(request.TimeInMinutes));
 
-            await this.RetrospectiveStatusUpdateDispatcherMock.Received().DispatchUpdate(Arg.Any<Retrospective>(), CancellationToken.None);
+            await this.SessionStatusUpdateDispatcherMock.Received().DispatchUpdate(Arg.Any<Retrospective>(), CancellationToken.None);
         }
     }
 }

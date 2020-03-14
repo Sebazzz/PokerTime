@@ -3,59 +3,59 @@
 <article class="message retrospective-status-panel">
     <div class="message-header">
         @* Each stage has its own title *@
-        <RetrospectiveStageText ApplicableTo="@RetrospectiveStage.NotStarted"
+        <SessionStageText ApplicableTo="@SessionStage.NotStarted"
                                 Text="Not started yet" />
-        <RetrospectiveStageText ApplicableTo="@RetrospectiveStage.Writing"
+        <SessionStageText ApplicableTo="@SessionStage.Writing"
                                 Text="Writing down findings" />
-        <RetrospectiveStageText ApplicableTo="@RetrospectiveStage.Discuss"
+        <SessionStageText ApplicableTo="@SessionStage.Discuss"
                                 Text="Discussion" />
-        <RetrospectiveStageText ApplicableTo="@RetrospectiveStage.Grouping"
+        <SessionStageText ApplicableTo="@SessionStage.Grouping"
                                 Text="Grouping" />
-        <RetrospectiveStageText ApplicableTo="@RetrospectiveStage.Voting"
+        <SessionStageText ApplicableTo="@SessionStage.Voting"
                                 Text="Voting" />
-        <RetrospectiveStageText ApplicableTo="@RetrospectiveStage.Finished"
+        <SessionStageText ApplicableTo="@SessionStage.Finished"
                                 Text="Finished" />
     </div>
     <div class="message-body">
         @* Each stage has its own explanation *@
         <p class="retrospective-status-panel__primary-explanation">
-            <RetrospectiveStageText ApplicableTo="@RetrospectiveStage.NotStarted"
+            <SessionStageText ApplicableTo="@SessionStage.NotStarted"
                                     Text="We are waiting for the facilitator to start the retrospective." />
-            <RetrospectiveStageText ApplicableTo="@RetrospectiveStage.Writing"
+            <SessionStageText ApplicableTo="@SessionStage.Writing"
                                     Text="You can now write down your findings by adding notes in each of the lanes. Until the next phase what you write down is not visible to others." />
-            <RetrospectiveStageText ApplicableTo="@RetrospectiveStage.Discuss"
+            <SessionStageText ApplicableTo="@SessionStage.Discuss"
                                     Text="All the cards are on the table. The facilitator leads the dissussion." />
-            <RetrospectiveStageText ApplicableTo="@RetrospectiveStage.Grouping"
+            <SessionStageText ApplicableTo="@SessionStage.Grouping"
                                     Text="The facilitator will now group the related notes together." />
-            <RetrospectiveStageText ApplicableTo="@RetrospectiveStage.Voting"
+            <SessionStageText ApplicableTo="@SessionStage.Voting"
                                     Text="You can now vote on the notes and groups to think are important to focus on." />
-            <RetrospectiveStageText ApplicableTo="@RetrospectiveStage.Finished"
+            <SessionStageText ApplicableTo="@SessionStage.Finished"
                                     Text="The retrospective is now finished. You can now view the results here." />
         </p>
 
         @* Each stage has its own panel and controls *@
-        <RetrospectiveStagePanel ApplicableTo="@RetrospectiveStage.NotStarted">
+        <SessionStagePanel ApplicableTo="@SessionStage.NotStarted">
             <PokerTime.Web.Components.StagePanels.NotStarted />
-        </RetrospectiveStagePanel>
+        </SessionStagePanel>
 
-        <RetrospectiveStagePanel ApplicableTo="@RetrospectiveStage.Writing">
+        <SessionStagePanel ApplicableTo="@SessionStage.Writing">
             <PokerTime.Web.Components.StagePanels.Writing />
-        </RetrospectiveStagePanel>
+        </SessionStagePanel>
 
-        <RetrospectiveStagePanel ApplicableTo="@RetrospectiveStage.Discuss">
+        <SessionStagePanel ApplicableTo="@SessionStage.Discuss">
             <PokerTime.Web.Components.StagePanels.Discuss />
-        </RetrospectiveStagePanel>
+        </SessionStagePanel>
 
-        <RetrospectiveStagePanel ApplicableTo="@RetrospectiveStage.Grouping">
+        <SessionStagePanel ApplicableTo="@SessionStage.Grouping">
             <PokerTime.Web.Components.StagePanels.Grouping />
-        </RetrospectiveStagePanel>
+        </SessionStagePanel>
 
-        <RetrospectiveStagePanel ApplicableTo="@RetrospectiveStage.Voting">
+        <SessionStagePanel ApplicableTo="@SessionStage.Voting">
             <PokerTime.Web.Components.StagePanels.Voting />
-        </RetrospectiveStagePanel>
+        </SessionStagePanel>
 
-        <RetrospectiveStagePanel ApplicableTo="@RetrospectiveStage.Finished">
+        <SessionStagePanel ApplicableTo="@SessionStage.Finished">
             <PokerTime.Web.Components.StagePanels.Finished />
-        </RetrospectiveStagePanel>
+        </SessionStagePanel>
     </div>
 </article>

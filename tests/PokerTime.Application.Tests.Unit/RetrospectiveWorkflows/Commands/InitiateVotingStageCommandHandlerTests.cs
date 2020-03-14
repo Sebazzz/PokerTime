@@ -21,7 +21,7 @@ namespace PokerTime.Application.Tests.Unit.RetrospectiveWorkflows.Commands {
         public void InitiateVotingStageCommandHandler_InvalidSessionId_ThrowsNotFoundException() {
             // Given
             const string sessionId = "not found surely :)";
-            var handler = new InitiateVotingStageCommandHandler(this.Context, this.RetrospectiveStatusUpdateDispatcherMock, this.SystemClockMock);
+            var handler = new InitiateVotingStageCommandHandler(this.Context, this.SessionStatusUpdateDispatcherMock, this.SystemClockMock);
             var request = new InitiateVotingStageCommand { SessionId = sessionId, TimeInMinutes = 10 };
 
             // When
@@ -34,7 +34,7 @@ namespace PokerTime.Application.Tests.Unit.RetrospectiveWorkflows.Commands {
         [Test]
         public async Task InitiateVotingStageCommandHandler_OnStatusChange_UpdatesRetroStageAndInvokesNotification() {
             // Given
-            var handler = new InitiateVotingStageCommandHandler(this.Context, this.RetrospectiveStatusUpdateDispatcherMock, this.SystemClockMock);
+            var handler = new InitiateVotingStageCommandHandler(this.Context, this.SessionStatusUpdateDispatcherMock, this.SystemClockMock);
             var request = new InitiateVotingStageCommand { SessionId = this.SessionId, TimeInMinutes = 10, VotesPerGroup = 6 };
 
             this.SystemClockMock.CurrentTimeOffset.Returns(DateTimeOffset.UnixEpoch);
@@ -45,14 +45,14 @@ namespace PokerTime.Application.Tests.Unit.RetrospectiveWorkflows.Commands {
             this.RefreshObject();
 
             // Then
-            Assert.That(this.Retrospective.CurrentStage, Is.EqualTo(RetrospectiveStage.Voting));
+            Assert.That(this.Retrospective.CurrentStage, Is.EqualTo(SessionStage.Voting));
 
             Assert.That(this.Retrospective.Options.MaximumNumberOfVotes, Is.EqualTo(6));
 
             Assert.That(this.Retrospective.WorkflowData.CurrentWorkflowInitiationTimestamp, Is.EqualTo(this.SystemClockMock.CurrentTimeOffset));
             Assert.That(this.Retrospective.WorkflowData.CurrentWorkflowTimeLimitInMinutes, Is.EqualTo(request.TimeInMinutes));
 
-            await this.RetrospectiveStatusUpdateDispatcherMock.Received().DispatchUpdate(Arg.Any<Retrospective>(), CancellationToken.None);
+            await this.SessionStatusUpdateDispatcherMock.Received().DispatchUpdate(Arg.Any<Retrospective>(), CancellationToken.None);
         }
     }
 }

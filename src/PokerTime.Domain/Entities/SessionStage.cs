@@ -1,12 +1,12 @@
 ﻿// ******************************************************************************
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : RetrospectiveStage.cs
+//  File:           : SessionStage.cs
 //  Project         : PokerTime.Domain
 // ******************************************************************************
 
 namespace PokerTime.Domain.Entities {
-    public enum RetrospectiveStage {
+    public enum SessionStage {
         /// <summary>
         /// The retrospective is not started yet and waiting for a facilitator to appear
         /// </summary>

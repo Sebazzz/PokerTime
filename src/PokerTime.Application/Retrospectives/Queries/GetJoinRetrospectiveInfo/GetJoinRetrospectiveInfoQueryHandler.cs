@@ -23,17 +23,17 @@
 
             Retrospective retrospective = await this._dbContext.Retrospectives.FindBySessionId(request.SessionId, cancellationToken);
             if (retrospective == null) {
-                this._logger.LogWarning($"Retrospective with id {request.SessionId} was not found");
+                this._logger.LogWarning($"Session with id {request.SessionId} was not found");
 
                 return null;
             }
 
-            this._logger.LogInformation($"Retrospective with id {request.SessionId} was found");
+            this._logger.LogInformation($"Session with id {request.SessionId} was found");
             return new JoinPokerSessionInfo(
                 retrospective.Title,
                 retrospective.HashedPassphrase != null,
                 retrospective.IsStarted(),
-                retrospective.CurrentStage == RetrospectiveStage.Finished);
+                retrospective.CurrentStage == SessionStage.Finished);
         }
     }
 }

@@ -13,8 +13,8 @@ namespace PokerTime.Web.Pages {
     using Application.Common.Abstractions;
     using Application.Common.Models;
     using Application.Notifications;
-    using Application.Notifications.RetrospectiveStatusUpdated;
-    using Application.Retrospectives.Queries.GetRetrospectiveStatus;
+    using Application.Notifications.SessionStatusUpdated;
+    using Application.Retrospectives.Queries.GetSessionStatus;
     using Components;
     using Components.Layout;
     using Domain.ValueObjects;
@@ -24,13 +24,13 @@ namespace PokerTime.Web.Pages {
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global", Justification = "Set by framework")]
     [SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "We catch, log and display.")]
     [SuppressMessage("ReSharper", "MemberCanBePrivate.Global", Justification = "Needed for DI")]
-    public abstract class PokerSessionLobbyBase : MediatorComponent, IRetrospectiveStatusUpdatedSubscriber, IDisposable {
+    public abstract class PokerSessionLobbyBase : MediatorComponent, ISessionStatusUpdatedSubscriber, IDisposable {
         public Guid UniqueId { get; } = Guid.NewGuid();
 
 #nullable disable
 
         [Inject]
-        public INotificationSubscription<IRetrospectiveStatusUpdatedSubscriber> RetrospectiveStatusUpdatedSubscription { get; set; }
+        public INotificationSubscription<ISessionStatusUpdatedSubscriber> SessionStatusUpdatedSubscription { get; set; }
 
 
         [Inject]
@@ -50,7 +50,7 @@ namespace PokerTime.Web.Pages {
 
         public CurrentParticipantModel CurrentParticipant { get; set; }
 
-        public RetrospectiveStatus RetrospectiveStatus { get; set; } = null;
+        public SessionStatus SessionStatus { get; set; } = null;
 
         public SessionIdentifier SessionIdObject { get; set; }
 
@@ -61,14 +61,14 @@ namespace PokerTime.Web.Pages {
         protected override void OnInitialized() {
             this.SessionIdObject = new SessionIdentifier(this.SessionId);
 
-            this.RetrospectiveStatusUpdatedSubscription.Subscribe(this);
+            this.SessionStatusUpdatedSubscription.Subscribe(this);
 
             base.OnInitialized();
         }
 
         protected virtual void Dispose(bool disposing) {
             if (disposing) {
-                this.RetrospectiveStatusUpdatedSubscription.Unsubscribe(this);
+                this.SessionStatusUpdatedSubscription.Unsubscribe(this);
             }
         }
 
@@ -88,24 +88,24 @@ namespace PokerTime.Web.Pages {
             this.CurrentParticipant = currentParticipant;
 
             try {
-                this.RetrospectiveStatus = await this.Mediator.Send(new GetRetrospectiveStatusQuery(this.SessionId));
-                this.Layout?.Update(new PokerSessionLayoutInfo(this.RetrospectiveStatus.Title, this.RetrospectiveStatus.Stage));
+                this.SessionStatus = await this.Mediator.Send(new GetSessionStatusQuery(this.SessionId));
+                this.Layout?.Update(new PokerSessionLayoutInfo(this.SessionStatus.Title, this.SessionStatus.Stage));
             }
             catch (NotFoundException) {
-                this.RetrospectiveStatus = null;
+                this.SessionStatus = null;
             }
             finally {
                 this.HasLoaded = true;
             }
         }
 
-        public Task OnRetrospectiveStatusUpdated(RetrospectiveStatus retrospectiveStatus) {
-            if (this.RetrospectiveStatus?.SessionId != this.SessionId) {
+        public Task OnSessionStatusUpdated(SessionStatus sessionStatus) {
+            if (this.SessionStatus?.SessionId != this.SessionId) {
                 return Task.CompletedTask;
             }
 
-            this.RetrospectiveStatus = retrospectiveStatus;
-            this.Layout?.Update(new PokerSessionLayoutInfo(retrospectiveStatus.Title, retrospectiveStatus.Stage));
+            this.SessionStatus = sessionStatus;
+            this.Layout?.Update(new PokerSessionLayoutInfo(sessionStatus.Title, sessionStatus.Stage));
             this.StateHasChanged();
 
             return Task.CompletedTask;

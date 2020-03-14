@@ -1,17 +1,17 @@
 ﻿// ******************************************************************************
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : GetRetrospectiveStatusQuery.cs
+//  File:           : GetSessionStatusQuery.cs
 //  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace PokerTime.Application.Retrospectives.Queries.GetRetrospectiveStatus {
+namespace PokerTime.Application.Retrospectives.Queries.GetSessionStatus {
     using MediatR;
 
-    public sealed class GetRetrospectiveStatusQuery : IRequest<RetrospectiveStatus> {
+    public sealed class GetSessionStatusQuery : IRequest<SessionStatus> {
         public string SessionId { get; }
 
-        public GetRetrospectiveStatusQuery(string sessionId) {
+        public GetSessionStatusQuery(string sessionId) {
             this.SessionId = sessionId;
         }
     }

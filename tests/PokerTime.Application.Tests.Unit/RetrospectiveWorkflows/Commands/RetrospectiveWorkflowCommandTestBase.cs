@@ -21,7 +21,7 @@ namespace PokerTime.Application.Tests.Unit.RetrospectiveWorkflows.Commands {
 #nullable disable
         protected Retrospective Retrospective { get; private set; }
         protected string SessionId { get; private set; }
-        protected IRetrospectiveStatusUpdateDispatcher RetrospectiveStatusUpdateDispatcherMock { get; set; }
+        protected ISessionStatusUpdateDispatcher SessionStatusUpdateDispatcherMock { get; set; }
         protected ISystemClock SystemClockMock { get; set; }
 #nullable restore
 
@@ -35,7 +35,7 @@ namespace PokerTime.Application.Tests.Unit.RetrospectiveWorkflows.Commands {
                     new Participant { Name = "Jane", Color = Color.Aqua },
                 },
                 HashedPassphrase = "abef",
-                CurrentStage = RetrospectiveStage.NotStarted
+                CurrentStage = SessionStage.NotStarted
             };
 
             this.SessionId = retro.UrlId.StringId;
@@ -48,7 +48,7 @@ namespace PokerTime.Application.Tests.Unit.RetrospectiveWorkflows.Commands {
 
         [SetUp]
         public void SetUp() {
-            this.RetrospectiveStatusUpdateDispatcherMock = Substitute.For<IRetrospectiveStatusUpdateDispatcher>();
+            this.SessionStatusUpdateDispatcherMock = Substitute.For<ISessionStatusUpdateDispatcher>();
             this.SystemClockMock = Substitute.For<ISystemClock>();
         }
 

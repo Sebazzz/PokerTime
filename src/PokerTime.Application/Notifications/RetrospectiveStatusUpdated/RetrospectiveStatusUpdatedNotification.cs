@@ -1,19 +1,19 @@
 ﻿// ******************************************************************************
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : RetrospectiveStatusUpdatedNotification.cs
+//  File:           : SessionStatusUpdatedNotification.cs
 //  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace PokerTime.Application.Notifications.RetrospectiveStatusUpdated {
+namespace PokerTime.Application.Notifications.SessionStatusUpdated {
     using MediatR;
-    using Retrospectives.Queries.GetRetrospectiveStatus;
+    using Retrospectives.Queries.GetSessionStatus;
 
-    public sealed class RetrospectiveStatusUpdatedNotification : INotification {
-        public RetrospectiveStatus RetrospectiveStatus { get; }
+    public sealed class SessionStatusUpdatedNotification : INotification {
+        public SessionStatus SessionStatus { get; }
 
-        public RetrospectiveStatusUpdatedNotification(RetrospectiveStatus retrospectiveStatus) {
-            this.RetrospectiveStatus = retrospectiveStatus;
+        public SessionStatusUpdatedNotification(SessionStatus sessionStatus) {
+            this.SessionStatus = sessionStatus;
         }
     }
 }

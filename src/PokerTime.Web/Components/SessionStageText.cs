@@ -6,26 +6,26 @@
 // ******************************************************************************
 
 namespace PokerTime.Web.Components {
-    using Application.Retrospectives.Queries.GetRetrospectiveStatus;
+    using Application.Retrospectives.Queries.GetSessionStatus;
     using Domain.Entities;
     using Microsoft.AspNetCore.Components;
     using Microsoft.AspNetCore.Components.Rendering;
 
 #nullable disable
 
-    public sealed class RetrospectiveStageText : ComponentBase {
+    public sealed class SessionStageText : ComponentBase {
         [Parameter]
-        public RetrospectiveStage ApplicableTo { get; set; }
+        public SessionStage ApplicableTo { get; set; }
 
         [Parameter]
         public string Text { get; set; }
 
         [CascadingParameter]
-        public RetrospectiveStatus RetrospectiveStatus { get; set; }
+        public SessionStatus SessionStatus { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "Framework infrastructure provides argument")]
         protected override void BuildRenderTree(RenderTreeBuilder builder) {
-            if (this.RetrospectiveStatus?.Stage == this.ApplicableTo) {
+            if (this.SessionStatus?.Stage == this.ApplicableTo) {
                 builder.AddContent(0, this.Text);
             }
         }

@@ -49,7 +49,7 @@ namespace PokerTime.Application.Retrospectives.Commands.JoinPokerSession {
 
             participant.IsFacilitator = request.JoiningAsFacilitator;
             participant.Name = request.Name;
-            participant.Retrospective = retrospective;
+            participant.Session = retrospective;
             participant.Color = new ParticipantColor {
                 R = Byte.Parse(request.Color[0..2], NumberStyles.AllowHexSpecifier, Culture.Invariant),
                 G = Byte.Parse(request.Color[2..4], NumberStyles.AllowHexSpecifier, Culture.Invariant),
@@ -76,7 +76,7 @@ namespace PokerTime.Application.Retrospectives.Commands.JoinPokerSession {
         }
 
         private async Task<Participant> GetOrCreateParticipantAsync(string sessionId, string name, CancellationToken cancellationToken) {
-            Participant? existingParticipant = await this._pokerTimeDbContext.Participants.FirstOrDefaultAsync(x => x.Name == name && x.Retrospective.UrlId.StringId == sessionId, cancellationToken);
+            Participant? existingParticipant = await this._pokerTimeDbContext.Participants.FirstOrDefaultAsync(x => x.Name == name && x.Session.UrlId.StringId == sessionId, cancellationToken);
 
             if (existingParticipant == null) {
                 return new Participant();

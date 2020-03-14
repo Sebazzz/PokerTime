@@ -27,7 +27,7 @@ namespace PokerTime.Application.Retrospectives.Queries.GetParticipant {
 
         public async Task<ParticipantInfo?> Handle(GetParticipantQuery request, CancellationToken cancellationToken) {
             ParticipantInfo? result = await this._pokerTimeDbContext.Participants.
-                    Where(x => x.Retrospective.UrlId.StringId == request.SessionId && x.Name == request.Name).
+                    Where(x => x.Session.UrlId.StringId == request.SessionId && x.Name == request.Name).
                     ProjectTo<ParticipantInfo>(this._mapper.ConfigurationProvider).
                     FirstOrDefaultAsync(cancellationToken);
 

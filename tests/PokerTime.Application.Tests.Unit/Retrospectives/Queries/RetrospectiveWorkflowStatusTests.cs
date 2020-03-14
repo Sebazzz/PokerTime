@@ -7,7 +7,7 @@
 
 namespace PokerTime.Application.Tests.Unit.Retrospectives.Queries {
     using System;
-    using Application.Retrospectives.Queries.GetRetrospectiveStatus;
+    using Application.Retrospectives.Queries.GetSessionStatus;
     using NUnit.Framework;
 
     [TestFixture]

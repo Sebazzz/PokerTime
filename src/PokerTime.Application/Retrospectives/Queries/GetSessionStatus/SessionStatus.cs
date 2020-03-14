@@ -1,47 +1,45 @@
 ﻿// ******************************************************************************
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : RetrospectiveStatus.cs
+//  File:           : SessionStatus.cs
 //  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace PokerTime.Application.Retrospectives.Queries.GetRetrospectiveStatus {
+namespace PokerTime.Application.Retrospectives.Queries.GetSessionStatus {
     using System;
     using System.Collections.Generic;
     using Domain.Entities;
 
-    public sealed class RetrospectiveStatus {
+    public sealed class SessionStatus {
         public string SessionId { get; }
 
         public string Title { get; }
 
-        public bool IsViewingOtherNotesAllowed => this.Stage >= RetrospectiveStage.Discuss;
-        public bool IsViewingVotesAllowed => this.Stage >= RetrospectiveStage.Voting;
-        public bool IsVotingAllowed => this.Stage == RetrospectiveStage.Voting;
-        public bool IsEditingNotesAllowed => this.Stage == RetrospectiveStage.Writing;
-        public bool IsDeletingNotesAllowed => this.Stage == RetrospectiveStage.Writing;
-        public bool IsGroupingAllowed(bool isFacilitator) => this.Stage == RetrospectiveStage.Grouping && isFacilitator;
+        public bool IsViewingOtherNotesAllowed => this.Stage >= SessionStage.Discuss;
+        public bool IsViewingVotesAllowed => this.Stage >= SessionStage.Voting;
+        public bool IsVotingAllowed => this.Stage == SessionStage.Voting;
+        public bool IsEditingNotesAllowed => this.Stage == SessionStage.Writing;
+        public bool IsDeletingNotesAllowed => this.Stage == SessionStage.Writing;
+        public bool IsGroupingAllowed(bool isFacilitator) => this.Stage == SessionStage.Grouping && isFacilitator;
 
         public RetrospectiveWorkflowStatus WorkflowStatus { get; }
 
         public int VotesPerLane { get; }
 
-        public RetrospectiveStage Stage { get; }
+        public SessionStage Stage { get; }
 
-        public List<RetrospectiveLane> Lanes { get; } = new List<RetrospectiveLane>();
-
-        public RetrospectiveStatus(string sessionId, string title, RetrospectiveStage retrospectiveStage, RetrospectiveWorkflowStatus workflowStatus, int votesPerLane) {
+        public SessionStatus(string sessionId, string title, SessionStage sessionStage, RetrospectiveWorkflowStatus workflowStatus, int votesPerLane) {
             this.SessionId = sessionId;
             this.Title = title;
-            this.Stage = retrospectiveStage;
+            this.Stage = sessionStage;
             this.WorkflowStatus = workflowStatus;
             this.VotesPerLane = votesPerLane;
         }
 
-        public RetrospectiveStatus() {
+        public SessionStatus() {
             this.SessionId = String.Empty;
             this.Title = String.Empty;
-            this.Stage = RetrospectiveStage.NotStarted;
+            this.Stage = SessionStage.NotStarted;
             this.WorkflowStatus = new RetrospectiveWorkflowStatus();
             this.VotesPerLane = -1;
         }

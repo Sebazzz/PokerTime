@@ -1,7 +1,7 @@
 ﻿// ******************************************************************************
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : Retrospective.cs
+//  File:           : Session.cs
 //  Project         : PokerTime.Domain
 // ******************************************************************************
 
@@ -38,7 +38,7 @@ namespace PokerTime.Domain.Entities {
         /// <summary>
         /// Gets or sets the current stage of the retrospective
         /// </summary>
-        public RetrospectiveStage CurrentStage { get; set; }
+        public SessionStage CurrentStage { get; set; }
 
         /// <summary>
         /// Gets the optional hashed passphrase necessary to access the retrospective lobby

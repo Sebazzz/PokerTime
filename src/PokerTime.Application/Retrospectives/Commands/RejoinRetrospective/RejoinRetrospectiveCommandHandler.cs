@@ -31,7 +31,7 @@ namespace PokerTime.Application.Retrospectives.Commands.RejoinPokerSession {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
             Participant? result = await this._pokerTimeDbContext.Participants.AsNoTracking().
-                Where(x => x.Retrospective.UrlId.StringId == request.SessionId && x.Id == request.ParticipantId).
+                Where(x => x.Session.UrlId.StringId == request.SessionId && x.Id == request.ParticipantId).
                 FirstOrDefaultAsync(cancellationToken);
 
             if (result == null) {

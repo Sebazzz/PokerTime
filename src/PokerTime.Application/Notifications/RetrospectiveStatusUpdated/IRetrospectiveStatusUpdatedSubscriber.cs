@@ -1,15 +1,15 @@
 ﻿// ******************************************************************************
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : IRetrospectiveStatusUpdatedSubscriber.cs
+//  File:           : ISessionStatusUpdatedSubscriber.cs
 //  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace PokerTime.Application.Notifications.RetrospectiveStatusUpdated {
+namespace PokerTime.Application.Notifications.SessionStatusUpdated {
     using System.Threading.Tasks;
-    using Retrospectives.Queries.GetRetrospectiveStatus;
+    using Retrospectives.Queries.GetSessionStatus;
 
-    public interface IRetrospectiveStatusUpdatedSubscriber : ISubscriber {
-        Task OnRetrospectiveStatusUpdated(RetrospectiveStatus retrospectiveStatus);
+    public interface ISessionStatusUpdatedSubscriber : ISubscriber {
+        Task OnSessionStatusUpdated(SessionStatus sessionStatus);
     }
 }

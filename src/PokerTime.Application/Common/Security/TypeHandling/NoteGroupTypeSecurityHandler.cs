@@ -15,7 +15,7 @@ namespace PokerTime.Application.Common.Security.TypeHandling {
     internal sealed class NoteGroupTypeSecurityHandler : AbstractTypeSecurityHandler<NoteGroup> {
         protected override void HandleAddOrUpdate(Retrospective retrospective, NoteGroup entity, in CurrentParticipantModel currentParticipant) {
             switch (retrospective.CurrentStage) {
-                case RetrospectiveStage.Grouping:
+                case SessionStage.Grouping:
                     if (!currentParticipant.IsFacilitator) {
                         throw new OperationSecurityException($"Operation is allowed in retrospective stage {retrospective.CurrentStage} but only by facilitator role");
 
@@ -28,7 +28,7 @@ namespace PokerTime.Application.Common.Security.TypeHandling {
 
         protected override void HandleDelete(Retrospective retrospective, NoteGroup entity, in CurrentParticipantModel currentParticipant) {
             switch (retrospective.CurrentStage) {
-                case RetrospectiveStage.Grouping:
+                case SessionStage.Grouping:
                     if (!currentParticipant.IsFacilitator) {
                         throw new OperationSecurityException($"Operation is allowed in retrospective stage {retrospective.CurrentStage} but only by facilitator role");
 

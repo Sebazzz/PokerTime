@@ -15,7 +15,7 @@ namespace PokerTime.Application.Common.Security.TypeHandling {
     internal sealed class NoteTypeSecurityHandler : AbstractTypeSecurityHandler<Note> {
         protected override void HandleAddOrUpdate(Retrospective retrospective, Note entity, in CurrentParticipantModel unused) {
             switch (retrospective.CurrentStage) {
-                case RetrospectiveStage.Writing:
+                case SessionStage.Writing:
                     break;
                 default:
                     throw new OperationSecurityException($"Operation not allowed in retrospective stage {retrospective.CurrentStage}");
@@ -30,7 +30,7 @@ namespace PokerTime.Application.Common.Security.TypeHandling {
         {
             switch (retrospective.CurrentStage)
             {
-                case RetrospectiveStage.Writing:
+                case SessionStage.Writing:
                     break;
                 default:
                     throw new OperationSecurityException($"Operation not allowed in retrospective stage {retrospective.CurrentStage}");

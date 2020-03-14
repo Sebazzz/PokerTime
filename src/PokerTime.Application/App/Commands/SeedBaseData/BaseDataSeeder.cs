@@ -21,23 +21,9 @@ namespace PokerTime.Application.App.Commands.SeedBaseData {
         }
 
         public async Task SeedAllAsync(CancellationToken cancellationToken) {
-            await this.SeedNoteLanes(cancellationToken);
             await this.SeedPredefinedParticipantColor(cancellationToken);
 
             await this._pokerTimeDbContext.SaveChangesAsync(cancellationToken);
-        }
-
-        private async Task SeedNoteLanes(CancellationToken cancellationToken) {
-            if (await this._pokerTimeDbContext.NoteLanes.AnyAsync(cancellationToken)) {
-                return;
-            }
-
-            // Seed note lanes
-            this._pokerTimeDbContext.NoteLanes.AddRange(
-                new NoteLane { Id = KnownNoteLane.Start, Name = "Start" },
-                new NoteLane { Id = KnownNoteLane.Stop, Name = "Stop" },
-                new NoteLane { Id = KnownNoteLane.Continue, Name = "Continue" }
-            );
         }
 
         private async Task SeedPredefinedParticipantColor(CancellationToken cancellationToken) {

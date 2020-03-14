@@ -17,14 +17,14 @@ namespace PokerTime.Application.RetrospectiveWorkflows.Commands {
     using Services;
 
     public abstract class AbstractStageCommandHandler<TRequest> : IRequestHandler<TRequest> where TRequest : AbstractStageCommand, IRequest {
-        private readonly IRetrospectiveStatusUpdateDispatcher _retrospectiveStatusUpdateDispatcher;
+        private readonly ISessionStatusUpdateDispatcher _retrospectiveStatusUpdateDispatcher;
         private readonly IPokerTimeDbContextFactory _dbContextFactory;
 
 #nullable disable
         protected IPokerTimeDbContext DbContext { get; private set; }
 #nullable enable
 
-        protected AbstractStageCommandHandler(IPokerTimeDbContextFactory pokerTimeDbContext, IRetrospectiveStatusUpdateDispatcher retrospectiveStatusUpdateDispatcher) {
+        protected AbstractStageCommandHandler(IPokerTimeDbContextFactory pokerTimeDbContext, ISessionStatusUpdateDispatcher retrospectiveStatusUpdateDispatcher) {
             this._dbContextFactory = pokerTimeDbContext;
             this._retrospectiveStatusUpdateDispatcher = retrospectiveStatusUpdateDispatcher;
         }

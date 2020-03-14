@@ -34,7 +34,7 @@ namespace PokerTime.Application.Tests.Unit.Common.Security {
         [TestCase(SecurityOperation.Delete)]
         public void SecurityValidator_DisallowsOperationOnNote_WrongParticipant(SecurityOperation securityOperation) {
             // Given
-            Retrospective retro = GetRetrospectiveInStage(RetrospectiveStage.Writing);
+            Retrospective retro = GetRetrospectiveInStage(SessionStage.Writing);
             var note = new Note { ParticipantId = 1 };
             this._currentParticipantService.SetParticipant(new CurrentParticipantModel(2, String.Empty, false));
 
@@ -50,7 +50,7 @@ namespace PokerTime.Application.Tests.Unit.Common.Security {
         [TestCase(SecurityOperation.Delete)]
         public void SecurityValidator_DisallowsOperationOnNote_UnauthenticatedParticipant(SecurityOperation securityOperation) {
             // Given
-            Retrospective retro = GetRetrospectiveInStage(RetrospectiveStage.Writing);
+            Retrospective retro = GetRetrospectiveInStage(SessionStage.Writing);
             var note = new Note { ParticipantId = 1 };
             this._currentParticipantService.Reset();
             Assume.That(this._currentParticipantService.GetParticipant().Result, Is.EqualTo(default(CurrentParticipantModel)));
@@ -67,7 +67,7 @@ namespace PokerTime.Application.Tests.Unit.Common.Security {
         [TestCase(SecurityOperation.Delete)]
         public void SecurityValidator_AllowsOperationOnNote_CorrectParticipant(SecurityOperation securityOperation) {
             // Given
-            Retrospective retro = GetRetrospectiveInStage(RetrospectiveStage.Writing);
+            Retrospective retro = GetRetrospectiveInStage(SessionStage.Writing);
             var note = new Note { ParticipantId = 212 };
             this._currentParticipantService.SetParticipant(new CurrentParticipantModel(212, String.Empty, false));
 
@@ -79,12 +79,12 @@ namespace PokerTime.Application.Tests.Unit.Common.Security {
         }
 
         [Test]
-        [TestCase(RetrospectiveStage.NotStarted)]
-        [TestCase(RetrospectiveStage.Discuss)]
-        [TestCase(RetrospectiveStage.Grouping)]
-        [TestCase(RetrospectiveStage.Voting)]
-        [TestCase(RetrospectiveStage.Finished)]
-        public void SecurityValidator_DisallowsOperationsOnNote_InStages(RetrospectiveStage stage) {
+        [TestCase(SessionStage.NotStarted)]
+        [TestCase(SessionStage.Discuss)]
+        [TestCase(SessionStage.Grouping)]
+        [TestCase(SessionStage.Voting)]
+        [TestCase(SessionStage.Finished)]
+        public void SecurityValidator_DisallowsOperationsOnNote_InStages(SessionStage stage) {
             // Given
             Retrospective retro = GetRetrospectiveInStage(stage);
             var note = new Note { ParticipantId = 252 };
@@ -102,7 +102,7 @@ namespace PokerTime.Application.Tests.Unit.Common.Security {
         [TestCase(SecurityOperation.Delete)]
         public void SecurityValidator_DisallowsOperationOnNoteGroup_NotFacilitator(SecurityOperation securityOperation) {
             // Given
-            Retrospective retro = GetRetrospectiveInStage(RetrospectiveStage.Grouping);
+            Retrospective retro = GetRetrospectiveInStage(SessionStage.Grouping);
             var noteGroup = new NoteGroup { Title = "G" };
             this._currentParticipantService.SetParticipant(new CurrentParticipantModel(2, String.Empty, false));
 
@@ -118,7 +118,7 @@ namespace PokerTime.Application.Tests.Unit.Common.Security {
         [TestCase(SecurityOperation.Delete)]
         public void SecurityValidator_DisallowsOperationOnNoteGroup_UnauthenticatedParticipant(SecurityOperation securityOperation) {
             // Given
-            Retrospective retro = GetRetrospectiveInStage(RetrospectiveStage.Grouping);
+            Retrospective retro = GetRetrospectiveInStage(SessionStage.Grouping);
             var noteGroup = new NoteGroup { Title = "G" };
             this._currentParticipantService.Reset();
             Assume.That(this._currentParticipantService.GetParticipant().Result, Is.EqualTo(default(CurrentParticipantModel)));
@@ -135,7 +135,7 @@ namespace PokerTime.Application.Tests.Unit.Common.Security {
         [TestCase(SecurityOperation.Delete)]
         public void SecurityValidator_AllowsOperationOnNote_IsFacilitator(SecurityOperation securityOperation) {
             // Given
-            Retrospective retro = GetRetrospectiveInStage(RetrospectiveStage.Grouping);
+            Retrospective retro = GetRetrospectiveInStage(SessionStage.Grouping);
             var noteGroup = new NoteGroup { Title = "G" };
             this._currentParticipantService.SetParticipant(new CurrentParticipantModel(212, String.Empty, true));
 
@@ -147,12 +147,12 @@ namespace PokerTime.Application.Tests.Unit.Common.Security {
         }
 
         [Test]
-        [TestCase(RetrospectiveStage.NotStarted)]
-        [TestCase(RetrospectiveStage.Discuss)]
-        [TestCase(RetrospectiveStage.Writing)]
-        [TestCase(RetrospectiveStage.Voting)]
-        [TestCase(RetrospectiveStage.Finished)]
-        public void SecurityValidator_DisallowsOperationsOnNoteGroup_InStages(RetrospectiveStage stage) {
+        [TestCase(SessionStage.NotStarted)]
+        [TestCase(SessionStage.Discuss)]
+        [TestCase(SessionStage.Writing)]
+        [TestCase(SessionStage.Voting)]
+        [TestCase(SessionStage.Finished)]
+        public void SecurityValidator_DisallowsOperationsOnNoteGroup_InStages(SessionStage stage) {
             // Given
             Retrospective retro = GetRetrospectiveInStage(stage);
             var noteGroup = new NoteGroup { Title = "G" };
@@ -174,7 +174,7 @@ namespace PokerTime.Application.Tests.Unit.Common.Security {
         [TestCase(SecurityOperation.Delete)]
         public void SecurityValidator_DisallowsOperationOnNoteVote_WrongParticipant(SecurityOperation securityOperation) {
             // Given
-            Retrospective retro = GetRetrospectiveInStage(RetrospectiveStage.Voting);
+            Retrospective retro = GetRetrospectiveInStage(SessionStage.Voting);
             var noteVote = new NoteVote { ParticipantId = 1 };
             this._currentParticipantService.SetParticipant(new CurrentParticipantModel(2, String.Empty, false));
 
@@ -190,7 +190,7 @@ namespace PokerTime.Application.Tests.Unit.Common.Security {
         [TestCase(SecurityOperation.Delete)]
         public void SecurityValidator_DisallowsOperationOnNoteVote_UnauthenticatedParticipant(SecurityOperation securityOperation) {
             // Given
-            Retrospective retro = GetRetrospectiveInStage(RetrospectiveStage.Voting);
+            Retrospective retro = GetRetrospectiveInStage(SessionStage.Voting);
             var noteVote = new NoteVote { ParticipantId = 1 };
             this._currentParticipantService.Reset();
             Assume.That(this._currentParticipantService.GetParticipant().Result, Is.EqualTo(default(CurrentParticipantModel)));
@@ -207,7 +207,7 @@ namespace PokerTime.Application.Tests.Unit.Common.Security {
         [TestCase(SecurityOperation.Delete)]
         public void SecurityValidator_AllowsOperationOnNoteVote_CorrectParticipant(SecurityOperation securityOperation) {
             // Given
-            Retrospective retro = GetRetrospectiveInStage(RetrospectiveStage.Voting);
+            Retrospective retro = GetRetrospectiveInStage(SessionStage.Voting);
             var noteVote = new NoteVote { ParticipantId = 212 };
             this._currentParticipantService.SetParticipant(new CurrentParticipantModel(212, String.Empty, false));
 
@@ -219,12 +219,12 @@ namespace PokerTime.Application.Tests.Unit.Common.Security {
         }
 
         [Test]
-        [TestCase(RetrospectiveStage.NotStarted)]
-        [TestCase(RetrospectiveStage.Writing)]
-        [TestCase(RetrospectiveStage.Discuss)]
-        [TestCase(RetrospectiveStage.Grouping)]
-        [TestCase(RetrospectiveStage.Finished)]
-        public void SecurityValidator_DisallowsOperationsOnNoteVote_InStages(RetrospectiveStage stage) {
+        [TestCase(SessionStage.NotStarted)]
+        [TestCase(SessionStage.Writing)]
+        [TestCase(SessionStage.Discuss)]
+        [TestCase(SessionStage.Grouping)]
+        [TestCase(SessionStage.Finished)]
+        public void SecurityValidator_DisallowsOperationsOnNoteVote_InStages(SessionStage stage) {
             // Given
             Retrospective retro = GetRetrospectiveInStage(stage);
             var noteVote = new NoteVote { ParticipantId = 252 };
@@ -237,9 +237,9 @@ namespace PokerTime.Application.Tests.Unit.Common.Security {
             Assert.That(action, Throws.InstanceOf<OperationSecurityException>());
         }
 
-        private static Retrospective GetRetrospectiveInStage(RetrospectiveStage retrospectiveStage) {
+        private static Retrospective GetRetrospectiveInStage(SessionStage sessionStage) {
             return new Retrospective {
-                CurrentStage = retrospectiveStage
+                CurrentStage = sessionStage
             };
         }
 

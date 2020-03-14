@@ -1,5 +1,5 @@
 @using System.Globalization
-@using PokerTime.Application.Retrospectives.Queries.GetRetrospectiveStatus
+@using PokerTime.Application.Retrospectives.Queries.GetSessionStatus
 @using PokerTime.Common
 @inject ISystemClock SystemClock
 
@@ -14,7 +14,7 @@
 
 @code {
     [CascadingParameter]
-    public RetrospectiveStatus? RetrospectiveStatus { get; set; }
+    public SessionStatus? SessionStatus { get; set; }
     
     #pragma warning disable 649 // @ref
     private Timer? _waitTimer;
@@ -36,7 +36,7 @@
 
     private void StartTimerIfNecessary()
     {
-        if (this._waitTimer != null && this.RetrospectiveStatus != null && !this.RetrospectiveStatus.WorkflowStatus.HasReachedTimeLimit(this.SystemClock.CurrentTimeOffset))
+        if (this._waitTimer != null && this.SessionStatus != null && !this.SessionStatus.WorkflowStatus.HasReachedTimeLimit(this.SystemClock.CurrentTimeOffset))
         {
             this._waitTimer?.Start();
         }
@@ -44,7 +44,7 @@
 
     private bool OnTimerCallback()
     {
-        RetrospectiveStatus? status = this.RetrospectiveStatus;
+        SessionStatus? status = this.SessionStatus;
         if (status == null)
         {
             return false;
@@ -58,7 +58,7 @@
 
     private string GetTimerText()
     {
-        RetrospectiveStatus? status = this.RetrospectiveStatus;
+        SessionStatus? status = this.SessionStatus;
         if (status == null)
         {
             return "0:00";
@@ -72,7 +72,7 @@
 
     private double CalculatePercent()
     {
-        RetrospectiveStatus? status = this.RetrospectiveStatus;
+        SessionStatus? status = this.SessionStatus;
         if (status == null)
         {
             return 0;
@@ -91,7 +91,7 @@
 
     private string GetCssClass()
     {
-        RetrospectiveStatus? status = this.RetrospectiveStatus;
+        SessionStatus? status = this.SessionStatus;
         if (status == null)
         {
             return String.Empty;

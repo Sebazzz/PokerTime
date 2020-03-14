@@ -1,11 +1,11 @@
 ﻿// ******************************************************************************
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : GetRetrospectiveStatusQueryHandler.cs
+//  File:           : GetSessionStatusQueryHandler.cs
 //  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace PokerTime.Application.Retrospectives.Queries.GetRetrospectiveStatus {
+namespace PokerTime.Application.Retrospectives.Queries.GetSessionStatus {
     using System;
     using System.Threading;
     using System.Threading.Tasks;
@@ -16,16 +16,16 @@ namespace PokerTime.Application.Retrospectives.Queries.GetRetrospectiveStatus {
     using MediatR;
     using Services;
 
-    public sealed class GetRetrospectiveStatusQueryHandler : IRequestHandler<GetRetrospectiveStatusQuery, RetrospectiveStatus> {
+    public sealed class GetSessionStatusQueryHandler : IRequestHandler<GetSessionStatusQuery, SessionStatus> {
         private readonly IPokerTimeDbContext _pokerTimeDbContext;
-        private readonly IRetrospectiveStatusMapper _mapper;
+        private readonly ISessionStatusMapper _mapper;
 
-        public GetRetrospectiveStatusQueryHandler(IPokerTimeDbContext pokerTimeDbContext, IRetrospectiveStatusMapper mapper) {
+        public GetSessionStatusQueryHandler(IPokerTimeDbContext pokerTimeDbContext, ISessionStatusMapper mapper) {
             this._pokerTimeDbContext = pokerTimeDbContext;
             this._mapper = mapper;
         }
 
-        public async Task<RetrospectiveStatus> Handle(GetRetrospectiveStatusQuery request, CancellationToken cancellationToken) {
+        public async Task<SessionStatus> Handle(GetSessionStatusQuery request, CancellationToken cancellationToken) {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
             Retrospective retrospective = await this._pokerTimeDbContext.Retrospectives.FindBySessionId(request.SessionId, cancellationToken);
@@ -34,7 +34,7 @@ namespace PokerTime.Application.Retrospectives.Queries.GetRetrospectiveStatus {
                 throw new NotFoundException();
             }
 
-            return await this._mapper.GetRetrospectiveStatus(retrospective, cancellationToken);
+            return await this._mapper.GetSessionStatus(retrospective, cancellationToken);
         }
     }
 }

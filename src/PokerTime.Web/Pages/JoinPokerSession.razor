@@ -15,7 +15,7 @@
 
 @if (this.RetrospectiveInfo == null)
 {
-    <h1 class="title">Retrospective not found</h1>
+    <h1 class="title">Session not found</h1>
 
     <p class="form-explanation">
         Sorry, I can't find that retrospective. Please check if the URL is correct.
@@ -161,7 +161,7 @@ else
         </div>
 
         <div class="column">
-            <RetrospectiveOnlineList SessionId="@this.SessionId" />
+            <SessionOnlineList SessionId="@this.SessionId" />
         </div>
     </div>
 }
