@@ -12,7 +12,6 @@ namespace PokerTime.Domain {
     public static class ServiceCollectionExtensions {
         public static IServiceCollection AddDomain(this IServiceCollection services) {
             services.AddTransient<IPassphraseService, PassphraseService>();
-            services.AddScoped<ITextAnonymizingService, TextAnonymizingService>();
 
             return services;
         }

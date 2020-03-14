@@ -4,7 +4,7 @@
 
 @if (this.RetrospectiveStatus == null) {
     if (this.HasLoaded) {
-        <ErrorMessage Text="This retrospective cannot be found!" />
+        <ErrorMessage Text="This poker session cannot be found!" />
     } else {
         <p>Hold on... crunching the data</p>
     }
@@ -15,28 +15,17 @@
 <CascadingValue Value=@this.SessionIdObject IsFixed="true">
     <CascadingValue Value=@this.CurrentParticipant IsFixed="true">
         <CascadingValue Value=@this.RetrospectiveStatus>
-            <CascadingValue Value=@this.Votes>
-                <div class="columns" data-test-element-id="main-board">
-                    <div class="column is-three-quarters">
-                        @if (this.ShowShowcase == false)
-                        {
-                            <RetrospectiveBoard />
-                        }
-                        else
-                        {
-                            <Showcase />
-                        }
-                    </div>
-
-                    <div class="column">
-                        <CascadingValue TValue="@IPokerSessionLobby" Value=@this IsFixed="true">
-                            <RetrospectiveStatusPanel />
-                        </CascadingValue>
-
-                        <RetrospectiveOnlineList SessionId="@this.SessionId" CurrentParticipant="@this.CurrentParticipant" />
-                    </div>
+            <div class="columns" data-test-element-id="main-board">
+                <div class="column is-three-quarters">
+                    <SessionBoard />
                 </div>
-            </CascadingValue>
+
+                <div class="column">
+                    <RetrospectiveStatusPanel />
+
+                    <RetrospectiveOnlineList SessionId="@this.SessionId" CurrentParticipant="@this.CurrentParticipant" />
+                </div>
+            </div>
         </CascadingValue>
     </CascadingValue>
 </CascadingValue>

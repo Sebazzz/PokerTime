@@ -10,7 +10,6 @@ namespace PokerTime.Application.Common.Models {
     using AutoMapper;
     using Domain.Entities;
     using Mapping;
-    using Notifications.VoteChanged;
 
 #nullable disable
 

@@ -14,28 +14,17 @@ namespace PokerTime.Web.Pages {
     using Application.Common.Models;
     using Application.Notifications;
     using Application.Notifications.RetrospectiveStatusUpdated;
-    using Application.Notifications.VoteChanged;
     using Application.Retrospectives.Queries.GetRetrospectiveStatus;
-    using Application.Votes.Queries;
     using Components;
     using Components.Layout;
-    using Domain.Entities;
     using Domain.ValueObjects;
     using Microsoft.AspNetCore.Components;
-
-    public interface IPokerSessionLobby {
-        bool ShowShowcase { get; }
-
-        void ShowShowcaseDisplay();
-
-        void ShowBoardDisplay();
-    }
 
     [SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "In-app callbacks")]
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global", Justification = "Set by framework")]
     [SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "We catch, log and display.")]
     [SuppressMessage("ReSharper", "MemberCanBePrivate.Global", Justification = "Needed for DI")]
-    public abstract class PokerSessionLobbyBase : MediatorComponent, IRetrospectiveStatusUpdatedSubscriber, IVoteChangeSubscriber, IPokerSessionLobby, IDisposable {
+    public abstract class PokerSessionLobbyBase : MediatorComponent, IRetrospectiveStatusUpdatedSubscriber, IDisposable {
         public Guid UniqueId { get; } = Guid.NewGuid();
 
 #nullable disable
@@ -43,8 +32,6 @@ namespace PokerTime.Web.Pages {
         [Inject]
         public INotificationSubscription<IRetrospectiveStatusUpdatedSubscriber> RetrospectiveStatusUpdatedSubscription { get; set; }
 
-        [Inject]
-        public INotificationSubscription<IVoteChangeSubscriber> VoteChangeSubscription { get; set; }
 
         [Inject]
         public ICurrentParticipantService CurrentParticipantService { get; set; }
@@ -67,23 +54,7 @@ namespace PokerTime.Web.Pages {
 
         public SessionIdentifier SessionIdObject { get; set; }
 
-        public RetrospectiveVoteStatus Votes { get; set; }
-
         protected bool HasLoaded { get; private set; }
-
-        public bool ShowShowcase { get; private set; }
-
-        public void ShowShowcaseDisplay() {
-            this.ShowShowcase = true;
-
-            this.StateHasChanged();
-        }
-
-        public void ShowBoardDisplay() {
-            this.ShowShowcase = false;
-
-            this.StateHasChanged();
-        }
 
 #nullable restore
 
@@ -91,7 +62,6 @@ namespace PokerTime.Web.Pages {
             this.SessionIdObject = new SessionIdentifier(this.SessionId);
 
             this.RetrospectiveStatusUpdatedSubscription.Subscribe(this);
-            this.VoteChangeSubscription.Subscribe(this);
 
             base.OnInitialized();
         }
@@ -99,7 +69,6 @@ namespace PokerTime.Web.Pages {
         protected virtual void Dispose(bool disposing) {
             if (disposing) {
                 this.RetrospectiveStatusUpdatedSubscription.Unsubscribe(this);
-                this.VoteChangeSubscription.Unsubscribe(this);
             }
         }
 
@@ -121,12 +90,6 @@ namespace PokerTime.Web.Pages {
             try {
                 this.RetrospectiveStatus = await this.Mediator.Send(new GetRetrospectiveStatusQuery(this.SessionId));
                 this.Layout?.Update(new PokerSessionLayoutInfo(this.RetrospectiveStatus.Title, this.RetrospectiveStatus.Stage));
-
-                if (this.RetrospectiveStatus.Stage == RetrospectiveStage.Finished) {
-                    this.ShowShowcase = true;
-                }
-
-                this.Votes = (await this.Mediator.Send(new GetVotesQuery(this.SessionId))).VoteStatus;
             }
             catch (NotFoundException) {
                 this.RetrospectiveStatus = null;
@@ -141,33 +104,9 @@ namespace PokerTime.Web.Pages {
                 return Task.CompletedTask;
             }
 
-            return this.InvokeAsync(async () => {
-                this.RetrospectiveStatus = retrospectiveStatus;
-                this.Layout?.Update(new PokerSessionLayoutInfo(retrospectiveStatus.Title, retrospectiveStatus.Stage));
-
-                switch (retrospectiveStatus.Stage) {
-                    case RetrospectiveStage.Voting:
-                        this.Votes = (await this.Mediator.Send(new GetVotesQuery(this.SessionId))).VoteStatus;
-                        break;
-                    case RetrospectiveStage.Finished:
-                        this.ShowShowcase = true;
-                        break;
-                }
-
-                this.StateHasChanged();
-            });
-        }
-
-        public Task OnVoteChange(VoteChange notification) {
-            if (notification.SessionId != this.SessionId) {
-                return Task.CompletedTask;
-            }
-
-            this.InvokeAsync(() => {
-                this.Votes.Apply(notification);
-
-                this.StateHasChanged();
-            });
+            this.RetrospectiveStatus = retrospectiveStatus;
+            this.Layout?.Update(new PokerSessionLayoutInfo(retrospectiveStatus.Title, retrospectiveStatus.Stage));
+            this.StateHasChanged();
 
             return Task.CompletedTask;
         }

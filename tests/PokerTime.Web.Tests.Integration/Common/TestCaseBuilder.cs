@@ -15,15 +15,9 @@ namespace PokerTime.Web.Tests.Integration.Common {
     using System.Threading.Tasks;
     using Application.Common.Abstractions;
     using Application.Common.Models;
-    using Application.NoteGroups.Commands;
-    using Application.Notes.Commands.AddNote;
-    using Application.Notes.Commands.MoveNote;
-    using Application.Notes.Commands.UpdateNote;
-    using Application.Notifications.VoteChanged;
     using Application.PredefinedParticipantColors.Queries.GetAvailablePredefinedParticipantColors;
     using Application.Retrospectives.Commands.JoinPokerSession;
     using Application.Retrospectives.Queries.GetParticipantsInfo;
-    using Application.Votes.Commands;
     using Domain.Entities;
     using MediatR;
     using Microsoft.EntityFrameworkCore;
@@ -101,36 +95,6 @@ namespace PokerTime.Web.Tests.Integration.Common {
             });
         }
 
-        public TestCaseBuilder WithNote(KnownNoteLane laneId, string participantName, string text = null) {
-            if (text == null) {
-                text = TestContext.CurrentContext.Random.GetString();
-            }
-
-            RetrospectiveNote addedNote = null;
-            this.EnqueueMediatorAction(participantName, () => new AddNoteCommand(this._retrospectiveId, (int)laneId),
-                n => {
-                    this.RecordAddedId<RetrospectiveNote>(n.Id);
-                    addedNote = n;
-                });
-
-            if (!String.IsNullOrEmpty(text)) {
-                this.EnqueueMediatorAction(participantName, () => new UpdateNoteCommand {
-                    Id = addedNote.Id,
-                    Text = text
-                }, _ => Task.CompletedTask);
-            }
-
-            return this;
-        }
-
-        public TestCaseBuilder WithVoteOnNoteGroup(string participantName, int noteGroupId) =>
-            this.EnqueueMediatorAction(participantName, () => CastVoteCommand.ForNoteGroup(noteGroupId, VoteMutationType.Added),
-                _ => { });
-
-        public TestCaseBuilder WithVoteOnNote(string participantName, int noteId) =>
-            this.EnqueueMediatorAction(participantName, () => CastVoteCommand.ForNote(noteId, VoteMutationType.Added),
-                _ => { });
-
         public TestCaseBuilder OutputId(Action<int> callback) {
             this._actions.Enqueue(() => {
                 if (this._lastAddedItem == default) {
@@ -173,42 +137,6 @@ namespace PokerTime.Web.Tests.Integration.Common {
 
             return this;
         }
-
-        public TestCaseBuilder WithNoteGroup(string participantName, KnownNoteLane laneId, string text = null) {
-            if (text == null) {
-                text = TestContext.CurrentContext.Random.GetString();
-            }
-
-            RetrospectiveNoteGroup addedNoteGroup = null;
-            this.EnqueueMediatorAction(participantName, () => new AddNoteGroupCommand(this._retrospectiveId, (int)laneId),
-                ng => {
-                    this.RecordAddedId<RetrospectiveNoteGroup>(ng.Id);
-                    addedNoteGroup = ng;
-                });
-
-            if (!String.IsNullOrEmpty(text)) {
-                this.EnqueueMediatorAction(participantName,
-                    () => new UpdateNoteGroupCommand(this._retrospectiveId, addedNoteGroup.Id, text)
-                    , _ => Task.CompletedTask);
-            }
-
-            return this;
-        }
-
-        public TestCaseBuilder AddNoteToNoteGroup(string participantName, string noteId, string noteGroupId) =>
-            this.EnqueueMediatorAction(participantName, () => {
-                int dbNoteId = this._entityIds.Get(noteId, typeof(RetrospectiveNote));
-                int? dbNoteGroupId = noteGroupId != null
-                    ? this._entityIds.Get(noteGroupId, typeof(RetrospectiveNoteGroup))
-                    : (int?)null;
-                return new MoveNoteCommand(dbNoteId, dbNoteGroupId);
-            },
-                _ => { });
-
-        public TestCaseBuilder AddNoteToNoteGroup(string participantName, int dbNoteId, int? dbNoteGroupId) =>
-            this.EnqueueMediatorAction(participantName, () => new MoveNoteCommand(dbNoteId, dbNoteGroupId),
-                _ => { });
-
         public TestCaseBuilder WithRetrospectiveStage(RetrospectiveStage stage) => this.EnqueueRetrospectiveAction(r => r.CurrentStage = stage);
 
         private ParticipantInfo GetParticipatorInfo(string name) {
