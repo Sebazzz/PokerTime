@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : TextAnonymizingServiceTests.cs
-//  Project         : Return.Domain.Tests.Unit
+//  Project         : PokerTime.Domain.Tests.Unit
 // ******************************************************************************
 
-namespace Return.Domain.Tests.Unit.Services {
+namespace PokerTime.Domain.Tests.Unit.Services {
     using System;
     using System.Collections;
     using System.Collections.Generic;

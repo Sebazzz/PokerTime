@@ -2,10 +2,10 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : RetrospectiveStatusUpdatedNotificationDispatcher.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Notifications.RetrospectiveStatusUpdated {
+namespace PokerTime.Application.Notifications.RetrospectiveStatusUpdated {
     using System.Threading.Tasks;
     using Microsoft.Extensions.Logging;
 

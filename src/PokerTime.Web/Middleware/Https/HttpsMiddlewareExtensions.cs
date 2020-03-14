@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : ApplicationBuilderExtensions.cs
-//  Project         : Return.Web
+//  Project         : PokerTime.Web
 // ******************************************************************************
 
-namespace Return.Web.Middleware.Https {
+namespace PokerTime.Web.Middleware.Https {
     using System;
     using Configuration;
     using Microsoft.AspNetCore.Builder;

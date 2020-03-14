@@ -2,10 +2,10 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : RetrospectiveWorkflowCommandTestBase.cs
-//  Project         : Return.Application.Tests.Unit
+//  Project         : PokerTime.Application.Tests.Unit
 // ******************************************************************************
 
-namespace Return.Application.Tests.Unit.RetrospectiveWorkflows.Commands {
+namespace PokerTime.Application.Tests.Unit.RetrospectiveWorkflows.Commands {
     using System.Drawing;
     using System.Threading;
     using System.Threading.Tasks;
@@ -14,7 +14,7 @@ namespace Return.Application.Tests.Unit.RetrospectiveWorkflows.Commands {
     using Domain.Entities;
     using NSubstitute;
     using NUnit.Framework;
-    using Return.Common;
+    using PokerTime.Common;
     using Support;
 
     public abstract class RetrospectiveWorkflowCommandTestBase : CommandTestBase {

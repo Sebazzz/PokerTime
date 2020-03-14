@@ -2,10 +2,10 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : NoteGroupTypeSecurityHandler.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Common.Security.TypeHandling {
+namespace PokerTime.Application.Common.Security.TypeHandling {
     using System.Diagnostics.CodeAnalysis;
     using Domain.Entities;
     using Models;

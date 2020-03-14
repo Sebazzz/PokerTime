@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : ColorModelTests.cs
-//  Project         : Return.Application.Tests.Unit
+//  Project         : PokerTime.Application.Tests.Unit
 // ******************************************************************************
 
-namespace Return.Application.Tests.Unit.Common.Models {
+namespace PokerTime.Application.Tests.Unit.Common.Models {
     using System.Drawing;
     using Application.Common.Models;
     using NUnit.Framework;

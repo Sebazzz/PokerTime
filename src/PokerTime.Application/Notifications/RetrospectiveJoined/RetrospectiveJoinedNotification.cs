@@ -2,10 +2,10 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : RetrospectiveJoinedNotification.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Notifications.RetrospectiveJoined {
+namespace PokerTime.Application.Notifications.RetrospectiveJoined {
     using Retrospectives.Queries.GetParticipantsInfo;
 
     public sealed class RetrospectiveJoinedNotification : RetrospectiveNotification {

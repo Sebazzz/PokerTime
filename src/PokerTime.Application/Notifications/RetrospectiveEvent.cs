@@ -2,10 +2,10 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : RetrospectiveEvent.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Notifications {
+namespace PokerTime.Application.Notifications {
     public sealed class RetrospectiveEvent<T> {
         public string RetroId { get; }
 

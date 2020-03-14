@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : SecurityTypeHandlers.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Common.Security.TypeHandling {
+namespace PokerTime.Application.Common.Security.TypeHandling {
     using System;
     using System.Diagnostics;
     using System.Linq;

@@ -2,10 +2,10 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : SecurityValidatorExtensions.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Common.Security {
+namespace PokerTime.Application.Common.Security {
     using System;
     using System.Threading.Tasks;
     using Domain.Entities;

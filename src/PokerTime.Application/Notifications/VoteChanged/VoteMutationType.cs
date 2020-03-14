@@ -2,10 +2,10 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : VoteMutationType.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Notifications.VoteChanged {
+namespace PokerTime.Application.Notifications.VoteChanged {
     public enum VoteMutationType {
         Added,
         Removed

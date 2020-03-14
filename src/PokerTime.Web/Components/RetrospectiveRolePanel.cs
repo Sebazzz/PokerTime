@@ -2,10 +2,10 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : RetrospectiveRolePanel.cs
-//  Project         : Return.Web
+//  Project         : PokerTime.Web
 // ******************************************************************************
 
-namespace Return.Web.Components {
+namespace PokerTime.Web.Components {
     using Application.Common.Models;
     using Application.Retrospectives.Queries.GetParticipantsInfo;
     using Microsoft.AspNetCore.Components;

@@ -2,10 +2,10 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : InitiateGroupingStageCommand.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.RetrospectiveWorkflows.Commands {
+namespace PokerTime.Application.RetrospectiveWorkflows.Commands {
     using MediatR;
 
     public sealed class InitiateGroupingStageCommand : AbstractStageCommand, IRequest {

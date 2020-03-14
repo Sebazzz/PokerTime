@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : MoveNoteCommandHandler.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Notes.Commands.MoveNote {
+namespace PokerTime.Application.Notes.Commands.MoveNote {
     using System;
     using System.Threading;
     using System.Threading.Tasks;

@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : NoteDeletedNotification.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Notifications.NoteDeleted {
+namespace PokerTime.Application.Notifications.NoteDeleted {
     using MediatR;
 
     public class NoteDeletedNotification : INotification {

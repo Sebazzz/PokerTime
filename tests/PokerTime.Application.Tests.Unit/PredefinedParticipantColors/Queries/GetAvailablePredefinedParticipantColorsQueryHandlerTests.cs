@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : GetAvailablePredefinedParticipantColorsQueryHandlerTests.cs
-//  Project         : Return.Application.Tests.Unit
+//  Project         : PokerTime.Application.Tests.Unit
 // ******************************************************************************
 
-namespace Return.Application.Tests.Unit.PredefinedParticipantColors.Queries {
+namespace PokerTime.Application.Tests.Unit.PredefinedParticipantColors.Queries {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;

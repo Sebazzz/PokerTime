@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : CleanupObjects.cs
-//  Project         : Return.Web.Tests.Integration
+//  Project         : PokerTime.Web.Tests.Integration
 // ******************************************************************************
 
-namespace Return.Web.Tests.Integration.Common {
+namespace PokerTime.Web.Tests.Integration.Common {
     using System;
     using System.Collections.Generic;
     using NUnit.Framework;

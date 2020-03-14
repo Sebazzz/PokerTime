@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : TextAnonymizingService.cs
-//  Project         : Return.Domain
+//  Project         : PokerTime.Domain
 // ******************************************************************************
 
-namespace Return.Domain.Services {
+namespace PokerTime.Domain.Services {
     using System;
     using System.Globalization;
 

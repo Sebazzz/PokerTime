@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : CurrentParticipantModel.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Common.Models {
+namespace PokerTime.Application.Common.Models {
     using System;
 
     public readonly struct CurrentParticipantModel : IEquatable<CurrentParticipantModel> {

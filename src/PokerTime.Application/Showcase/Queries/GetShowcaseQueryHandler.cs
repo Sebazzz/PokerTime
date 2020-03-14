@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : GetShowcaseQueryHandler.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Showcase.Queries {
+namespace PokerTime.Application.Showcase.Queries {
     using System;
     using System.Threading;
     using System.Threading.Tasks;

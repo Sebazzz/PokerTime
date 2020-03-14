@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : TestCaseBuilder.cs
-//  Project         : Return.Web.Tests.Integration
+//  Project         : PokerTime.Web.Tests.Integration
 // ******************************************************************************
 
-namespace Return.Web.Tests.Integration.Common {
+namespace PokerTime.Web.Tests.Integration.Common {
     using System;
     using System.Collections.Generic;
     using System.Drawing;
@@ -29,7 +29,7 @@ namespace Return.Web.Tests.Integration.Common {
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
     using NUnit.Framework;
-    using Return.Common;
+    using PokerTime.Common;
 
     public sealed class TestCaseBuilder {
         private readonly IServiceScope _scope;

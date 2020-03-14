@@ -2,10 +2,10 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : AbstractTimedStageCommand.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.RetrospectiveWorkflows.Commands {
+namespace PokerTime.Application.RetrospectiveWorkflows.Commands {
 #nullable disable
 
     public abstract class AbstractStageCommand {

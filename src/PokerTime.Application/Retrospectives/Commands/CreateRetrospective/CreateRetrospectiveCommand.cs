@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : CreateRetrospectiveCommand.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Retrospectives.Commands.CreateRetrospective {
+namespace PokerTime.Application.Retrospectives.Commands.CreateRetrospective {
     using MediatR;
 
     public class CreateRetrospectiveCommand : IRequest<CreateRetrospectiveCommandResponse> {

@@ -2,10 +2,10 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : GetShowcaseQuery.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Showcase.Queries {
+namespace PokerTime.Application.Showcase.Queries {
     using Common.Behaviours;
     using MediatR;
 

@@ -2,9 +2,9 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : ColorModel.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
-namespace Return.Application.Common.Models {
+namespace PokerTime.Application.Common.Models {
     using System;
     using AutoMapper;
     using Domain.ValueObjects;

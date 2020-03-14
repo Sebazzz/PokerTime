@@ -2,10 +2,10 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : RetrospectiveStageText2.cs
-//  Project         : Return.Web
+//  Project         : PokerTime.Web
 // ******************************************************************************
 
-namespace Return.Web.Components {
+namespace PokerTime.Web.Components {
     using Application.Retrospectives.Queries.GetRetrospectiveStatus;
     using Domain.Entities;
     using Microsoft.AspNetCore.Components;

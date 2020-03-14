@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : Note.cs
-//  Project         : Return.Domain
+//  Project         : PokerTime.Domain
 // ******************************************************************************
 
-namespace Return.Domain.Entities {
+namespace PokerTime.Domain.Entities {
     using System;
     using Abstractions;
 

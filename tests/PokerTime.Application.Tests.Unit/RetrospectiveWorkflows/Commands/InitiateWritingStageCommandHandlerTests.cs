@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : InitiateWritingStageCommandHandlerTests.cs
-//  Project         : Return.Application.Tests.Unit
+//  Project         : PokerTime.Application.Tests.Unit
 // ******************************************************************************
 
-namespace Return.Application.Tests.Unit.RetrospectiveWorkflows.Commands {
+namespace PokerTime.Application.Tests.Unit.RetrospectiveWorkflows.Commands {
     using System;
     using System.Threading;
     using System.Threading.Tasks;

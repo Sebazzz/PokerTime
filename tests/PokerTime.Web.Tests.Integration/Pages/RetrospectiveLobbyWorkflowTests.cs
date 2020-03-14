@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : RetrospectiveLobbyTests.cs
-//  Project         : Return.Web.Tests.Integration
+//  Project         : PokerTime.Web.Tests.Integration
 // ******************************************************************************
 
-namespace Return.Web.Tests.Integration.Pages {
+namespace PokerTime.Web.Tests.Integration.Pages {
     using System;
     using System.Linq;
     using System.Threading.Tasks;
@@ -18,7 +18,7 @@ namespace Return.Web.Tests.Integration.Pages {
     using NUnit.Framework;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Interactions;
-    using Return.Common;
+    using PokerTime.Common;
 
     [TestFixture]
     public sealed class RetrospectiveLobbyWorkflowTests : RetrospectiveLobbyTestsBase {

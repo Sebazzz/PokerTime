@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : VoteChangeCommandHandlerTests.cs
-//  Project         : Return.Application.Tests.Unit
+//  Project         : PokerTime.Application.Tests.Unit
 // ******************************************************************************
 
-namespace Return.Application.Tests.Unit.Votes.Command {
+namespace PokerTime.Application.Tests.Unit.Votes.Command {
     using System;
     using System.Linq;
     using System.Threading;

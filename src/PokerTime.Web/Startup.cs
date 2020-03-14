@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Return.Web {
+namespace PokerTime.Web {
     using System;
     using Application;
     using Application.Common.Abstractions;

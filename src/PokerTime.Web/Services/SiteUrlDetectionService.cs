@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Return.Web.Services {
+namespace PokerTime.Web.Services {
     using Configuration;
     using Microsoft.AspNetCore.Http;
     using Microsoft.Extensions.Logging;

@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : NoteAddedNotification.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Notifications.NoteAdded {
+namespace PokerTime.Application.Notifications.NoteAdded {
     using Common.Models;
 
     public sealed class NoteAddedNotification : RetrospectiveNotification {

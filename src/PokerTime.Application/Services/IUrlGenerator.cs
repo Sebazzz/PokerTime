@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : IUrlGenerator.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Services {
+namespace PokerTime.Application.Services {
     using System;
     using Domain.ValueObjects;
 

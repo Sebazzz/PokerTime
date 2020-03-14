@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : CreateRetrospectiveCommandHandler.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Retrospectives.Commands.CreateRetrospective {
+namespace PokerTime.Application.Retrospectives.Commands.CreateRetrospective {
     using System;
     using System.Threading;
     using System.Threading.Tasks;
@@ -15,7 +15,7 @@ namespace Return.Application.Retrospectives.Commands.CreateRetrospective {
     using MediatR;
     using Microsoft.Extensions.Logging;
     using QRCoder;
-    using Return.Common;
+    using PokerTime.Common;
     using Services;
 
     public sealed class CreateRetrospectiveCommandHandler : IRequestHandler<CreateRetrospectiveCommand, CreateRetrospectiveCommandResponse> {

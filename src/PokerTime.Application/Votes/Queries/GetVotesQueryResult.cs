@@ -2,10 +2,10 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : RetrospectiveVoteStatus.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Votes.Queries {
+namespace PokerTime.Application.Votes.Queries {
     public sealed class GetVotesQueryResult {
         public RetrospectiveVoteStatus VoteStatus { get; }
 

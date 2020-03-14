@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : CreateRetrospectiveCommandResponse.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Retrospectives.Commands.CreateRetrospective {
+namespace PokerTime.Application.Retrospectives.Commands.CreateRetrospective {
     using System.Drawing;
     using Domain.ValueObjects;
     using QRCoder;

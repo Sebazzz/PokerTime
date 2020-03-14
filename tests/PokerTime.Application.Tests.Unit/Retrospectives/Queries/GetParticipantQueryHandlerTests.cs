@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : GetParticipantQueryHandlerTests.cs
-//  Project         : Return.Application.Tests.Unit
+//  Project         : PokerTime.Application.Tests.Unit
 // ******************************************************************************
 
-namespace Return.Application.Tests.Unit.Retrospectives.Queries {
+namespace PokerTime.Application.Tests.Unit.Retrospectives.Queries {
     using System.Drawing;
     using System.Threading;
     using System.Threading.Tasks;

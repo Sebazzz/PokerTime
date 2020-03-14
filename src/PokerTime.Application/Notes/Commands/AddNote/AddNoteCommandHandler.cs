@@ -2,10 +2,10 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : AddNoteCommandHandler.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Notes.Commands.AddNote {
+namespace PokerTime.Application.Notes.Commands.AddNote {
     using System;
     using System.Threading;
     using System.Threading.Tasks;
@@ -17,7 +17,7 @@ namespace Return.Application.Notes.Commands.AddNote {
     using Domain.Entities;
     using MediatR;
     using Notifications.NoteAdded;
-    using Return.Common;
+    using PokerTime.Common;
     using Services;
 
     public sealed class AddNoteCommandHandler : IRequestHandler<AddNoteCommand, RetrospectiveNote> {

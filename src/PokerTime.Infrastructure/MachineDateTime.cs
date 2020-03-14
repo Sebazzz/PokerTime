@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : MachineDateTime.cs
-//  Project         : Return.Infrastructure
+//  Project         : PokerTime.Infrastructure
 // ******************************************************************************
 
-namespace Return.Infrastructure {
+namespace PokerTime.Infrastructure {
     using System;
     using Common;
 

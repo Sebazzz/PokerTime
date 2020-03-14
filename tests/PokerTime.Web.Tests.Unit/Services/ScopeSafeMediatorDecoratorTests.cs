@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : ScopeSafeMediatorDecoratorTests.cs
-//  Project         : Return.Web.Tests.Unit
+//  Project         : PokerTime.Web.Tests.Unit
 // ******************************************************************************
 
-namespace Return.Web.Tests.Unit.Services {
+namespace PokerTime.Web.Tests.Unit.Services {
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;

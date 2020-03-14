@@ -2,10 +2,10 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : ParticipantsInfoList.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Retrospectives.Queries.GetParticipantsInfo {
+namespace PokerTime.Application.Retrospectives.Queries.GetParticipantsInfo {
     using System.Collections.Generic;
 
     public class ParticipantsInfoList {

@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : UpdateNoteGroupCommand.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.NoteGroups.Commands {
+namespace PokerTime.Application.NoteGroups.Commands {
     using Domain.Entities;
     using MediatR;
 

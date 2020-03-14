@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Return.Persistence.Migrations
+namespace PokerTime.Persistence.Migrations
 {
     public partial class InitialCreate : Migration
     {

@@ -2,14 +2,14 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : PassphraseServiceTests.cs
-//  Project         : Return.Domain.Tests.Unit
+//  Project         : PokerTime.Domain.Tests.Unit
 // ******************************************************************************
 
-namespace Return.Domain.Tests.Unit.Services {
+namespace PokerTime.Domain.Tests.Unit.Services {
     using System;
     using Domain.Services;
     using NUnit.Framework;
-    using Return.Common;
+    using PokerTime.Common;
 
     [TestFixture]
     public sealed class PassphraseServiceTests {

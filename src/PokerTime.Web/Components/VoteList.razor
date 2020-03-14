@@ -1,11 +1,11 @@
 @using Microsoft.Extensions.Logging
-@using Return.Application.Common.Models
-@using Return.Application.Notifications.VoteChanged
-@using Return.Application.Retrospectives.Queries.GetRetrospectiveStatus
-@using Return.Application.Votes.Commands
+@using PokerTime.Application.Common.Models
+@using PokerTime.Application.Notifications.VoteChanged
+@using PokerTime.Application.Retrospectives.Queries.GetRetrospectiveStatus
+@using PokerTime.Application.Votes.Commands
 @inherits MediatorComponent
 @inject ILogger<VoteList> Logger
-@using Return.Application.Votes.Queries
+@using PokerTime.Application.Votes.Queries
 
 @if (!this.RetrospectiveStatus.IsVotingAllowed && !this.RetrospectiveStatus.IsViewingVotesAllowed)
 {

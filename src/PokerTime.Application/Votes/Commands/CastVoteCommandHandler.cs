@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : CastVoteCommandHandler.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Votes.Commands {
+namespace PokerTime.Application.Votes.Commands {
     using System;
     using System.Threading;
     using System.Threading.Tasks;

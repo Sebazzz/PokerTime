@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : GetVotesQueryHandlerTests.cs
-//  Project         : Return.Application.Tests.Unit
+//  Project         : PokerTime.Application.Tests.Unit
 // ******************************************************************************
 
-namespace Return.Application.Tests.Unit.Votes.Queries {
+namespace PokerTime.Application.Tests.Unit.Votes.Queries {
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;

@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : NoteGroupBase.cs
-//  Project         : Return.Web
+//  Project         : PokerTime.Web
 // ******************************************************************************
 
-namespace Return.Web.Components {
+namespace PokerTime.Web.Components {
     using System;
     using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;

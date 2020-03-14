@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : IRetrospectiveJoinedSubscriber.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Notifications.RetrospectiveJoined {
+namespace PokerTime.Application.Notifications.RetrospectiveJoined {
     using System.Threading.Tasks;
     using Retrospectives.Queries.GetParticipantsInfo;
 

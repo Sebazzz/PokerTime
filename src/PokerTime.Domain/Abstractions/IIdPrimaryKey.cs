@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : IIdPrimaryKey.cs
-//  Project         : Return.Domain
+//  Project         : PokerTime.Domain
 // ******************************************************************************
 
-namespace Return.Domain.Abstractions {
+namespace PokerTime.Domain.Abstractions {
     public interface IIdPrimaryKey {
         int Id { get; }
     }

@@ -2,10 +2,10 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : IVoteChangeSubscriber.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Notifications.VoteChanged {
+namespace PokerTime.Application.Notifications.VoteChanged {
     using System.Threading.Tasks;
 
     public interface IVoteChangeSubscriber : ISubscriber {

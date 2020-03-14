@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : GetVotesQuery.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Votes.Queries {
+namespace PokerTime.Application.Votes.Queries {
     using MediatR;
 
     public sealed class GetVotesQuery : IRequest<GetVotesQueryResult> {

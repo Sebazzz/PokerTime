@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : InitiateWritingStageCommandHandler.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.RetrospectiveWorkflows.Commands {
+namespace PokerTime.Application.RetrospectiveWorkflows.Commands {
     using System;
     using System.Threading;
     using System.Threading.Tasks;
@@ -13,7 +13,7 @@ namespace Return.Application.RetrospectiveWorkflows.Commands {
     using Common;
     using Domain.Entities;
     using MediatR;
-    using Return.Common;
+    using PokerTime.Common;
 
     public sealed class InitiateWritingStageCommandHandler : AbstractStageCommandHandler<InitiateWritingStageCommand> {
         private readonly ISystemClock _systemClock;

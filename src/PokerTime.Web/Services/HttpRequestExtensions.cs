@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : HttpRequestExtensions.cs
-//  Project         : Return.Web
+//  Project         : PokerTime.Web
 // ******************************************************************************
 
-namespace Return.Web.Services {
+namespace PokerTime.Web.Services {
     using System;
     using Microsoft.AspNetCore.Http;
 

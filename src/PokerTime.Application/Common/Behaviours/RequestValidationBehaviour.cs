@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : RequestValidationBehaviour.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Common.Behaviours {
+namespace PokerTime.Application.Common.Behaviours {
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -14,7 +14,7 @@ namespace Return.Application.Common.Behaviours {
     using FluentValidation;
     using FluentValidation.Results;
     using MediatR;
-    using ValidationException = Return.Application.Common.ValidationException;
+    using ValidationException = PokerTime.Application.Common.ValidationException;
 
     public sealed class RequestValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<TResponse> {

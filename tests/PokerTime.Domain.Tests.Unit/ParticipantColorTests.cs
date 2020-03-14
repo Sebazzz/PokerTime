@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : ParticipantColorTests.cs
-//  Project         : Return.Domain.Tests.Unit
+//  Project         : PokerTime.Domain.Tests.Unit
 // ******************************************************************************
 
-namespace Return.Domain.Tests.Unit {
+namespace PokerTime.Domain.Tests.Unit {
     using System.Drawing;
     using Domain.ValueObjects;
     using NUnit.Framework;

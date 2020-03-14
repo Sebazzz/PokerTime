@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : ReturnDbContextFactory.cs
-//  Project         : Return.Persistence
+//  Project         : PokerTime.Persistence
 // ******************************************************************************
 
-namespace Return.Persistence {
+namespace PokerTime.Persistence {
     using Microsoft.EntityFrameworkCore;
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1812:Avoid uninstantiated internal classes", Justification = "EF Core infra")]

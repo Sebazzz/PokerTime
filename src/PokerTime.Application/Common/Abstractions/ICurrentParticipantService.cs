@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : ICurrentParticipantService.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Common.Abstractions {
+namespace PokerTime.Application.Common.Abstractions {
     using System.Threading.Tasks;
     using Models;
 

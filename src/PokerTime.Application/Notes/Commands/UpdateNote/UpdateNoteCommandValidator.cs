@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : UpdateNoteCommandValidator.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Notes.Commands.UpdateNote {
+namespace PokerTime.Application.Notes.Commands.UpdateNote {
     using System.Diagnostics.CodeAnalysis;
     using FluentValidation;
 

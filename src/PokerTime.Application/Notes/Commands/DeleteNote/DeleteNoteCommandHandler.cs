@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : DeleteNoteCommandHandler.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Notes.Commands.DeleteNote {
+namespace PokerTime.Application.Notes.Commands.DeleteNote {
     using System;
     using System.Threading;
     using System.Threading.Tasks;

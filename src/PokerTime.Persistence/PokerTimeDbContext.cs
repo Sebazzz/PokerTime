@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : ReturnDbContext.cs
-//  Project         : Return.Persistence
+//  Project         : PokerTime.Persistence
 // ******************************************************************************
 
-namespace Return.Persistence {
+namespace PokerTime.Persistence {
     using System;
     using System.Collections.Generic;
     using System.Linq;

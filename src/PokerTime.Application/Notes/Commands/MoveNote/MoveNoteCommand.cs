@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : MoveNoteCommand.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Notes.Commands.MoveNote {
+namespace PokerTime.Application.Notes.Commands.MoveNote {
     using MediatR;
 
     /// <summary>

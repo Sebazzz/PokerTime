@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : BaseDataSeeder.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.App.Commands.SeedBaseData {
+namespace PokerTime.Application.App.Commands.SeedBaseData {
     using System.Drawing;
     using System.Threading;
     using System.Threading.Tasks;

@@ -1,4 +1,4 @@
-﻿namespace Return.Web.Middleware {
+﻿namespace PokerTime.Web.Middleware {
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Http;
     using Services;

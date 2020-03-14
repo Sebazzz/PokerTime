@@ -1,3 +1,3 @@
 ﻿using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("Return.Application.Tests.Unit")]
+[assembly: InternalsVisibleTo("PokerTime.Application.Tests.Unit")]

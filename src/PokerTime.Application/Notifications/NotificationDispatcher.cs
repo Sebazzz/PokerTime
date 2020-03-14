@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : NotificationDispatcher.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Notifications {
+namespace PokerTime.Application.Notifications {
     using System;
     using System.Diagnostics;
     using System.Linq;

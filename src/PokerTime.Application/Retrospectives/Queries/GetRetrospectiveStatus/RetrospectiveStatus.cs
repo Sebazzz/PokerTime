@@ -2,10 +2,10 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : RetrospectiveStatus.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Retrospectives.Queries.GetRetrospectiveStatus {
+namespace PokerTime.Application.Retrospectives.Queries.GetRetrospectiveStatus {
     using System;
     using System.Collections.Generic;
     using Domain.Entities;

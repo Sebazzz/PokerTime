@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : NoteComponent.cs
-//  Project         : Return.Web.Tests.Integration
+//  Project         : PokerTime.Web.Tests.Integration
 // ******************************************************************************
 
-namespace Return.Web.Tests.Integration.Components {
+namespace PokerTime.Web.Tests.Integration.Components {
     using Common;
     using OpenQA.Selenium;
 

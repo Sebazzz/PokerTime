@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : SecurityValidatorTests.cs
-//  Project         : Return.Application.Tests.Unit
+//  Project         : PokerTime.Application.Tests.Unit
 // ******************************************************************************
 
-namespace Return.Application.Tests.Unit.Common.Security {
+namespace PokerTime.Application.Tests.Unit.Common.Security {
     using System;
     using System.Threading.Tasks;
     using Application.Common.Abstractions;

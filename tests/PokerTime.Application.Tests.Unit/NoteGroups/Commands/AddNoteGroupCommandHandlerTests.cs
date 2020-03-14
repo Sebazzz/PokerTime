@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : AddNoteGroupCommandHandlerTests.cs
-//  Project         : Return.Application.Tests.Unit
+//  Project         : PokerTime.Application.Tests.Unit
 // ******************************************************************************
 
-namespace Return.Application.Tests.Unit.NoteGroups.Commands {
+namespace PokerTime.Application.Tests.Unit.NoteGroups.Commands {
     using System;
     using System.Linq;
     using System.Threading;

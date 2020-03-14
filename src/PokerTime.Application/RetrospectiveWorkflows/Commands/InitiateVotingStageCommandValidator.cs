@@ -2,10 +2,10 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : InitiateVotingStageCommandValidator.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.RetrospectiveWorkflows.Commands {
+namespace PokerTime.Application.RetrospectiveWorkflows.Commands {
     using FluentValidation;
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming",

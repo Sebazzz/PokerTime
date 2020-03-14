@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : ServiceCollectionExtensions.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application {
+namespace PokerTime.Application {
     using System.Reflection;
     using AutoMapper;
     using Common.Behaviours;

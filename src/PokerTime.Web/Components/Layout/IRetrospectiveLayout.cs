@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : IRetrospectiveLayout.cs
-//  Project         : Return.Web
+//  Project         : PokerTime.Web
 // ******************************************************************************
 
-namespace Return.Web.Components.Layout {
+namespace PokerTime.Web.Components.Layout {
     using System;
     using Domain.Entities;
 

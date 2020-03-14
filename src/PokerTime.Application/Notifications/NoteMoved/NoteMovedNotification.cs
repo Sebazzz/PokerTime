@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Return.Application.Notifications.NoteMoved {
+namespace PokerTime.Application.Notifications.NoteMoved {
     using MediatR;
 
     public sealed class NoteMovedNotification : INotification {

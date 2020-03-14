@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : SeedBaseDataCommand.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.App.Commands.SeedBaseData {
+namespace PokerTime.Application.App.Commands.SeedBaseData {
     using Common.Abstractions;
     using System.Threading;
     using System.Threading.Tasks;

@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : INoteDeletedSubscriber.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Notifications.NoteDeleted {
+namespace PokerTime.Application.Notifications.NoteDeleted {
     using System.Threading.Tasks;
 
     public interface INoteDeletedSubscriber : ISubscriber {

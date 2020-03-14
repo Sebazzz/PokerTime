@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : SubscribingComponent.cs
-//  Project         : Return.Web
+//  Project         : PokerTime.Web
 // ******************************************************************************
 
-namespace Return.Web.Components {
+namespace PokerTime.Web.Components {
     using System;
     using Application.Notifications;
     using Microsoft.AspNetCore.Components;

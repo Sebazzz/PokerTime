@@ -2,11 +2,11 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : NoteGroupConfiguration.cs
-//  Project         : Return.Persistence
+//  Project         : PokerTime.Persistence
 // ******************************************************************************
 
 
-namespace Return.Persistence.Configurations {
+namespace PokerTime.Persistence.Configurations {
     using System;
     using Domain.Entities;
     using Microsoft.EntityFrameworkCore;

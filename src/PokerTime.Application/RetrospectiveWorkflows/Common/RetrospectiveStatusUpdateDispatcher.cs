@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : RetrospectiveStatusUpdateDispatcher.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.RetrospectiveWorkflows.Common {
+namespace PokerTime.Application.RetrospectiveWorkflows.Common {
     using System.Threading;
     using System.Threading.Tasks;
     using Domain.Entities;

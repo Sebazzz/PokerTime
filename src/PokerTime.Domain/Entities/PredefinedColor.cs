@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : PredefinedParticipantColor.cs
-//  Project         : Return.Domain
+//  Project         : PokerTime.Domain
 // ******************************************************************************
 
-namespace Return.Domain.Entities {
+namespace PokerTime.Domain.Entities {
     using System;
     using System.Diagnostics.CodeAnalysis;
     using ValueObjects;

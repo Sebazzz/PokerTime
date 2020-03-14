@@ -2,10 +2,10 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : NoteLaneUpdatedNotificationDispatcher.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Notifications.NoteLaneUpdated {
+namespace PokerTime.Application.Notifications.NoteLaneUpdated {
     using System.Threading.Tasks;
     using Microsoft.Extensions.Logging;
 

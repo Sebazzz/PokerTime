@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : DatabaseOptions.cs
-//  Project         : Return.Web
+//  Project         : PokerTime.Web
 // ******************************************************************************
 
-namespace Return.Web.Configuration {
+namespace PokerTime.Web.Configuration {
     using System;
     using Microsoft.Data.SqlClient;
     using Microsoft.Data.Sqlite;

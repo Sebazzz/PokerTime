@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : EnvironmentPath.cs
-//  Project         : Return.Web
+//  Project         : PokerTime.Web
 // ******************************************************************************
 
-namespace Return.Web.Configuration {
+namespace PokerTime.Web.Configuration {
     using System;
     using System.IO;
     using System.Runtime.InteropServices;

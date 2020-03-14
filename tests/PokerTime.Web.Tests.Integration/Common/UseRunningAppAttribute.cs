@@ -2,10 +2,10 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : UseRunningAppAttribute.cs
-//  Project         : Return.Web.Tests.Integration
+//  Project         : PokerTime.Web.Tests.Integration
 // ******************************************************************************
 
-namespace Return.Web.Tests.Integration.Common {
+namespace PokerTime.Web.Tests.Integration.Common {
     using System;
     using NUnit.Framework;
     using NUnit.Framework.Interfaces;

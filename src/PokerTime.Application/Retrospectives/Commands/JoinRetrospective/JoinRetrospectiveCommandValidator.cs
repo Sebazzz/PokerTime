@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : JoinRetrospectiveCommandValidator.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Retrospectives.Commands.JoinRetrospective {
+namespace PokerTime.Application.Retrospectives.Commands.JoinRetrospective {
     using System;
     using System.Linq;
     using System.Linq.Expressions;

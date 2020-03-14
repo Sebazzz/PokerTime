@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : JoinRetrospectiveTests.cs
-//  Project         : Return.Web.Tests.Integration
+//  Project         : PokerTime.Web.Tests.Integration
 // ******************************************************************************
 
-namespace Return.Web.Tests.Integration.Pages {
+namespace PokerTime.Web.Tests.Integration.Pages {
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;

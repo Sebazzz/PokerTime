@@ -1,4 +1,4 @@
-﻿namespace Return.Application.PredefinedParticipantColors.Queries.GetAvailablePredefinedParticipantColors {
+﻿namespace PokerTime.Application.PredefinedParticipantColors.Queries.GetAvailablePredefinedParticipantColors {
     using System;
     using System.Collections.Generic;
     using System.Linq;

@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : ISystemClock.cs
-//  Project         : Return.Common
+//  Project         : PokerTime.Common
 // ******************************************************************************
 
-namespace Return.Common
+namespace PokerTime.Common
 {
     using System;
 

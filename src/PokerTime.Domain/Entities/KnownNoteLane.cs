@@ -2,10 +2,10 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : KnownNoteLane.cs
-//  Project         : Return.Domain
+//  Project         : PokerTime.Domain
 // ******************************************************************************
 
-namespace Return.Domain.Entities {
+namespace PokerTime.Domain.Entities {
     public enum KnownNoteLane {
         Invalid = 0,
         Start,

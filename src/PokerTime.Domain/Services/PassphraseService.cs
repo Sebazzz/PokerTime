@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Text;
 
-namespace Return.Domain.Services {
+namespace PokerTime.Domain.Services {
     using System.Security.Cryptography;
-    using Return.Common;
+    using PokerTime.Common;
 
     public interface IPassphraseService {
         bool ValidatePassphrase(string passphrase, string hashed);

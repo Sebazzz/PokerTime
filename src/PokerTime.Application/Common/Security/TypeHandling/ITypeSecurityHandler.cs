@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : ITypeSecurityHandler.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Common.Security.TypeHandling {
+namespace PokerTime.Application.Common.Security.TypeHandling {
     using Domain.Entities;
     using Models;
 

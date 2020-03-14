@@ -2,10 +2,10 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : NoteMovedNotificationDispatcher.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Notifications.NoteMoved {
+namespace PokerTime.Application.Notifications.NoteMoved {
     using System.Threading.Tasks;
     using Microsoft.Extensions.Logging;
 

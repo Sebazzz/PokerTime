@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : WebUrlGeneratorService.cs
-//  Project         : Return.Web
+//  Project         : PokerTime.Web
 // ******************************************************************************
 
-namespace Return.Web.Services {
+namespace PokerTime.Web.Services {
     using System;
     using Application.Services;
     using Domain.ValueObjects;

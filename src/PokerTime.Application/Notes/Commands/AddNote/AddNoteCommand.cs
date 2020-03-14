@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : AddNoteCommand.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Notes.Commands.AddNote {
+namespace PokerTime.Application.Notes.Commands.AddNote {
     using Common.Models;
     using MediatR;
 

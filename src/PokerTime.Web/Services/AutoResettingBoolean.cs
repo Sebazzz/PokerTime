@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : AutoResettingBoolean.cs
-//  Project         : Return.Web
+//  Project         : PokerTime.Web
 // ******************************************************************************
 
-namespace Return.Web.Services {
+namespace PokerTime.Web.Services {
     public class AutoResettingBoolean {
         private readonly bool _initialValue;
         private bool _currentValue;

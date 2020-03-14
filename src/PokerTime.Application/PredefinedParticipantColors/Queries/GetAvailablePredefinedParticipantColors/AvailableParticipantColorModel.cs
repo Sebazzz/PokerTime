@@ -2,10 +2,10 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : AvailableParticipantColorModel.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.PredefinedParticipantColors.Queries.GetAvailablePredefinedParticipantColors {
+namespace PokerTime.Application.PredefinedParticipantColors.Queries.GetAvailablePredefinedParticipantColors {
     using System;
     using AutoMapper;
     using Common.Mapping;

@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : IReturnDbContext.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Common.Abstractions {
+namespace PokerTime.Application.Common.Abstractions {
     using System;
     using System.Threading;
     using System.Threading.Tasks;

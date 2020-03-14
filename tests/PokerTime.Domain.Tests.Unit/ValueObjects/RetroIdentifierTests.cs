@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : RetroIdentifierTests.cs
-//  Project         : Return.Domain.Tests.Unit
+//  Project         : PokerTime.Domain.Tests.Unit
 // ******************************************************************************
 
-namespace Return.Domain.Tests.Unit.ValueObjects {
+namespace PokerTime.Domain.Tests.Unit.ValueObjects {
     using System.Collections.Generic;
     using Domain.Services;
     using Domain.ValueObjects;

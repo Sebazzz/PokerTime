@@ -2,10 +2,10 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : RetrospectiveLobby.cs
-//  Project         : Return.Web.Tests.Integration
+//  Project         : PokerTime.Web.Tests.Integration
 // ******************************************************************************
 
-namespace Return.Web.Tests.Integration.Pages {
+namespace PokerTime.Web.Tests.Integration.Pages {
     using System.Collections.ObjectModel;
     using System.Threading;
     using Common;

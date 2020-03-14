@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : ServiceCollectionExtensions.cs
-//  Project         : Return.Infrastructure
+//  Project         : PokerTime.Infrastructure
 // ******************************************************************************
 
-namespace Return.Infrastructure {
+namespace PokerTime.Infrastructure {
     using Common;
     using Microsoft.Extensions.DependencyInjection;
 

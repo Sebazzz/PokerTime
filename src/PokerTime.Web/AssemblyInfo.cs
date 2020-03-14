@@ -1,3 +1,3 @@
 ﻿using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("Return.Web.Tests.Integration")]
+[assembly: InternalsVisibleTo("PokerTime.Web.Tests.Integration")]

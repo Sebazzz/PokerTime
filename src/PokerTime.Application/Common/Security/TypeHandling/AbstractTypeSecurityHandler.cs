@@ -2,10 +2,10 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : AbstractTypeSecurityHandler.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Common.Security.TypeHandling {
+namespace PokerTime.Application.Common.Security.TypeHandling {
     using System;
     using Domain.Entities;
     using Models;

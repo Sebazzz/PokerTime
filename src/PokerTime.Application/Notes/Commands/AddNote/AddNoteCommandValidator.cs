@@ -2,10 +2,10 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : AddNoteCommandValidator.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Notes.Commands.AddNote {
+namespace PokerTime.Application.Notes.Commands.AddNote {
     using System.Diagnostics.CodeAnalysis;
     using FluentValidation;
 

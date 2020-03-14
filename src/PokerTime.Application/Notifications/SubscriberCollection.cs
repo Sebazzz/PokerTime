@@ -2,10 +2,10 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : SubscriberCollection.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Notifications {
+namespace PokerTime.Application.Notifications {
     using System;
     using System.Collections.Concurrent;
     using System.Collections.Generic;

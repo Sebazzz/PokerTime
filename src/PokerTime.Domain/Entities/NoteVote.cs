@@ -2,10 +2,10 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : NoteVote.cs
-//  Project         : Return.Domain
+//  Project         : PokerTime.Domain
 // ******************************************************************************
 
-namespace Return.Domain.Entities {
+namespace PokerTime.Domain.Entities {
     using Abstractions;
 
     // These members are mandatory. Let's don't do nullability here for clarity sake.

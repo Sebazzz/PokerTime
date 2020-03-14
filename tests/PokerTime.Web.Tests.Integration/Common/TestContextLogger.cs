@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : TestContextLogger.cs
-//  Project         : Return.Web.Tests.Integration
+//  Project         : PokerTime.Web.Tests.Integration
 // ******************************************************************************
 
-namespace Return.Web.Tests.Integration.Common {
+namespace PokerTime.Web.Tests.Integration.Common {
     using System;
     using Microsoft.Extensions.Logging;
     using NUnit.Framework;

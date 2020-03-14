@@ -2,10 +2,10 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : NoteUpdate.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Notifications.NoteUpdated {
+namespace PokerTime.Application.Notifications.NoteUpdated {
     using Domain.Entities;
 
     public class NoteUpdate {

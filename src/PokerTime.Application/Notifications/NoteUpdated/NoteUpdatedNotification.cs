@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : NoteUpdatedNotification.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Notifications.NoteUpdated {
+namespace PokerTime.Application.Notifications.NoteUpdated {
     using MediatR;
 
     public sealed class NoteUpdatedNotification : INotification {

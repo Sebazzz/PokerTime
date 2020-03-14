@@ -2,12 +2,12 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : Name.cs
-//  Project         : Return.Web.Tests.Integration
+//  Project         : PokerTime.Web.Tests.Integration
 // ******************************************************************************
 
-namespace Return.Web.Tests.Integration.Common {
+namespace PokerTime.Web.Tests.Integration.Common {
     using System;
-    using Return.Common;
+    using PokerTime.Common;
 
     public static class Name {
         public static string Create() => Guid.NewGuid().ToString("N", Culture.Invariant);

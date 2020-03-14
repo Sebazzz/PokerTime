@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : MappingTests.cs
-//  Project         : Return.Application.Tests.Unit
+//  Project         : PokerTime.Application.Tests.Unit
 // ******************************************************************************
 
-namespace Return.Application.Tests.Unit {
+namespace PokerTime.Application.Tests.Unit {
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;

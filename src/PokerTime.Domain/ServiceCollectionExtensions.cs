@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : ServiceCollectionExtensions.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Domain {
+namespace PokerTime.Domain {
     using Services;
     using Microsoft.Extensions.DependencyInjection;
 

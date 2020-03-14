@@ -2,10 +2,10 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : VoteLookup.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Votes.Queries {
+namespace PokerTime.Application.Votes.Queries {
     using System;
     using System.Collections.Generic;
     using Common.Models;

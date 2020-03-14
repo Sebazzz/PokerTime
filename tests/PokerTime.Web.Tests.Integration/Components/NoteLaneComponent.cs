@@ -2,10 +2,10 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : NoteLaneComponent.cs
-//  Project         : Return.Web.Tests.Integration
+//  Project         : PokerTime.Web.Tests.Integration
 // ******************************************************************************
 
-namespace Return.Web.Tests.Integration.Components {
+namespace PokerTime.Web.Tests.Integration.Components {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;

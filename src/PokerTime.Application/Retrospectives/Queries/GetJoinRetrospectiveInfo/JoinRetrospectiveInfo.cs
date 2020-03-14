@@ -2,10 +2,10 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : JoinRetrospectiveInfo.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Retrospectives.Queries.GetJoinRetrospectiveInfo {
+namespace PokerTime.Application.Retrospectives.Queries.GetJoinRetrospectiveInfo {
 
     public sealed class JoinRetrospectiveInfo {
         public string Title { get; }

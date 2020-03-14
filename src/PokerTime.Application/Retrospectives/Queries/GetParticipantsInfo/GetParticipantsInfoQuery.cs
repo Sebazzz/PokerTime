@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : GetParticipantsInfoQuery.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Retrospectives.Queries.GetParticipantsInfo {
+namespace PokerTime.Application.Retrospectives.Queries.GetParticipantsInfo {
     using MediatR;
 
     public sealed class GetParticipantsInfoQuery : IRequest<ParticipantsInfoList> {

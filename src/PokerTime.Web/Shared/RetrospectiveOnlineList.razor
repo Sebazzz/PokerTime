@@ -1,11 +1,11 @@
 @implements IRetrospectiveJoinedSubscriber
 @inherits SubscribingComponent<IRetrospectiveJoinedSubscriber>
-@using Return.Application.Notifications.RetrospectiveJoined
+@using PokerTime.Application.Notifications.RetrospectiveJoined
 
 @using System.Diagnostics
-@using Return.Application.Common.Models
-@using Return.Application.Notifications
-@using Return.Application.Retrospectives.Queries.GetParticipantsInfo
+@using PokerTime.Application.Common.Models
+@using PokerTime.Application.Notifications
+@using PokerTime.Application.Retrospectives.Queries.GetParticipantsInfo
 
 @if (this.Participants == null)
 {

@@ -2,10 +2,10 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : AddNoteGroupCommandValidator.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.NoteGroups.Commands {
+namespace PokerTime.Application.NoteGroups.Commands {
     using System.Diagnostics.CodeAnalysis;
     using FluentValidation;
 

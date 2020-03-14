@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : RetrospectiveLane.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Retrospectives.Queries.GetRetrospectiveStatus {
+namespace PokerTime.Application.Retrospectives.Queries.GetRetrospectiveStatus {
     using System;
     using AutoMapper;
     using Common.Mapping;

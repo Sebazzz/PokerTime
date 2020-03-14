@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : RejoinRetrospectiveCommand.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Retrospectives.Commands.RejoinRetrospective {
+namespace PokerTime.Application.Retrospectives.Commands.RejoinRetrospective {
     using MediatR;
 
     public sealed class RejoinRetrospectiveCommand : IRequest {

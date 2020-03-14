@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : CreateRetrospectiveCommandHandlerTests.cs
-//  Project         : Return.Application.Tests.Unit
+//  Project         : PokerTime.Application.Tests.Unit
 // ******************************************************************************
 
-namespace Return.Application.Tests.Unit.Retrospectives.Commands {
+namespace PokerTime.Application.Tests.Unit.Retrospectives.Commands {
     using System;
     using System.Linq;
     using System.Threading;
@@ -16,7 +16,7 @@ namespace Return.Application.Tests.Unit.Retrospectives.Commands {
     using Microsoft.Extensions.Logging.Abstractions;
     using NSubstitute;
     using NUnit.Framework;
-    using Return.Common;
+    using PokerTime.Common;
     using Services;
     using Support;
 

@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : ValueObjectTests.cs
-//  Project         : Return.Domain.Tests.Unit
+//  Project         : PokerTime.Domain.Tests.Unit
 // ******************************************************************************
 
-namespace Return.Domain.Tests.Unit.Common
+namespace PokerTime.Domain.Tests.Unit.Common
 {
     using System.Collections.Generic;
     using Domain.Common;

@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : RequestPerformanceBehaviour.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Common.Behaviours {
+namespace PokerTime.Application.Common.Behaviours {
     using System;
     using System.Diagnostics;
     using System.Threading;
@@ -47,7 +47,7 @@ namespace Return.Application.Common.Behaviours {
 
                 this._logger.LogWarning(
                     message:
-                    "Return.App Long running request: {Name} ({ElapsedMilliseconds} milliseconds) {@UserId} {@Request}",
+                    "PokerTime.App Long running request: {Name} ({ElapsedMilliseconds} milliseconds) {@UserId} {@Request}",
                     name,
                     this._timer.ElapsedMilliseconds,
                     (await this._currentParticipantService.GetParticipant().ConfigureAwait(false)).Id,

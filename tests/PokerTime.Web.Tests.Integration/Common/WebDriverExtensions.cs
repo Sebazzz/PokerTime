@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : WebDriverExtensions.cs
-//  Project         : Return.Web.Tests.Integration
+//  Project         : PokerTime.Web.Tests.Integration
 // ******************************************************************************
 
-namespace Return.Web.Tests.Integration.Common {
+namespace PokerTime.Web.Tests.Integration.Common {
     using System;
     using System.Collections.ObjectModel;
     using System.IO;
@@ -14,7 +14,7 @@ namespace Return.Web.Tests.Integration.Common {
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.Extensions;
     using OpenQA.Selenium.Support.UI;
-    using Return.Common;
+    using PokerTime.Common;
 
     public static class WebDriverExtensions {
         public static IWebElement FindElementByTestElementId(this IWebDriver webDriver, string testElementId) {

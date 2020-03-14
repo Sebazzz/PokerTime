@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : GetRetrospectiveStatusQuery.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Retrospectives.Queries.GetRetrospectiveStatus {
+namespace PokerTime.Application.Retrospectives.Queries.GetRetrospectiveStatus {
     using MediatR;
 
     public sealed class GetRetrospectiveStatusQuery : IRequest<RetrospectiveStatus> {

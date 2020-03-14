@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : JoinRetrospectiveCommandHandler.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Retrospectives.Commands.JoinRetrospective {
+namespace PokerTime.Application.Retrospectives.Commands.JoinRetrospective {
     using System;
     using System.Globalization;
     using System.Threading;
@@ -20,7 +20,7 @@ namespace Return.Application.Retrospectives.Commands.JoinRetrospective {
     using Microsoft.EntityFrameworkCore;
     using Notifications.RetrospectiveJoined;
     using Queries.GetParticipantsInfo;
-    using Return.Common;
+    using PokerTime.Common;
     using Services;
 
     public sealed class JoinRetrospectiveCommandHandler : IRequestHandler<JoinRetrospectiveCommand, ParticipantInfo> {

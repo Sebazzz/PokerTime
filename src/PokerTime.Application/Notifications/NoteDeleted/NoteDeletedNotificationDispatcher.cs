@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : Class1.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Notifications.NoteDeleted {
+namespace PokerTime.Application.Notifications.NoteDeleted {
     using System.Threading.Tasks;
     using Microsoft.Extensions.Logging;
 

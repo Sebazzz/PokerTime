@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : VoteChange.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Notifications.VoteChanged {
+namespace PokerTime.Application.Notifications.VoteChanged {
     using Common.Models;
 
     public sealed class VoteChange {

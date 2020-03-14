@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : PluralizationConventions.cs
-//  Project         : Return.Persistence
+//  Project         : PokerTime.Persistence
 // ******************************************************************************
 
-namespace Return.Persistence.Conventions {
+namespace PokerTime.Persistence.Conventions {
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata;
 

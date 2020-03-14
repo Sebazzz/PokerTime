@@ -1,4 +1,4 @@
-﻿namespace Return.Application.Common.Behaviours {
+﻿namespace PokerTime.Application.Common.Behaviours {
     using System.Threading;
     using System.Threading.Tasks;
     using Abstractions;
@@ -17,7 +17,7 @@
         public async Task Process(TRequest request, CancellationToken cancellationToken) {
             string name = typeof(TRequest).Name;
 
-            this._logger.LogInformation("Return.App Request: {Name} {@UserId} {@Request}",
+            this._logger.LogInformation("PokerTime.App Request: {Name} {@UserId} {@Request}",
                 name, (await this._currentUserService.GetParticipant().ConfigureAwait(false)).Id, request);
         }
     }

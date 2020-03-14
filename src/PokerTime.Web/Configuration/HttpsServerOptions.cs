@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : HttpsServerOptions.cs
-//  Project         : Return.Web
+//  Project         : PokerTime.Web
 // ******************************************************************************
 
-namespace Return.Web.Configuration {
+namespace PokerTime.Web.Configuration {
     public sealed class HttpsServerOptions {
         public string? CertificatePath { get; set; }
         public string? CertificatePassword { get; set; }

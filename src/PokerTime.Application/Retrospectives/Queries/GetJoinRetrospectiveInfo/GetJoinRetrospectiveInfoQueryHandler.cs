@@ -1,4 +1,4 @@
-﻿namespace Return.Application.Retrospectives.Queries.GetJoinRetrospectiveInfo {
+﻿namespace PokerTime.Application.Retrospectives.Queries.GetJoinRetrospectiveInfo {
     using System;
     using System.Threading;
     using System.Threading.Tasks;

@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : RetrospectiveLobbyVotingTests.cs
-//  Project         : Return.Web.Tests.Integration
+//  Project         : PokerTime.Web.Tests.Integration
 // ******************************************************************************
 
-namespace Return.Web.Tests.Integration.Pages {
+namespace PokerTime.Web.Tests.Integration.Pages {
     using System;
     using System.Collections;
     using System.Linq;

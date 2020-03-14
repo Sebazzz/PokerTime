@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : DeleteNoteGroupCommand.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.NoteGroups.Commands {
+namespace PokerTime.Application.NoteGroups.Commands {
     using MediatR;
 
     public sealed class DeleteNoteGroupCommand : IRequest {

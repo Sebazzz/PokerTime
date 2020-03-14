@@ -2,10 +2,10 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : INotificationSubscription.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Notifications {
+namespace PokerTime.Application.Notifications {
     public interface INotificationSubscription<in TSubscriber> where TSubscriber : ISubscriber {
         void Subscribe(TSubscriber subscriber);
 

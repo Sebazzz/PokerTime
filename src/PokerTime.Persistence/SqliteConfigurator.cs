@@ -1,4 +1,4 @@
-﻿namespace Return.Persistence {
+﻿namespace PokerTime.Persistence {
     using Microsoft.Data.Sqlite;
     using Microsoft.EntityFrameworkCore;
 

@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : ParticipantColor.cs
-//  Project         : Return.Domain
+//  Project         : PokerTime.Domain
 // ******************************************************************************
 
-namespace Return.Domain.ValueObjects {
+namespace PokerTime.Domain.ValueObjects {
     using System.Collections.Generic;
     using System.Drawing;
     using Common;

@@ -2,10 +2,10 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : RetrospectiveLaneContent.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.RetrospectiveLanes.Queries {
+namespace PokerTime.Application.RetrospectiveLanes.Queries {
     using System.Collections.Generic;
     using Common.Models;
 

@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : GetJoinRetrospectiveInfoQuery.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Retrospectives.Queries.GetJoinRetrospectiveInfo {
+namespace PokerTime.Application.Retrospectives.Queries.GetJoinRetrospectiveInfo {
     using MediatR;
 
     public sealed class GetJoinRetrospectiveInfoQuery : IRequest<JoinRetrospectiveInfo?> {

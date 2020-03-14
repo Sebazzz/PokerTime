@@ -2,10 +2,10 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : DesignTimeDbContextFactoryBase.cs
-//  Project         : Return.Persistence
+//  Project         : PokerTime.Persistence
 // ******************************************************************************
 
-namespace Return.Persistence {
+namespace PokerTime.Persistence {
     using System;
     using System.IO;
     using Common;
@@ -18,7 +18,7 @@ namespace Return.Persistence {
         private const string AspNetCoreEnvironment = "ASPNETCORE_ENVIRONMENT";
 
         public TContext CreateDbContext(string[] args) {
-            string basePath = Directory.GetCurrentDirectory() + String.Format(Culture.Invariant, "{0}..{0}Return.Web", Path.DirectorySeparatorChar);
+            string basePath = Directory.GetCurrentDirectory() + String.Format(Culture.Invariant, "{0}..{0}PokerTime.Web", Path.DirectorySeparatorChar);
             return this.Create(basePath, Environment.GetEnvironmentVariable(AspNetCoreEnvironment));
         }
 
@@ -33,7 +33,7 @@ namespace Return.Persistence {
                 .AddEnvironmentVariables()
                 .Build();
 
-            var databaseOptions = (IDatabaseOptions)configuration.GetSection("Database").Get(Type.GetType("Return.Web.Configuration.DatabaseOptions, Return.Web", true));
+            var databaseOptions = (IDatabaseOptions)configuration.GetSection("Database").Get(Type.GetType("PokerTime.Web.Configuration.DatabaseOptions, PokerTime.Web", true));
             string connectionString = databaseOptions.CreateConnectionString();
 
             return this.Create(connectionString);

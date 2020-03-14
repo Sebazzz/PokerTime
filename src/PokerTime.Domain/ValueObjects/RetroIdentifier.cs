@@ -5,7 +5,7 @@
 //  Project         : IFS.Web
 // ******************************************************************************
 
-namespace Return.Domain.ValueObjects {
+namespace PokerTime.Domain.ValueObjects {
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using Common;

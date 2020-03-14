@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : MappingProfile.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Common.Mapping {
+namespace PokerTime.Application.Common.Mapping {
     using System;
     using System.Collections.Generic;
     using System.Linq;

@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : NoteBase.cs
-//  Project         : Return.Web
+//  Project         : PokerTime.Web
 // ******************************************************************************
 
-namespace Return.Web.Components {
+namespace PokerTime.Web.Components {
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Threading.Tasks;
@@ -25,7 +25,7 @@ namespace Return.Web.Components {
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global", Justification = "Set by framework")]
     [SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "We catch, log and display.")]
     [SuppressMessage("ReSharper", "MemberCanBePrivate.Global", Justification = "Needed for DI")]
-    public abstract class NoteBase : SubscribingComponent<Return.Application.Notifications.NoteUpdated.INoteUpdatedSubscriber>, Return.Application.Notifications.NoteUpdated.INoteUpdatedSubscriber {
+    public abstract class NoteBase : SubscribingComponent<PokerTime.Application.Notifications.NoteUpdated.INoteUpdatedSubscriber>, PokerTime.Application.Notifications.NoteUpdated.INoteUpdatedSubscriber {
         [Inject]
         public ILogger<Note> Logger { get; set; }
 

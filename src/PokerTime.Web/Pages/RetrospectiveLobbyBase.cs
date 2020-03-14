@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : RetrospectiveLobbyBase.cs
-//  Project         : Return.Web
+//  Project         : PokerTime.Web
 // ******************************************************************************
 
-namespace Return.Web.Pages {
+namespace PokerTime.Web.Pages {
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Threading.Tasks;

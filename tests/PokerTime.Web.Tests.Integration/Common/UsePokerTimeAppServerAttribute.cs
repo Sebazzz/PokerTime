@@ -2,12 +2,12 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : UseReturnAppServerAttribute.cs
-//  Project         : Return.Web.Tests.Integration
+//  Project         : PokerTime.Web.Tests.Integration
 // ******************************************************************************
 
-[assembly: Return.Web.Tests.Integration.Common.UseReturnAppServer]
+[assembly: PokerTime.Web.Tests.Integration.Common.UseReturnAppServer]
 
-namespace Return.Web.Tests.Integration.Common {
+namespace PokerTime.Web.Tests.Integration.Common {
     using System;
     using NUnit.Framework;
     using NUnit.Framework.Interfaces;

@@ -2,10 +2,10 @@
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : INoteAddedSubscriber.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Notifications.NoteAdded {
+namespace PokerTime.Application.Notifications.NoteAdded {
     using System.Threading.Tasks;
 
     public interface INoteAddedSubscriber : ISubscriber {

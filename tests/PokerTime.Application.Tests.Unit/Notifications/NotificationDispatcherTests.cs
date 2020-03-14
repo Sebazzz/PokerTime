@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : NotificationDispatcherTests.cs
-//  Project         : Return.Application.Tests.Unit
+//  Project         : PokerTime.Application.Tests.Unit
 // ******************************************************************************
 
-namespace Return.Application.Tests.Unit.Notifications {
+namespace PokerTime.Application.Tests.Unit.Notifications {
     using System;
     using System.Threading;
     using System.Threading.Tasks;

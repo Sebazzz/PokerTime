@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : AutoResettingBooleanTests.cs
-//  Project         : Return.Web.Tests.Unit
+//  Project         : PokerTime.Web.Tests.Unit
 // ******************************************************************************
 
-namespace Return.Web.Tests.Unit.Services {
+namespace PokerTime.Web.Tests.Unit.Services {
     using NUnit.Framework;
     using Web.Services;
 

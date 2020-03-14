@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : AddNoteCommandHandlerTests.cs
-//  Project         : Return.Application.Tests.Unit
+//  Project         : PokerTime.Application.Tests.Unit
 // ******************************************************************************
 
-namespace Return.Application.Tests.Unit.Notes.Commands {
+namespace PokerTime.Application.Tests.Unit.Notes.Commands {
     using System;
     using System.Linq;
     using System.Threading;
@@ -20,7 +20,7 @@ namespace Return.Application.Tests.Unit.Notes.Commands {
     using MediatR;
     using NSubstitute;
     using NUnit.Framework;
-    using Return.Common;
+    using PokerTime.Common;
     using Support;
 
     [TestFixture]

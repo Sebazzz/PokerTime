@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Return.Persistence;
+using PokerTime.Persistence;
 
-namespace Return.Persistence.Migrations
+namespace PokerTime.Persistence.Migrations
 {
     [DbContext(typeof(ReturnDbContext))]
     partial class ReturnDbContextModelSnapshot : ModelSnapshot
@@ -19,7 +19,7 @@ namespace Return.Persistence.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Return.Domain.Entities.Note", b =>
+            modelBuilder.Entity("PokerTime.Domain.Entities.Note", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -59,7 +59,7 @@ namespace Return.Persistence.Migrations
                     b.ToTable("Note");
                 });
 
-            modelBuilder.Entity("Return.Domain.Entities.NoteGroup", b =>
+            modelBuilder.Entity("PokerTime.Domain.Entities.NoteGroup", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -86,7 +86,7 @@ namespace Return.Persistence.Migrations
                     b.ToTable("NoteGroup");
                 });
 
-            modelBuilder.Entity("Return.Domain.Entities.NoteLane", b =>
+            modelBuilder.Entity("PokerTime.Domain.Entities.NoteLane", b =>
                 {
                     b.Property<int>("Id")
                         .HasColumnType("int");
@@ -101,7 +101,7 @@ namespace Return.Persistence.Migrations
                     b.ToTable("NoteLane");
                 });
 
-            modelBuilder.Entity("Return.Domain.Entities.NoteVote", b =>
+            modelBuilder.Entity("PokerTime.Domain.Entities.NoteVote", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -133,7 +133,7 @@ namespace Return.Persistence.Migrations
                     b.ToTable("NoteVote");
                 });
 
-            modelBuilder.Entity("Return.Domain.Entities.Participant", b =>
+            modelBuilder.Entity("PokerTime.Domain.Entities.Participant", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -158,7 +158,7 @@ namespace Return.Persistence.Migrations
                     b.ToTable("Participant");
                 });
 
-            modelBuilder.Entity("Return.Domain.Entities.PredefinedParticipantColor", b =>
+            modelBuilder.Entity("PokerTime.Domain.Entities.PredefinedParticipantColor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -175,7 +175,7 @@ namespace Return.Persistence.Migrations
                     b.ToTable("PredefinedParticipantColor");
                 });
 
-            modelBuilder.Entity("Return.Domain.Entities.Retrospective", b =>
+            modelBuilder.Entity("PokerTime.Domain.Entities.Retrospective", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -211,81 +211,81 @@ namespace Return.Persistence.Migrations
                     b.ToTable("Retrospective");
                 });
 
-            modelBuilder.Entity("Return.Domain.Entities.Note", b =>
+            modelBuilder.Entity("PokerTime.Domain.Entities.Note", b =>
                 {
-                    b.HasOne("Return.Domain.Entities.NoteGroup", "Group")
+                    b.HasOne("PokerTime.Domain.Entities.NoteGroup", "Group")
                         .WithMany()
                         .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("Return.Domain.Entities.NoteLane", "Lane")
+                    b.HasOne("PokerTime.Domain.Entities.NoteLane", "Lane")
                         .WithMany()
                         .HasForeignKey("LaneId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Return.Domain.Entities.Participant", "Participant")
+                    b.HasOne("PokerTime.Domain.Entities.Participant", "Participant")
                         .WithMany()
                         .HasForeignKey("ParticipantId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Return.Domain.Entities.Retrospective", "Retrospective")
+                    b.HasOne("PokerTime.Domain.Entities.Retrospective", "Retrospective")
                         .WithMany("Notes")
                         .HasForeignKey("RetrospectiveId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Return.Domain.Entities.NoteGroup", b =>
+            modelBuilder.Entity("PokerTime.Domain.Entities.NoteGroup", b =>
                 {
-                    b.HasOne("Return.Domain.Entities.NoteLane", "Lane")
+                    b.HasOne("PokerTime.Domain.Entities.NoteLane", "Lane")
                         .WithMany()
                         .HasForeignKey("LaneId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Return.Domain.Entities.Retrospective", "Retrospective")
+                    b.HasOne("PokerTime.Domain.Entities.Retrospective", "Retrospective")
                         .WithMany("NoteGroup")
                         .HasForeignKey("RetrospectiveId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Return.Domain.Entities.NoteVote", b =>
+            modelBuilder.Entity("PokerTime.Domain.Entities.NoteVote", b =>
                 {
-                    b.HasOne("Return.Domain.Entities.NoteGroup", "NoteGroup")
+                    b.HasOne("PokerTime.Domain.Entities.NoteGroup", "NoteGroup")
                         .WithMany()
                         .HasForeignKey("NoteGroupId")
                         .OnDelete(DeleteBehavior.ClientCascade);
 
-                    b.HasOne("Return.Domain.Entities.Note", "Note")
+                    b.HasOne("PokerTime.Domain.Entities.Note", "Note")
                         .WithMany()
                         .HasForeignKey("NoteId")
                         .OnDelete(DeleteBehavior.ClientCascade);
 
-                    b.HasOne("Return.Domain.Entities.Participant", "Participant")
+                    b.HasOne("PokerTime.Domain.Entities.Participant", "Participant")
                         .WithMany()
                         .HasForeignKey("ParticipantId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Return.Domain.Entities.Retrospective", "Retrospective")
+                    b.HasOne("PokerTime.Domain.Entities.Retrospective", "Retrospective")
                         .WithMany("NoteVotes")
                         .HasForeignKey("RetrospectiveId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Return.Domain.Entities.Participant", b =>
+            modelBuilder.Entity("PokerTime.Domain.Entities.Participant", b =>
                 {
-                    b.HasOne("Return.Domain.Entities.Retrospective", "Retrospective")
+                    b.HasOne("PokerTime.Domain.Entities.Retrospective", "Retrospective")
                         .WithMany("Participants")
                         .HasForeignKey("RetrospectiveId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("Return.Domain.ValueObjects.ParticipantColor", "Color", b1 =>
+                    b.OwnsOne("PokerTime.Domain.ValueObjects.ParticipantColor", "Color", b1 =>
                         {
                             b1.Property<int>("ParticipantId")
                                 .ValueGeneratedOnAdd()
@@ -310,9 +310,9 @@ namespace Return.Persistence.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Return.Domain.Entities.PredefinedParticipantColor", b =>
+            modelBuilder.Entity("PokerTime.Domain.Entities.PredefinedParticipantColor", b =>
                 {
-                    b.OwnsOne("Return.Domain.ValueObjects.ParticipantColor", "Color", b1 =>
+                    b.OwnsOne("PokerTime.Domain.ValueObjects.ParticipantColor", "Color", b1 =>
                         {
                             b1.Property<int>("PredefinedParticipantColorId")
                                 .ValueGeneratedOnAdd()
@@ -337,9 +337,9 @@ namespace Return.Persistence.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Return.Domain.Entities.Retrospective", b =>
+            modelBuilder.Entity("PokerTime.Domain.Entities.Retrospective", b =>
                 {
-                    b.OwnsOne("Return.Domain.Entities.RetrospectiveOptions", "Options", b1 =>
+                    b.OwnsOne("PokerTime.Domain.Entities.RetrospectiveOptions", "Options", b1 =>
                         {
                             b1.Property<int>("RetrospectiveId")
                                 .ValueGeneratedOnAdd()
@@ -357,7 +357,7 @@ namespace Return.Persistence.Migrations
                                 .HasForeignKey("RetrospectiveId");
                         });
 
-                    b.OwnsOne("Return.Domain.Entities.RetrospectiveWorkflowData", "WorkflowData", b1 =>
+                    b.OwnsOne("PokerTime.Domain.Entities.RetrospectiveWorkflowData", "WorkflowData", b1 =>
                         {
                             b1.Property<int>("RetrospectiveId")
                                 .ValueGeneratedOnAdd()
@@ -378,7 +378,7 @@ namespace Return.Persistence.Migrations
                                 .HasForeignKey("RetrospectiveId");
                         });
 
-                    b.OwnsOne("Return.Domain.ValueObjects.RetroIdentifier", "UrlId", b1 =>
+                    b.OwnsOne("PokerTime.Domain.ValueObjects.RetroIdentifier", "UrlId", b1 =>
                         {
                             b1.Property<int>("RetrospectiveId")
                                 .ValueGeneratedOnAdd()

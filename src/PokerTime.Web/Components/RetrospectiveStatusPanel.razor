@@ -1,4 +1,4 @@
-@using Return.Domain.Entities
+@using PokerTime.Domain.Entities
 
 <article class="message retrospective-status-panel">
     <div class="message-header">
@@ -35,27 +35,27 @@
 
         @* Each stage has its own panel and controls *@
         <RetrospectiveStagePanel ApplicableTo="@RetrospectiveStage.NotStarted">
-            <Return.Web.Components.StagePanels.NotStarted />
+            <PokerTime.Web.Components.StagePanels.NotStarted />
         </RetrospectiveStagePanel>
 
         <RetrospectiveStagePanel ApplicableTo="@RetrospectiveStage.Writing">
-            <Return.Web.Components.StagePanels.Writing />
+            <PokerTime.Web.Components.StagePanels.Writing />
         </RetrospectiveStagePanel>
 
         <RetrospectiveStagePanel ApplicableTo="@RetrospectiveStage.Discuss">
-            <Return.Web.Components.StagePanels.Discuss />
+            <PokerTime.Web.Components.StagePanels.Discuss />
         </RetrospectiveStagePanel>
 
         <RetrospectiveStagePanel ApplicableTo="@RetrospectiveStage.Grouping">
-            <Return.Web.Components.StagePanels.Grouping />
+            <PokerTime.Web.Components.StagePanels.Grouping />
         </RetrospectiveStagePanel>
 
         <RetrospectiveStagePanel ApplicableTo="@RetrospectiveStage.Voting">
-            <Return.Web.Components.StagePanels.Voting />
+            <PokerTime.Web.Components.StagePanels.Voting />
         </RetrospectiveStagePanel>
 
         <RetrospectiveStagePanel ApplicableTo="@RetrospectiveStage.Finished">
-            <Return.Web.Components.StagePanels.Finished />
+            <PokerTime.Web.Components.StagePanels.Finished />
         </RetrospectiveStagePanel>
     </div>
 </article>

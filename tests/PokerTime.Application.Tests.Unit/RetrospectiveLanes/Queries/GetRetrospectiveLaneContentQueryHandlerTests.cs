@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : GetRetrospectiveLaneContentQueryHandlerTests.cs
-//  Project         : Return.Application.Tests.Unit
+//  Project         : PokerTime.Application.Tests.Unit
 // ******************************************************************************
 
-namespace Return.Application.Tests.Unit.RetrospectiveLanes.Queries {
+namespace PokerTime.Application.Tests.Unit.RetrospectiveLanes.Queries {
     using System.Drawing;
     using System.Linq;
     using System.Threading;

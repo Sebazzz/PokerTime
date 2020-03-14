@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : INoteUpdatedSubscriber.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Notifications.NoteUpdated {
+namespace PokerTime.Application.Notifications.NoteUpdated {
     using System.Threading.Tasks;
 
     public interface INoteUpdatedSubscriber : ISubscriber {

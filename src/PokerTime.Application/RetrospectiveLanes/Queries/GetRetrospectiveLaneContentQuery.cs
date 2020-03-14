@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : GetRetrospectiveLaneContent.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.RetrospectiveLanes.Queries {
+namespace PokerTime.Application.RetrospectiveLanes.Queries {
     using MediatR;
 
     public sealed class GetRetrospectiveLaneContentQuery : IRequest<RetrospectiveLaneContent> {

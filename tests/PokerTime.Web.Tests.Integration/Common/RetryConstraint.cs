@@ -2,16 +2,16 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : RetryConstraint.cs
-//  Project         : Return.Web.Tests.Integration
+//  Project         : PokerTime.Web.Tests.Integration
 // ******************************************************************************
 
-namespace Return.Web.Tests.Integration.Common {
+namespace PokerTime.Web.Tests.Integration.Common {
     using System;
     using System.Runtime.InteropServices;
     using System.Threading;
     using NUnit.Framework;
     using NUnit.Framework.Constraints;
-    using Return.Common;
+    using PokerTime.Common;
 
     /// <summary>
     ///     Provides extension methods for a constraint that can be retried

@@ -2,10 +2,10 @@
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
 //  File:           : SecurityValidator.cs
-//  Project         : Return.Application
+//  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace Return.Application.Common.Security {
+namespace PokerTime.Application.Common.Security {
     using System;
     using System.Threading.Tasks;
     using Abstractions;
