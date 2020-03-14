@@ -1,21 +1,21 @@
 ﻿// ******************************************************************************
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : CreateRetrospectiveCommandResponse.cs
+//  File:           : CreatePokerSessionCommandResponse.cs
 //  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace PokerTime.Application.Retrospectives.Commands.CreateRetrospective {
+namespace PokerTime.Application.Retrospectives.Commands.CreatePokerSession {
     using System.Drawing;
     using Domain.ValueObjects;
     using QRCoder;
 
-    public sealed class CreateRetrospectiveCommandResponse {
+    public sealed class CreatePokerSessionCommandResponse {
         public SessionIdentifier Identifier { get; }
         public QrCode QrCode { get; }
         public string Location { get; }
 
-        public CreateRetrospectiveCommandResponse(SessionIdentifier identifier, QrCode qrCode, string location) {
+        public CreatePokerSessionCommandResponse(SessionIdentifier identifier, QrCode qrCode, string location) {
             this.Identifier = identifier;
             this.QrCode = qrCode;
             this.Location = location;

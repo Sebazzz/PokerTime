@@ -1,19 +1,19 @@
 ﻿// ******************************************************************************
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : RejoinRetrospectiveCommand.cs
+//  File:           : RejoinPokerSessionCommand.cs
 //  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace PokerTime.Application.Retrospectives.Commands.RejoinRetrospective {
+namespace PokerTime.Application.Retrospectives.Commands.RejoinPokerSession {
     using MediatR;
 
-    public sealed class RejoinRetrospectiveCommand : IRequest {
+    public sealed class RejoinPokerSessionCommand : IRequest {
         public string SessionId { get; }
 
         public int ParticipantId { get; }
 
-        public RejoinRetrospectiveCommand(string sessionId, int participantId) {
+        public RejoinPokerSessionCommand(string sessionId, int participantId) {
             this.SessionId = sessionId;
             this.ParticipantId = participantId;
         }

@@ -1,6 +1,6 @@
 @page "/session/{sessionId}/lobby"
-@layout RetrospectiveLayout
-@inherits RetrospectiveLobbyBase
+@layout PokerSessionLayout
+@inherits PokerSessionLobbyBase
 
 @if (this.RetrospectiveStatus == null) {
     if (this.HasLoaded) {
@@ -29,7 +29,7 @@
                     </div>
 
                     <div class="column">
-                        <CascadingValue TValue="@IRetrospectiveLobby" Value=@this IsFixed="true">
+                        <CascadingValue TValue="@IPokerSessionLobby" Value=@this IsFixed="true">
                             <RetrospectiveStatusPanel />
                         </CascadingValue>
 

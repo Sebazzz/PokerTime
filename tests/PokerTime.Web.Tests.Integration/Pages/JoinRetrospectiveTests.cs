@@ -1,7 +1,7 @@
 ﻿// ******************************************************************************
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : JoinRetrospectiveTests.cs
+//  File:           : JoinPokerSessionTests.cs
 //  Project         : PokerTime.Web.Tests.Integration
 // ******************************************************************************
 
@@ -14,7 +14,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
     using System.Threading;
     using System.Threading.Tasks;
     using Application.PredefinedParticipantColors.Queries.GetAvailablePredefinedParticipantColors;
-    using Application.Retrospectives.Commands.CreateRetrospective;
+    using Application.Retrospectives.Commands.CreatePokerSession;
     using Application.Retrospectives.Queries.GetParticipantsInfo;
     using Common;
     using Components;
@@ -27,9 +27,9 @@ namespace PokerTime.Web.Tests.Integration.Pages {
     using OpenQA.Selenium.Support.UI;
 
     [TestFixture]
-    public sealed class JoinRetrospectiveTests : PageFixture<JoinRetrospectivePage> {
+    public sealed class JoinPokerSessionTests : PageFixture<JoinPokerSessionPage> {
         [Test]
-        public void JoinRetrospectivePage_UnknownRetrospective_ShowNotFoundMessage() {
+        public void JoinPokerSessionPage_UnknownRetrospective_ShowNotFoundMessage() {
             // Given
             string sessionIdentifier = new SessionIdentifierService().CreateNew().StringId;
 
@@ -41,16 +41,16 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         }
 
         [Test]
-        public async Task JoinRetrospectivePage_KnownRetrospective_FormShownWithValidation() {
+        public async Task JoinPokerSessionPage_KnownRetrospective_FormShownWithValidation() {
             // Given
-            string sessionId = await this.CreateRetrospective("scrummaster", "secret");
+            string sessionId = await this.CreatePokerSession("scrummaster", "secret");
             this.Page.Navigate(this.App, sessionId);
 
             // When
             this.Page.Submit();
 
             // Then
-            string[] messages = new DefaultWait<JoinRetrospectivePage>(this.Page)
+            string[] messages = new DefaultWait<JoinPokerSessionPage>(this.Page)
                 .Until(p => {
                     ReadOnlyCollection<IWebElement> collection = p.GetValidationMessages();
                     if (collection.Count == 0) return null;
@@ -65,9 +65,9 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         }
 
         [Test]
-        public async Task JoinRetrospectivePage_KnownRetrospectiveAlreadyStarted_ShowMessage() {
+        public async Task JoinPokerSessionPage_KnownRetrospectiveAlreadyStarted_ShowMessage() {
             // Given
-            string sessionId = await this.CreateRetrospective("scrummaster", "secret");
+            string sessionId = await this.CreatePokerSession("scrummaster", "secret");
             await this.SetRetrospective(sessionId, retro => retro.CurrentStage = RetrospectiveStage.Writing);
 
             // When
@@ -78,9 +78,9 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         }
 
         [Test]
-        public async Task JoinRetrospectivePage_KnownRetrospectiveFinished_ShowMessage() {
+        public async Task JoinPokerSessionPage_KnownRetrospectiveFinished_ShowMessage() {
             // Given
-            string sessionId = await this.CreateRetrospective("scrummaster", "secret");
+            string sessionId = await this.CreatePokerSession("scrummaster", "secret");
             await this.SetRetrospective(sessionId, retro => retro.CurrentStage = RetrospectiveStage.Finished);
 
             // When
@@ -91,9 +91,9 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         }
 
         [Test]
-        public async Task JoinRetrospectivePage_KnownRetrospective_ValidatesParticipantPassphaseAndRedirectsToLobby() {
+        public async Task JoinPokerSessionPage_KnownRetrospective_ValidatesParticipantPassphaseAndRedirectsToLobby() {
             // Given
-            string sessionId = await this.CreateRetrospective("scrummaster", "secret");
+            string sessionId = await this.CreatePokerSession("scrummaster", "secret");
             string myName = Name.Create();
             this.Page.Navigate(this.App, sessionId);
 
@@ -108,13 +108,13 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         }
 
         [Test]
-        public async Task JoinRetrospectivePage_KnownRetrospective_JoinParticipantUpdatesParticipantListInRealtime() {
+        public async Task JoinPokerSessionPage_KnownRetrospective_JoinParticipantUpdatesParticipantListInRealtime() {
             // Given
-            string sessionId = await this.CreateRetrospective("scrummaster", "secret");
+            string sessionId = await this.CreatePokerSession("scrummaster", "secret");
             string myName = Name.Create();
             this.Page.Navigate(this.App, sessionId);
 
-            var secondInstance = this.App.CreatePageObject<JoinRetrospectivePage>().RegisterAsTestDisposable();
+            var secondInstance = this.App.CreatePageObject<JoinPokerSessionPage>().RegisterAsTestDisposable();
             secondInstance.Navigate(this.App, sessionId);
 
             // When
@@ -128,13 +128,13 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         }
 
         [Test]
-        public async Task JoinRetrospectivePage_KnownRetrospective_JoinParticipantUpdatesColorListInRealtime() {
+        public async Task JoinPokerSessionPage_KnownRetrospective_JoinParticipantUpdatesColorListInRealtime() {
             // Given
-            string sessionId = await this.CreateRetrospective("scrummaster", "secret");
+            string sessionId = await this.CreatePokerSession("scrummaster", "secret");
             string myName = Name.Create();
             this.Page.Navigate(this.App, sessionId);
 
-            JoinRetrospectivePage secondInstance = this.App.CreatePageObject<JoinRetrospectivePage>().RegisterAsTestDisposable();
+            JoinPokerSessionPage secondInstance = this.App.CreatePageObject<JoinPokerSessionPage>().RegisterAsTestDisposable();
             secondInstance.Navigate(this.App, sessionId);
 
             IList<AvailableParticipantColorModel> availableColors;
@@ -160,13 +160,13 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         }
 
         [Test]
-        public async Task JoinRetrospectivePage_KnownRetrospective_JoinAsFacilitatorUpdatesParticipantListInRealtime() {
+        public async Task JoinPokerSessionPage_KnownRetrospective_JoinAsFacilitatorUpdatesParticipantListInRealtime() {
             // Given
-            string sessionId = await this.CreateRetrospective("scrummaster", "secret");
+            string sessionId = await this.CreatePokerSession("scrummaster", "secret");
             string myName = Name.Create();
             this.Page.Navigate(this.App, sessionId);
 
-            var secondInstance = this.App.CreatePageObject<JoinRetrospectivePage>().RegisterAsTestDisposable();
+            var secondInstance = this.App.CreatePageObject<JoinPokerSessionPage>().RegisterAsTestDisposable();
             secondInstance.Navigate(this.App, sessionId);
 
             // When
@@ -195,8 +195,8 @@ namespace PokerTime.Web.Tests.Integration.Pages {
             using IServiceScope scope = this.App.CreateTestServiceScope();
             return scope.SetRetrospective(sessionId, action);
         }
-        private async Task<string> CreateRetrospective(string facilitatorPassword, string password) {
-            var command = new CreateRetrospectiveCommand {
+        private async Task<string> CreatePokerSession(string facilitatorPassword, string password) {
+            var command = new CreatePokerSessionCommand {
                 Title = TestContext.CurrentContext.Test.FullName,
                 FacilitatorPassphrase = facilitatorPassword,
                 Passphrase = password
@@ -204,13 +204,13 @@ namespace PokerTime.Web.Tests.Integration.Pages {
 
             this.ServiceScope.SetNoAuthenticationInfo();
 
-            CreateRetrospectiveCommandResponse result = await this.ServiceScope.Send(command);
+            CreatePokerSessionCommandResponse result = await this.ServiceScope.Send(command);
             return result.Identifier.StringId;
         }
     }
 
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global", Justification = "Dynamically instantiated")]
-    public sealed class JoinRetrospectivePage : PageObject {
+    public sealed class JoinPokerSessionPage : PageObject {
         public IWebElement Title => this.WebDriver.FindElement(By.CssSelector("h1.title"));
         public IWebElement NameInput => this.WebDriver.FindElement(By.Id("pokertime-name"));
         public IWebElement FacilitatorPassphraseInput => this.WebDriver.FindElement(By.Id("pokertime-facilitator-passphrase"));

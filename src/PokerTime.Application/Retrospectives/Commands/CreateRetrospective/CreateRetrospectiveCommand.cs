@@ -1,14 +1,14 @@
 ﻿// ******************************************************************************
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : CreateRetrospectiveCommand.cs
+//  File:           : CreatePokerSessionCommand.cs
 //  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace PokerTime.Application.Retrospectives.Commands.CreateRetrospective {
+namespace PokerTime.Application.Retrospectives.Commands.CreatePokerSession {
     using MediatR;
 
-    public class CreateRetrospectiveCommand : IRequest<CreateRetrospectiveCommandResponse> {
+    public class CreatePokerSessionCommand : IRequest<CreatePokerSessionCommandResponse> {
 #nullable disable
         public string Title { get; set; }
 

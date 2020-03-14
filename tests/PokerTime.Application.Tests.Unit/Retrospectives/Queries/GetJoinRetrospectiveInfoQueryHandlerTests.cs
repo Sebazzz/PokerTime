@@ -1,7 +1,7 @@
 ﻿// ******************************************************************************
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : GetJoinRetrospectiveInfoQueryHandlerTests.cs
+//  File:           : GetJoinPokerSessionInfoQueryHandlerTests.cs
 //  Project         : PokerTime.Application.Tests.Unit
 // ******************************************************************************
 
@@ -9,20 +9,20 @@ namespace PokerTime.Application.Tests.Unit.Retrospectives.Queries {
     using System;
     using System.Threading;
     using System.Threading.Tasks;
-    using Application.Retrospectives.Queries.GetJoinRetrospectiveInfo;
+    using Application.Retrospectives.Queries.GetJoinPokerSessionInfo;
     using Domain.Entities;
     using Microsoft.Extensions.Logging.Abstractions;
     using NUnit.Framework;
     using Support;
 
     [TestFixture]
-    public sealed class GetJoinRetrospectiveInfoQueryHandlerTests : QueryTestBase {
+    public sealed class GetJoinPokerSessionInfoQueryHandlerTests : QueryTestBase {
         [Test]
-        public async Task GetJoinRetrospectiveInfoCommandHandler_ReturnsNull_OnRetrospectiveNotFound() {
+        public async Task GetJoinPokerSessionInfoCommandHandler_ReturnsNull_OnRetrospectiveNotFound() {
             // Given
             string sessionId = "whatever-whatever";
-            var handler = new GetJoinRetrospectiveInfoQueryHandler(this.Context, new NullLogger<GetJoinRetrospectiveInfoQueryHandler>());
-            var command = new GetJoinRetrospectiveInfoQuery { SessionId = sessionId };
+            var handler = new GetJoinPokerSessionInfoQueryHandler(this.Context, new NullLogger<GetJoinPokerSessionInfoQueryHandler>());
+            var command = new GetJoinPokerSessionInfoQuery { SessionId = sessionId };
 
             // When
             var result = await handler.Handle(command, CancellationToken.None);
@@ -32,7 +32,7 @@ namespace PokerTime.Application.Tests.Unit.Retrospectives.Queries {
         }
 
         [Test]
-        public async Task GetJoinRetrospectiveInfoCommandHandler_ReturnsInfo_OnRetrospectiveFound() {
+        public async Task GetJoinPokerSessionInfoCommandHandler_ReturnsInfo_OnRetrospectiveFound() {
             // Given
             var retrospective = new Retrospective {
                 Title = "Hello",
@@ -43,8 +43,8 @@ namespace PokerTime.Application.Tests.Unit.Retrospectives.Queries {
             this.Context.Retrospectives.Add(retrospective);
             await this.Context.SaveChangesAsync(CancellationToken.None);
 
-            var handler = new GetJoinRetrospectiveInfoQueryHandler(this.Context, new NullLogger<GetJoinRetrospectiveInfoQueryHandler>());
-            var command = new GetJoinRetrospectiveInfoQuery { SessionId = sessionId };
+            var handler = new GetJoinPokerSessionInfoQueryHandler(this.Context, new NullLogger<GetJoinPokerSessionInfoQueryHandler>());
+            var command = new GetJoinPokerSessionInfoQuery { SessionId = sessionId };
 
             // When
             var result = await handler.Handle(command, CancellationToken.None);

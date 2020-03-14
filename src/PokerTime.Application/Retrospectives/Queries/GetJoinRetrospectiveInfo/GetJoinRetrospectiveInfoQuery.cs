@@ -1,14 +1,14 @@
 ﻿// ******************************************************************************
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : GetJoinRetrospectiveInfoQuery.cs
+//  File:           : GetJoinPokerSessionInfoQuery.cs
 //  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace PokerTime.Application.Retrospectives.Queries.GetJoinRetrospectiveInfo {
+namespace PokerTime.Application.Retrospectives.Queries.GetJoinPokerSessionInfo {
     using MediatR;
 
-    public sealed class GetJoinRetrospectiveInfoQuery : IRequest<JoinRetrospectiveInfo?> {
+    public sealed class GetJoinPokerSessionInfoQuery : IRequest<JoinPokerSessionInfo?> {
 #nullable disable
         public string SessionId { get; set; }
     }

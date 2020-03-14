@@ -1,12 +1,12 @@
 @inherits Microsoft.AspNetCore.Components.LayoutComponentBase
 @using PokerTime.Web.Components.Layout
-@implements PokerTime.Web.Components.Layout.IRetrospectiveLayout
+@implements PokerTime.Web.Components.Layout.IPokerSessionLayout
 
-<RetrospectiveLobbyTopMenu @ref="this._topMenu"/>
+<PokerSessionLobbyTopMenu @ref="this._topMenu"/>
 
 <section class="section">
     <div class="container">
-        <CascadingValue Value=@this IsFixed="true" TValue="IRetrospectiveLayout">
+        <CascadingValue Value=@this IsFixed="true" TValue="IPokerSessionLayout">
             @Body
         </CascadingValue>
     </div>
@@ -16,11 +16,11 @@
 
 @code {
 
-    private RetrospectiveLayoutInfo _layoutInfo = new RetrospectiveLayoutInfo("Loading...", null);
-    private RetrospectiveLobbyTopMenu? _topMenu;
+    private PokerSessionLayoutInfo _layoutInfo = new PokerSessionLayoutInfo("Loading...", null);
+    private PokerSessionLobbyTopMenu? _topMenu;
     private bool _needToUpdateTopMenu;
 
-    public void Update(in RetrospectiveLayoutInfo layoutInfo)
+    public void Update(in PokerSessionLayoutInfo layoutInfo)
     {
         this._layoutInfo = layoutInfo;
 

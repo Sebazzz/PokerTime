@@ -1,11 +1,11 @@
 ﻿// ******************************************************************************
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : CreateRetrospectiveCommandHandler.cs
+//  File:           : CreatePokerSessionCommandHandler.cs
 //  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace PokerTime.Application.Retrospectives.Commands.CreateRetrospective {
+namespace PokerTime.Application.Retrospectives.Commands.CreatePokerSession {
     using System;
     using System.Threading;
     using System.Threading.Tasks;
@@ -18,14 +18,14 @@ namespace PokerTime.Application.Retrospectives.Commands.CreateRetrospective {
     using PokerTime.Common;
     using Services;
 
-    public sealed class CreateRetrospectiveCommandHandler : IRequestHandler<CreateRetrospectiveCommand, CreateRetrospectiveCommandResponse> {
+    public sealed class CreatePokerSessionCommandHandler : IRequestHandler<CreatePokerSessionCommand, CreatePokerSessionCommandResponse> {
         private readonly IReturnDbContext _returnDbContext;
         private readonly ISystemClock _systemClock;
         private readonly IUrlGenerator _urlGenerator;
         private readonly IPassphraseService _passphraseService;
-        private readonly ILogger<CreateRetrospectiveCommandHandler> _logger;
+        private readonly ILogger<CreatePokerSessionCommandHandler> _logger;
 
-        public CreateRetrospectiveCommandHandler(IReturnDbContext returnDbContext, IPassphraseService passphraseService, ISystemClock systemClock, IUrlGenerator urlGenerator, ILogger<CreateRetrospectiveCommandHandler> logger) {
+        public CreatePokerSessionCommandHandler(IReturnDbContext returnDbContext, IPassphraseService passphraseService, ISystemClock systemClock, IUrlGenerator urlGenerator, ILogger<CreatePokerSessionCommandHandler> logger) {
             this._returnDbContext = returnDbContext;
             this._passphraseService = passphraseService;
             this._systemClock = systemClock;
@@ -33,7 +33,7 @@ namespace PokerTime.Application.Retrospectives.Commands.CreateRetrospective {
             this._logger = logger;
         }
 
-        public async Task<CreateRetrospectiveCommandResponse> Handle(CreateRetrospectiveCommand request, CancellationToken cancellationToken) {
+        public async Task<CreatePokerSessionCommandResponse> Handle(CreatePokerSessionCommand request, CancellationToken cancellationToken) {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
             string? HashOptionalPassphrase(string? plainText) {
@@ -50,9 +50,9 @@ namespace PokerTime.Application.Retrospectives.Commands.CreateRetrospective {
 
             this._logger.LogInformation($"Creating new retrospective with id {retrospective.UrlId}");
 
-            string retroLocation = this._urlGenerator.GenerateUrlToRetrospectiveLobby(retrospective.UrlId).ToString();
+            string retroLocation = this._urlGenerator.GenerateUrlToPokerSessionLobby(retrospective.UrlId).ToString();
             var payload = new PayloadGenerator.Url(retroLocation);
-            var result = new CreateRetrospectiveCommandResponse(
+            var result = new CreatePokerSessionCommandResponse(
                 retrospective.UrlId,
                 new QrCode(qrCodeGenerator.CreateQrCode(payload.ToString(), QRCodeGenerator.ECCLevel.L)),
                 retroLocation);

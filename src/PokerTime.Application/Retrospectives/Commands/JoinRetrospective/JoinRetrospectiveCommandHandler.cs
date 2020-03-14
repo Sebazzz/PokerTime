@@ -1,11 +1,11 @@
 ﻿// ******************************************************************************
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : JoinRetrospectiveCommandHandler.cs
+//  File:           : JoinPokerSessionCommandHandler.cs
 //  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace PokerTime.Application.Retrospectives.Commands.JoinRetrospective {
+namespace PokerTime.Application.Retrospectives.Commands.JoinPokerSession {
     using System;
     using System.Globalization;
     using System.Threading;
@@ -23,20 +23,20 @@ namespace PokerTime.Application.Retrospectives.Commands.JoinRetrospective {
     using PokerTime.Common;
     using Services;
 
-    public sealed class JoinRetrospectiveCommandHandler : IRequestHandler<JoinRetrospectiveCommand, ParticipantInfo> {
+    public sealed class JoinPokerSessionCommandHandler : IRequestHandler<JoinPokerSessionCommand, ParticipantInfo> {
         private readonly IReturnDbContext _returnDbContext;
         private readonly ICurrentParticipantService _currentParticipantService;
         private readonly IMapper _mapper;
         private readonly IMediator _mediator;
 
-        public JoinRetrospectiveCommandHandler(IReturnDbContext returnDbContext, ICurrentParticipantService currentParticipantService, IMediator mediator, IMapper mapper) {
+        public JoinPokerSessionCommandHandler(IReturnDbContext returnDbContext, ICurrentParticipantService currentParticipantService, IMediator mediator, IMapper mapper) {
             this._returnDbContext = returnDbContext;
             this._currentParticipantService = currentParticipantService;
             this._mediator = mediator;
             this._mapper = mapper;
         }
 
-        public async Task<ParticipantInfo> Handle(JoinRetrospectiveCommand request, CancellationToken cancellationToken) {
+        public async Task<ParticipantInfo> Handle(JoinPokerSessionCommand request, CancellationToken cancellationToken) {
             if (request == null) throw new ArgumentNullException(nameof(request));
             Retrospective retrospective = await this._returnDbContext.Retrospectives.FindBySessionId(request.SessionId, cancellationToken);
 

@@ -1,13 +1,13 @@
 ﻿// ******************************************************************************
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : JoinRetrospectiveInfo.cs
+//  File:           : JoinPokerSessionInfo.cs
 //  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace PokerTime.Application.Retrospectives.Queries.GetJoinRetrospectiveInfo {
+namespace PokerTime.Application.Retrospectives.Queries.GetJoinPokerSessionInfo {
 
-    public sealed class JoinRetrospectiveInfo {
+    public sealed class JoinPokerSessionInfo {
         public string Title { get; }
 
         public bool NeedsParticipantPassphrase { get; }
@@ -15,7 +15,7 @@ namespace PokerTime.Application.Retrospectives.Queries.GetJoinRetrospectiveInfo 
         public bool IsFinished { get; }
 
 
-        public JoinRetrospectiveInfo(string title, bool needsParticipantPassphrase, bool isStarted, bool isFinished) {
+        public JoinPokerSessionInfo(string title, bool needsParticipantPassphrase, bool isStarted, bool isFinished) {
             this.NeedsParticipantPassphrase = needsParticipantPassphrase;
             this.IsStarted = isStarted;
             this.IsFinished = isFinished;

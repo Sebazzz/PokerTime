@@ -1,4 +1,4 @@
-﻿namespace PokerTime.Application.Retrospectives.Queries.GetJoinRetrospectiveInfo {
+﻿namespace PokerTime.Application.Retrospectives.Queries.GetJoinPokerSessionInfo {
     using System;
     using System.Threading;
     using System.Threading.Tasks;
@@ -9,16 +9,16 @@
     using Microsoft.Extensions.Logging;
     using Services;
 
-    public sealed class GetJoinRetrospectiveInfoQueryHandler : IRequestHandler<GetJoinRetrospectiveInfoQuery, JoinRetrospectiveInfo?> {
+    public sealed class GetJoinPokerSessionInfoQueryHandler : IRequestHandler<GetJoinPokerSessionInfoQuery, JoinPokerSessionInfo?> {
         private readonly IReturnDbContext _dbContext;
-        private readonly ILogger<GetJoinRetrospectiveInfoQueryHandler> _logger;
+        private readonly ILogger<GetJoinPokerSessionInfoQueryHandler> _logger;
 
-        public GetJoinRetrospectiveInfoQueryHandler(IReturnDbContext dbContext, ILogger<GetJoinRetrospectiveInfoQueryHandler> logger) {
+        public GetJoinPokerSessionInfoQueryHandler(IReturnDbContext dbContext, ILogger<GetJoinPokerSessionInfoQueryHandler> logger) {
             this._dbContext = dbContext;
             this._logger = logger;
         }
 
-        public async Task<JoinRetrospectiveInfo?> Handle(GetJoinRetrospectiveInfoQuery request, CancellationToken cancellationToken) {
+        public async Task<JoinPokerSessionInfo?> Handle(GetJoinPokerSessionInfoQuery request, CancellationToken cancellationToken) {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
             Retrospective retrospective = await this._dbContext.Retrospectives.FindBySessionId(request.SessionId, cancellationToken);
@@ -29,7 +29,7 @@
             }
 
             this._logger.LogInformation($"Retrospective with id {request.SessionId} was found");
-            return new JoinRetrospectiveInfo(
+            return new JoinPokerSessionInfo(
                 retrospective.Title,
                 retrospective.HashedPassphrase != null,
                 retrospective.IsStarted(),

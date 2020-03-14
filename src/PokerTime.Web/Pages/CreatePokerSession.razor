@@ -1,8 +1,8 @@
 @page "/create-poker-session"
 @inherits MediatorComponent
 @using Microsoft.Extensions.Logging
-@using PokerTime.Application.Retrospectives.Commands.CreateRetrospective
-@inject ILogger<CreateRetrospective> Logger
+@using PokerTime.Application.Retrospectives.Commands.CreatePokerSession
+@inject ILogger<CreatePokerSession> Logger
 
 @if (ShowCompletionMessage)
 {
@@ -132,7 +132,7 @@ else
 
         try
         {
-            CreateRetrospectiveCommandResponse response = await this.Mediator.Send(this.Model);
+            CreatePokerSessionCommandResponse response = await this.Mediator.Send(this.Model);
 
             this.Result = response;
             this.ShowCompletionMessage = true;
@@ -145,11 +145,11 @@ else
         }
     }
 
-    public CreateRetrospectiveCommandResponse Result { get; set; }
+    public CreatePokerSessionCommandResponse Result { get; set; }
 
     public bool ShowCompletionMessage;
     public bool ShowErrorMessage;
 
     [Parameter]
-    public CreateRetrospectiveCommand Model { get; set; } = new CreateRetrospectiveCommand();
+    public CreatePokerSessionCommand Model { get; set; } = new CreatePokerSessionCommand();
 }

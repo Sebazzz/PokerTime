@@ -1,7 +1,7 @@
 ﻿// ******************************************************************************
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : CreateRetrospectiveTests.cs
+//  File:           : CreatePokerSessionTests.cs
 //  Project         : PokerTime.Web.Tests.Integration
 // ******************************************************************************
 
@@ -15,9 +15,9 @@ namespace PokerTime.Web.Tests.Integration.Pages {
     using OpenQA.Selenium.Support.UI;
 
     [TestFixture]
-    public class CreateRetrospectiveTests : PageFixture<CreateRetrospectivePage> {
+    public class CreatePokerSessionTests : PageFixture<CreatePokerSessionPage> {
         [Test]
-        public void CreateRetrospective_SubmitWithoutValidation_ShowsValidationMessages() {
+        public void CreatePokerSession_SubmitWithoutValidation_ShowsValidationMessages() {
             // Given
             this.Page.Navigate(this.App);
 
@@ -25,7 +25,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
             this.Page.Submit();
 
             // Then
-            string[] messages = new DefaultWait<CreateRetrospectivePage>(this.Page)
+            string[] messages = new DefaultWait<CreatePokerSessionPage>(this.Page)
                 .Until(p => {
                     ReadOnlyCollection<IWebElement> collection = p.GetValidationMessages();
                     if (collection.Count == 0) return null;
@@ -39,7 +39,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         }
 
         [Test]
-        public void CreateRetrospective_SubmitValidWithBothPassphrases_ShowQrCodeAndLink() {
+        public void CreatePokerSession_SubmitValidWithBothPassphrases_ShowQrCodeAndLink() {
             // Given
             this.Page.Navigate(this.App);
 
@@ -58,7 +58,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         }
 
         [Test]
-        public void CreateRetrospective_SubmitValidWithOnlyFacilitatorPassphrase_ShowQrCodeAndLink() {
+        public void CreatePokerSession_SubmitValidWithOnlyFacilitatorPassphrase_ShowQrCodeAndLink() {
             // Given
             this.Page.Navigate(this.App);
 
@@ -77,7 +77,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
     }
 
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global", Justification = "Dynamically instantiated")]
-    public sealed class CreateRetrospectivePage : PageObject {
+    public sealed class CreatePokerSessionPage : PageObject {
         public IWebElement RetrospectiveTitleInput => this.WebDriver.FindVisibleElement(By.Id("pokertime-title"));
         public IWebElement FacilitatorPassphraseInput => this.WebDriver.FindVisibleElement(By.Id("pokertime-facilitator-passphrase"));
         public IWebElement ParticipantPassphraseInput => this.WebDriver.FindVisibleElement(By.Id("pokertime-passphrase"));

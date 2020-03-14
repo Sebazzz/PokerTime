@@ -17,7 +17,7 @@ namespace PokerTime.Web.Services {
             this._siteUrlDetectionService = siteUrlDetectionService;
         }
 
-        public Uri GenerateUrlToRetrospectiveLobby(SessionIdentifier urlId) {
+        public Uri GenerateUrlToPokerSessionLobby(SessionIdentifier urlId) {
             if (urlId == null) throw new ArgumentNullException(nameof(urlId));
 
             var uriBuilder = new UriBuilder(this._siteUrlDetectionService.GetSiteUrl()) {

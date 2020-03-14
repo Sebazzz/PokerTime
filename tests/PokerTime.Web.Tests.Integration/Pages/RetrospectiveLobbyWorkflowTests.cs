@@ -1,7 +1,7 @@
 ﻿// ******************************************************************************
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : RetrospectiveLobbyTests.cs
+//  File:           : PokerSessionLobbyTests.cs
 //  Project         : PokerTime.Web.Tests.Integration
 // ******************************************************************************
 
@@ -21,15 +21,15 @@ namespace PokerTime.Web.Tests.Integration.Pages {
     using PokerTime.Common;
 
     [TestFixture]
-    public sealed class RetrospectiveLobbyWorkflowTests : RetrospectiveLobbyTestsBase {
+    public sealed class PokerSessionLobbyWorkflowTests : PokerSessionLobbyTestsBase {
         [SetUp]
         public async Task SetUp() {
             using IServiceScope scope = this.App.CreateTestServiceScope();
-            this.SessionId = await scope.CreateRetrospective("scrummaster");
+            this.SessionId = await scope.CreatePokerSession("scrummaster");
         }
 
         [Test]
-        public async Task RetrospectiveLobby_ShowsPlainBoard_OnJoiningNewRetrospective() {
+        public async Task PokerSessionLobby_ShowsPlainBoard_OnJoiningNewRetrospective() {
             // Given
             await Task.WhenAll(
                 Task.Run(() => this.Join(this.Client1, true)),
@@ -45,7 +45,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         }
 
         [Test]
-        public async Task RetrospectiveLobby_ShowsNoteAddButtons_OnRetrospectiveAdvancingToNextWritingStage() {
+        public async Task PokerSessionLobby_ShowsNoteAddButtons_OnRetrospectiveAdvancingToNextWritingStage() {
             // Given
             await Task.WhenAll(
                 Task.Run(() => this.Join(this.Client1, true)),
@@ -63,7 +63,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         }
 
         [Test]
-        public async Task RetrospectiveLobby_WritingStage_CanAddNote() {
+        public async Task PokerSessionLobby_WritingStage_CanAddNote() {
             // Given
             await this.SetRetrospective(retro => retro.CurrentStage = RetrospectiveStage.Writing);
 
@@ -97,7 +97,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         }
 
         [Test]
-        public async Task RetrospectiveLobby_WritingStage_CanDeleteNote() {
+        public async Task PokerSessionLobby_WritingStage_CanDeleteNote() {
             // Given
             int noteId = 0;
             using (IServiceScope scope = this.App.CreateTestServiceScope()) {
@@ -141,7 +141,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         }
 
         [Test]
-        public async Task RetrospectiveLobby_WritingStage_CanDeleteNote_Shortcut() {
+        public async Task PokerSessionLobby_WritingStage_CanDeleteNote_Shortcut() {
             // Given
             int noteId = 0;
             using (IServiceScope scope = this.App.CreateTestServiceScope()) {
@@ -190,7 +190,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         }
 
         [Test]
-        public async Task RetrospectiveLobby_WritingStage_CanAddNote_Shortcut() {
+        public async Task PokerSessionLobby_WritingStage_CanAddNote_Shortcut() {
             // Given
             await this.SetRetrospective(retro => retro.CurrentStage = RetrospectiveStage.Writing);
 
@@ -229,7 +229,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         }
 
         [Test]
-        public async Task RetrospectiveLobby_GroupingStage_CanMoveNote() {
+        public async Task PokerSessionLobby_GroupingStage_CanMoveNote() {
             // Given
             int note1Id = 0, note2Id = 0, noteGroupId = 0, bossId = 0;
             using (IServiceScope scope = this.App.CreateTestServiceScope()) {
@@ -291,7 +291,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         }
 
         [Test]
-        public async Task RetrospectiveLobby_GroupingStage_CanAddNoteGroup() {
+        public async Task PokerSessionLobby_GroupingStage_CanAddNoteGroup() {
             // Given
             using (IServiceScope scope = this.App.CreateTestServiceScope()) {
                 await scope.TestCaseBuilder(this.SessionId).

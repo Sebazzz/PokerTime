@@ -10,22 +10,22 @@ namespace PokerTime.Web.Tests.Integration.Common {
     using System.Threading;
     using System.Threading.Tasks;
     using Application.Common.Abstractions;
-    using Application.Retrospectives.Commands.CreateRetrospective;
+    using Application.Retrospectives.Commands.CreatePokerSession;
     using Application.Services;
     using Domain.Entities;
     using Microsoft.Extensions.DependencyInjection;
     using NUnit.Framework;
 
     public static class ScopeActionsExtensions {
-        public static async Task<string> CreateRetrospective(this IServiceScope scope, string facilitatorPassphrase) {
+        public static async Task<string> CreatePokerSession(this IServiceScope scope, string facilitatorPassphrase) {
             scope.SetNoAuthenticationInfo();
 
-            var command = new CreateRetrospectiveCommand {
+            var command = new CreatePokerSessionCommand {
                 Title = TestContext.CurrentContext.Test.FullName,
                 FacilitatorPassphrase = facilitatorPassphrase
             };
 
-            CreateRetrospectiveCommandResponse result = await scope.Send(command);
+            CreatePokerSessionCommandResponse result = await scope.Send(command);
 
             return result.Identifier.StringId;
         }

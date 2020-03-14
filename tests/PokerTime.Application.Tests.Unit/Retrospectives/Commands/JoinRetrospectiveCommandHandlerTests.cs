@@ -1,7 +1,7 @@
 ﻿// ******************************************************************************
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : JoinRetrospectiveCommandHandlerTests.cs
+//  File:           : JoinPokerSessionCommandHandlerTests.cs
 //  Project         : PokerTime.Application.Tests.Unit
 // ******************************************************************************
 
@@ -15,7 +15,7 @@ namespace PokerTime.Application.Tests.Unit.Retrospectives.Commands {
     using Application.Common.Abstractions;
     using Application.Common.Models;
     using Application.Notifications.RetrospectiveJoined;
-    using Application.Retrospectives.Commands.JoinRetrospective;
+    using Application.Retrospectives.Commands.JoinPokerSession;
     using AutoMapper;
     using Domain.Entities;
     using MediatR;
@@ -27,7 +27,7 @@ namespace PokerTime.Application.Tests.Unit.Retrospectives.Commands {
     using Support;
 
     [TestFixture]
-    public sealed class JoinRetrospectiveCommandHandlerTests : CommandTestBase {
+    public sealed class JoinPokerSessionCommandHandlerTests : CommandTestBase {
         private Retrospective _retrospective;
 
         [OneTimeSetUp]
@@ -49,12 +49,12 @@ namespace PokerTime.Application.Tests.Unit.Retrospectives.Commands {
         }
 
         [Test]
-        public void JoinRetrospectiveCommand_ThrowsException_WhenNotFound() {
+        public void JoinPokerSessionCommand_ThrowsException_WhenNotFound() {
             // Given
-            var command = new JoinRetrospectiveCommand {
+            var command = new JoinPokerSessionCommand {
                 SessionId = "not found"
             };
-            var handler = new JoinRetrospectiveCommandHandler(this.Context, Substitute.For<ICurrentParticipantService>(), Substitute.For<IMediator>(), Substitute.For<IMapper>());
+            var handler = new JoinPokerSessionCommandHandler(this.Context, Substitute.For<ICurrentParticipantService>(), Substitute.For<IMediator>(), Substitute.For<IMapper>());
 
             // When
             TestDelegate action = () => handler.Handle(command, CancellationToken.None).GetAwaiter().GetResult();
@@ -64,7 +64,7 @@ namespace PokerTime.Application.Tests.Unit.Retrospectives.Commands {
         }
 
         [Test]
-        public async Task JoinRetrospectiveCommand_SetsParticipantId_WhenJoiningRetrospective() {
+        public async Task JoinPokerSessionCommand_SetsParticipantId_WhenJoiningRetrospective() {
             // Given
             var retro = this._retrospective ?? throw new InvalidOperationException("OneTimeSetup not executed");
 
@@ -72,14 +72,14 @@ namespace PokerTime.Application.Tests.Unit.Retrospectives.Commands {
             var mapper = Substitute.For<IMapper>();
 
             var currentParticipantService = Substitute.For<ICurrentParticipantService>();
-            var handler = new JoinRetrospectiveCommandHandler(
+            var handler = new JoinPokerSessionCommandHandler(
                 this.Context,
                 currentParticipantService,
                 mediator,
                 mapper
             );
 
-            var command = new JoinRetrospectiveCommand {
+            var command = new JoinPokerSessionCommand {
                 SessionId = retro.UrlId.StringId,
                 Color = "ABCDEF",
                 JoiningAsFacilitator = true,
@@ -106,7 +106,7 @@ namespace PokerTime.Application.Tests.Unit.Retrospectives.Commands {
         }
 
         [Test]
-        public async Task JoinRetrospectiveCommand_DuplicateJoin_DoesNotCreateNewParticipant() {
+        public async Task JoinPokerSessionCommand_DuplicateJoin_DoesNotCreateNewParticipant() {
             // Given
             var retro = this._retrospective ?? throw new InvalidOperationException("OneTimeSetup not executed");
 
@@ -114,14 +114,14 @@ namespace PokerTime.Application.Tests.Unit.Retrospectives.Commands {
             var mapper = Substitute.For<IMapper>();
 
             var currentParticipantService = Substitute.For<ICurrentParticipantService>();
-            var handler = new JoinRetrospectiveCommandHandler(
+            var handler = new JoinPokerSessionCommandHandler(
                 this.Context,
                 currentParticipantService,
                 mediator,
                 mapper
             );
 
-            var command = new JoinRetrospectiveCommand {
+            var command = new JoinPokerSessionCommand {
                 SessionId = retro.UrlId.StringId,
                 Color = "ABCDEF",
                 JoiningAsFacilitator = true,

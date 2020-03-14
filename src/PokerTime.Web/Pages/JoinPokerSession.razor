@@ -1,14 +1,14 @@
 @page "/pokertime-session/{sessionId}/join"
 @implements PokerTime.Application.Notifications.RetrospectiveJoined.IRetrospectiveJoinedSubscriber
 @inherits SubscribingComponent<PokerTime.Application.Notifications.RetrospectiveJoined.IRetrospectiveJoinedSubscriber>
-@layout RetrospectiveLayout
-@inject ILogger<JoinRetrospective> Logger
+@layout PokerSessionLayout
+@inject ILogger<JoinPokerSession> Logger
 @inject NavigationManager NavigationManager;
 @using Microsoft.Extensions.Logging
 @using PokerTime.Application.Notifications
 @using PokerTime.Application.PredefinedParticipantColors.Queries.GetAvailablePredefinedParticipantColors
-@using PokerTime.Application.Retrospectives.Commands.JoinRetrospective
-@using PokerTime.Application.Retrospectives.Queries.GetJoinRetrospectiveInfo
+@using PokerTime.Application.Retrospectives.Commands.JoinPokerSession
+@using PokerTime.Application.Retrospectives.Queries.GetJoinPokerSessionInfo
 @using PokerTime.Application.Retrospectives.Queries.GetParticipant
 @using PokerTime.Application.Retrospectives.Queries.GetParticipantsInfo
 @using PokerTime.Web.Components.Layout
@@ -173,32 +173,32 @@ else
     [Parameter]
     public string SessionId { get; set; }
 
-    private JoinRetrospectiveInfo RetrospectiveInfo { get; set; }
+    private JoinPokerSessionInfo RetrospectiveInfo { get; set; }
     private IList<AvailableParticipantColorModel> AvailablePredefinedColors { get; set; }
     private bool ShowErrorMessage { get; set; }
     private bool ShowParticipantAlreadyJoinedWarning { get; set; }
 
     [Parameter]
-    public JoinRetrospectiveCommand Model { get; set; } = new JoinRetrospectiveCommand();
+    public JoinPokerSessionCommand Model { get; set; } = new JoinPokerSessionCommand();
 
     [Parameter]
     public bool UseOwnColor { get; set; }
 
     [CascadingParameter]
-    public IRetrospectiveLayout Layout { get; set; }
+    public IPokerSessionLayout Layout { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        this.RetrospectiveInfo = await this.Mediator.Send(new GetJoinRetrospectiveInfoQuery { SessionId = this.SessionId });
+        this.RetrospectiveInfo = await this.Mediator.Send(new GetJoinPokerSessionInfoQuery { SessionId = this.SessionId });
 
         if (this.RetrospectiveInfo != null)
         {
-            this.Layout?.Update(new RetrospectiveLayoutInfo(this.RetrospectiveInfo.Title));
+            this.Layout?.Update(new PokerSessionLayoutInfo(this.RetrospectiveInfo.Title));
             this.AvailablePredefinedColors = await this.Mediator.Send(new GetAvailablePredefinedParticipantColorsQuery(this.SessionId));
         }
         else
         {
-            this.Layout?.Update(new RetrospectiveLayoutInfo("Not found"));
+            this.Layout?.Update(new PokerSessionLayoutInfo("Not found"));
         }
     }
 

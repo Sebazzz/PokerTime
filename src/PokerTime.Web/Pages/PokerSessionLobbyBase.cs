@@ -1,7 +1,7 @@
 ﻿// ******************************************************************************
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : RetrospectiveLobbyBase.cs
+//  File:           : PokerSessionLobbyBase.cs
 //  Project         : PokerTime.Web
 // ******************************************************************************
 
@@ -23,7 +23,7 @@ namespace PokerTime.Web.Pages {
     using Domain.ValueObjects;
     using Microsoft.AspNetCore.Components;
 
-    public interface IRetrospectiveLobby {
+    public interface IPokerSessionLobby {
         bool ShowShowcase { get; }
 
         void ShowShowcaseDisplay();
@@ -35,7 +35,7 @@ namespace PokerTime.Web.Pages {
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global", Justification = "Set by framework")]
     [SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "We catch, log and display.")]
     [SuppressMessage("ReSharper", "MemberCanBePrivate.Global", Justification = "Needed for DI")]
-    public abstract class RetrospectiveLobbyBase : MediatorComponent, IRetrospectiveStatusUpdatedSubscriber, IVoteChangeSubscriber, IRetrospectiveLobby, IDisposable {
+    public abstract class PokerSessionLobbyBase : MediatorComponent, IRetrospectiveStatusUpdatedSubscriber, IVoteChangeSubscriber, IPokerSessionLobby, IDisposable {
         public Guid UniqueId { get; } = Guid.NewGuid();
 
 #nullable disable
@@ -59,7 +59,7 @@ namespace PokerTime.Web.Pages {
         public string SessionId { get; set; }
 
         [CascadingParameter]
-        public IRetrospectiveLayout Layout { get; set; }
+        public IPokerSessionLayout Layout { get; set; }
 
         public CurrentParticipantModel CurrentParticipant { get; set; }
 
@@ -120,7 +120,7 @@ namespace PokerTime.Web.Pages {
 
             try {
                 this.RetrospectiveStatus = await this.Mediator.Send(new GetRetrospectiveStatusQuery(this.SessionId));
-                this.Layout?.Update(new RetrospectiveLayoutInfo(this.RetrospectiveStatus.Title, this.RetrospectiveStatus.Stage));
+                this.Layout?.Update(new PokerSessionLayoutInfo(this.RetrospectiveStatus.Title, this.RetrospectiveStatus.Stage));
 
                 if (this.RetrospectiveStatus.Stage == RetrospectiveStage.Finished) {
                     this.ShowShowcase = true;
@@ -143,7 +143,7 @@ namespace PokerTime.Web.Pages {
 
             return this.InvokeAsync(async () => {
                 this.RetrospectiveStatus = retrospectiveStatus;
-                this.Layout?.Update(new RetrospectiveLayoutInfo(retrospectiveStatus.Title, retrospectiveStatus.Stage));
+                this.Layout?.Update(new PokerSessionLayoutInfo(retrospectiveStatus.Title, retrospectiveStatus.Stage));
 
                 switch (retrospectiveStatus.Stage) {
                     case RetrospectiveStage.Voting:

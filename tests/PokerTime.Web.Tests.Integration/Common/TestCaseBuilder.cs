@@ -21,7 +21,7 @@ namespace PokerTime.Web.Tests.Integration.Common {
     using Application.Notes.Commands.UpdateNote;
     using Application.Notifications.VoteChanged;
     using Application.PredefinedParticipantColors.Queries.GetAvailablePredefinedParticipantColors;
-    using Application.Retrospectives.Commands.JoinRetrospective;
+    using Application.Retrospectives.Commands.JoinPokerSession;
     using Application.Retrospectives.Queries.GetParticipantsInfo;
     using Application.Votes.Commands;
     using Domain.Entities;
@@ -85,7 +85,7 @@ namespace PokerTime.Web.Tests.Integration.Common {
                 availableParticipantColor = response.FirstOrDefault(x => !x.HasSameColors(yellowColor)); // Yellow is a bad color for testing
             });
 
-            return this.EnqueueMediatorAction(() => new JoinRetrospectiveCommand {
+            return this.EnqueueMediatorAction(() => new JoinPokerSessionCommand {
                 Name = name,
                 Color = availableParticipantColor?.HexString ?? (RandomByte() + RandomByte() + RandomByte()),
                 JoiningAsFacilitator = isFacilitator,

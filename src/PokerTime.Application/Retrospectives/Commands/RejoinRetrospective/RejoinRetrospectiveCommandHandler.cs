@@ -1,11 +1,11 @@
 ﻿// ******************************************************************************
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : RejoinRetrospectiveCommandHandler.cs
+//  File:           : RejoinPokerSessionCommandHandler.cs
 //  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace PokerTime.Application.Retrospectives.Commands.RejoinRetrospective {
+namespace PokerTime.Application.Retrospectives.Commands.RejoinPokerSession {
     using System;
     using System.Linq;
     using System.Threading;
@@ -18,16 +18,16 @@ namespace PokerTime.Application.Retrospectives.Commands.RejoinRetrospective {
     using MediatR;
     using Microsoft.EntityFrameworkCore;
 
-    public sealed class RejoinRetrospectiveCommandHandler : IRequestHandler<RejoinRetrospectiveCommand> {
+    public sealed class RejoinPokerSessionCommandHandler : IRequestHandler<RejoinPokerSessionCommand> {
         private readonly IReturnDbContext _returnDbContext;
         private readonly ICurrentParticipantService _currentParticipantService;
 
-        public RejoinRetrospectiveCommandHandler(IReturnDbContext returnDbContext, ICurrentParticipantService currentParticipantService) {
+        public RejoinPokerSessionCommandHandler(IReturnDbContext returnDbContext, ICurrentParticipantService currentParticipantService) {
             this._returnDbContext = returnDbContext;
             this._currentParticipantService = currentParticipantService;
         }
 
-        public async Task<Unit> Handle(RejoinRetrospectiveCommand request, CancellationToken cancellationToken) {
+        public async Task<Unit> Handle(RejoinPokerSessionCommand request, CancellationToken cancellationToken) {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
             Participant? result = await this._returnDbContext.Participants.AsNoTracking().

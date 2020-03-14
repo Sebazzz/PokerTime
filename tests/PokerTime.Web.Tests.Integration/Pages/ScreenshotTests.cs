@@ -35,7 +35,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
     /// Client2: Hong (participant)
     /// </remarks>
     [TestFixture]
-    public sealed class ScreenshotTests : RetrospectiveLobbyTestsBase {
+    public sealed class ScreenshotTests : PokerSessionLobbyTestsBase {
         private readonly HashSet<int> _startAutomationGroupNoteIds = new HashSet<int>();
         private readonly HashSet<int> _stopBacklogUnstableNoteIds = new HashSet<int>();
         private readonly HashSet<int> _stopSprintScopeIncreasedNoteIds = new HashSet<int>();
@@ -61,9 +61,9 @@ namespace PokerTime.Web.Tests.Integration.Pages {
 
         [Test]
         [Order((int)RetrospectiveStage.NotStarted)]
-        public void Screenshot_CreateRetrospective() {
+        public void Screenshot_CreatePokerSession() {
             // Given
-            using var createRetroPage = new CreateRetrospectivePage();
+            using var createRetroPage = new CreatePokerSessionPage();
             createRetroPage.InitializeFrom(this.Client1);
             createRetroPage.Navigate(this.App);
 
@@ -113,7 +113,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
 
             // When
             var writtenNoteIds = new HashSet<int>();
-            void WriteNote(RetrospectiveLobby client, KnownNoteLane laneId, string text) {
+            void WriteNote(PokerSessionLobby client, KnownNoteLane laneId, string text) {
                 NoteLaneComponent lane = client.GetLane(laneId);
 
                 lane.AddNoteButton.Click();

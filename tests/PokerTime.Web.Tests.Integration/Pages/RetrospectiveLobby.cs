@@ -1,7 +1,7 @@
 ﻿// ******************************************************************************
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : RetrospectiveLobby.cs
+//  File:           : PokerSessionLobby.cs
 //  Project         : PokerTime.Web.Tests.Integration
 // ******************************************************************************
 
@@ -13,7 +13,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
     using Domain.Entities;
     using OpenQA.Selenium;
 
-    public sealed class RetrospectiveLobby : PageObject {
+    public sealed class PokerSessionLobby : PageObject {
         public IWebElement TimeInMinutesInput => this.WebDriver.FindElementByTestElementId("time-in-minutes-input");
         public IWebElement VoteCountInput => this.WebDriver.FindElementByTestElementId("vote-count-input");
         public IWebElement WorkflowContinueButton => this.WebDriver.FindElementByTestElementId("workflow-continue-button");

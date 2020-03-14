@@ -83,7 +83,7 @@ namespace PokerTime.Application.Tests.Unit.Votes.Command {
                 Substitute.For<IMediator>(),
                 this.Mapper
             );
-            Retrospective retro = await this.CreateRetrospectiveWithNote();
+            Retrospective retro = await this.CreatePokerSessionWithNote();
             CastVoteCommand command = CastVoteCommand.ForNote(retro.Notes.First().Id, VoteMutationType.Removed);
 
             // When
@@ -104,7 +104,7 @@ namespace PokerTime.Application.Tests.Unit.Votes.Command {
                 this.Mapper
             );
 
-            Retrospective retro = await this.CreateRetrospectiveWithNoteGroup();
+            Retrospective retro = await this.CreatePokerSessionWithNoteGroup();
 
             CastVoteCommand command = CastVoteCommand.ForNoteGroup(retro.NoteGroup.First().Id, VoteMutationType.Removed);
 
@@ -128,7 +128,7 @@ namespace PokerTime.Application.Tests.Unit.Votes.Command {
                 this.Mapper
             );
 
-            Retrospective retro = await this.CreateRetrospectiveWithNoteGroup();
+            Retrospective retro = await this.CreatePokerSessionWithNoteGroup();
 
             CastVoteCommand command = CastVoteCommand.ForNoteGroup(retro.NoteGroup.First().Id, VoteMutationType.Added);
 
@@ -163,7 +163,7 @@ namespace PokerTime.Application.Tests.Unit.Votes.Command {
                 this.Mapper
             );
 
-            Retrospective retro = await this.CreateRetrospectiveWithNoteGroup();
+            Retrospective retro = await this.CreatePokerSessionWithNoteGroup();
 
             NoteGroup noteGroup = retro.NoteGroup.First();
 
@@ -197,7 +197,7 @@ namespace PokerTime.Application.Tests.Unit.Votes.Command {
             Assert.That(this.Context.NoteVotes.Select(x => x.Id), Does.Not.Contain(note.Id));
         }
 
-        private async Task<Retrospective> CreateRetrospectiveWithNoteGroup() {
+        private async Task<Retrospective> CreatePokerSessionWithNoteGroup() {
             var retro = new Retrospective {
                 CurrentStage = RetrospectiveStage.Writing,
                 FacilitatorHashedPassphrase = "whatever",
@@ -227,7 +227,7 @@ namespace PokerTime.Application.Tests.Unit.Votes.Command {
                 this.Mapper
             );
 
-            Retrospective retro = await this.CreateRetrospectiveWithNote();
+            Retrospective retro = await this.CreatePokerSessionWithNote();
 
             Note note = retro.Notes.First();
             CastVoteCommand command = CastVoteCommand.ForNote(note.Id, VoteMutationType.Added);
@@ -250,7 +250,7 @@ namespace PokerTime.Application.Tests.Unit.Votes.Command {
             Assert.That(broadcastedNote.VoteChange.Vote.NoteId, Is.EqualTo(note.Id));
         }
 
-        private async Task<Retrospective> CreateRetrospectiveWithNote() {
+        private async Task<Retrospective> CreatePokerSessionWithNote() {
             var retro = new Retrospective {
                 CurrentStage = RetrospectiveStage.Writing,
                 FacilitatorHashedPassphrase = "whatever",
@@ -283,7 +283,7 @@ namespace PokerTime.Application.Tests.Unit.Votes.Command {
                 this.Mapper
             );
 
-            Retrospective retro = await this.CreateRetrospectiveWithNote();
+            Retrospective retro = await this.CreatePokerSessionWithNote();
 
             Note note = retro.Notes.First();
 

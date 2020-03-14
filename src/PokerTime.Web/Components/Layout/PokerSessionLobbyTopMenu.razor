@@ -11,27 +11,27 @@
         <div class="navbar-end">
             <div class="navbar-item retrospective-progress-container">
                 <div class="retrospective-progress @(this.CurrentStage == RetrospectiveStage.NotStarted ? "retrospective-progress--inactive" : String.Empty)">
-                    <RetrospectiveProgressItem 
+                    <PokerSessionProgressItem 
                         CurrentStage="@this.CurrentStage"
                         ApplicableTo="@RetrospectiveStage.Writing"
                         Text="Write"/>
 
-                    <RetrospectiveProgressItem 
+                    <PokerSessionProgressItem 
                         CurrentStage="@this.CurrentStage"
                         ApplicableTo="@RetrospectiveStage.Discuss"
                         Text="Discuss"/>
 
-                    <RetrospectiveProgressItem 
+                    <PokerSessionProgressItem 
                         CurrentStage="@this.CurrentStage"
                         ApplicableTo="@RetrospectiveStage.Grouping"
                         Text="Group"/>
 
-                    <RetrospectiveProgressItem 
+                    <PokerSessionProgressItem 
                         CurrentStage="@this.CurrentStage"
                         ApplicableTo="@RetrospectiveStage.Voting"
                         Text="Vote"/>
 
-                    <RetrospectiveProgressItem 
+                    <PokerSessionProgressItem 
                         CurrentStage="@this.CurrentStage"
                         ApplicableTo="@RetrospectiveStage.Finished"
                         Text="Finished"/>
@@ -44,11 +44,11 @@
 @code
 {
     #nullable disable
-    private RetrospectiveLayoutInfo _layoutInfo = new RetrospectiveLayoutInfo("Loading...");
+    private PokerSessionLayoutInfo _layoutInfo = new PokerSessionLayoutInfo("Loading...");
 
     private RetrospectiveStage CurrentStage => this._layoutInfo.Stage ?? RetrospectiveStage.NotStarted;
 
-    public void Update(in RetrospectiveLayoutInfo layoutInfo)
+    public void Update(in PokerSessionLayoutInfo layoutInfo)
     {
         this._layoutInfo = layoutInfo;
 

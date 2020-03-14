@@ -1,7 +1,7 @@
 ﻿// ******************************************************************************
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : RetrospectiveLobbyTestsBase.cs
+//  File:           : PokerSessionLobbyTestsBase.cs
 //  Project         : PokerTime.Web.Tests.Integration
 // ******************************************************************************
 namespace PokerTime.Web.Tests.Integration.Pages {
@@ -16,7 +16,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
     using NUnit.Framework;
     using OpenQA.Selenium.Support.UI;
 
-    public class RetrospectiveLobbyTestsBase : TwoClientPageFixture<RetrospectiveLobby> {
+    public class PokerSessionLobbyTestsBase : TwoClientPageFixture<PokerSessionLobby> {
         protected string SessionId { get; set; }
         private int _colorIndex = 1;
 
@@ -24,8 +24,8 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         public void ResetColorIndex() => this._colorIndex = 1;
 
         [SuppressMessage("ReSharper", "AccessToDisposedClosure", Justification = "Retry runs while the webdriver runs")]
-        protected void Join(RetrospectiveLobby pageObject, bool facilitator, string name = null, bool alreadyJoined = false, string colorName = null, Action submitCallback = null) {
-            using var joinPage = new JoinRetrospectivePage();
+        protected void Join(PokerSessionLobby pageObject, bool facilitator, string name = null, bool alreadyJoined = false, string colorName = null, Action submitCallback = null) {
+            using var joinPage = new JoinPokerSessionPage();
             joinPage.InitializeFrom(pageObject);
             joinPage.Navigate(this.App, this.SessionId);
 
@@ -75,7 +75,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
             return scope.SetRetrospective(this.SessionId, action);
         }
 
-        private static void WaitNavigatedToLobby(RetrospectiveLobby pageObject) {
+        private static void WaitNavigatedToLobby(PokerSessionLobby pageObject) {
             var sw = new Stopwatch();
             sw.Start();
 

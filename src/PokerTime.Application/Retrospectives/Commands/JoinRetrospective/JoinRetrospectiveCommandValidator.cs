@@ -1,11 +1,11 @@
 ﻿// ******************************************************************************
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : JoinRetrospectiveCommandValidator.cs
+//  File:           : JoinPokerSessionCommandValidator.cs
 //  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace PokerTime.Application.Retrospectives.Commands.JoinRetrospective {
+namespace PokerTime.Application.Retrospectives.Commands.JoinPokerSession {
     using System;
     using System.Linq;
     using System.Linq.Expressions;
@@ -16,14 +16,14 @@ namespace PokerTime.Application.Retrospectives.Commands.JoinRetrospective {
     using FluentValidation;
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1710:Identifiers should have correct suffix", Justification = "This is a validation rule set.")]
-    public sealed class JoinRetrospectiveCommandValidator : AbstractValidator<JoinRetrospectiveCommand> {
+    public sealed class JoinPokerSessionCommandValidator : AbstractValidator<JoinPokerSessionCommand> {
         private static readonly Expression<Func<Retrospective, string?>> GetFacilitatorHash = r => r.FacilitatorHashedPassphrase;
         private static readonly Expression<Func<Retrospective, string?>> GetParticipantHash = r => r.HashedPassphrase;
 
         private readonly IReturnDbContextFactory _returnDbContext;
         private readonly IPassphraseService _passphraseService;
 
-        public JoinRetrospectiveCommandValidator(IReturnDbContextFactory returnDbContext, IPassphraseService passphraseService) {
+        public JoinPokerSessionCommandValidator(IReturnDbContextFactory returnDbContext, IPassphraseService passphraseService) {
             this._returnDbContext = returnDbContext;
             this._passphraseService = passphraseService;
 

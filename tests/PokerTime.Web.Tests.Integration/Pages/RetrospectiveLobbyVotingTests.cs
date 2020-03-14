@@ -1,7 +1,7 @@
 ﻿// ******************************************************************************
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : RetrospectiveLobbyVotingTests.cs
+//  File:           : PokerSessionLobbyVotingTests.cs
 //  Project         : PokerTime.Web.Tests.Integration
 // ******************************************************************************
 
@@ -18,15 +18,15 @@ namespace PokerTime.Web.Tests.Integration.Pages {
     using OpenQA.Selenium;
 
     [TestFixture]
-    public sealed class RetrospectiveLobbyVotingTests : RetrospectiveLobbyTestsBase {
+    public sealed class PokerSessionLobbyVotingTests : PokerSessionLobbyTestsBase {
         [SetUp]
         public async Task SetUp() {
             using IServiceScope scope = this.App.CreateTestServiceScope();
-            this.SessionId = await scope.CreateRetrospective("scrummaster");
+            this.SessionId = await scope.CreatePokerSession("scrummaster");
         }
 
         [Test]
-        public async Task RetrospectiveLobby_ShowsCorrectVoteCount_OnStartingVotes() {
+        public async Task PokerSessionLobby_ShowsCorrectVoteCount_OnStartingVotes() {
             // Given
             int bossId = 0;
             using (IServiceScope scope = this.App.CreateTestServiceScope()) {
@@ -70,7 +70,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         }
 
         [Test]
-        public async Task RetrospectiveLobby_ShowsUpdatesVotes_OnVoting() {
+        public async Task PokerSessionLobby_ShowsUpdatesVotes_OnVoting() {
             // Given
             int bossId = 0;
             int participantId = 0;

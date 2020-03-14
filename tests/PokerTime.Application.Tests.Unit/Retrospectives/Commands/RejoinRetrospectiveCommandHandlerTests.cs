@@ -1,7 +1,7 @@
 ﻿// ******************************************************************************
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : RejoinRetrospectiveCommandHandlerTests.cs
+//  File:           : RejoinPokerSessionCommandHandlerTests.cs
 //  Project         : PokerTime.Application.Tests.Unit
 // ******************************************************************************
 
@@ -12,14 +12,14 @@ namespace PokerTime.Application.Tests.Unit.Retrospectives.Commands {
     using Application.Common;
     using Application.Common.Abstractions;
     using Application.Common.Models;
-    using Application.Retrospectives.Commands.RejoinRetrospective;
+    using Application.Retrospectives.Commands.RejoinPokerSession;
     using Domain.Entities;
     using NSubstitute;
     using NUnit.Framework;
     using Support;
 
     [TestFixture]
-    public sealed class RejoinRetrospectiveCommandHandlerTests : CommandTestBase {
+    public sealed class RejoinPokerSessionCommandHandlerTests : CommandTestBase {
         private string _retro1Id;
         private string _retro2Id;
 
@@ -53,11 +53,11 @@ namespace PokerTime.Application.Tests.Unit.Retrospectives.Commands {
         }
 
         [Test]
-        public async Task RejoinRetrospectiveCommandHandler_SetsParticipantInfo_IfFound() {
+        public async Task RejoinPokerSessionCommandHandler_SetsParticipantInfo_IfFound() {
             // Given
             var authService = Substitute.For<ICurrentParticipantService>();
-            var handler = new RejoinRetrospectiveCommandHandler(this.Context, authService);
-            var query = new RejoinRetrospectiveCommand(this._retro1Id, /*John*/ 1);
+            var handler = new RejoinPokerSessionCommandHandler(this.Context, authService);
+            var query = new RejoinPokerSessionCommand(this._retro1Id, /*John*/ 1);
 
             // When
             await handler.Handle(query, CancellationToken.None);
@@ -67,11 +67,11 @@ namespace PokerTime.Application.Tests.Unit.Retrospectives.Commands {
         }
 
         [Test]
-        public void RejoinRetrospectiveCommandHandler_ThrowsNotFoundException_IfNotFound1() {
+        public void RejoinPokerSessionCommandHandler_ThrowsNotFoundException_IfNotFound1() {
             // Given
             var authService = Substitute.For<ICurrentParticipantService>();
-            var handler = new RejoinRetrospectiveCommandHandler(this.Context, authService);
-            var query = new RejoinRetrospectiveCommand(this._retro2Id, 2 /*Jane*/);
+            var handler = new RejoinPokerSessionCommandHandler(this.Context, authService);
+            var query = new RejoinPokerSessionCommand(this._retro2Id, 2 /*Jane*/);
 
             // When
             TestDelegate action = () => handler.Handle(query, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
@@ -81,11 +81,11 @@ namespace PokerTime.Application.Tests.Unit.Retrospectives.Commands {
         }
 
         [Test]
-        public void RejoinRetrospectiveCommandHandler_IfNotFound2() {
+        public void RejoinPokerSessionCommandHandler_IfNotFound2() {
             // Given
             var authService = Substitute.For<ICurrentParticipantService>();
-            var handler = new RejoinRetrospectiveCommandHandler(this.Context, authService);
-            var query = new RejoinRetrospectiveCommand(this._retro1Id, 3 /*Baz*/);
+            var handler = new RejoinPokerSessionCommandHandler(this.Context, authService);
+            var query = new RejoinPokerSessionCommand(this._retro1Id, 3 /*Baz*/);
 
             // When
             TestDelegate action = () => handler.Handle(query, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
