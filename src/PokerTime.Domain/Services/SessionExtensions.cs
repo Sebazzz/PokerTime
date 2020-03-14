@@ -17,10 +17,9 @@ namespace PokerTime.Domain.Services {
                 case SessionStage.NotStarted:
                 case SessionStage.Finished:
                     return false;
-                case SessionStage.Writing:
-                case SessionStage.Discuss:
-                case SessionStage.Grouping:
-                case SessionStage.Voting:
+                case SessionStage.Discussion:
+                case SessionStage.Estimation:
+                case SessionStage.EstimationDiscussion:
                     return true;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(session));

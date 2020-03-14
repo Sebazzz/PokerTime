@@ -14,14 +14,14 @@ namespace PokerTime.Application.SessionWorkflows.Commands {
     using Domain.Entities;
     using MediatR;
 
-    public sealed class InitiateGroupingStageCommandHandler : AbstractStageCommandHandler<InitiateGroupingStageCommand> {
-        public InitiateGroupingStageCommandHandler(IPokerTimeDbContextFactory pokerTimeDbContext, ISessionStatusUpdateDispatcher retrospectiveStatusUpdateDispatcher) : base(pokerTimeDbContext, retrospectiveStatusUpdateDispatcher) {
+    public sealed class InitiateEstimationDiscussionStageCommandHandler : AbstractStageCommandHandler<InitiateEstimationDiscussionStageCommand> {
+        public InitiateEstimationDiscussionStageCommandHandler(IPokerTimeDbContextFactory pokerTimeDbContext, ISessionStatusUpdateDispatcher retrospectiveStatusUpdateDispatcher) : base(pokerTimeDbContext, retrospectiveStatusUpdateDispatcher) {
         }
 
-        protected override async Task<Unit> HandleCore(InitiateGroupingStageCommand request, Session session, CancellationToken cancellationToken) {
+        protected override async Task<Unit> HandleCore(InitiateEstimationDiscussionStageCommand request, Session session, CancellationToken cancellationToken) {
             if (session == null) throw new ArgumentNullException(nameof(session));
 
-            session.CurrentStage = SessionStage.Grouping;
+            session.CurrentStage = SessionStage.EstimationDiscussion;
 
             await this.DbContext.SaveChangesAsync(cancellationToken);
 

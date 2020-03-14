@@ -1,7 +1,7 @@
 ﻿// ******************************************************************************
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : InitiateWritingStageCommandHandler.cs
+//  File:           : InitiateDicussionStageCommandHandler.cs
 //  Project         : PokerTime.Application
 // ******************************************************************************
 
@@ -15,17 +15,17 @@ namespace PokerTime.Application.SessionWorkflows.Commands {
     using MediatR;
     using PokerTime.Common;
 
-    public sealed class InitiateWritingStageCommandHandler : AbstractStageCommandHandler<InitiateWritingStageCommand> {
+    public sealed class InitiateDicussionStageCommandHandler : AbstractStageCommandHandler<InitiateDiscussionStageCommand> {
         private readonly ISystemClock _systemClock;
 
-        public InitiateWritingStageCommandHandler(IPokerTimeDbContext pokerTimeDbContext, ISessionStatusUpdateDispatcher retrospectiveStatusUpdateDispatcher, ISystemClock systemClock) : base(pokerTimeDbContext, retrospectiveStatusUpdateDispatcher) {
+        public InitiateDicussionStageCommandHandler(IPokerTimeDbContext pokerTimeDbContext, ISessionStatusUpdateDispatcher retrospectiveStatusUpdateDispatcher, ISystemClock systemClock) : base(pokerTimeDbContext, retrospectiveStatusUpdateDispatcher) {
             this._systemClock = systemClock;
         }
 
-        protected override async Task<Unit> HandleCore(InitiateWritingStageCommand request, Session session, CancellationToken cancellationToken) {
+        protected override async Task<Unit> HandleCore(InitiateDiscussionStageCommand request, Session session, CancellationToken cancellationToken) {
             if (session == null) throw new ArgumentNullException(nameof(session));
 
-            session.CurrentStage = SessionStage.Writing;
+            session.CurrentStage = SessionStage.Discussion;
 
             await this.DbContext.SaveChangesAsync(cancellationToken);
 

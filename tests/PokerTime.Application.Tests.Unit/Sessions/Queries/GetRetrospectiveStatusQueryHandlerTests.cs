@@ -43,7 +43,7 @@ namespace PokerTime.Application.Tests.Unit.Sessions.Queries {
                     new Participant { Name = "Jane", Color = Color.Aqua },
                 },
                 HashedPassphrase = "abef",
-                CurrentStage = SessionStage.Writing
+                CurrentStage = SessionStage.Discussion
             };
             string sessionId = retro.UrlId.StringId;
             this.Context.Retrospectives.Add(retro);

@@ -1,13 +1,14 @@
 ﻿// ******************************************************************************
-//  © 2019 Sebastiaan Dammann | damsteen.nl
+//  ©  Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : InitiateWritingStageCommand.cs
+//  File:           : InitiateEstimationDiscussionStageCommand.cs
 //  Project         : PokerTime.Application
 // ******************************************************************************
 
 namespace PokerTime.Application.SessionWorkflows.Commands {
     using MediatR;
 
-    public sealed class InitiateWritingStageCommand : AbstractTimedStageCommand, IRequest {
+    public sealed class InitiateEstimationDiscussionStageCommand : AbstractStageCommand, IRequest {
+
     }
 }

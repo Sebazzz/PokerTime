@@ -5,14 +5,12 @@
         @* Each stage has its own title *@
         <SessionStageText ApplicableTo="@SessionStage.NotStarted"
                                 Text="Not started yet" />
-        <SessionStageText ApplicableTo="@SessionStage.Writing"
-                                Text="Writing down findings" />
-        <SessionStageText ApplicableTo="@SessionStage.Discuss"
-                                Text="Discussion" />
-        <SessionStageText ApplicableTo="@SessionStage.Grouping"
-                                Text="Grouping" />
-        <SessionStageText ApplicableTo="@SessionStage.Voting"
-                                Text="Voting" />
+        <SessionStageText ApplicableTo="@SessionStage.Discussion"
+                                Text="User story discussion" />
+        <SessionStageText ApplicableTo="@SessionStage.Estimation"
+                                Text="Estimation" />
+        <SessionStageText ApplicableTo="@SessionStage.EstimationDiscussion"
+                                Text="Concensus" />
         <SessionStageText ApplicableTo="@SessionStage.Finished"
                                 Text="Finished" />
     </div>
@@ -20,17 +18,15 @@
         @* Each stage has its own explanation *@
         <p class="retrospective-status-panel__primary-explanation">
             <SessionStageText ApplicableTo="@SessionStage.NotStarted"
-                                    Text="We are waiting for the facilitator to start the retrospective." />
-            <SessionStageText ApplicableTo="@SessionStage.Writing"
-                                    Text="You can now write down your findings by adding notes in each of the lanes. Until the next phase what you write down is not visible to others." />
-            <SessionStageText ApplicableTo="@SessionStage.Discuss"
-                                    Text="All the cards are on the table. The facilitator leads the dissussion." />
-            <SessionStageText ApplicableTo="@SessionStage.Grouping"
-                                    Text="The facilitator will now group the related notes together." />
-            <SessionStageText ApplicableTo="@SessionStage.Voting"
-                                    Text="You can now vote on the notes and groups to think are important to focus on." />
+                                    Text="We are waiting for the facilitator to start the planning poker session." />
+            <SessionStageText ApplicableTo="@SessionStage.Discussion"
+                                    Text="The facilitator discusses the user story with you." />
+            <SessionStageText ApplicableTo="@SessionStage.Estimation"
+                                    Text="Place your estimations. Once you and your team are done the facilitator will show all the cards." />
+            <SessionStageText ApplicableTo="@SessionStage.EstimationDiscussion"
+                                    Text="Discuss your estimations and reach a concensus." />
             <SessionStageText ApplicableTo="@SessionStage.Finished"
-                                    Text="The retrospective is now finished. You can now view the results here." />
+                                    Text="The planning poker session is now finished." />
         </p>
 
         @* Each stage has its own panel and controls *@
@@ -38,19 +34,15 @@
             <span></span>
         </SessionStagePanel>
 
-        <SessionStagePanel ApplicableTo="@SessionStage.Writing">
+        <SessionStagePanel ApplicableTo="@SessionStage.Discussion">
             <span></span>
         </SessionStagePanel>
 
-        <SessionStagePanel ApplicableTo="@SessionStage.Discuss">
+        <SessionStagePanel ApplicableTo="@SessionStage.Estimation">
             <span></span>
         </SessionStagePanel>
 
-        <SessionStagePanel ApplicableTo="@SessionStage.Grouping">
-            <span></span>
-        </SessionStagePanel>
-
-        <SessionStagePanel ApplicableTo="@SessionStage.Voting">
+        <SessionStagePanel ApplicableTo="@SessionStage.EstimationDiscussion">
             <span></span>
         </SessionStagePanel>
 

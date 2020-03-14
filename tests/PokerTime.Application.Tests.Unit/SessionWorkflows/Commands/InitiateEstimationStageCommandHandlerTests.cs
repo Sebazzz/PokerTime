@@ -1,7 +1,7 @@
 ﻿// ******************************************************************************
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : InitiateWritingStageCommandHandlerTests.cs
+//  File:           : InitiateEstimationStageCommandHandlerTests.cs
 //  Project         : PokerTime.Application.Tests.Unit
 // ******************************************************************************
 
@@ -16,13 +16,13 @@ namespace PokerTime.Application.Tests.Unit.SessionWorkflows.Commands {
     using NUnit.Framework;
 
     [TestFixture]
-    public sealed class InitiateWritingStageCommandHandlerTests : RetrospectiveWorkflowCommandTestBase {
+    public sealed class InitiateEstimationStageCommandHandlerTests : RetrospectiveWorkflowCommandTestBase {
         [Test]
-        public void InitiateWritingStageCommandHandler_InvalidSessionId_ThrowsNotFoundException() {
+        public void InitiateEstimationStageCommandHandler_InvalidSessionId_ThrowsNotFoundException() {
             // Given
             const string sessionId = "not found surely :)";
-            var handler = new InitiateWritingStageCommandHandler(this.Context, this.SessionStatusUpdateDispatcherMock, this.SystemClockMock);
-            var request = new InitiateWritingStageCommand { SessionId = sessionId, TimeInMinutes = 10 };
+            var handler = new InitiateEstimationStageCommandHandler(this.Context, this.SessionStatusUpdateDispatcherMock);
+            var request = new InitiateEstimationStageCommand { SessionId = sessionId };
 
             // When
             TestDelegate action = () => handler.Handle(request, CancellationToken.None).GetAwaiter().GetResult();
@@ -32,10 +32,10 @@ namespace PokerTime.Application.Tests.Unit.SessionWorkflows.Commands {
         }
 
         [Test]
-        public async Task InitiateWritingStageCommandHandler_OnStatusChange_UpdatesRetroStageAndInvokesNotification() {
+        public async Task InitiateEstimationStageCommandHandler_OnStatusChange_UpdatesRetroStageAndInvokesNotification() {
             // Given
-            var handler = new InitiateWritingStageCommandHandler(this.Context, this.SessionStatusUpdateDispatcherMock, this.SystemClockMock);
-            var request = new InitiateWritingStageCommand { SessionId = this.SessionId, TimeInMinutes = 10 };
+            var handler = new InitiateEstimationStageCommandHandler(this.Context, this.SessionStatusUpdateDispatcherMock);
+            var request = new InitiateEstimationStageCommand { SessionId = this.SessionId };
 
             this.SystemClockMock.CurrentTimeOffset.Returns(DateTimeOffset.UnixEpoch);
 
@@ -45,7 +45,7 @@ namespace PokerTime.Application.Tests.Unit.SessionWorkflows.Commands {
             this.RefreshObject();
 
             // Then
-            Assert.That(this.Session.CurrentStage, Is.EqualTo(SessionStage.Writing));
+            Assert.That(this.Session.CurrentStage, Is.EqualTo(SessionStage.Estimation));
 
             await this.SessionStatusUpdateDispatcherMock.Received().DispatchUpdate(Arg.Any<Session>(), CancellationToken.None);
         }

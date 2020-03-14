@@ -1,7 +1,7 @@
 ﻿// ******************************************************************************
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : InitiateDiscussionStageCommandHandler.cs
+//  File:           : InitiateEstimationStageCommandHandler.cs
 //  Project         : PokerTime.Application
 // ******************************************************************************
 
@@ -14,14 +14,14 @@ namespace PokerTime.Application.SessionWorkflows.Commands {
     using Domain.Entities;
     using MediatR;
 
-    public sealed class InitiateDiscussionStageCommandHandler : AbstractStageCommandHandler<InitiateDiscussionStageCommand> {
-        public InitiateDiscussionStageCommandHandler(IPokerTimeDbContextFactory pokerTimeDbContext, ISessionStatusUpdateDispatcher retrospectiveStatusUpdateDispatcher) : base(pokerTimeDbContext, retrospectiveStatusUpdateDispatcher) {
+    public sealed class InitiateEstimationStageCommandHandler : AbstractStageCommandHandler<InitiateEstimationStageCommand> {
+        public InitiateEstimationStageCommandHandler(IPokerTimeDbContextFactory pokerTimeDbContext, ISessionStatusUpdateDispatcher retrospectiveStatusUpdateDispatcher) : base(pokerTimeDbContext, retrospectiveStatusUpdateDispatcher) {
         }
 
-        protected override async Task<Unit> HandleCore(InitiateDiscussionStageCommand request, Session session, CancellationToken cancellationToken) {
+        protected override async Task<Unit> HandleCore(InitiateEstimationStageCommand request, Session session, CancellationToken cancellationToken) {
             if (session == null) throw new ArgumentNullException(nameof(session));
 
-            session.CurrentStage = SessionStage.Discuss;
+            session.CurrentStage = SessionStage.Estimation;
 
             await this.DbContext.SaveChangesAsync(cancellationToken);
 

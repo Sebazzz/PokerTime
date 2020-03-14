@@ -15,22 +15,17 @@ namespace PokerTime.Domain.Entities {
         /// <summary>
         /// The retrospective is underway: participants are currently writing down their findings. Notes are private to the creator.
         /// </summary>
-        Writing,
+        Discussion,
 
         /// <summary>
         /// The retrospective is underway: written down notes are currently being discussed. Notes cannot be modified anymore. Notes are public.
         /// </summary>
-        Discuss,
+        Estimation,
 
         /// <summary>
         /// The retrospective is underway: notes are currently being grouped by the facilitator.
         /// </summary>
-        Grouping,
-
-        /// <summary>
-        /// The retrospective is underway: voting on the notes takes place.
-        /// </summary>
-        Voting,
+        EstimationDiscussion,
 
         /// <summary>
         /// The retrospective has been finished

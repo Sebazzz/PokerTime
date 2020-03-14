@@ -13,23 +13,18 @@
                 <div class="retrospective-progress @(this.CurrentStage == SessionStage.NotStarted ? "retrospective-progress--inactive" : String.Empty)">
                     <PokerSessionProgressItem 
                         CurrentStage="@this.CurrentStage"
-                        ApplicableTo="@SessionStage.Writing"
-                        Text="Write"/>
-
-                    <PokerSessionProgressItem 
-                        CurrentStage="@this.CurrentStage"
-                        ApplicableTo="@SessionStage.Discuss"
+                        ApplicableTo="@SessionStage.Discussion"
                         Text="Discuss"/>
 
                     <PokerSessionProgressItem 
                         CurrentStage="@this.CurrentStage"
-                        ApplicableTo="@SessionStage.Grouping"
-                        Text="Group"/>
+                        ApplicableTo="@SessionStage.Estimation"
+                        Text="Estimation"/>
 
                     <PokerSessionProgressItem 
                         CurrentStage="@this.CurrentStage"
-                        ApplicableTo="@SessionStage.Voting"
-                        Text="Vote"/>
+                        ApplicableTo="@SessionStage.EstimationDiscussion"
+                        Text="Consolidate"/>
 
                     <PokerSessionProgressItem 
                         CurrentStage="@this.CurrentStage"
