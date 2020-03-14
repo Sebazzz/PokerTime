@@ -15,7 +15,7 @@
             },
             "use64Bit": true
         },
-        "Return.Web": {
+        "PokerTime.Web": {
             "commandName": "Project",
             "environmentVariables": {
                 "ASPNETCORE_ENVIRONMENT": "Development"
