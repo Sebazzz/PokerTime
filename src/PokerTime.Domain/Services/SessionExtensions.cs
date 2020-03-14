@@ -9,7 +9,7 @@ namespace PokerTime.Domain.Services {
     using System;
     using Entities;
 
-    public static class RetrospectiveExtensions {
+    public static class SessionExtensions {
         public static bool IsStarted(this Retrospective retrospective) {
             if (retrospective == null) throw new ArgumentNullException(nameof(retrospective));
 
