@@ -59,16 +59,16 @@
 }
 else
 {
-    <h1 class="title">Create a planning poker</h1>
+    <h1 class="title">Create a planning poker session</h1>
     <h2 class="subtitle">To estimate your next moves</h2>
 
     <p class="form-explanation">
-        Create a planning poker with the form below. After completion you will receive a url to share with your team members.
+        Create a planning poker session with the form below. After completion you will receive a url to share with your team members.
     </p>
 
     if (ShowErrorMessage)
     {
-        <ErrorMessage Text="Something went wrong creating the planning poker. Please try again."/>
+        <ErrorMessage Text="Something went wrong creating the planning poker session. Please try again."/>
     }
 
     <EditForm Model="@Model" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
@@ -77,7 +77,7 @@ else
         <div class="field">
             <label class="label" for="pokertime-title">Title</label>
             <div class="control">
-                <InputText id="pokertime-title" class="input" type="text" @bind-Value="@Model.Title" placeholder="Give the planning poker a title" />
+                <InputText id="pokertime-title" class="input" type="text" @bind-Value="@Model.Title" placeholder="Give the planning poker session a title" />
             </div>
 
             <ValidationMessage For="() => Model.Title"></ValidationMessage>
@@ -92,7 +92,7 @@ else
                     </div>
 
                     <ValidationMessage For="() => Model.FacilitatorPassphrase"></ValidationMessage>
-                    <p class="help">This is the password you need to start and control the progress of the planning poker.</p>
+                    <p class="help">This is the password you need to start and control the progress of the planning poker session.</p>
                 </div>
             </div>
             <div class="column">
