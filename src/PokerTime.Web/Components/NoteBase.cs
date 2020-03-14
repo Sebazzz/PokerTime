@@ -131,7 +131,7 @@ namespace PokerTime.Web.Components {
 
         protected async Task Delete() {
             try {
-                await this.Mediator.Send(new DeleteNoteCommand(this.RetrospectiveStatus.RetroId, this.Data.Id));
+                await this.Mediator.Send(new DeleteNoteCommand(this.RetrospectiveStatus.SessionId, this.Data.Id));
             }
             catch (Exception ex) {
                 this.Logger.LogError(ex, $"Delete note #{this.Data.Id} failed");

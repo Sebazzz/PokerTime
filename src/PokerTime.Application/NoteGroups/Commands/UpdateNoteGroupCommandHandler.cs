@@ -37,7 +37,7 @@ namespace PokerTime.Application.NoteGroups.Commands {
             NoteGroup noteGroup = await dbContext.NoteGroups
                 .Include(x => x.Retrospective)
                 .Include(x => x.Lane)
-                .FirstOrDefaultAsync(ng => ng.Retrospective.UrlId.StringId == request.RetroId && ng.Id == request.Id, cancellationToken);
+                .FirstOrDefaultAsync(ng => ng.Retrospective.UrlId.StringId == request.SessionId && ng.Id == request.Id, cancellationToken);
             if (noteGroup == null) {
                 throw new NotFoundException(nameof(NoteGroup), request.Id);
             }
@@ -51,7 +51,7 @@ namespace PokerTime.Application.NoteGroups.Commands {
             await dbContext.SaveChangesAsync(cancellationToken);
 
             // Broadcast
-            await this._mediator.Publish(new NoteLaneUpdatedNotification(request.RetroId, (int)noteGroup.Lane.Id, noteGroup.Id), cancellationToken);
+            await this._mediator.Publish(new NoteLaneUpdatedNotification(request.SessionId, (int)noteGroup.Lane.Id, noteGroup.Id), cancellationToken);
 
             return Unit.Value;
         }

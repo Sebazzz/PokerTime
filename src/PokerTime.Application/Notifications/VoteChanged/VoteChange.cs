@@ -11,12 +11,12 @@ namespace PokerTime.Application.Notifications.VoteChanged {
     public sealed class VoteChange {
         public VoteModel Vote { get; }
 
-        public string RetroId { get; }
+        public string SessionId { get; }
 
         public VoteMutationType Mutation { get; }
 
-        public VoteChange(string retroId, VoteModel vote, VoteMutationType mutation) {
-            this.RetroId = retroId;
+        public VoteChange(string sessionId, VoteModel vote, VoteMutationType mutation) {
+            this.SessionId = sessionId;
             this.Vote = vote;
             this.Mutation = mutation;
         }

@@ -6,13 +6,13 @@ namespace PokerTime.Application.Notifications.NoteMoved {
     using MediatR;
 
     public sealed class NoteMovedNotification : INotification {
-        public string RetroId { get; }
+        public string SessionId { get; }
         public int LaneId { get; }
         public int NoteId { get; }
         public int? GroupId { get; }
 
-        public NoteMovedNotification(string retroId, int laneId, int noteId, int? groupId) {
-            this.RetroId = retroId;
+        public NoteMovedNotification(string sessionId, int laneId, int noteId, int? groupId) {
+            this.SessionId = sessionId;
             this.LaneId = laneId;
             this.NoteId = noteId;
             this.GroupId = groupId;

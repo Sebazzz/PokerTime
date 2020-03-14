@@ -11,11 +11,11 @@ namespace PokerTime.Application.Retrospectives.Queries.GetParticipant {
 
     public sealed class GetParticipantQuery : IRequest<ParticipantInfo?> {
         public string Name { get; }
-        public string RetroId { get; }
+        public string SessionId { get; }
 
-        public GetParticipantQuery(string name, string retroId) {
+        public GetParticipantQuery(string name, string sessionId) {
             this.Name = name;
-            this.RetroId = retroId;
+            this.SessionId = sessionId;
         }
     }
 }

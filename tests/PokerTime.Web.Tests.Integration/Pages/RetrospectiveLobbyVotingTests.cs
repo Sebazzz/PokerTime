@@ -22,7 +22,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         [SetUp]
         public async Task SetUp() {
             using IServiceScope scope = this.App.CreateTestServiceScope();
-            this.RetroId = await scope.CreateRetrospective("scrummaster");
+            this.SessionId = await scope.CreateRetrospective("scrummaster");
         }
 
         [Test]
@@ -30,7 +30,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
             // Given
             int bossId = 0;
             using (IServiceScope scope = this.App.CreateTestServiceScope()) {
-                await scope.TestCaseBuilder(this.RetroId).
+                await scope.TestCaseBuilder(this.SessionId).
                     WithParticipant("Boss", true, "scrummaster").
                     OutputId(id => bossId = id).
                     WithParticipant("Josh", false).
@@ -75,7 +75,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
             int bossId = 0;
             int participantId = 0;
             using (IServiceScope scope = this.App.CreateTestServiceScope()) {
-                await scope.TestCaseBuilder(this.RetroId).
+                await scope.TestCaseBuilder(this.SessionId).
                     WithParticipant("Boss", true, "scrummaster").
                     OutputId(id => bossId = id).
                     WithParticipant("Josh", false).

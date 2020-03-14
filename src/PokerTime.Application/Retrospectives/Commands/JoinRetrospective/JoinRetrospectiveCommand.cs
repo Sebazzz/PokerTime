@@ -18,8 +18,8 @@ namespace PokerTime.Application.Retrospectives.Commands.JoinRetrospective {
         public string Passphrase { get; set; }
 
         public bool JoiningAsFacilitator { get; set; }
-        public string RetroId { get; set; }
+        public string SessionId { get; set; }
 
-        public override string ToString() => $"[{nameof(JoinRetrospectiveCommand)}] Join retro {this.RetroId} as {this.Name} (facilitator: {this.JoiningAsFacilitator})";
+        public override string ToString() => $"[{nameof(JoinRetrospectiveCommand)}] Join retro {this.SessionId} as {this.Name} (facilitator: {this.JoiningAsFacilitator})";
     }
 }

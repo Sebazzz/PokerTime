@@ -23,7 +23,7 @@ namespace PokerTime.Application.Tests.Unit.NoteGroups.Commands {
     [TestFixture]
     public sealed class DeleteNoteGroupCommandHandlerTests : QueryTestBase {
         [Test]
-        public async Task DeleteNoteGroupCommandHandler_InvalidRetroId_SilentlyContinueNoBroadcast() {
+        public async Task DeleteNoteGroupCommandHandler_InvalidSessionId_SilentlyContinueNoBroadcast() {
             // Given
             var mediator = Substitute.For<IMediator>();
             var handler = new DeleteNoteGroupCommandHandler(
@@ -58,11 +58,11 @@ namespace PokerTime.Application.Tests.Unit.NoteGroups.Commands {
                 Participants = { new Participant { Name = "John" } },
                 NoteGroup = { new NoteGroup { Lane = this.Context.NoteLanes.Find(KnownNoteLane.Continue), Title = "???" } }
             };
-            string retroId = retro.UrlId.StringId;
+            string sessionId = retro.UrlId.StringId;
             this.Context.Retrospectives.Add(retro);
             await this.Context.SaveChangesAsync();
 
-            var command = new DeleteNoteGroupCommand(retroId, -1);
+            var command = new DeleteNoteGroupCommand(sessionId, -1);
 
             // When
             await handler.Handle(command, CancellationToken.None);
@@ -91,12 +91,12 @@ namespace PokerTime.Application.Tests.Unit.NoteGroups.Commands {
                 Participants = { new Participant { Name = "John" } },
                 NoteGroup = { new NoteGroup { Lane = this.Context.NoteLanes.Find(KnownNoteLane.Continue), Title = "???" } }
             };
-            string retroId = retro.UrlId.StringId;
+            string sessionId = retro.UrlId.StringId;
             this.Context.Retrospectives.Add(retro);
             await this.Context.SaveChangesAsync();
             NoteGroup noteGroup = retro.NoteGroup.First();
 
-            var command = new DeleteNoteGroupCommand(retroId, noteGroup.Id);
+            var command = new DeleteNoteGroupCommand(sessionId, noteGroup.Id);
 
             // When
             Assume.That(this.Context.NoteGroups.Select(x => x.Id), Does.Contain(noteGroup.Id));
@@ -112,7 +112,7 @@ namespace PokerTime.Application.Tests.Unit.NoteGroups.Commands {
             }
 
             Assert.That(broadcastedDelete.LaneId, Is.EqualTo((int)KnownNoteLane.Continue));
-            Assert.That(broadcastedDelete.RetroId, Is.EqualTo(command.RetroId));
+            Assert.That(broadcastedDelete.SessionId, Is.EqualTo(command.SessionId));
             Assert.That(broadcastedDelete.GroupId, Is.EqualTo(noteGroup.Id));
 
             Assert.That(this.Context.NoteGroups.Select(x => x.Id), Does.Not.Contains(noteGroup.Id));

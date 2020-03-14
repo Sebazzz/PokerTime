@@ -145,7 +145,7 @@ namespace PokerTime.Application.Tests.Unit.Votes.Command {
                 Assert.Fail("No broadcast has gone out");
             }
 
-            Assert.That(broadcastedNote.VoteChange.RetroId, Is.EqualTo(retro.UrlId.StringId));
+            Assert.That(broadcastedNote.VoteChange.SessionId, Is.EqualTo(retro.UrlId.StringId));
             Assert.That(broadcastedNote.VoteChange.Mutation, Is.EqualTo(VoteMutationType.Added));
             Assert.That(broadcastedNote.VoteChange.Vote.NoteGroupId, Is.EqualTo(retro.NoteGroup.First().Id));
         }
@@ -190,7 +190,7 @@ namespace PokerTime.Application.Tests.Unit.Votes.Command {
                 Assert.Fail("No broadcast has gone out");
             }
 
-            Assert.That(broadcastedNote.VoteChange.RetroId, Is.EqualTo(retro.UrlId.StringId));
+            Assert.That(broadcastedNote.VoteChange.SessionId, Is.EqualTo(retro.UrlId.StringId));
             Assert.That(broadcastedNote.VoteChange.Mutation, Is.EqualTo(VoteMutationType.Removed));
             Assert.That(broadcastedNote.VoteChange.Vote.NoteGroupId, Is.EqualTo(noteGroup.Id));
 
@@ -206,11 +206,11 @@ namespace PokerTime.Application.Tests.Unit.Votes.Command {
                 Participants = { new Participant { Name = "John" } },
                 NoteGroup = { new NoteGroup { Lane = this.Context.NoteLanes.Find(KnownNoteLane.Continue), Title = "???" } }
             };
-            string retroId = retro.UrlId.StringId;
+            string sessionId = retro.UrlId.StringId;
             this.Context.Retrospectives.Add(retro);
             await this.Context.SaveChangesAsync();
 
-            TestContext.WriteLine(retroId);
+            TestContext.WriteLine(sessionId);
             return retro;
         }
 
@@ -245,7 +245,7 @@ namespace PokerTime.Application.Tests.Unit.Votes.Command {
                 Assert.Fail("No broadcast has gone out");
             }
 
-            Assert.That(broadcastedNote.VoteChange.RetroId, Is.EqualTo(retro.UrlId.StringId));
+            Assert.That(broadcastedNote.VoteChange.SessionId, Is.EqualTo(retro.UrlId.StringId));
             Assert.That(broadcastedNote.VoteChange.Mutation, Is.EqualTo(VoteMutationType.Added));
             Assert.That(broadcastedNote.VoteChange.Vote.NoteId, Is.EqualTo(note.Id));
         }
@@ -262,11 +262,11 @@ namespace PokerTime.Application.Tests.Unit.Votes.Command {
             Note note = retro.Notes.First();
             note.Participant = retro.Participants.First();
 
-            string retroId = retro.UrlId.StringId;
+            string sessionId = retro.UrlId.StringId;
             this.Context.Retrospectives.Add(retro);
             await this.Context.SaveChangesAsync();
 
-            TestContext.WriteLine(retroId);
+            TestContext.WriteLine(sessionId);
             return retro;
         }
 
@@ -310,7 +310,7 @@ namespace PokerTime.Application.Tests.Unit.Votes.Command {
                 Assert.Fail("No broadcast has gone out");
             }
 
-            Assert.That(broadcastedNote.VoteChange.RetroId, Is.EqualTo(retro.UrlId.StringId));
+            Assert.That(broadcastedNote.VoteChange.SessionId, Is.EqualTo(retro.UrlId.StringId));
             Assert.That(broadcastedNote.VoteChange.Mutation, Is.EqualTo(VoteMutationType.Removed));
             Assert.That(broadcastedNote.VoteChange.Vote.NoteId, Is.EqualTo(note.Id));
 

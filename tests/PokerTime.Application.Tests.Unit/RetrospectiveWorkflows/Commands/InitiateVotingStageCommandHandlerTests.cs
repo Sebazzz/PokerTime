@@ -18,11 +18,11 @@ namespace PokerTime.Application.Tests.Unit.RetrospectiveWorkflows.Commands {
     [TestFixture]
     public sealed class InitiateVotingStageCommandHandlerTests : RetrospectiveWorkflowCommandTestBase {
         [Test]
-        public void InitiateVotingStageCommandHandler_InvalidRetroId_ThrowsNotFoundException() {
+        public void InitiateVotingStageCommandHandler_InvalidSessionId_ThrowsNotFoundException() {
             // Given
-            const string retroId = "not found surely :)";
+            const string sessionId = "not found surely :)";
             var handler = new InitiateVotingStageCommandHandler(this.Context, this.RetrospectiveStatusUpdateDispatcherMock, this.SystemClockMock);
-            var request = new InitiateVotingStageCommand { RetroId = retroId, TimeInMinutes = 10 };
+            var request = new InitiateVotingStageCommand { SessionId = sessionId, TimeInMinutes = 10 };
 
             // When
             TestDelegate action = () => handler.Handle(request, CancellationToken.None).GetAwaiter().GetResult();
@@ -35,7 +35,7 @@ namespace PokerTime.Application.Tests.Unit.RetrospectiveWorkflows.Commands {
         public async Task InitiateVotingStageCommandHandler_OnStatusChange_UpdatesRetroStageAndInvokesNotification() {
             // Given
             var handler = new InitiateVotingStageCommandHandler(this.Context, this.RetrospectiveStatusUpdateDispatcherMock, this.SystemClockMock);
-            var request = new InitiateVotingStageCommand { RetroId = this.RetroId, TimeInMinutes = 10, VotesPerGroup = 6 };
+            var request = new InitiateVotingStageCommand { SessionId = this.SessionId, TimeInMinutes = 10, VotesPerGroup = 6 };
 
             this.SystemClockMock.CurrentTimeOffset.Returns(DateTimeOffset.UnixEpoch);
 

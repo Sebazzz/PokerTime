@@ -9,10 +9,10 @@ namespace PokerTime.Application.Notifications {
     using MediatR;
 
     public abstract class RetrospectiveNotification : INotification {
-        protected RetrospectiveNotification(string retroId) {
-            this.RetroId = retroId;
+        protected RetrospectiveNotification(string sessionId) {
+            this.SessionId = sessionId;
         }
 
-        public string RetroId { get; }
+        public string SessionId { get; }
     }
 }

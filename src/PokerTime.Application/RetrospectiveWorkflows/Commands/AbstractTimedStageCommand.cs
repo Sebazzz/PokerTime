@@ -9,7 +9,7 @@ namespace PokerTime.Application.RetrospectiveWorkflows.Commands {
 #nullable disable
 
     public abstract class AbstractStageCommand {
-        public string RetroId { get; set; }
+        public string SessionId { get; set; }
 
     }
 

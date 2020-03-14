@@ -33,7 +33,7 @@ namespace PokerTime.Application.Tests.Unit.Retrospectives.Commands {
             passphraseService.CreateHashedPassphrase("anything").Returns("myhash");
             passphraseService.CreateHashedPassphrase("facilitator password").Returns("facilitatorhash");
 
-            urlGenerator.GenerateUrlToRetrospectiveLobby(Arg.Any<RetroIdentifier>()).Returns(new Uri("https://example.com/retro/1"));
+            urlGenerator.GenerateUrlToRetrospectiveLobby(Arg.Any<SessionIdentifier>()).Returns(new Uri("https://example.com/retro/1"));
 
             systemClock.CurrentTimeOffset.Returns(DateTimeOffset.UnixEpoch);
 

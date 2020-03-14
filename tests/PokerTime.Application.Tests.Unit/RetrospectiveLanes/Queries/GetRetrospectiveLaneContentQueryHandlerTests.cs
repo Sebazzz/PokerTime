@@ -23,8 +23,8 @@ namespace PokerTime.Application.Tests.Unit.RetrospectiveLanes.Queries {
         [Test]
         public async Task GetRetrospectiveLaneContentCommand_ReturnsEmpty_RetrospectiveNotFound() {
             // Given
-            const string retroId = "surely-not-found";
-            var query = new GetRetrospectiveLaneContentQuery(retroId, (int)KnownNoteLane.Stop);
+            const string sessionId = "surely-not-found";
+            var query = new GetRetrospectiveLaneContentQuery(sessionId, (int)KnownNoteLane.Stop);
             var handler = new GetRetrospectiveLaneContentQueryHandler(this.Context, this.Mapper, Substitute.For<ICurrentParticipantService>(), new TextAnonymizingService());
 
             // When
@@ -65,11 +65,11 @@ namespace PokerTime.Application.Tests.Unit.RetrospectiveLanes.Queries {
                     }
                 }
             };
-            string retroId = retro.UrlId.StringId;
+            string sessionId = retro.UrlId.StringId;
             this.Context.Retrospectives.Add(retro);
             await this.Context.SaveChangesAsync(CancellationToken.None);
 
-            var query = new GetRetrospectiveLaneContentQuery(retroId, (int)KnownNoteLane.Stop);
+            var query = new GetRetrospectiveLaneContentQuery(sessionId, (int)KnownNoteLane.Stop);
             var handler = new GetRetrospectiveLaneContentQueryHandler(this.Context, this.Mapper, Substitute.For<ICurrentParticipantService>(), new TextAnonymizingService());
 
             // When
@@ -112,7 +112,7 @@ namespace PokerTime.Application.Tests.Unit.RetrospectiveLanes.Queries {
                     }
                 }
             };
-            string retroId = retro.UrlId.StringId;
+            string sessionId = retro.UrlId.StringId;
             this.Context.Retrospectives.Add(retro);
             await this.Context.SaveChangesAsync(CancellationToken.None);
 
@@ -123,7 +123,7 @@ namespace PokerTime.Application.Tests.Unit.RetrospectiveLanes.Queries {
 
             await this.Context.SaveChangesAsync(CancellationToken.None);
 
-            var query = new GetRetrospectiveLaneContentQuery(retroId, (int)KnownNoteLane.Stop);
+            var query = new GetRetrospectiveLaneContentQuery(sessionId, (int)KnownNoteLane.Stop);
             var handler = new GetRetrospectiveLaneContentQueryHandler(this.Context, this.Mapper, Substitute.For<ICurrentParticipantService>(), new TextAnonymizingService());
 
             // When

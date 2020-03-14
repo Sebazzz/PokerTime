@@ -9,13 +9,13 @@ namespace PokerTime.Application.Notifications.NoteDeleted {
     using MediatR;
 
     public class NoteDeletedNotification : INotification {
-        public NoteDeletedNotification(string retroId, int laneId, in int noteId) {
-            this.RetroId = retroId;
+        public NoteDeletedNotification(string sessionId, int laneId, in int noteId) {
+            this.SessionId = sessionId;
             this.LaneId = laneId;
             this.NoteId = noteId;
         }
 
-        public string RetroId { get; }
+        public string SessionId { get; }
         public int LaneId { get; }
         public int NoteId { get; }
     }

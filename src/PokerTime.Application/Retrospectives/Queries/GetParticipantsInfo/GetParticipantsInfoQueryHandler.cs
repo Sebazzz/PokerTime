@@ -31,7 +31,7 @@ namespace PokerTime.Application.Retrospectives.Queries.GetParticipantsInfo {
             var returnValue = new ParticipantsInfoList();
             returnValue.Participants.AddRange(
                 await this._returnDbContext.Retrospectives
-                    .Where(r => r.UrlId.StringId == request.RetroId)
+                    .Where(r => r.UrlId.StringId == request.SessionId)
                     .SelectMany(r => r.Participants)
                     .ProjectTo<ParticipantInfo>(this._mapper.ConfigurationProvider)
                     .OrderBy(x => x.Name)

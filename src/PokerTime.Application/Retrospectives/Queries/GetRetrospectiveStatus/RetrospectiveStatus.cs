@@ -11,7 +11,7 @@ namespace PokerTime.Application.Retrospectives.Queries.GetRetrospectiveStatus {
     using Domain.Entities;
 
     public sealed class RetrospectiveStatus {
-        public string RetroId { get; }
+        public string SessionId { get; }
 
         public string Title { get; }
 
@@ -30,8 +30,8 @@ namespace PokerTime.Application.Retrospectives.Queries.GetRetrospectiveStatus {
 
         public List<RetrospectiveLane> Lanes { get; } = new List<RetrospectiveLane>();
 
-        public RetrospectiveStatus(string retroId, string title, RetrospectiveStage retrospectiveStage, RetrospectiveWorkflowStatus workflowStatus, int votesPerLane) {
-            this.RetroId = retroId;
+        public RetrospectiveStatus(string sessionId, string title, RetrospectiveStage retrospectiveStage, RetrospectiveWorkflowStatus workflowStatus, int votesPerLane) {
+            this.SessionId = sessionId;
             this.Title = title;
             this.Stage = retrospectiveStage;
             this.WorkflowStatus = workflowStatus;
@@ -39,7 +39,7 @@ namespace PokerTime.Application.Retrospectives.Queries.GetRetrospectiveStatus {
         }
 
         public RetrospectiveStatus() {
-            this.RetroId = String.Empty;
+            this.SessionId = String.Empty;
             this.Title = String.Empty;
             this.Stage = RetrospectiveStage.NotStarted;
             this.WorkflowStatus = new RetrospectiveWorkflowStatus();

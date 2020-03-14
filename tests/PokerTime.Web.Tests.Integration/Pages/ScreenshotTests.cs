@@ -86,10 +86,10 @@ namespace PokerTime.Web.Tests.Integration.Pages {
             createRetroPage.Submit();
 
             string url = createRetroPage.GetUrlShown();
-            string retroId = Regex.Match(url, "/retrospective/(?<retroId>[A-z0-9]+)/join", RegexOptions.IgnoreCase).
-                Groups["retroId"].
+            string sessionId = Regex.Match(url, "/session/(?<sessionId>[A-z0-9]+)/join", RegexOptions.IgnoreCase).
+                Groups["sessionId"].
                 Value;
-            this.RetroId = retroId;
+            this.SessionId = sessionId;
         }
 
         [Test]
@@ -99,7 +99,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
 
             // Given
             using (IServiceScope scope = this.App.CreateTestServiceScope()) {
-                await scope.SetRetrospective(this.RetroId, r => r.HashedPassphrase = null);
+                await scope.SetRetrospective(this.SessionId, r => r.HashedPassphrase = null);
             }
 
             this.Join(this.Client1, true, "Roger", colorName: "Driver", submitCallback: () => CreateDocScreenshot(this.Client1.WebDriver, "join-retro"));
@@ -133,7 +133,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
             WriteNote(this.Client2, KnownNoteLane.Continue, "Using this framework, it works very productive");
 
             using (IServiceScope scope = this.App.CreateTestServiceScope()) {
-                await scope.TestCaseBuilder(this.RetroId).
+                await scope.TestCaseBuilder(this.SessionId).
                     HasExistingParticipant("Roger").
                     HasExistingParticipant("Hong").
                     WithParticipant("Aaron", false).
@@ -203,7 +203,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
                     }
                 }
 
-                await scope.TestCaseBuilder(this.RetroId).
+                await scope.TestCaseBuilder(this.SessionId).
                     HasExistingParticipant("Roger").
                     WithNoteGroup("Roger", KnownNoteLane.Start, "Automated tests").
                     OutputId(id => this._startAutomationGroupId = id).
@@ -246,7 +246,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
 
             // When
             using (IServiceScope scope = this.App.CreateTestServiceScope()) {
-                await scope.TestCaseBuilder(this.RetroId).
+                await scope.TestCaseBuilder(this.SessionId).
                     HasExistingParticipant("Aaron").
                     HasExistingParticipant("Ashley").
                     HasExistingParticipant("Hong").
@@ -345,11 +345,11 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         private int GetLatestNoteId() {
             Thread.Sleep(250);
 
-            string retroId = this.RetroId;
+            string sessionId = this.SessionId;
 
             using IServiceScope scope = this.App.CreateTestServiceScope();
             var dbContext = scope.ServiceProvider.GetRequiredService<IReturnDbContext>();
-            int noteId = dbContext.Notes.Where(x => x.Retrospective.UrlId.StringId == retroId).
+            int noteId = dbContext.Notes.Where(x => x.Retrospective.UrlId.StringId == sessionId).
                 OrderByDescending(x => x.Id).
                 Select(x => x.Id).
                 First();
@@ -359,9 +359,9 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         private void EnsureRetrospectiveInStage(RetrospectiveStage retrospectiveStage) {
             using IServiceScope scope = this.App.CreateTestServiceScope();
             var dbContext = scope.ServiceProvider.GetRequiredService<IReturnDbContext>();
-            Assume.That(() => dbContext.Retrospectives.AsNoTracking().FindByRetroId(this.RetroId, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult(),
+            Assume.That(() => dbContext.Retrospectives.AsNoTracking().FindBySessionId(this.SessionId, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult(),
                 Has.Property(nameof(Retrospective.CurrentStage)).EqualTo(retrospectiveStage).Retry(),
-                $"Retrospective {this.RetroId} is not in stage {retrospectiveStage} required for this test. Are the tests running in the correct order?");
+                $"Retrospective {this.SessionId} is not in stage {retrospectiveStage} required for this test. Are the tests running in the correct order?");
         }
     }
 }

@@ -1,4 +1,4 @@
-@page "/session/{retroId}/lobby"
+@page "/session/{sessionId}/lobby"
 @layout RetrospectiveLayout
 @inherits RetrospectiveLobbyBase
 
@@ -12,7 +12,7 @@
     return;
 }
 
-<CascadingValue Value=@this.RetroIdObject IsFixed="true">
+<CascadingValue Value=@this.SessionIdObject IsFixed="true">
     <CascadingValue Value=@this.CurrentParticipant IsFixed="true">
         <CascadingValue Value=@this.RetrospectiveStatus>
             <CascadingValue Value=@this.Votes>
@@ -33,7 +33,7 @@
                             <RetrospectiveStatusPanel />
                         </CascadingValue>
 
-                        <RetrospectiveOnlineList RetroId="@this.RetroId" CurrentParticipant="@this.CurrentParticipant" />
+                        <RetrospectiveOnlineList SessionId="@this.SessionId" CurrentParticipant="@this.CurrentParticipant" />
                     </div>
                 </div>
             </CascadingValue>

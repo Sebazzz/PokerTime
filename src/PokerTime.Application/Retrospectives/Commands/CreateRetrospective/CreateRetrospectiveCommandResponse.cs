@@ -11,11 +11,11 @@ namespace PokerTime.Application.Retrospectives.Commands.CreateRetrospective {
     using QRCoder;
 
     public sealed class CreateRetrospectiveCommandResponse {
-        public RetroIdentifier Identifier { get; }
+        public SessionIdentifier Identifier { get; }
         public QrCode QrCode { get; }
         public string Location { get; }
 
-        public CreateRetrospectiveCommandResponse(RetroIdentifier identifier, QrCode qrCode, string location) {
+        public CreateRetrospectiveCommandResponse(SessionIdentifier identifier, QrCode qrCode, string location) {
             this.Identifier = identifier;
             this.QrCode = qrCode;
             this.Location = location;

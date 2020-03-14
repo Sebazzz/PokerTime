@@ -17,7 +17,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
     using OpenQA.Selenium.Support.UI;
 
     public class RetrospectiveLobbyTestsBase : TwoClientPageFixture<RetrospectiveLobby> {
-        protected string RetroId { get; set; }
+        protected string SessionId { get; set; }
         private int _colorIndex = 1;
 
         [SetUp]
@@ -27,7 +27,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         protected void Join(RetrospectiveLobby pageObject, bool facilitator, string name = null, bool alreadyJoined = false, string colorName = null, Action submitCallback = null) {
             using var joinPage = new JoinRetrospectivePage();
             joinPage.InitializeFrom(pageObject);
-            joinPage.Navigate(this.App, this.RetroId);
+            joinPage.Navigate(this.App, this.SessionId);
 
             joinPage.NameInput.SendKeys(name ?? Name.Create());
 
@@ -72,7 +72,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
 
         protected Task SetRetrospective(Action<Retrospective> action) {
             using IServiceScope scope = this.App.CreateTestServiceScope();
-            return scope.SetRetrospective(this.RetroId, action);
+            return scope.SetRetrospective(this.SessionId, action);
         }
 
         private static void WaitNavigatedToLobby(RetrospectiveLobby pageObject) {

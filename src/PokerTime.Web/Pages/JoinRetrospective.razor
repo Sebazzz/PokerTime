@@ -1,4 +1,4 @@
-@page "/pokertime-session/{retroId}/join"
+@page "/pokertime-session/{sessionId}/join"
 @implements PokerTime.Application.Notifications.RetrospectiveJoined.IRetrospectiveJoinedSubscriber
 @inherits SubscribingComponent<PokerTime.Application.Notifications.RetrospectiveJoined.IRetrospectiveJoinedSubscriber>
 @layout RetrospectiveLayout
@@ -161,7 +161,7 @@ else
         </div>
 
         <div class="column">
-            <RetrospectiveOnlineList RetroId="@this.RetroId" />
+            <RetrospectiveOnlineList SessionId="@this.SessionId" />
         </div>
     </div>
 }
@@ -171,7 +171,7 @@ else
 {
 #nullable disable
     [Parameter]
-    public string RetroId { get; set; }
+    public string SessionId { get; set; }
 
     private JoinRetrospectiveInfo RetrospectiveInfo { get; set; }
     private IList<AvailableParticipantColorModel> AvailablePredefinedColors { get; set; }
@@ -189,12 +189,12 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        this.RetrospectiveInfo = await this.Mediator.Send(new GetJoinRetrospectiveInfoQuery { RetroId = this.RetroId });
+        this.RetrospectiveInfo = await this.Mediator.Send(new GetJoinRetrospectiveInfoQuery { SessionId = this.SessionId });
 
         if (this.RetrospectiveInfo != null)
         {
             this.Layout?.Update(new RetrospectiveLayoutInfo(this.RetrospectiveInfo.Title));
-            this.AvailablePredefinedColors = await this.Mediator.Send(new GetAvailablePredefinedParticipantColorsQuery(this.RetroId));
+            this.AvailablePredefinedColors = await this.Mediator.Send(new GetAvailablePredefinedParticipantColorsQuery(this.SessionId));
         }
         else
         {
@@ -204,7 +204,7 @@ else
 
     protected override void OnParametersSet()
     {
-        this.Model.RetroId = this.RetroId;
+        this.Model.SessionId = this.SessionId;
     }
 
     private void ChooseOwnColor()
@@ -221,7 +221,7 @@ else
 
         bool wasShowingParticipantWarning = this.ShowParticipantAlreadyJoinedWarning;
 
-        ParticipantInfo result = await this.Mediator.Send(new GetParticipantQuery(this.Model.Name, this.RetroId));
+        ParticipantInfo result = await this.Mediator.Send(new GetParticipantQuery(this.Model.Name, this.SessionId));
         this.ShowParticipantAlreadyJoinedWarning = result != null;
 
         if (result != null)
@@ -255,11 +255,11 @@ else
         {
             this.ShowErrorMessage = true;
 
-            Logger.LogError(ex, $"Error joining retrospective {this.RetroId} with name {this.Model.Name}");
+            Logger.LogError(ex, $"Error joining retrospective {this.SessionId} with name {this.Model.Name}");
             return;
         }
 
-        this.NavigationManager.NavigateTo("session/" + this.RetroId + "/lobby");
+        this.NavigationManager.NavigateTo("session/" + this.SessionId + "/lobby");
     }
 
     private void HandleInvalidSubmit()
@@ -269,14 +269,14 @@ else
 
     public Task OnParticipantJoinedRetrospective(RetrospectiveEvent<ParticipantInfo> eventArgs)
     {
-        if (eventArgs.RetroId != this.RetroId)
+        if (eventArgs.SessionId != this.SessionId)
         {
             return Task.CompletedTask;
         }
 
         return this.InvokeAsync(async () =>
         {
-            this.AvailablePredefinedColors = await this.Mediator.Send(new GetAvailablePredefinedParticipantColorsQuery(this.RetroId));
+            this.AvailablePredefinedColors = await this.Mediator.Send(new GetAvailablePredefinedParticipantColorsQuery(this.SessionId));
 
             this.NotificationIsHandled();
         });

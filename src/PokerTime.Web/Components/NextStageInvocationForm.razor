@@ -54,7 +54,7 @@
     public AbstractTimedStageCommand Model { get; set; }
 
     [CascadingParameter]
-    public RetroIdentifier RetroId { get; set; }
+    public SessionIdentifier SessionId { get; set; }
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
@@ -66,9 +66,9 @@
 
     protected override void OnParametersSet()
     {
-        if (this.RetroId != null && this.Model != null)
+        if (this.SessionId != null && this.Model != null)
         {
-            this.Model.RetroId = this.RetroId.StringId;
+            this.Model.SessionId = this.SessionId.StringId;
         }
 
         base.OnParametersSet();
@@ -87,7 +87,7 @@
         }
         catch (Exception ex)
         {
-            this.Logger.LogError(ex, $"Unable to start the next stage of retrospective {this.RetroId} from form: {this.ButtonText}");
+            this.Logger.LogError(ex, $"Unable to start the next stage of retrospective {this.SessionId} from form: {this.ButtonText}");
             this.ShowErrorMessage = true;
         }
     }

@@ -51,7 +51,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
             this.Page.Submit();
 
             // Then
-            Assert.That(this.Page.GetUrlShown(), Does.Match(@"http://localhost:\d+/retrospective/([A-z0-9]+)/join"));
+            Assert.That(this.Page.GetUrlShown(), Does.Match(@"http://localhost:\d+/session/([A-z0-9]+)/join"));
 
             Assert.That(this.Page.FacilitatorInstructions.Text, Contains.Substring("my secret facilitator password"));
             Assert.That(this.Page.ParticipatorInstructions.Text, Contains.Substring("the participator password"));
@@ -69,7 +69,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
             this.Page.Submit();
 
             // Then
-            Assert.That(this.Page.GetUrlShown(), Does.Match(@"http://localhost:\d+/retrospective/([A-z0-9]+)/join"));
+            Assert.That(this.Page.GetUrlShown(), Does.Match(@"http://localhost:\d+/session/([A-z0-9]+)/join"));
 
             Assert.That(this.Page.FacilitatorInstructions.Text, Contains.Substring("my secret facilitator password"));
             Assert.That(this.Page.ParticipatorInstructions.Text, Contains.Substring("no password is required"));

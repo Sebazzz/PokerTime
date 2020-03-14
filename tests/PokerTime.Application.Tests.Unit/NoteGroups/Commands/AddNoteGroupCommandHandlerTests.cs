@@ -24,7 +24,7 @@ namespace PokerTime.Application.Tests.Unit.NoteGroups.Commands {
     [TestFixture]
     public sealed class AddNoteGroupCommandHandlerTests : QueryTestBase {
         [Test]
-        public void AddNoteGroupCommandHandler_InvalidRetroId_ThrowsNotFoundException() {
+        public void AddNoteGroupCommandHandler_InvalidSessionId_ThrowsNotFoundException() {
             // Given
             var handler = new AddNoteGroupCommandHandler(
                 this.Context,
@@ -58,11 +58,11 @@ namespace PokerTime.Application.Tests.Unit.NoteGroups.Commands {
                 CreationTimestamp = DateTimeOffset.Now,
                 Participants = { new Participant { Name = "John" } }
             };
-            string retroId = retro.UrlId.StringId;
+            string sessionId = retro.UrlId.StringId;
             this.Context.Retrospectives.Add(retro);
             await this.Context.SaveChangesAsync();
 
-            var command = new AddNoteGroupCommand(retroId, -1);
+            var command = new AddNoteGroupCommand(sessionId, -1);
 
             // When
             TestDelegate action = () => handler.Handle(command, CancellationToken.None).GetAwaiter().GetResult();
@@ -91,11 +91,11 @@ namespace PokerTime.Application.Tests.Unit.NoteGroups.Commands {
                 CreationTimestamp = DateTimeOffset.Now,
                 Participants = { new Participant { Name = "John" } }
             };
-            string retroId = retro.UrlId.StringId;
+            string sessionId = retro.UrlId.StringId;
             this.Context.Retrospectives.Add(retro);
             await this.Context.SaveChangesAsync();
 
-            var command = new AddNoteGroupCommand(retroId, (int)KnownNoteLane.Start);
+            var command = new AddNoteGroupCommand(sessionId, (int)KnownNoteLane.Start);
 
             // When
             RetrospectiveNoteGroup result = await handler.Handle(command, CancellationToken.None);
@@ -113,7 +113,7 @@ namespace PokerTime.Application.Tests.Unit.NoteGroups.Commands {
             }
 
             Assert.That(broadcastedUpdate.LaneId, Is.EqualTo((int)KnownNoteLane.Start));
-            Assert.That(broadcastedUpdate.RetroId, Is.EqualTo(command.RetroId));
+            Assert.That(broadcastedUpdate.SessionId, Is.EqualTo(command.SessionId));
             Assert.That(broadcastedUpdate.GroupId, Is.EqualTo(result.Id));
         }
     }

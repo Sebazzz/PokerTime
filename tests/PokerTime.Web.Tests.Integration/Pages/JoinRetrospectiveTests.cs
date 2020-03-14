@@ -31,10 +31,10 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         [Test]
         public void JoinRetrospectivePage_UnknownRetrospective_ShowNotFoundMessage() {
             // Given
-            string retroIdentifier = new RetroIdentifierService().CreateNew().StringId;
+            string sessionIdentifier = new SessionIdentifierService().CreateNew().StringId;
 
             // When
-            this.Page.Navigate(this.App, retroIdentifier);
+            this.Page.Navigate(this.App, sessionIdentifier);
 
             // Then
             Assert.That(this.Page.Title.Text, Contains.Substring("not found"));
@@ -43,8 +43,8 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         [Test]
         public async Task JoinRetrospectivePage_KnownRetrospective_FormShownWithValidation() {
             // Given
-            string retroId = await this.CreateRetrospective("scrummaster", "secret");
-            this.Page.Navigate(this.App, retroId);
+            string sessionId = await this.CreateRetrospective("scrummaster", "secret");
+            this.Page.Navigate(this.App, sessionId);
 
             // When
             this.Page.Submit();
@@ -67,11 +67,11 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         [Test]
         public async Task JoinRetrospectivePage_KnownRetrospectiveAlreadyStarted_ShowMessage() {
             // Given
-            string retroId = await this.CreateRetrospective("scrummaster", "secret");
-            await this.SetRetrospective(retroId, retro => retro.CurrentStage = RetrospectiveStage.Writing);
+            string sessionId = await this.CreateRetrospective("scrummaster", "secret");
+            await this.SetRetrospective(sessionId, retro => retro.CurrentStage = RetrospectiveStage.Writing);
 
             // When
-            this.Page.Navigate(this.App, retroId);
+            this.Page.Navigate(this.App, sessionId);
 
             // Then
             Assert.That(() => this.Page.WebDriver.FindElements(By.CssSelector(".notification.is-info")), Has.Count.EqualTo(1).Retry());
@@ -80,11 +80,11 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         [Test]
         public async Task JoinRetrospectivePage_KnownRetrospectiveFinished_ShowMessage() {
             // Given
-            string retroId = await this.CreateRetrospective("scrummaster", "secret");
-            await this.SetRetrospective(retroId, retro => retro.CurrentStage = RetrospectiveStage.Finished);
+            string sessionId = await this.CreateRetrospective("scrummaster", "secret");
+            await this.SetRetrospective(sessionId, retro => retro.CurrentStage = RetrospectiveStage.Finished);
 
             // When
-            this.Page.Navigate(this.App, retroId);
+            this.Page.Navigate(this.App, sessionId);
 
             // Then
             Assert.That(() => this.Page.WebDriver.FindElements(By.CssSelector(".notification.is-warning")), Has.Count.EqualTo(1).Retry());
@@ -93,9 +93,9 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         [Test]
         public async Task JoinRetrospectivePage_KnownRetrospective_ValidatesParticipantPassphaseAndRedirectsToLobby() {
             // Given
-            string retroId = await this.CreateRetrospective("scrummaster", "secret");
+            string sessionId = await this.CreateRetrospective("scrummaster", "secret");
             string myName = Name.Create();
-            this.Page.Navigate(this.App, retroId);
+            this.Page.Navigate(this.App, sessionId);
 
             // When
             this.Page.NameInput.SendKeys(myName);
@@ -104,18 +104,18 @@ namespace PokerTime.Web.Tests.Integration.Pages {
             this.Page.Submit();
 
             // Then
-            Assert.That(() => this.Page.WebDriver.Url, Does.Match("/retrospective/" + retroId + "/lobby").Retry());
+            Assert.That(() => this.Page.WebDriver.Url, Does.Match("/session/" + sessionId + "/lobby").Retry());
         }
 
         [Test]
         public async Task JoinRetrospectivePage_KnownRetrospective_JoinParticipantUpdatesParticipantListInRealtime() {
             // Given
-            string retroId = await this.CreateRetrospective("scrummaster", "secret");
+            string sessionId = await this.CreateRetrospective("scrummaster", "secret");
             string myName = Name.Create();
-            this.Page.Navigate(this.App, retroId);
+            this.Page.Navigate(this.App, sessionId);
 
             var secondInstance = this.App.CreatePageObject<JoinRetrospectivePage>().RegisterAsTestDisposable();
-            secondInstance.Navigate(this.App, retroId);
+            secondInstance.Navigate(this.App, sessionId);
 
             // When
             this.Page.NameInput.SendKeys(myName);
@@ -130,18 +130,18 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         [Test]
         public async Task JoinRetrospectivePage_KnownRetrospective_JoinParticipantUpdatesColorListInRealtime() {
             // Given
-            string retroId = await this.CreateRetrospective("scrummaster", "secret");
+            string sessionId = await this.CreateRetrospective("scrummaster", "secret");
             string myName = Name.Create();
-            this.Page.Navigate(this.App, retroId);
+            this.Page.Navigate(this.App, sessionId);
 
             JoinRetrospectivePage secondInstance = this.App.CreatePageObject<JoinRetrospectivePage>().RegisterAsTestDisposable();
-            secondInstance.Navigate(this.App, retroId);
+            secondInstance.Navigate(this.App, sessionId);
 
             IList<AvailableParticipantColorModel> availableColors;
             {
                 using IServiceScope scope = this.App.CreateTestServiceScope();
                 scope.SetNoAuthenticationInfo();
-                availableColors = await scope.Send(new GetAvailablePredefinedParticipantColorsQuery(retroId));
+                availableColors = await scope.Send(new GetAvailablePredefinedParticipantColorsQuery(sessionId));
             }
             AvailableParticipantColorModel colorToSelect = availableColors[TestContext.CurrentContext.Random.Next(0, availableColors.Count)];
 
@@ -162,12 +162,12 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         [Test]
         public async Task JoinRetrospectivePage_KnownRetrospective_JoinAsFacilitatorUpdatesParticipantListInRealtime() {
             // Given
-            string retroId = await this.CreateRetrospective("scrummaster", "secret");
+            string sessionId = await this.CreateRetrospective("scrummaster", "secret");
             string myName = Name.Create();
-            this.Page.Navigate(this.App, retroId);
+            this.Page.Navigate(this.App, sessionId);
 
             var secondInstance = this.App.CreatePageObject<JoinRetrospectivePage>().RegisterAsTestDisposable();
-            secondInstance.Navigate(this.App, retroId);
+            secondInstance.Navigate(this.App, sessionId);
 
             // When
             this.Page.NameInput.SendKeys(myName);
@@ -183,7 +183,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
 
             using IServiceScope scope = this.App.CreateTestServiceScope();
             scope.SetNoAuthenticationInfo();
-            ParticipantsInfoList participants = await scope.Send(new GetParticipantsInfoQuery(retroId));
+            ParticipantsInfoList participants = await scope.Send(new GetParticipantsInfoQuery(sessionId));
             ParticipantInfo facilitator = participants.Participants.First(x => x.Name == myName);
 
             // Then
@@ -191,9 +191,9 @@ namespace PokerTime.Web.Tests.Integration.Pages {
             Assert.That(() => secondInstance.OnlineList.GetListItem(facilitator.Id).FindElements(By.ClassName("fa-crown")), Is.Not.Empty.Retry());
         }
 
-        private Task SetRetrospective(string retroId, Action<Retrospective> action) {
+        private Task SetRetrospective(string sessionId, Action<Retrospective> action) {
             using IServiceScope scope = this.App.CreateTestServiceScope();
-            return scope.SetRetrospective(retroId, action);
+            return scope.SetRetrospective(sessionId, action);
         }
         private async Task<string> CreateRetrospective(string facilitatorPassword, string password) {
             var command = new CreateRetrospectiveCommand {
@@ -222,7 +222,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         public void Submit() => this.SubmitButton.Click();
 
         public ReadOnlyCollection<IWebElement> GetValidationMessages() => this.WebDriver.FindElements(By.ClassName("validation-message"));
-        public void Navigate(ReturnAppFactory app, string retroId) => this.WebDriver.NavigateToBlazorPage(app.CreateUri($"retrospective/{retroId}/join"));
+        public void Navigate(ReturnAppFactory app, string sessionId) => this.WebDriver.NavigateToBlazorPage(app.CreateUri($"retrospective/{sessionId}/join"));
 
         public RetrospectiveOnlineListComponent OnlineList => new RetrospectiveOnlineListComponent(this.WebDriver);
     }

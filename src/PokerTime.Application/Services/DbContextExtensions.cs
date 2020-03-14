@@ -14,14 +14,14 @@ namespace PokerTime.Application.Services {
     using Microsoft.EntityFrameworkCore;
 
     public static class RetrospectiveQueryExtensions {
-        public static Task<Retrospective> FindByRetroId(
+        public static Task<Retrospective> FindBySessionId(
             this IQueryable<Retrospective> queryable,
-            string retroIdentifier,
+            string sessionIdentifier,
             CancellationToken cancellationToken
         ) {
-            if (retroIdentifier == null) throw new ArgumentNullException(nameof(retroIdentifier));
+            if (sessionIdentifier == null) throw new ArgumentNullException(nameof(sessionIdentifier));
 
-            return queryable.FirstOrDefaultAsync(predicate: x => x.UrlId.StringId == retroIdentifier,
+            return queryable.FirstOrDefaultAsync(predicate: x => x.UrlId.StringId == sessionIdentifier,
                 cancellationToken: cancellationToken);
         }
     }

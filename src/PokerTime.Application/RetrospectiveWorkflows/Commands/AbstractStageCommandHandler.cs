@@ -34,7 +34,7 @@ namespace PokerTime.Application.RetrospectiveWorkflows.Commands {
 
             try {
                 this.DbContext = this._dbContextFactory.CreateForEditContext();
-                Retrospective? retrospective = await this.DbContext.Retrospectives.FindByRetroId(request.RetroId, cancellationToken);
+                Retrospective? retrospective = await this.DbContext.Retrospectives.FindBySessionId(request.SessionId, cancellationToken);
 
                 if (retrospective == null) {
                     throw new NotFoundException();

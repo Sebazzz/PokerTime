@@ -38,7 +38,7 @@ namespace PokerTime.Application.Tests.Unit.Notes.Commands {
         }
 
         [Test]
-        public void AddNoteCommandHandler_InvalidRetroId_ThrowsNotFoundException() {
+        public void AddNoteCommandHandler_InvalidSessionId_ThrowsNotFoundException() {
             // Given
             var handler = new AddNoteCommandHandler(
                 this.Context,
@@ -76,11 +76,11 @@ namespace PokerTime.Application.Tests.Unit.Notes.Commands {
                 CreationTimestamp = DateTimeOffset.Now,
                 Participants = { new Participant { Name = "John" } }
             };
-            string retroId = retro.UrlId.StringId;
+            string sessionId = retro.UrlId.StringId;
             this.Context.Retrospectives.Add(retro);
             await this.Context.SaveChangesAsync();
 
-            var command = new AddNoteCommand(retroId, -1);
+            var command = new AddNoteCommand(sessionId, -1);
 
             // When
             TestDelegate action = () => handler.Handle(command, CancellationToken.None).GetAwaiter().GetResult();
@@ -110,11 +110,11 @@ namespace PokerTime.Application.Tests.Unit.Notes.Commands {
                 CreationTimestamp = DateTimeOffset.Now,
                 Participants = { new Participant { Name = "John" } }
             };
-            string retroId = retro.UrlId.StringId;
+            string sessionId = retro.UrlId.StringId;
             this.Context.Retrospectives.Add(retro);
             await this.Context.SaveChangesAsync();
 
-            var command = new AddNoteCommand(retroId, (int)KnownNoteLane.Start);
+            var command = new AddNoteCommand(sessionId, (int)KnownNoteLane.Start);
 
             // When
             RetrospectiveNote result = await handler.Handle(command, CancellationToken.None);
@@ -133,7 +133,7 @@ namespace PokerTime.Application.Tests.Unit.Notes.Commands {
             }
 
             Assert.That(broadcastedNote.LaneId, Is.EqualTo((int)KnownNoteLane.Start));
-            Assert.That(broadcastedNote.RetroId, Is.EqualTo(command.RetroId));
+            Assert.That(broadcastedNote.SessionId, Is.EqualTo(command.SessionId));
             Assert.That(broadcastedNote.Note.IsOwnedByCurrentUser, Is.False);
         }
     }

@@ -380,7 +380,7 @@ namespace PokerTime.Persistence.Migrations
                                 .HasForeignKey("RetrospectiveId");
                         });
 
-                    b.OwnsOne("PokerTime.Domain.ValueObjects.RetroIdentifier", "UrlId", b1 =>
+                    b.OwnsOne("PokerTime.Domain.ValueObjects.SessionIdentifier", "UrlId", b1 =>
                         {
                             b1.Property<int>("RetrospectiveId")
                                 .ValueGeneratedOnAdd()

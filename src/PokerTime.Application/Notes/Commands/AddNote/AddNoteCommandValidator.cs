@@ -14,7 +14,7 @@ namespace PokerTime.Application.Notes.Commands.AddNote {
         Justification = "This is a validation rule set.")]
     public sealed class AddNoteCommandValidator : AbstractValidator<AddNoteCommand> {
         public AddNoteCommandValidator() {
-            this.RuleFor(c => c.RetroId).NotEmpty();
+            this.RuleFor(c => c.SessionId).NotEmpty();
             this.RuleFor(c => c.LaneId).NotEmpty();
         }
     }

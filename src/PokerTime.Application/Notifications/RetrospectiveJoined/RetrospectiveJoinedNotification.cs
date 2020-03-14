@@ -11,7 +11,7 @@ namespace PokerTime.Application.Notifications.RetrospectiveJoined {
     public sealed class RetrospectiveJoinedNotification : RetrospectiveNotification {
         public ParticipantInfo ParticipantInfo { get; }
 
-        public RetrospectiveJoinedNotification(string retroId, ParticipantInfo participantInfo) : base(retroId) {
+        public RetrospectiveJoinedNotification(string sessionId, ParticipantInfo participantInfo) : base(sessionId) {
             this.ParticipantInfo = participantInfo;
         }
     }

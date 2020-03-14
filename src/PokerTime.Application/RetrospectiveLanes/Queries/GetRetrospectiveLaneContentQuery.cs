@@ -9,11 +9,11 @@ namespace PokerTime.Application.RetrospectiveLanes.Queries {
     using MediatR;
 
     public sealed class GetRetrospectiveLaneContentQuery : IRequest<RetrospectiveLaneContent> {
-        public string RetroId { get; }
+        public string SessionId { get; }
         public int LaneId { get; }
 
-        public GetRetrospectiveLaneContentQuery(string retroId, int laneId) {
-            this.RetroId = retroId;
+        public GetRetrospectiveLaneContentQuery(string sessionId, int laneId) {
+            this.SessionId = sessionId;
             this.LaneId = laneId;
         }
     }

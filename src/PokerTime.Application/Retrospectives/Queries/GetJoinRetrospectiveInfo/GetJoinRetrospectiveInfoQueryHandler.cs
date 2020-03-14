@@ -21,14 +21,14 @@
         public async Task<JoinRetrospectiveInfo?> Handle(GetJoinRetrospectiveInfoQuery request, CancellationToken cancellationToken) {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
-            Retrospective retrospective = await this._dbContext.Retrospectives.FindByRetroId(request.RetroId, cancellationToken);
+            Retrospective retrospective = await this._dbContext.Retrospectives.FindBySessionId(request.SessionId, cancellationToken);
             if (retrospective == null) {
-                this._logger.LogWarning($"Retrospective with id {request.RetroId} was not found");
+                this._logger.LogWarning($"Retrospective with id {request.SessionId} was not found");
 
                 return null;
             }
 
-            this._logger.LogInformation($"Retrospective with id {request.RetroId} was found");
+            this._logger.LogInformation($"Retrospective with id {request.SessionId} was found");
             return new JoinRetrospectiveInfo(
                 retrospective.Title,
                 retrospective.HashedPassphrase != null,

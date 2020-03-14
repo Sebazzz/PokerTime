@@ -10,6 +10,6 @@ namespace PokerTime.Application.Retrospectives.Queries.GetJoinRetrospectiveInfo 
 
     public sealed class GetJoinRetrospectiveInfoQuery : IRequest<JoinRetrospectiveInfo?> {
 #nullable disable
-        public string RetroId { get; set; }
+        public string SessionId { get; set; }
     }
 }

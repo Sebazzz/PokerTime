@@ -10,10 +10,10 @@ namespace PokerTime.Application.Showcase.Queries {
     using MediatR;
 
     public sealed class GetShowcaseQuery : IRequest<GetShowcaseQueryResult>, ILockFreeRequest {
-        public string RetroId { get; }
+        public string SessionId { get; }
 
-        public GetShowcaseQuery(string retroId) {
-            this.RetroId = retroId;
+        public GetShowcaseQuery(string sessionId) {
+            this.SessionId = sessionId;
         }
     }
 }

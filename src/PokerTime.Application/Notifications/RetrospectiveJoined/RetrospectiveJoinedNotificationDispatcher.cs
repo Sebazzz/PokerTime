@@ -15,6 +15,6 @@ namespace PokerTime.Application.Notifications.RetrospectiveJoined {
         {
         }
 
-        protected override Task DispatchCore(IRetrospectiveJoinedSubscriber subscriber, RetrospectiveJoinedNotification notification) => subscriber.OnParticipantJoinedRetrospective(new RetrospectiveEvent<ParticipantInfo>(notification.RetroId, notification.ParticipantInfo));
+        protected override Task DispatchCore(IRetrospectiveJoinedSubscriber subscriber, RetrospectiveJoinedNotification notification) => subscriber.OnParticipantJoinedRetrospective(new RetrospectiveEvent<ParticipantInfo>(notification.SessionId, notification.ParticipantInfo));
     }
 }

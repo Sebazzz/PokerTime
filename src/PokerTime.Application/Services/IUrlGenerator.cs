@@ -10,6 +10,6 @@ namespace PokerTime.Application.Services {
     using Domain.ValueObjects;
 
     public interface IUrlGenerator {
-        Uri GenerateUrlToRetrospectiveLobby(RetroIdentifier urlId);
+        Uri GenerateUrlToRetrospectiveLobby(SessionIdentifier urlId);
     }
 }

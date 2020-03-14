@@ -13,7 +13,7 @@ namespace PokerTime.Application.Notifications.NoteAdded {
 
         public RetrospectiveNote Note { get; }
 
-        public NoteAddedNotification(string retroId, int laneId, RetrospectiveNote note) : base(retroId) {
+        public NoteAddedNotification(string sessionId, int laneId, RetrospectiveNote note) : base(sessionId) {
             this.LaneId = laneId;
             this.Note = note;
         }

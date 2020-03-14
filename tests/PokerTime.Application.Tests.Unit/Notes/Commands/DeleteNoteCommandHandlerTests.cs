@@ -39,7 +39,7 @@ namespace PokerTime.Application.Tests.Unit.Notes.Commands {
         }
 
         [Test]
-        public void DeleteNoteCommandHandler_InvalidRetroId_ThrowsNotFoundException() {
+        public void DeleteNoteCommandHandler_InvalidSessionId_ThrowsNotFoundException() {
             // Given
             var handler = new DeleteNoteCommandHandler(
                 this.Context,
@@ -71,11 +71,11 @@ namespace PokerTime.Application.Tests.Unit.Notes.Commands {
                 CreationTimestamp = DateTimeOffset.Now,
                 Participants = { new Participant { Name = "John" } }
             };
-            string retroId = retro.UrlId.StringId;
+            string sessionId = retro.UrlId.StringId;
             this.Context.Retrospectives.Add(retro);
             await this.Context.SaveChangesAsync();
 
-            var command = new DeleteNoteCommand(retroId, -1);
+            var command = new DeleteNoteCommand(sessionId, -1);
 
             // When
             TestDelegate action = () => handler.Handle(command, CancellationToken.None).GetAwaiter().GetResult();
@@ -126,7 +126,7 @@ namespace PokerTime.Application.Tests.Unit.Notes.Commands {
                 Assert.Fail("No broadcast has gone out");
             }
 
-            Assert.That(broadcastedNote.RetroId, Is.EqualTo(command.RetroId));
+            Assert.That(broadcastedNote.SessionId, Is.EqualTo(command.SessionId));
             Assert.That(broadcastedNote.LaneId, Is.EqualTo((int?)note.Lane?.Id));
             Assert.That(broadcastedNote.NoteId, Is.EqualTo(note.Id));
 

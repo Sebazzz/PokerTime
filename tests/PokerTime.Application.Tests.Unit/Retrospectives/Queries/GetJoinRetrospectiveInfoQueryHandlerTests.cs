@@ -20,9 +20,9 @@ namespace PokerTime.Application.Tests.Unit.Retrospectives.Queries {
         [Test]
         public async Task GetJoinRetrospectiveInfoCommandHandler_ReturnsNull_OnRetrospectiveNotFound() {
             // Given
-            string retroId = "whatever-whatever";
+            string sessionId = "whatever-whatever";
             var handler = new GetJoinRetrospectiveInfoQueryHandler(this.Context, new NullLogger<GetJoinRetrospectiveInfoQueryHandler>());
-            var command = new GetJoinRetrospectiveInfoQuery { RetroId = retroId };
+            var command = new GetJoinRetrospectiveInfoQuery { SessionId = sessionId };
 
             // When
             var result = await handler.Handle(command, CancellationToken.None);
@@ -39,12 +39,12 @@ namespace PokerTime.Application.Tests.Unit.Retrospectives.Queries {
                 CreationTimestamp = DateTimeOffset.Now,
                 HashedPassphrase = "hello"
             };
-            string retroId = retrospective.UrlId.StringId;
+            string sessionId = retrospective.UrlId.StringId;
             this.Context.Retrospectives.Add(retrospective);
             await this.Context.SaveChangesAsync(CancellationToken.None);
 
             var handler = new GetJoinRetrospectiveInfoQueryHandler(this.Context, new NullLogger<GetJoinRetrospectiveInfoQueryHandler>());
-            var command = new GetJoinRetrospectiveInfoQuery { RetroId = retroId };
+            var command = new GetJoinRetrospectiveInfoQuery { SessionId = sessionId };
 
             // When
             var result = await handler.Handle(command, CancellationToken.None);

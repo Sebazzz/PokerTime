@@ -20,7 +20,7 @@ namespace PokerTime.Application.Tests.Unit.RetrospectiveWorkflows.Commands {
     public abstract class RetrospectiveWorkflowCommandTestBase : CommandTestBase {
 #nullable disable
         protected Retrospective Retrospective { get; private set; }
-        protected string RetroId { get; private set; }
+        protected string SessionId { get; private set; }
         protected IRetrospectiveStatusUpdateDispatcher RetrospectiveStatusUpdateDispatcherMock { get; set; }
         protected ISystemClock SystemClockMock { get; set; }
 #nullable restore
@@ -38,7 +38,7 @@ namespace PokerTime.Application.Tests.Unit.RetrospectiveWorkflows.Commands {
                 CurrentStage = RetrospectiveStage.NotStarted
             };
 
-            this.RetroId = retro.UrlId.StringId;
+            this.SessionId = retro.UrlId.StringId;
             this.Retrospective = retro;
             this.ConfigureRetrospective(retro);
 

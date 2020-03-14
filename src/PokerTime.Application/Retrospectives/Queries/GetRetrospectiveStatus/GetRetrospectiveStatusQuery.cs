@@ -9,10 +9,10 @@ namespace PokerTime.Application.Retrospectives.Queries.GetRetrospectiveStatus {
     using MediatR;
 
     public sealed class GetRetrospectiveStatusQuery : IRequest<RetrospectiveStatus> {
-        public string RetroId { get; }
+        public string SessionId { get; }
 
-        public GetRetrospectiveStatusQuery(string retroId) {
-            this.RetroId = retroId;
+        public GetRetrospectiveStatusQuery(string sessionId) {
+            this.SessionId = sessionId;
         }
     }
 }

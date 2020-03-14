@@ -90,7 +90,7 @@ namespace PokerTime.Web.Tests.Integration.Common {
                 Color = availableParticipantColor?.HexString ?? (RandomByte() + RandomByte() + RandomByte()),
                 JoiningAsFacilitator = isFacilitator,
                 Passphrase = passphrase,
-                RetroId = this._retrospectiveId
+                SessionId = this._retrospectiveId
             }, p => {
                 if (this._participators.ContainsKey(p.Name)) {
                     Assert.Inconclusive($"Trying to register existing participant: {p.Name}");

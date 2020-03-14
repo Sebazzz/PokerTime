@@ -33,7 +33,7 @@ namespace PokerTime.Web.Components {
         public bool CanEdit { get; set; }
 
         [CascadingParameter]
-        public RetroIdentifier RetroId { get; set; } = new RetroIdentifier();
+        public SessionIdentifier SessionId { get; set; } = new SessionIdentifier();
 
         [CascadingParameter]
         public NoteLane Container { get; set; }
@@ -58,7 +58,7 @@ namespace PokerTime.Web.Components {
         protected async Task UpdateTitle() {
             try {
                 this.ShowError = false;
-                await this.Mediator.Send(new UpdateNoteGroupCommand(this.RetroId.StringId, this.Data.Id, this.Data.Title));
+                await this.Mediator.Send(new UpdateNoteGroupCommand(this.SessionId.StringId, this.Data.Id, this.Data.Title));
             }
             catch (Exception ex) {
                 this.Logger.LogError(ex, "Unable to save note group title of #" + this.Data.Id);
@@ -68,7 +68,7 @@ namespace PokerTime.Web.Components {
 
         protected async Task DeleteNoteGroup() {
             try {
-                await this.Mediator.Send(new DeleteNoteGroupCommand(this.RetroId.StringId, this.Data.Id));
+                await this.Mediator.Send(new DeleteNoteGroupCommand(this.SessionId.StringId, this.Data.Id));
             }
             catch (Exception ex) {
                 this.Logger.LogError(ex, "Unable to delete note group #" + this.Data.Id);

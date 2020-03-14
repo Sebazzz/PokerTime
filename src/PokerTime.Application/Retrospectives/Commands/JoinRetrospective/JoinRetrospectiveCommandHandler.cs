@@ -38,14 +38,14 @@ namespace PokerTime.Application.Retrospectives.Commands.JoinRetrospective {
 
         public async Task<ParticipantInfo> Handle(JoinRetrospectiveCommand request, CancellationToken cancellationToken) {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            Retrospective retrospective = await this._returnDbContext.Retrospectives.FindByRetroId(request.RetroId, cancellationToken);
+            Retrospective retrospective = await this._returnDbContext.Retrospectives.FindBySessionId(request.SessionId, cancellationToken);
 
             if (retrospective == null) {
-                throw new NotFoundException(nameof(Retrospective), request.RetroId);
+                throw new NotFoundException(nameof(Retrospective), request.SessionId);
             }
 
             // Create domain object
-            Participant participant = await this.GetOrCreateParticipantAsync(request.RetroId, request.Name, cancellationToken);
+            Participant participant = await this.GetOrCreateParticipantAsync(request.SessionId, request.Name, cancellationToken);
 
             participant.IsFacilitator = request.JoiningAsFacilitator;
             participant.Name = request.Name;
@@ -69,14 +69,14 @@ namespace PokerTime.Application.Retrospectives.Commands.JoinRetrospective {
             var participantInfo = this._mapper.Map<ParticipantInfo>(participant);
 
             if (isNew) {
-                await this._mediator.Publish(new RetrospectiveJoinedNotification(request.RetroId, participantInfo), cancellationToken);
+                await this._mediator.Publish(new RetrospectiveJoinedNotification(request.SessionId, participantInfo), cancellationToken);
             }
 
             return participantInfo;
         }
 
-        private async Task<Participant> GetOrCreateParticipantAsync(string retroId, string name, CancellationToken cancellationToken) {
-            Participant? existingParticipant = await this._returnDbContext.Participants.FirstOrDefaultAsync(x => x.Name == name && x.Retrospective.UrlId.StringId == retroId, cancellationToken);
+        private async Task<Participant> GetOrCreateParticipantAsync(string sessionId, string name, CancellationToken cancellationToken) {
+            Participant? existingParticipant = await this._returnDbContext.Participants.FirstOrDefaultAsync(x => x.Name == name && x.Retrospective.UrlId.StringId == sessionId, cancellationToken);
 
             if (existingParticipant == null) {
                 return new Participant();

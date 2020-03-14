@@ -18,11 +18,11 @@ namespace PokerTime.Application.Tests.Unit.RetrospectiveWorkflows.Commands {
     [TestFixture]
     public sealed class InitiateDiscussionStageCommandHandlerTests : RetrospectiveWorkflowCommandTestBase {
         [Test]
-        public void InitiateDiscussionStageCommandHandler_InvalidRetroId_ThrowsNotFoundException() {
+        public void InitiateDiscussionStageCommandHandler_InvalidSessionId_ThrowsNotFoundException() {
             // Given
-            const string retroId = "not found surely :)";
+            const string sessionId = "not found surely :)";
             var handler = new InitiateDiscussionStageCommandHandler(this.Context, this.RetrospectiveStatusUpdateDispatcherMock);
-            var request = new InitiateDiscussionStageCommand { RetroId = retroId };
+            var request = new InitiateDiscussionStageCommand { SessionId = sessionId };
 
             // When
             TestDelegate action = () => handler.Handle(request, CancellationToken.None).GetAwaiter().GetResult();
@@ -35,7 +35,7 @@ namespace PokerTime.Application.Tests.Unit.RetrospectiveWorkflows.Commands {
         public async Task InitiateDiscussionStageCommandHandler_OnStatusChange_UpdatesRetroStageAndInvokesNotification() {
             // Given
             var handler = new InitiateDiscussionStageCommandHandler(this.Context, this.RetrospectiveStatusUpdateDispatcherMock);
-            var request = new InitiateDiscussionStageCommand { RetroId = this.RetroId };
+            var request = new InitiateDiscussionStageCommand { SessionId = this.SessionId };
 
             this.SystemClockMock.CurrentTimeOffset.Returns(DateTimeOffset.UnixEpoch);
 

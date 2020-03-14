@@ -14,7 +14,7 @@ namespace PokerTime.Application.NoteGroups.Commands {
         Justification = "This is a validation rule set.")]
     public sealed class DeleteNoteGroupCommandValidator : AbstractValidator<DeleteNoteGroupCommand> {
         public DeleteNoteGroupCommandValidator() {
-            this.RuleFor(x => x.RetroId).NotEmpty();
+            this.RuleFor(x => x.SessionId).NotEmpty();
             this.RuleFor(x => x.Id).NotEmpty();
         }
     }

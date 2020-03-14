@@ -10,15 +10,15 @@ namespace PokerTime.Application.Notes.Commands.AddNote {
     using MediatR;
 
     public sealed class AddNoteCommand : IRequest<RetrospectiveNote> {
-        public string RetroId { get; }
+        public string SessionId { get; }
 
         public int LaneId { get; }
 
-        public AddNoteCommand(string retroId, int laneId) {
-            this.RetroId = retroId;
+        public AddNoteCommand(string sessionId, int laneId) {
+            this.SessionId = sessionId;
             this.LaneId = laneId;
         }
 
-        public override string ToString() => $"[{nameof(AddNoteCommand)}] RetroId: {this.RetroId}; LaneId: {this.LaneId}";
+        public override string ToString() => $"[{nameof(AddNoteCommand)}] SessionId: {this.SessionId}; LaneId: {this.LaneId}";
     }
 }

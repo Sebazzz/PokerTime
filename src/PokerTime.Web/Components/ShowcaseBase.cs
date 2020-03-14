@@ -25,7 +25,7 @@ namespace PokerTime.Web.Components {
         public ILogger<ShowcaseBase> Logger { get; set; }
 
         [CascadingParameter]
-        public RetroIdentifier RetroIdentifier { get; set; }
+        public SessionIdentifier SessionIdentifier { get; set; }
 #nullable restore
 
         protected ShowcaseData? Data { get; private set; }
@@ -35,11 +35,11 @@ namespace PokerTime.Web.Components {
         protected int VisibleItemIndex { get; private set; }
 
         protected override async Task OnInitializedAsync() {
-            Debug.Assert(this.RetroIdentifier != null);
+            Debug.Assert(this.SessionIdentifier != null);
 
             try {
                 GetShowcaseQueryResult result =
-                    await this.Mediator.Send(new GetShowcaseQuery(this.RetroIdentifier.StringId));
+                    await this.Mediator.Send(new GetShowcaseQuery(this.SessionIdentifier.StringId));
 
                 this.Data = result.Showcase;
             }

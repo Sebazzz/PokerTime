@@ -37,9 +37,9 @@ namespace PokerTime.Application.NoteGroups.Commands {
             using IReturnDbContext dbContext = this._returnDbContextFactory.CreateForEditContext();
 
             // Get the required relations
-            Retrospective? retrospective = await dbContext.Retrospectives.FindByRetroId(request.RetroId, cancellationToken);
+            Retrospective? retrospective = await dbContext.Retrospectives.FindBySessionId(request.SessionId, cancellationToken);
             if (retrospective == null) {
-                throw new NotFoundException(nameof(Retrospective), request.RetroId);
+                throw new NotFoundException(nameof(Retrospective), request.SessionId);
             }
 
             NoteLane? noteLane = await dbContext.NoteLanes.FindAsync(new object[] { (KnownNoteLane)request.LaneId }, cancellationToken);
@@ -62,7 +62,7 @@ namespace PokerTime.Application.NoteGroups.Commands {
             // Map it and broadcast
             var mappedGroup = this._mapper.Map<RetrospectiveNoteGroup>(noteGroup);
 
-            await this._mediator.Publish(new NoteLaneUpdatedNotification(request.RetroId, request.LaneId, mappedGroup.Id), cancellationToken);
+            await this._mediator.Publish(new NoteLaneUpdatedNotification(request.SessionId, request.LaneId, mappedGroup.Id), cancellationToken);
 
             return mappedGroup;
         }

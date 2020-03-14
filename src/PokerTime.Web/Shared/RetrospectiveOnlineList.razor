@@ -50,7 +50,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        this.Participants = await this.Mediator.Send(new GetParticipantsInfoQuery(this.RetroId));
+        this.Participants = await this.Mediator.Send(new GetParticipantsInfoQuery(this.SessionId));
         Debug.Assert(this.Participants != null);
     }
 
@@ -65,14 +65,14 @@
     public ParticipantsInfoList Participants { get; set; }
 
     [Parameter]
-    public string RetroId { get; set; }
+    public string SessionId { get; set; }
 
     [Parameter]
     public CurrentParticipantModel CurrentParticipant { get; set; }
 
     public Task OnParticipantJoinedRetrospective(RetrospectiveEvent<ParticipantInfo> eventArgs)
     {
-        if (eventArgs.RetroId != this.RetroId)
+        if (eventArgs.SessionId != this.SessionId)
         {
             return Task.CompletedTask;
         }

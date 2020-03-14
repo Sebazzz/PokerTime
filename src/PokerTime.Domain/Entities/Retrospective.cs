@@ -23,7 +23,7 @@ namespace PokerTime.Domain.Entities {
         private ICollection<NoteVote>? _noteVotes;
         private ICollection<Participant>? _participants;
 
-        private readonly RetroIdentifier _urlId = RetroIdentifierService.CreateNewInternal();
+        private readonly SessionIdentifier _urlId = SessionIdentifierService.CreateNewInternal();
         private RetrospectiveOptions? _options;
         private RetrospectiveWorkflowData? _workflowData;
 
@@ -33,7 +33,7 @@ namespace PokerTime.Domain.Entities {
         /// Identifier (random string) of the retrospective
         /// </summary>
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
-        public RetroIdentifier UrlId => this._urlId;
+        public SessionIdentifier UrlId => this._urlId;
 
         /// <summary>
         /// Gets or sets the current stage of the retrospective

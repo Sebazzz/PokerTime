@@ -25,7 +25,7 @@ namespace PokerTime.Application.Tests.Unit.NoteGroups.Commands {
     [TestFixture]
     public sealed class UpdateNoteGroupCommandHandlerTests : QueryTestBase {
         [Test]
-        public void UpdateNoteGroupCommandHandler_InvalidRetroId_ThrowsNotFoundException() {
+        public void UpdateNoteGroupCommandHandler_InvalidSessionId_ThrowsNotFoundException() {
             // Given
             var handler = new UpdateNoteGroupCommandHandler(
                 this.Context,
@@ -58,11 +58,11 @@ namespace PokerTime.Application.Tests.Unit.NoteGroups.Commands {
                 Participants = { new Participant { Name = "John" } },
                 NoteGroup = { new NoteGroup { Lane = this.Context.NoteLanes.Find(KnownNoteLane.Continue), Title = "???" } }
             };
-            string retroId = retro.UrlId.StringId;
+            string sessionId = retro.UrlId.StringId;
             this.Context.Retrospectives.Add(retro);
             await this.Context.SaveChangesAsync();
 
-            var command = new UpdateNoteGroupCommand(retroId, -1, "!!!");
+            var command = new UpdateNoteGroupCommand(sessionId, -1, "!!!");
 
             // When
             TestDelegate action = () => handler.Handle(command, CancellationToken.None).GetAwaiter().GetResult();
@@ -91,12 +91,12 @@ namespace PokerTime.Application.Tests.Unit.NoteGroups.Commands {
                 Participants = { new Participant { Name = "John" } },
                 NoteGroup = { new NoteGroup { Lane = this.Context.NoteLanes.Find(KnownNoteLane.Continue), Title = "???" } }
             };
-            string retroId = retro.UrlId.StringId;
+            string sessionId = retro.UrlId.StringId;
             this.Context.Retrospectives.Add(retro);
             await this.Context.SaveChangesAsync();
             NoteGroup noteGroup = retro.NoteGroup.First();
 
-            var command = new UpdateNoteGroupCommand(retroId, noteGroup.Id, "!!!");
+            var command = new UpdateNoteGroupCommand(sessionId, noteGroup.Id, "!!!");
 
             // When
             await handler.Handle(command, CancellationToken.None);
@@ -111,7 +111,7 @@ namespace PokerTime.Application.Tests.Unit.NoteGroups.Commands {
             }
 
             Assert.That(broadcastedUpdate.LaneId, Is.EqualTo((int)KnownNoteLane.Continue));
-            Assert.That(broadcastedUpdate.RetroId, Is.EqualTo(command.RetroId));
+            Assert.That(broadcastedUpdate.SessionId, Is.EqualTo(command.SessionId));
             Assert.That(broadcastedUpdate.GroupId, Is.EqualTo(noteGroup.Id));
         }
     }

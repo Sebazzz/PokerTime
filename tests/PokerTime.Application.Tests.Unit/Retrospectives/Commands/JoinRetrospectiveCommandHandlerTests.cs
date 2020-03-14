@@ -52,7 +52,7 @@ namespace PokerTime.Application.Tests.Unit.Retrospectives.Commands {
         public void JoinRetrospectiveCommand_ThrowsException_WhenNotFound() {
             // Given
             var command = new JoinRetrospectiveCommand {
-                RetroId = "not found"
+                SessionId = "not found"
             };
             var handler = new JoinRetrospectiveCommandHandler(this.Context, Substitute.For<ICurrentParticipantService>(), Substitute.For<IMediator>(), Substitute.For<IMapper>());
 
@@ -80,7 +80,7 @@ namespace PokerTime.Application.Tests.Unit.Retrospectives.Commands {
             );
 
             var command = new JoinRetrospectiveCommand {
-                RetroId = retro.UrlId.StringId,
+                SessionId = retro.UrlId.StringId,
                 Color = "ABCDEF",
                 JoiningAsFacilitator = true,
                 Name = "The BOSS",
@@ -96,7 +96,7 @@ namespace PokerTime.Application.Tests.Unit.Retrospectives.Commands {
 
             Retrospective checkRetro = await this.Context.Retrospectives.AsNoTracking().
                 Include(x => x.Participants).
-                FindByRetroId(retro.UrlId.StringId, CancellationToken.None).
+                FindBySessionId(retro.UrlId.StringId, CancellationToken.None).
                 ConfigureAwait(false);
 
             Assert.That(checkRetro.Participants.Select(x => x.Name), Contains.Item("The BOSS"));
@@ -122,7 +122,7 @@ namespace PokerTime.Application.Tests.Unit.Retrospectives.Commands {
             );
 
             var command = new JoinRetrospectiveCommand {
-                RetroId = retro.UrlId.StringId,
+                SessionId = retro.UrlId.StringId,
                 Color = "ABCDEF",
                 JoiningAsFacilitator = true,
                 Name = "Duplicate joiner",

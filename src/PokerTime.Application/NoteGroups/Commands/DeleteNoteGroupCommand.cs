@@ -9,12 +9,12 @@ namespace PokerTime.Application.NoteGroups.Commands {
     using MediatR;
 
     public sealed class DeleteNoteGroupCommand : IRequest {
-        public DeleteNoteGroupCommand(string retroId, int id) {
-            this.RetroId = retroId;
+        public DeleteNoteGroupCommand(string sessionId, int id) {
+            this.SessionId = sessionId;
             this.Id = id;
         }
 
-        public string RetroId { get; }
+        public string SessionId { get; }
 
         public int Id { get; }
     }

@@ -33,14 +33,14 @@ namespace PokerTime.Application.Votes.Queries {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
             using IReturnDbContext dbContext = this._returnDbContextFactory.CreateForEditContext();
-            Retrospective retrospective = await dbContext.Retrospectives.AsNoTracking().FindByRetroId(request.RetroId, cancellationToken);
+            Retrospective retrospective = await dbContext.Retrospectives.AsNoTracking().FindBySessionId(request.SessionId, cancellationToken);
 
             if (retrospective == null) {
-                throw new NotFoundException(nameof(Retrospective), request.RetroId);
+                throw new NotFoundException(nameof(Retrospective), request.SessionId);
             }
 
             List<Participant> participants = await dbContext.Participants.AsNoTracking().
-                Where(x => x.Retrospective.UrlId.StringId == request.RetroId).
+                Where(x => x.Retrospective.UrlId.StringId == request.SessionId).
                 ToListAsync(cancellationToken);
 
             List<NoteLane> lanes = await dbContext.NoteLanes.ToListAsync(cancellationToken);
@@ -53,7 +53,7 @@ namespace PokerTime.Application.Votes.Queries {
                 .Include(x => x.Note.Lane)
                 .Include(x => x.NoteGroup)
                 .Include(x => x.NoteGroup.Lane)
-                .Where(x => x.Retrospective.UrlId.StringId == request.RetroId)
+                .Where(x => x.Retrospective.UrlId.StringId == request.SessionId)
                 .AsEnumerable()
                 .ToLookup(x => x.Participant.Id, x => x);
 

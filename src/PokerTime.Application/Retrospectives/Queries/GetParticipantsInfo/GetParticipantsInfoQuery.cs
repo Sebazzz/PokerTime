@@ -9,10 +9,10 @@ namespace PokerTime.Application.Retrospectives.Queries.GetParticipantsInfo {
     using MediatR;
 
     public sealed class GetParticipantsInfoQuery : IRequest<ParticipantsInfoList> {
-        public GetParticipantsInfoQuery(string retroId) {
-            this.RetroId = retroId;
+        public GetParticipantsInfoQuery(string sessionId) {
+            this.SessionId = sessionId;
         }
 
-        public string RetroId { get; }
+        public string SessionId { get; }
     }
 }

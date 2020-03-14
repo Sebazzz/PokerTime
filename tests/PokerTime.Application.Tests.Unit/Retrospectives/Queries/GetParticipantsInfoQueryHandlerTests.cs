@@ -20,8 +20,8 @@ namespace PokerTime.Application.Tests.Unit.Retrospectives.Queries {
         [Test]
         public async Task GetParticipantsInfoCommand_ReturnsEmptyList_OnRetrospectiveNotFound() {
             // Given
-            const string retroId = "surely-not-found";
-            var query = new GetParticipantsInfoQuery(retroId);
+            const string sessionId = "surely-not-found";
+            var query = new GetParticipantsInfoQuery(sessionId);
             var handler = new GetParticipantsInfoQueryHandler(this.Context, this.Mapper);
 
             // When
@@ -43,11 +43,11 @@ namespace PokerTime.Application.Tests.Unit.Retrospectives.Queries {
                 },
                 HashedPassphrase = "abef"
             };
-            string retroId = retro.UrlId.StringId;
+            string sessionId = retro.UrlId.StringId;
             this.Context.Retrospectives.Add(retro);
             await this.Context.SaveChangesAsync(CancellationToken.None);
 
-            var query = new GetParticipantsInfoQuery(retroId);
+            var query = new GetParticipantsInfoQuery(sessionId);
             var handler = new GetParticipantsInfoQueryHandler(this.Context, this.Mapper);
 
             // When

@@ -37,7 +37,7 @@ namespace PokerTime.Application.RetrospectiveLanes.Queries {
         public async Task<RetrospectiveLaneContent> Handle(GetRetrospectiveLaneContentQuery request, CancellationToken cancellationToken) {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
-            Retrospective retrospective = await this._returnDbContext.Retrospectives.AsNoTracking().FindByRetroId(request.RetroId, cancellationToken);
+            Retrospective retrospective = await this._returnDbContext.Retrospectives.AsNoTracking().FindBySessionId(request.SessionId, cancellationToken);
 
             var laneId = (KnownNoteLane)request.LaneId;
             var lane = new RetrospectiveLaneContent();
@@ -45,7 +45,7 @@ namespace PokerTime.Application.RetrospectiveLanes.Queries {
             {
                 IOrderedQueryable<Note> query =
                     from note in this._returnDbContext.Notes
-                    where note.Retrospective.UrlId.StringId == request.RetroId
+                    where note.Retrospective.UrlId.StringId == request.SessionId
                     where note.Lane.Id == laneId
                     orderby note.CreationTimestamp
                     select note;
@@ -57,7 +57,7 @@ namespace PokerTime.Application.RetrospectiveLanes.Queries {
             {
                 IQueryable<NoteGroup> query =
                     from retro in this._returnDbContext.Retrospectives
-                    where retro.UrlId.StringId == request.RetroId
+                    where retro.UrlId.StringId == request.SessionId
                     from noteGroup in retro.NoteGroup
                     where noteGroup.Lane.Id == laneId
                     orderby noteGroup.Id

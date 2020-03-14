@@ -9,12 +9,12 @@ namespace PokerTime.Application.Retrospectives.Commands.RejoinRetrospective {
     using MediatR;
 
     public sealed class RejoinRetrospectiveCommand : IRequest {
-        public string RetroId { get; }
+        public string SessionId { get; }
 
         public int ParticipantId { get; }
 
-        public RejoinRetrospectiveCommand(string retroId, int participantId) {
-            this.RetroId = retroId;
+        public RejoinRetrospectiveCommand(string sessionId, int participantId) {
+            this.SessionId = sessionId;
             this.ParticipantId = participantId;
         }
     }

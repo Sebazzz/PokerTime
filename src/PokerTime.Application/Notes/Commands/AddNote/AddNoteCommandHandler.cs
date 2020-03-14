@@ -43,9 +43,9 @@ namespace PokerTime.Application.Notes.Commands.AddNote {
             // Get the required entities
             using IReturnDbContext returnDbContext = this._returnDbContextFactory.CreateForEditContext();
 
-            Retrospective retrospective = await returnDbContext.Retrospectives.FindByRetroId(request.RetroId, cancellationToken);
+            Retrospective retrospective = await returnDbContext.Retrospectives.FindBySessionId(request.SessionId, cancellationToken);
             if (retrospective == null) {
-                throw new NotFoundException(nameof(Retrospective), request.RetroId);
+                throw new NotFoundException(nameof(Retrospective), request.SessionId);
             }
 
             NoteLane noteLane = await returnDbContext.NoteLanes.FindAsync((KnownNoteLane)request.LaneId);
@@ -74,7 +74,7 @@ namespace PokerTime.Application.Notes.Commands.AddNote {
             returnNote.IsOwnedByCurrentUser = true;
 
             // ... Broadcast
-            await this._mediator.Publish(new NoteAddedNotification(request.RetroId, request.LaneId, broadcastNote), cancellationToken);
+            await this._mediator.Publish(new NoteAddedNotification(request.SessionId, request.LaneId, broadcastNote), cancellationToken);
 
             return returnNote;
         }

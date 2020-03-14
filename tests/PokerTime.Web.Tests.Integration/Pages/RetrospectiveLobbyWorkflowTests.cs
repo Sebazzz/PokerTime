@@ -25,7 +25,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         [SetUp]
         public async Task SetUp() {
             using IServiceScope scope = this.App.CreateTestServiceScope();
-            this.RetroId = await scope.CreateRetrospective("scrummaster");
+            this.SessionId = await scope.CreateRetrospective("scrummaster");
         }
 
         [Test]
@@ -101,7 +101,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
             // Given
             int noteId = 0;
             using (IServiceScope scope = this.App.CreateTestServiceScope()) {
-                await scope.TestCaseBuilder(this.RetroId).
+                await scope.TestCaseBuilder(this.SessionId).
                     WithParticipant("Boss", true, "scrummaster").
                     WithParticipant("Josh", false).
                     WithRetrospectiveStage(RetrospectiveStage.Writing).
@@ -145,7 +145,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
             // Given
             int noteId = 0;
             using (IServiceScope scope = this.App.CreateTestServiceScope()) {
-                await scope.TestCaseBuilder(this.RetroId).
+                await scope.TestCaseBuilder(this.SessionId).
                     WithParticipant("Boss", true, "scrummaster").
                     WithParticipant("Josh", false).
                     WithRetrospectiveStage(RetrospectiveStage.Writing).
@@ -233,7 +233,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
             // Given
             int note1Id = 0, note2Id = 0, noteGroupId = 0, bossId = 0;
             using (IServiceScope scope = this.App.CreateTestServiceScope()) {
-                await scope.TestCaseBuilder(this.RetroId).
+                await scope.TestCaseBuilder(this.SessionId).
                     WithParticipant("Boss", true, "scrummaster").
                     OutputId(id => bossId = id).
                     WithParticipant("Josh", false).
@@ -294,7 +294,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         public async Task RetrospectiveLobby_GroupingStage_CanAddNoteGroup() {
             // Given
             using (IServiceScope scope = this.App.CreateTestServiceScope()) {
-                await scope.TestCaseBuilder(this.RetroId).
+                await scope.TestCaseBuilder(this.SessionId).
                     WithParticipant("Boss", true, "scrummaster").
                     WithParticipant("Josh", false).
                     WithParticipant("Foo", false).

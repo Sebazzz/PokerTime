@@ -9,10 +9,10 @@ namespace PokerTime.Application.Votes.Queries {
     using MediatR;
 
     public sealed class GetVotesQuery : IRequest<GetVotesQueryResult> {
-        public string RetroId { get; }
+        public string SessionId { get; }
 
-        public GetVotesQuery(string retroId) {
-            this.RetroId = retroId;
+        public GetVotesQuery(string sessionId) {
+            this.SessionId = sessionId;
         }
     }
 }

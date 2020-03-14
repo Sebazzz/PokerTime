@@ -17,7 +17,7 @@ namespace PokerTime.Application.Tests.Unit.Votes.Queries {
 
     [TestFixture]
     public sealed class GetVotesQueryHandlerTests : QueryTestBase {
-        private string _retroId = "";
+        private string _sessionId = "";
         private int _note1Id;
         private int _note2Id;
         private int _noteGroupId;
@@ -43,7 +43,7 @@ namespace PokerTime.Application.Tests.Unit.Votes.Queries {
                     MaximumNumberOfVotes = 3
                 }
             };
-            this._retroId = retro.UrlId.StringId;
+            this._sessionId = retro.UrlId.StringId;
             this.Context.Retrospectives.Add(retro);
 
             Note note1 = this.Context.Notes.Add(new Note {
@@ -121,8 +121,8 @@ namespace PokerTime.Application.Tests.Unit.Votes.Queries {
         [Test]
         public void GetVotesQueryHandlerTests_ThrowsNotFoundException_WhenNotFound() {
             // Given
-            const string retroId = "surely-not-found";
-            var query = new GetVotesQuery(retroId);
+            const string sessionId = "surely-not-found";
+            var query = new GetVotesQuery(sessionId);
             var handler = new GetVotesQueryHandler(this.Context, this.Mapper);
 
             // When
@@ -135,11 +135,11 @@ namespace PokerTime.Application.Tests.Unit.Votes.Queries {
         [Test]
         public async Task GetVotesQueryHandlerTests_ReturnsVotesPerParticipant_BasedOnRetrospectiveOptions() {
             // Given
-            var command = new GetVotesQuery(this._retroId);
+            var command = new GetVotesQuery(this._sessionId);
             var handler = new GetVotesQueryHandler(this.Context, this.Mapper);
 
             int laneCount = this.Context.NoteLanes.Count();
-            int votePerLaneCount = this.Context.Retrospectives.Where(x => x.UrlId.StringId == this._retroId).
+            int votePerLaneCount = this.Context.Retrospectives.Where(x => x.UrlId.StringId == this._sessionId).
                 Select(x => x.Options.MaximumNumberOfVotes).
                 First();
             int votesPerParticipant = laneCount * votePerLaneCount;

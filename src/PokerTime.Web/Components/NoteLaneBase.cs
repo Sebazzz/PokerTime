@@ -85,7 +85,7 @@ namespace PokerTime.Web.Components {
         public RetrospectiveStatus RetrospectiveStatus { get; set; }
 
         [CascadingParameter]
-        public RetroIdentifier RetroId { get; set; }
+        public SessionIdentifier SessionId { get; set; }
 
         /// <summary>
         /// Used for drag and drop
@@ -102,7 +102,7 @@ namespace PokerTime.Web.Components {
 
         protected override Task OnInitializedAsync() => this.Load();
 
-        private async Task Load() => this.Contents = await this.Mediator.Send(new GetRetrospectiveLaneContentQuery(this.RetroId.StringId, this.Lane?.Id ?? 0));
+        private async Task Load() => this.Contents = await this.Mediator.Send(new GetRetrospectiveLaneContentQuery(this.SessionId.StringId, this.Lane?.Id ?? 0));
 
         protected override void OnInitialized() {
             this.NoteLaneUpdatedSubscription.Subscribe(this);
@@ -183,7 +183,7 @@ namespace PokerTime.Web.Components {
         public Task OnNoteMoved(NoteMovedNotification notification) {
             // Filter out irrelevant notifications
             if (notification.LaneId != this.Lane.Id ||
-                notification.RetroId != this.RetroId.StringId) {
+                notification.SessionId != this.SessionId.StringId) {
                 return Task.CompletedTask;
             }
 
@@ -225,7 +225,7 @@ namespace PokerTime.Web.Components {
             try {
                 this.ShowErrorMessage = false;
 
-                RetrospectiveNote result = await this.Mediator.Send(new AddNoteCommand(this.RetroId.StringId, this.Lane.Id));
+                RetrospectiveNote result = await this.Mediator.Send(new AddNoteCommand(this.SessionId.StringId, this.Lane.Id));
 
                 this.Contents.Notes.Insert(0, result);
                 this.LastAddedNote = result;
@@ -233,7 +233,7 @@ namespace PokerTime.Web.Components {
             catch (Exception ex) {
                 this.ShowErrorMessage = true;
 
-                this.Logger.LogError(ex, $"Unable to add note for {this.RetroId} in lane {this.Lane?.Id}");
+                this.Logger.LogError(ex, $"Unable to add note for {this.SessionId} in lane {this.Lane?.Id}");
             }
         }
 
@@ -242,20 +242,20 @@ namespace PokerTime.Web.Components {
                 this.ShowErrorMessage = false;
                 this._skipFirstUpdate.Set();
 
-                RetrospectiveNoteGroup result = await this.Mediator.Send(new AddNoteGroupCommand(this.RetroId.StringId, this.Lane.Id));
+                RetrospectiveNoteGroup result = await this.Mediator.Send(new AddNoteGroupCommand(this.SessionId.StringId, this.Lane.Id));
 
                 this.Contents.Groups.Add(result);
             }
             catch (Exception ex) {
                 this.ShowErrorMessage = true;
 
-                this.Logger.LogError(ex, $"Unable to add note group for {this.RetroId} in lane {this.Lane?.Id}");
+                this.Logger.LogError(ex, $"Unable to add note group for {this.SessionId} in lane {this.Lane?.Id}");
             }
         }
 
         public Task OnNoteAdded(NoteAddedNotification notification) {
             if (notification.LaneId != this.Lane?.Id ||
-                notification.RetroId != this.RetroId.StringId ||
+                notification.SessionId != this.SessionId.StringId ||
                 notification.Note.ParticipantId == this.CurrentParticipant.Id) {
                 // We can ignore this notification if:
                 // 1. This isn't our lane
@@ -272,7 +272,7 @@ namespace PokerTime.Web.Components {
         }
 
         public Task OnNoteLaneUpdated(NoteLaneUpdatedNotification note) {
-            if (this.RetroId?.StringId != note.RetroId ||
+            if (this.SessionId?.StringId != note.SessionId ||
                 this.Lane?.Id != note.LaneId ||
                 this.Contents?.Groups.Exists(g => g.Id == note.GroupId) == true && this._skipFirstUpdate.GetValue()) {
                 return Task.CompletedTask;
@@ -284,7 +284,7 @@ namespace PokerTime.Web.Components {
         }
 
         public Task OnNoteDeleted(NoteDeletedNotification notification) {
-            if (notification.RetroId != this.RetroId.StringId ||
+            if (notification.SessionId != this.SessionId.StringId ||
                 notification.LaneId != this.Lane.Id) {
                 return Task.CompletedTask;
             }

@@ -56,7 +56,7 @@ namespace PokerTime.Web.Pages {
         /// Route parameter
         /// </summary>
         [Parameter]
-        public string RetroId { get; set; }
+        public string SessionId { get; set; }
 
         [CascadingParameter]
         public IRetrospectiveLayout Layout { get; set; }
@@ -65,7 +65,7 @@ namespace PokerTime.Web.Pages {
 
         public RetrospectiveStatus RetrospectiveStatus { get; set; } = null;
 
-        public RetroIdentifier RetroIdObject { get; set; }
+        public SessionIdentifier SessionIdObject { get; set; }
 
         public RetrospectiveVoteStatus Votes { get; set; }
 
@@ -88,7 +88,7 @@ namespace PokerTime.Web.Pages {
 #nullable restore
 
         protected override void OnInitialized() {
-            this.RetroIdObject = new RetroIdentifier(this.RetroId);
+            this.SessionIdObject = new SessionIdentifier(this.SessionId);
 
             this.RetrospectiveStatusUpdatedSubscription.Subscribe(this);
             this.VoteChangeSubscription.Subscribe(this);
@@ -112,21 +112,21 @@ namespace PokerTime.Web.Pages {
             CurrentParticipantModel currentParticipant = await this.CurrentParticipantService.GetParticipant();
 
             if (!currentParticipant.IsAuthenticated) {
-                this.NavigationManager.NavigateTo("/retrospective/" + this.RetroId + "/join");
+                this.NavigationManager.NavigateTo("/session/" + this.SessionId + "/join");
                 return;
             }
 
             this.CurrentParticipant = currentParticipant;
 
             try {
-                this.RetrospectiveStatus = await this.Mediator.Send(new GetRetrospectiveStatusQuery(this.RetroId));
+                this.RetrospectiveStatus = await this.Mediator.Send(new GetRetrospectiveStatusQuery(this.SessionId));
                 this.Layout?.Update(new RetrospectiveLayoutInfo(this.RetrospectiveStatus.Title, this.RetrospectiveStatus.Stage));
 
                 if (this.RetrospectiveStatus.Stage == RetrospectiveStage.Finished) {
                     this.ShowShowcase = true;
                 }
 
-                this.Votes = (await this.Mediator.Send(new GetVotesQuery(this.RetroId))).VoteStatus;
+                this.Votes = (await this.Mediator.Send(new GetVotesQuery(this.SessionId))).VoteStatus;
             }
             catch (NotFoundException) {
                 this.RetrospectiveStatus = null;
@@ -137,7 +137,7 @@ namespace PokerTime.Web.Pages {
         }
 
         public Task OnRetrospectiveStatusUpdated(RetrospectiveStatus retrospectiveStatus) {
-            if (this.RetrospectiveStatus?.RetroId != this.RetroId) {
+            if (this.RetrospectiveStatus?.SessionId != this.SessionId) {
                 return Task.CompletedTask;
             }
 
@@ -147,7 +147,7 @@ namespace PokerTime.Web.Pages {
 
                 switch (retrospectiveStatus.Stage) {
                     case RetrospectiveStage.Voting:
-                        this.Votes = (await this.Mediator.Send(new GetVotesQuery(this.RetroId))).VoteStatus;
+                        this.Votes = (await this.Mediator.Send(new GetVotesQuery(this.SessionId))).VoteStatus;
                         break;
                     case RetrospectiveStage.Finished:
                         this.ShowShowcase = true;
@@ -159,7 +159,7 @@ namespace PokerTime.Web.Pages {
         }
 
         public Task OnVoteChange(VoteChange notification) {
-            if (notification.RetroId != this.RetroId) {
+            if (notification.SessionId != this.SessionId) {
                 return Task.CompletedTask;
             }
 

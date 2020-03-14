@@ -1,7 +1,7 @@
 ﻿// ******************************************************************************
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : RetroIdentifierTests.cs
+//  File:           : SessionIdentifierTests.cs
 //  Project         : PokerTime.Domain.Tests.Unit
 // ******************************************************************************
 
@@ -12,18 +12,18 @@ namespace PokerTime.Domain.Tests.Unit.ValueObjects {
     using NUnit.Framework;
 
     [TestFixture]
-    public sealed class RetroIdentifierTests {
-        private readonly IRetroIdentifierService _retroIdentifierService = new RetroIdentifierService();
+    public sealed class SessionIdentifierTests {
+        private readonly ISessionIdentifierService _sessionIdentifierService = new SessionIdentifierService();
 
         [Test]
         [Retry(1)]
-        public void RetroIdentifier_CreateNew_ReturnsRandomId() {
+        public void SessionIdentifier_CreateNew_ReturnsRandomId() {
             // Given
             var generatedIds = new HashSet<string>(1000);
 
             // When / then
             for (int count = 1000; count > 0; count--) {
-                RetroIdentifier identifier = this._retroIdentifierService.CreateNew();
+                SessionIdentifier identifier = this._sessionIdentifierService.CreateNew();
 
                 Assert.That(generatedIds.Add(identifier.StringId), Is.True, $"Non-unique identifier created: {identifier}");
             }
@@ -31,26 +31,26 @@ namespace PokerTime.Domain.Tests.Unit.ValueObjects {
 
         [Test]
         [Repeat(100)]
-        public void RetroIdentifier_CreateNew_CreatesValidId() {
+        public void SessionIdentifier_CreateNew_CreatesValidId() {
             // Given
-            RetroIdentifier retroIdentifier = this._retroIdentifierService.CreateNew();
+            SessionIdentifier sessionIdentifier = this._sessionIdentifierService.CreateNew();
 
             // When
-            bool isValid = this._retroIdentifierService.IsValid(retroIdentifier.StringId);
+            bool isValid = this._sessionIdentifierService.IsValid(sessionIdentifier.StringId);
 
             // Then
-            Assert.IsTrue(isValid, $"Id {retroIdentifier} is not valid");
+            Assert.IsTrue(isValid, $"Id {sessionIdentifier} is not valid");
         }
 
 
         [Test]
         [Repeat(100)]
-        public void RetroIdentifier_CreateNew_CreatesIdOfLengthLessThanOrEqualTo32() {
+        public void SessionIdentifier_CreateNew_CreatesIdOfLengthLessThanOrEqualTo32() {
             // Given / when
-            RetroIdentifier retroIdentifier = this._retroIdentifierService.CreateNew();
+            SessionIdentifier sessionIdentifier = this._sessionIdentifierService.CreateNew();
 
             // Then
-            Assert.That(retroIdentifier.StringId, Has.Length.LessThanOrEqualTo(32), $"Id {retroIdentifier} is not valid");
+            Assert.That(sessionIdentifier.StringId, Has.Length.LessThanOrEqualTo(32), $"Id {sessionIdentifier} is not valid");
         }
     }
 }

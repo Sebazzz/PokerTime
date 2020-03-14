@@ -21,8 +21,8 @@ namespace PokerTime.Application.Tests.Unit.Retrospectives.Queries {
         [Test]
         public void GetRetrospectiveStatusCommand_ThrowsNotFoundException_WhenNotFound() {
             // Given
-            const string retroId = "surely-not-found";
-            var query = new GetRetrospectiveStatusQuery(retroId);
+            const string sessionId = "surely-not-found";
+            var query = new GetRetrospectiveStatusQuery(sessionId);
             var handler = new GetRetrospectiveStatusQueryHandler(this.Context, Substitute.For<IRetrospectiveStatusMapper>());
 
             // When
@@ -45,11 +45,11 @@ namespace PokerTime.Application.Tests.Unit.Retrospectives.Queries {
                 HashedPassphrase = "abef",
                 CurrentStage = RetrospectiveStage.Writing
             };
-            string retroId = retro.UrlId.StringId;
+            string sessionId = retro.UrlId.StringId;
             this.Context.Retrospectives.Add(retro);
             await this.Context.SaveChangesAsync(CancellationToken.None);
 
-            var query = new GetRetrospectiveStatusQuery(retroId);
+            var query = new GetRetrospectiveStatusQuery(sessionId);
             var handler = new GetRetrospectiveStatusQueryHandler(this.Context, new RetrospectiveStatusMapper(this.Context, this.Mapper));
 
             // When
@@ -59,7 +59,7 @@ namespace PokerTime.Application.Tests.Unit.Retrospectives.Queries {
             Assert.That(result.Lanes, Has.Count.EqualTo(3 /* Based on seed data */));
             Assert.That(result.IsEditingNotesAllowed, Is.True);
             Assert.That(result.IsViewingOtherNotesAllowed, Is.False);
-            Assert.That(result.RetroId, Is.EqualTo(retroId));
+            Assert.That(result.SessionId, Is.EqualTo(sessionId));
             Assert.That(result.Title, Is.EqualTo(retro.Title));
         }
     }

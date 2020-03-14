@@ -11,13 +11,13 @@ namespace PokerTime.Application.NoteGroups.Commands {
     using MediatR;
 
     public sealed class AddNoteGroupCommand : IRequest<RetrospectiveNoteGroup> {
-        public string RetroId { get; }
+        public string SessionId { get; }
         public int LaneId { get; }
 
-        public AddNoteGroupCommand(string retroId, int laneId) {
-            this.RetroId = retroId;
+        public AddNoteGroupCommand(string sessionId, int laneId) {
+            this.SessionId = sessionId;
             this.LaneId = laneId;
         }
-        public override string ToString() => $"[{nameof(AddNoteGroupCommand)}] {this.RetroId} on lane {(KnownNoteLane)this.LaneId}";
+        public override string ToString() => $"[{nameof(AddNoteGroupCommand)}] {this.SessionId} on lane {(KnownNoteLane)this.LaneId}";
     }
 }

@@ -1,7 +1,7 @@
 ﻿// ******************************************************************************
 //  © 2016 Sebastiaan Dammann - damsteen.nl
 // 
-//  File:           : RetroIdentifier.cs
+//  File:           : SessionIdentifier.cs
 //  Project         : IFS.Web
 // ******************************************************************************
 
@@ -11,18 +11,18 @@ namespace PokerTime.Domain.ValueObjects {
     using Common;
 
 #pragma warning disable CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.
-    public sealed class RetroIdentifier : ValueObject {
+    public sealed class SessionIdentifier : ValueObject {
         [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         [SuppressMessage("ReSharper", "AutoPropertyCanBeMadeGetOnly.Global")]
         public string StringId { get; set; }
 
         protected override IEnumerable<object> GetAtomicValues() => new[] { this.StringId };
 
-        public RetroIdentifier() {
+        public SessionIdentifier() {
             // Needed for EF construction
         }
 
-        public RetroIdentifier(string stringId) {
+        public SessionIdentifier(string stringId) {
             this.StringId = stringId;
         }
     }

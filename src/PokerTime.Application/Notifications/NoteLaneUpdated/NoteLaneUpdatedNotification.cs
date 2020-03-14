@@ -9,12 +9,12 @@ namespace PokerTime.Application.Notifications.NoteLaneUpdated {
     using MediatR;
 
     public sealed class NoteLaneUpdatedNotification : INotification {
-        public string RetroId { get; }
+        public string SessionId { get; }
         public int LaneId { get; }
         public int GroupId { get; }
 
-        public NoteLaneUpdatedNotification(string retroId, int laneId, int groupId) {
-            this.RetroId = retroId;
+        public NoteLaneUpdatedNotification(string sessionId, int laneId, int groupId) {
+            this.SessionId = sessionId;
             this.LaneId = laneId;
             this.GroupId = groupId;
         }

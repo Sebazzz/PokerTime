@@ -39,15 +39,15 @@ namespace PokerTime.Application.Retrospectives.Commands.JoinRetrospective {
 
             // Passphrase validation
             this.RuleFor(e => e.Passphrase).
-                Must((obj, passphrase) => this.MustBeAValidPassphrase(obj.RetroId, obj.JoiningAsFacilitator, obj.Passphrase))
+                Must((obj, passphrase) => this.MustBeAValidPassphrase(obj.SessionId, obj.JoiningAsFacilitator, obj.Passphrase))
                 .WithMessage("This passphrase is not valid. Please try again.");
         }
 
-        private bool MustBeAValidPassphrase(string retroId, in bool isFacilitatorRole, string passphrase) {
+        private bool MustBeAValidPassphrase(string sessionId, in bool isFacilitatorRole, string passphrase) {
             using IReturnDbContext dbContext = this._returnDbContext.CreateForEditContext();
 
             Expression<Func<Retrospective, string?>> property = isFacilitatorRole ? GetFacilitatorHash : GetParticipantHash;
-            string? hash = dbContext.Retrospectives.Where(x => x.UrlId.StringId == retroId).Select(property).FirstOrDefault();
+            string? hash = dbContext.Retrospectives.Where(x => x.UrlId.StringId == sessionId).Select(property).FirstOrDefault();
 
             if (hash == null) {
                 return true;

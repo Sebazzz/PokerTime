@@ -25,15 +25,15 @@ namespace PokerTime.Application.Showcase.Queries {
         public async Task<GetShowcaseQueryResult> Handle(GetShowcaseQuery request, CancellationToken cancellationToken) {
             if (request == null) throw new ArgumentNullException(nameof(request));
             RetrospectiveStatus retrospective =
-                await this._mediator.Send(new GetRetrospectiveStatusQuery(request.RetroId), cancellationToken);
+                await this._mediator.Send(new GetRetrospectiveStatusQuery(request.SessionId), cancellationToken);
 
-            RetrospectiveVoteStatus voteStatus = (await this._mediator.Send(new GetVotesQuery(request.RetroId), cancellationToken)).VoteStatus;
+            RetrospectiveVoteStatus voteStatus = (await this._mediator.Send(new GetVotesQuery(request.SessionId), cancellationToken)).VoteStatus;
 
             var showcaseData = new ShowcaseData();
             foreach (RetrospectiveLane retrospectiveLane in retrospective.Lanes) {
                 RetrospectiveLaneContent laneContents =
                     await this._mediator.Send(
-                        new GetRetrospectiveLaneContentQuery(request.RetroId, retrospectiveLane.Id), cancellationToken);
+                        new GetRetrospectiveLaneContentQuery(request.SessionId, retrospectiveLane.Id), cancellationToken);
 
                 foreach (RetrospectiveNote note in laneContents.Notes) {
                     showcaseData.Items.Add(new ShowcaseItem(note, retrospectiveLane, voteStatus));

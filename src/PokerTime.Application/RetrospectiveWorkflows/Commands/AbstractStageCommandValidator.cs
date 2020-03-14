@@ -11,7 +11,7 @@ namespace PokerTime.Application.RetrospectiveWorkflows.Commands {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1710:Identifiers should have correct suffix", Justification = "This is a validation rule set.")]
     public abstract class AbstractStageCommandValidator<TCommand> : AbstractValidator<TCommand> where TCommand : AbstractStageCommand {
         protected AbstractStageCommandValidator() {
-            this.RuleFor(x => x.RetroId).NotEmpty();
+            this.RuleFor(x => x.SessionId).NotEmpty();
         }
     }
 }

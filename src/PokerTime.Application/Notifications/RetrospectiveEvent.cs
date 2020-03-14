@@ -7,12 +7,12 @@
 
 namespace PokerTime.Application.Notifications {
     public sealed class RetrospectiveEvent<T> {
-        public string RetroId { get; }
+        public string SessionId { get; }
 
         public T Argument { get; }
 
-        public RetrospectiveEvent(string retroId, T argument) {
-            this.RetroId = retroId;
+        public RetrospectiveEvent(string sessionId, T argument) {
+            this.SessionId = sessionId;
             this.Argument = argument;
         }
     }

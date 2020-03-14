@@ -1,7 +1,7 @@
 ﻿// ******************************************************************************
 //  © 2019 Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : RetroIdentifierService.cs
+//  File:           : SessionIdentifierService.cs
 //  Project         : PokerTime.Domain
 // ******************************************************************************
 
@@ -11,20 +11,20 @@ namespace PokerTime.Domain.Services {
     using System.Threading;
     using ValueObjects;
 
-    public interface IRetroIdentifierService {
+    public interface ISessionIdentifierService {
         bool IsValid(string str);
 
         /// <summary>
         ///     Creates a new log message id
         /// </summary>
         /// <returns></returns>
-        RetroIdentifier CreateNew();
+        SessionIdentifier CreateNew();
     }
 
     /// <summary>
     ///     Represents the identifier of an uploaded file
     /// </summary>
-    public sealed class RetroIdentifierService : IRetroIdentifierService {
+    public sealed class SessionIdentifierService : ISessionIdentifierService {
         private static int _mask = ~1;
 
         private static readonly char[] Chars =
@@ -51,11 +51,11 @@ namespace PokerTime.Domain.Services {
         ///     Creates a new log message id
         /// </summary>
         /// <returns></returns>
-        public RetroIdentifier CreateNew() => CreateNewInternal();
+        public SessionIdentifier CreateNew() => CreateNewInternal();
 
-        internal static RetroIdentifier CreateNewInternal() {
+        internal static SessionIdentifier CreateNewInternal() {
             Interlocked.Increment(location: ref _mask);
-            return new RetroIdentifier(MakeStringRepresentation(Guid.NewGuid()));
+            return new SessionIdentifier(MakeStringRepresentation(Guid.NewGuid()));
         }
 
         private static unsafe string MakeStringRepresentation(Guid id) {

@@ -33,7 +33,7 @@ namespace PokerTime.Application.Notes.Commands.DeleteNote {
             using IReturnDbContext dbContext = this._returnDbContextFactory.CreateForEditContext();
 
             // Get
-            Note note = await dbContext.Notes.Include(x => x.Lane).Include(x => x.Retrospective).FirstOrDefaultAsync(x => x.Id == request.NoteId && x.Retrospective.UrlId.StringId == request.RetroId, cancellationToken);
+            Note note = await dbContext.Notes.Include(x => x.Lane).Include(x => x.Retrospective).FirstOrDefaultAsync(x => x.Id == request.NoteId && x.Retrospective.UrlId.StringId == request.SessionId, cancellationToken);
 
             if (note == null) {
                 throw new NotFoundException(nameof(Note), request.NoteId);
@@ -47,7 +47,7 @@ namespace PokerTime.Application.Notes.Commands.DeleteNote {
             await dbContext.SaveChangesAsync(cancellationToken);
 
             // Broadcast
-            await this._mediator.Publish(new NoteDeletedNotification(request.RetroId, (int)note.Lane.Id, note.Id), cancellationToken);
+            await this._mediator.Publish(new NoteDeletedNotification(request.SessionId, (int)note.Lane.Id, note.Id), cancellationToken);
 
             return Unit.Value;
         }

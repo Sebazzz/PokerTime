@@ -30,10 +30,10 @@ namespace PokerTime.Web.Tests.Integration.Common {
             return result.Identifier.StringId;
         }
 
-        public static async Task SetRetrospective(this IServiceScope scope, string retroId, Action<Retrospective> action) {
+        public static async Task SetRetrospective(this IServiceScope scope, string sessionId, Action<Retrospective> action) {
             var dbContext = scope.ServiceProvider.GetRequiredService<IReturnDbContext>();
 
-            Retrospective retrospective = await dbContext.Retrospectives.FindByRetroId(retroId, CancellationToken.None);
+            Retrospective retrospective = await dbContext.Retrospectives.FindBySessionId(sessionId, CancellationToken.None);
             action.Invoke(retrospective);
             await dbContext.SaveChangesAsync(CancellationToken.None);
         }
