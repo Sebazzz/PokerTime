@@ -1,0 +1,39 @@
+@using PokerTime.Application.SessionWorkflows.Commands
+@inherits MediatorComponent
+
+<h3 class="retrospective-status-panel__next-step-title">Next step</h3>
+<SessionRolePanel>
+    <Facilitator>
+        <p>
+            You can start the planning poker session with the button below. Participants can still join after the session has started.
+        </p>
+
+        <NextStageInvocationForm TModel="InitiateDiscussionStageCommand"
+                                 Model="@this.Command"
+                                 OnContinue="@this.OnInvokeContinueToNextStage"
+                                 ButtonText="Start session">
+            <div class="field">
+                <label class="label">User story title</label>
+                <div class="control">
+                    <label class="label" for="pokertime-userstory-title">User story description</label>
+                    <div class="control">
+                        <InputText id="pokertime-userstory-title" class="input" type="text" @bind-Value="@Command.UserStoryTitle" placeholder="" />
+                    </div>
+
+                    <ValidationMessage For="() => Command.UserStoryTitle"></ValidationMessage>
+                </div>
+            </div>
+        </NextStageInvocationForm>
+    </Facilitator>
+    <Participant>
+        <p>
+            Please wait while the facilitator starts the session.
+        </p>
+    </Participant>
+</SessionRolePanel>
+
+@code {
+    private InitiateDiscussionStageCommand Command { get; } = new InitiateDiscussionStageCommand();
+
+    private Task OnInvokeContinueToNextStage(InitiateDiscussionStageCommand command) => this.Mediator.Send(this.Command);
+}
