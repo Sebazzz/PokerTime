@@ -14,7 +14,7 @@ namespace PokerTime.Application {
     using Microsoft.Extensions.DependencyInjection;
     using Notifications;
     using Sessions.Queries.GetSessionStatus;
-    using RetrospectiveWorkflows.Common;
+    using SessionWorkflows.Common;
 
     public static class ServiceCollectionExtensions {
         public static IServiceCollection AddApplication(this IServiceCollection services) {
