@@ -1,4 +1,4 @@
-@page "/retrospective/{retroId}/join"
+@page "/pokertime-session/{retroId}/join"
 @implements PokerTime.Application.Notifications.RetrospectiveJoined.IRetrospectiveJoinedSubscriber
 @inherits SubscribingComponent<PokerTime.Application.Notifications.RetrospectiveJoined.IRetrospectiveJoinedSubscriber>
 @layout RetrospectiveLayout
@@ -54,9 +54,9 @@ else
                 <Blazored.FluentValidation.FluentValidationValidator />
 
                 <div class="field">
-                    <label class="label" for="retro-name">Your name</label>
+                    <label class="label" for="pokertime-name">Your name</label>
                     <div class="control">
-                        <InputText id="retro-name"
+                        <InputText id="pokertime-name"
                                    class="input"
                                    type="text"
                                    @bind-Value="@Model.Name"
@@ -74,9 +74,9 @@ else
                 @if (UseOwnColor || this.AvailablePredefinedColors.Count == 0)
                 {
                     <div class="field">
-                        <label class="label" for="retro-color">Your custom color</label>
+                        <label class="label" for="pokertime-color">Your custom color</label>
                         <div class="control">
-                            <InputText id="retro-color" type="color" class="input input--retro-color" @bind-Value="@Model.Color" disabled="@(this.ShowParticipantAlreadyJoinedWarning ? "disabled" : null)" />
+                            <InputText id="pokertime-color" type="color" class="input input--pokertime-color" @bind-Value="@Model.Color" disabled="@(this.ShowParticipantAlreadyJoinedWarning ? "disabled" : null)" />
                         </div>
 
                         <ValidationMessage For="() => Model.Color"></ValidationMessage>
@@ -90,7 +90,7 @@ else
                             <div class="field has-addons">
                                 <div class="control">
                                     <div class="select">
-                                        <InputSelect @bind-Value="@Model.Color" id="retro-color-choices">
+                                        <InputSelect @bind-Value="@Model.Color" id="pokertime-color-choices">
                                             <option value="">Select an option</option>
                                             @foreach (AvailableParticipantColorModel color in this.AvailablePredefinedColors)
                                                     {
@@ -118,7 +118,7 @@ else
                 <div class="field">
                     <div class="control">
                         <label class="checkbox">
-                            <InputCheckbox @bind-Value="@Model.JoiningAsFacilitator" id="retro-is-facilitator" disabled="@(this.ShowParticipantAlreadyJoinedWarning ? "disabled" : null)" />
+                            <InputCheckbox @bind-Value="@Model.JoiningAsFacilitator" id="pokertime-is-facilitator" disabled="@(this.ShowParticipantAlreadyJoinedWarning ? "disabled" : null)" />
                             I'm the facilitator of this retrospective
                         </label>
                     </div>
@@ -127,9 +127,9 @@ else
                 @if (Model.JoiningAsFacilitator)
                 {
                     <div class="field">
-                        <label class="label" for="retro-facilitator-passphrase">Facilitator passphrase</label>
+                        <label class="label" for="pokertime-facilitator-passphrase">Facilitator passphrase</label>
                         <div class="control">
-                            <InputText id="retro-facilitator-passphrase" class="input" type="text" @bind-Value="@Model.Passphrase" placeholder="" />
+                            <InputText id="pokertime-facilitator-passphrase" class="input" type="text" @bind-Value="@Model.Passphrase" placeholder="" />
                         </div>
 
                         <ValidationMessage For="() => Model.Passphrase"></ValidationMessage>
@@ -139,9 +139,9 @@ else
                 else if (this.RetrospectiveInfo.NeedsParticipantPassphrase)
                 {
                     <div class="field">
-                        <label class="label" for="retro-passphrase">Passphrase</label>
+                        <label class="label" for="pokertime-passphrase">Passphrase</label>
                         <div class="control">
-                            <InputText id="retro-passphrase" class="input" type="text" @bind-Value="@Model.Passphrase" placeholder="" />
+                            <InputText id="pokertime-passphrase" class="input" type="text" @bind-Value="@Model.Passphrase" placeholder="" />
                         </div>
 
                         <ValidationMessage For="() => Model.Passphrase"></ValidationMessage>
@@ -151,7 +151,7 @@ else
 
                 <div class="field is-grouped">
                     <div class="control">
-                        <button class="button is-link" id="join-retro-button">
+                        <button class="button is-link" id="join-pokertime-button">
                             <span class="icon is-small"><i class="fas fa-door-open"></i></span>
                             <span>Continue</span>
                         </button>
@@ -259,7 +259,7 @@ else
             return;
         }
 
-        this.NavigationManager.NavigateTo("retrospective/" + this.RetroId + "/lobby");
+        this.NavigationManager.NavigateTo("session/" + this.RetroId + "/lobby");
     }
 
     private void HandleInvalidSubmit()

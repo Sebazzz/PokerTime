@@ -212,13 +212,13 @@ namespace PokerTime.Web.Tests.Integration.Pages {
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global", Justification = "Dynamically instantiated")]
     public sealed class JoinRetrospectivePage : PageObject {
         public IWebElement Title => this.WebDriver.FindElement(By.CssSelector("h1.title"));
-        public IWebElement NameInput => this.WebDriver.FindElement(By.Id("retro-name"));
-        public IWebElement FacilitatorPassphraseInput => this.WebDriver.FindElement(By.Id("retro-facilitator-passphrase"));
-        public IWebElement ParticipantPassphraseInput => this.WebDriver.FindElement(By.Id("retro-passphrase"));
-        public IWebElement ColorInput => this.WebDriver.FindElement(By.Id("retro-color"));
-        public IWebElement ColorSelect => this.WebDriver.FindElement(By.Id("retro-color-choices"));
-        public IWebElement IsFacilitatorCheckbox => this.WebDriver.FindElement(By.Id("retro-is-facilitator"));
-        public IWebElement SubmitButton => this.WebDriver.FindVisibleElement(By.Id("join-retro-button"));
+        public IWebElement NameInput => this.WebDriver.FindElement(By.Id("pokertime-name"));
+        public IWebElement FacilitatorPassphraseInput => this.WebDriver.FindElement(By.Id("pokertime-facilitator-passphrase"));
+        public IWebElement ParticipantPassphraseInput => this.WebDriver.FindElement(By.Id("pokertime-passphrase"));
+        public IWebElement ColorInput => this.WebDriver.FindElement(By.Id("pokertime-color"));
+        public IWebElement ColorSelect => this.WebDriver.FindElement(By.Id("pokertime-color-choices"));
+        public IWebElement IsFacilitatorCheckbox => this.WebDriver.FindElement(By.Id("pokertime-is-facilitator"));
+        public IWebElement SubmitButton => this.WebDriver.FindVisibleElement(By.Id("join-pokertime-button"));
         public void Submit() => this.SubmitButton.Click();
 
         public ReadOnlyCollection<IWebElement> GetValidationMessages() => this.WebDriver.FindElements(By.ClassName("validation-message"));

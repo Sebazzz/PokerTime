@@ -21,7 +21,7 @@ namespace PokerTime.Web.Services {
             if (urlId == null) throw new ArgumentNullException(nameof(urlId));
 
             var uriBuilder = new UriBuilder(this._siteUrlDetectionService.GetSiteUrl()) {
-                Path = $"/retrospective/{urlId.StringId}/join"
+                Path = $"/pokertime-session/{urlId.StringId}/join"
             };
 
             return uriBuilder.Uri;

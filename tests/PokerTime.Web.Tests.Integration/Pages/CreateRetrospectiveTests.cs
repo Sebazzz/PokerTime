@@ -78,12 +78,12 @@ namespace PokerTime.Web.Tests.Integration.Pages {
 
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global", Justification = "Dynamically instantiated")]
     public sealed class CreateRetrospectivePage : PageObject {
-        public IWebElement RetrospectiveTitleInput => this.WebDriver.FindVisibleElement(By.Id("retro-title"));
-        public IWebElement FacilitatorPassphraseInput => this.WebDriver.FindVisibleElement(By.Id("retro-facilitator-passphrase"));
-        public IWebElement ParticipantPassphraseInput => this.WebDriver.FindVisibleElement(By.Id("retro-passphrase"));
-        public IWebElement SubmitButton => this.WebDriver.FindVisibleElement(By.Id("create-retro-button"));
+        public IWebElement RetrospectiveTitleInput => this.WebDriver.FindVisibleElement(By.Id("pokertime-title"));
+        public IWebElement FacilitatorPassphraseInput => this.WebDriver.FindVisibleElement(By.Id("pokertime-facilitator-passphrase"));
+        public IWebElement ParticipantPassphraseInput => this.WebDriver.FindVisibleElement(By.Id("pokertime-passphrase"));
+        public IWebElement SubmitButton => this.WebDriver.FindVisibleElement(By.Id("create-pokertime-button"));
 
-        public IWebElement UrlLocationInput => this.WebDriver.FindVisibleElement(By.Id("retro-location"));
+        public IWebElement UrlLocationInput => this.WebDriver.FindVisibleElement(By.Id("pokertime-location"));
         public IWebElement ParticipatorInstructions => this.WebDriver.FindElementByTestElementId("participator instructions");
         public IWebElement FacilitatorInstructions => this.WebDriver.FindElementByTestElementId("facilitator instructions");
 
