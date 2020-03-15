@@ -4,7 +4,7 @@ Remote planning poker tool built in ASP.NET Core and Blazor
 
 Licensed: GNU GPL v3.0
 
-[![Build status](https://ci.appveyor.com/api/projects/status/7bjrmgtek7j080d7?svg=true)](https://ci.appveyor.com/project/Sebazzz/PokerTime)
+[![Build status](https://ci.appveyor.com/api/projects/status/mlwomeg23hqb0r3j?svg=true)](https://ci.appveyor.com/project/Sebazzz/PokerTime)
 [![CircleCI](https://circleci.com/gh/Sebazzz/PokerTime.svg?style=svg)](https://circleci.com/gh/Sebazzz/PokerTime)
 [![Github CI](https://github.com/sebazzz/PokerTime/workflows/Continuous%20integration/badge.svg)](https://github.com/Sebazzz/PokerTime/actions?workflow=Continuous+integration)
 
@@ -39,7 +39,7 @@ If you prefer to build the application yourself, please follow the [compilation 
 
 ## Screenshots
 
-*to-do*
+_to-do_
 
 ## Contributions
 
