@@ -16,6 +16,7 @@ namespace PokerTime.Application.Common.Abstractions {
         DbSet<PredefinedParticipantColor> PredefinedParticipantColors { get; set; }
         DbSet<Session> Retrospectives { get; set; }
         DbSet<Participant> Participants { get; set; }
+        DbSet<UserStory> UserStories { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }

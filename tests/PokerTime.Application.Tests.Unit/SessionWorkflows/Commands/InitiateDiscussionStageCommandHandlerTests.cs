@@ -21,7 +21,7 @@ namespace PokerTime.Application.Tests.Unit.SessionWorkflows.Commands {
         public void InitiateDiscussionStageCommandHandler_InvalidSessionId_ThrowsNotFoundException() {
             // Given
             const string sessionId = "not found surely :)";
-            var handler = new InitiateDicussionStageCommandHandler(this.Context, this.SessionStatusUpdateDispatcherMock, this.SystemClockMock);
+            var handler = new InitiateDiscussionStageCommandHandler(this.Context, this.SessionStatusUpdateDispatcherMock, this.SystemClockMock);
             var request = new InitiateDiscussionStageCommand { SessionId = sessionId, TimeInMinutes = 10 };
 
             // When
@@ -34,7 +34,7 @@ namespace PokerTime.Application.Tests.Unit.SessionWorkflows.Commands {
         [Test]
         public async Task InitiateDiscussionStageCommandHandler_OnStatusChange_UpdatesRetroStageAndInvokesNotification() {
             // Given
-            var handler = new InitiateDicussionStageCommandHandler(this.Context, this.SessionStatusUpdateDispatcherMock, this.SystemClockMock);
+            var handler = new InitiateDiscussionStageCommandHandler(this.Context, this.SessionStatusUpdateDispatcherMock, this.SystemClockMock);
             var request = new InitiateDiscussionStageCommand { SessionId = this.SessionId, TimeInMinutes = 10 };
 
             this.SystemClockMock.CurrentTimeOffset.Returns(DateTimeOffset.UnixEpoch);

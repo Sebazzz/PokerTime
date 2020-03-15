@@ -19,6 +19,33 @@ namespace PokerTime.Persistence.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("PokerTime.Domain.Entities.Estimation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ParticipantId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SymbolId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserStoryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParticipantId");
+
+                    b.HasIndex("SymbolId");
+
+                    b.HasIndex("UserStoryId");
+
+                    b.ToTable("Estimation");
+                });
+
             modelBuilder.Entity("PokerTime.Domain.Entities.Participant", b =>
                 {
                     b.Property<int>("Id")
@@ -74,6 +101,9 @@ namespace PokerTime.Persistence.Migrations
                     b.Property<int>("CurrentStage")
                         .HasColumnType("int");
 
+                    b.Property<int?>("CurrentUserStoryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("FacilitatorHashedPassphrase")
                         .IsRequired()
                         .HasColumnType("char(64)")
@@ -94,7 +124,60 @@ namespace PokerTime.Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CurrentUserStoryId");
+
                     b.ToTable("Session");
+                });
+
+            modelBuilder.Entity("PokerTime.Domain.Entities.Symbol", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ValueAsNumber")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Symbol");
+                });
+
+            modelBuilder.Entity("PokerTime.Domain.Entities.UserStory", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserStory");
+                });
+
+            modelBuilder.Entity("PokerTime.Domain.Entities.Estimation", b =>
+                {
+                    b.HasOne("PokerTime.Domain.Entities.Participant", "Participant")
+                        .WithMany()
+                        .HasForeignKey("ParticipantId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("PokerTime.Domain.Entities.Symbol", "Symbol")
+                        .WithMany()
+                        .HasForeignKey("SymbolId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("PokerTime.Domain.Entities.UserStory", "UserStory")
+                        .WithMany("Estimations")
+                        .HasForeignKey("UserStoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("PokerTime.Domain.Entities.Participant", b =>
@@ -159,6 +242,10 @@ namespace PokerTime.Persistence.Migrations
 
             modelBuilder.Entity("PokerTime.Domain.Entities.Session", b =>
                 {
+                    b.HasOne("PokerTime.Domain.Entities.UserStory", "CurrentUserStory")
+                        .WithMany()
+                        .HasForeignKey("CurrentUserStoryId");
+
                     b.OwnsOne("PokerTime.Domain.ValueObjects.SessionIdentifier", "UrlId", b1 =>
                         {
                             b1.Property<int>("SessionId")
@@ -183,6 +270,15 @@ namespace PokerTime.Persistence.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("SessionId");
                         });
+                });
+
+            modelBuilder.Entity("PokerTime.Domain.Entities.UserStory", b =>
+                {
+                    b.HasOne("PokerTime.Domain.Entities.Session", "Session")
+                        .WithMany()
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

@@ -40,6 +40,10 @@ namespace PokerTime.Domain.Entities {
         /// </summary>
         public string? HashedPassphrase { get; set; }
 
+        /// <summary>
+        /// Gets the current user story being estimated
+        /// </summary>
+        public UserStory? CurrentUserStory { get; set; }
 
 #pragma warning disable CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.
         public string Title { get; set; }
