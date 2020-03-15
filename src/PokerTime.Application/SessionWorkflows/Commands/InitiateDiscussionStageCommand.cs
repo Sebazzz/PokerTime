@@ -8,7 +8,7 @@
 namespace PokerTime.Application.SessionWorkflows.Commands {
     using MediatR;
 
-    public sealed class InitiateDiscussionStageCommand : AbstractTimedStageCommand, IRequest {
+    public sealed class InitiateDiscussionStageCommand : AbstractStageCommand, IRequest {
         public string? UserStoryTitle { get; set; }
     }
 }

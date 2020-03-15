@@ -11,12 +11,14 @@ namespace PokerTime.Application.Common.Models {
     public readonly struct CurrentParticipantModel : IEquatable<CurrentParticipantModel> {
         public int Id { get; }
         public string? Name { get; }
+        public string? HexColorString { get; }
         public bool IsFacilitator { get; }
         public bool IsAuthenticated => this.Id != 0;
 
-        public CurrentParticipantModel(int id, string? name, bool isFacilitator) {
+        public CurrentParticipantModel(int id, string? name, string? color, bool isFacilitator) {
             this.Id = id;
             this.Name = name;
+            this.HexColorString = color;
             this.IsFacilitator = isFacilitator;
         }
 
@@ -30,9 +32,10 @@ namespace PokerTime.Application.Common.Models {
 
         public static bool operator !=(CurrentParticipantModel left, CurrentParticipantModel right) => !left.Equals(right);
 
-        public void Deconstruct(out int participantId, out string? name, out bool isFacilitator) {
+        public void Deconstruct(out int participantId, out string? name, out string? color, out bool isFacilitator) {
             participantId = this.Id;
             name = this.Name;
+            color = this.HexColorString;
             isFacilitator = this.IsFacilitator;
         }
 

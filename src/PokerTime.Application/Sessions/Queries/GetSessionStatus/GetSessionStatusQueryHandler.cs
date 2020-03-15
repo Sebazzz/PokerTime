@@ -28,7 +28,7 @@ namespace PokerTime.Application.Sessions.Queries.GetSessionStatus {
         public async Task<SessionStatus> Handle(GetSessionStatusQuery request, CancellationToken cancellationToken) {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
-            Session Session = await this._pokerTimeDbContext.Retrospectives.FindBySessionId(request.SessionId, cancellationToken);
+            Session Session = await this._pokerTimeDbContext.Sessions.FindBySessionId(request.SessionId, cancellationToken);
 
             if (Session == null) {
                 throw new NotFoundException();

@@ -101,9 +101,6 @@ namespace PokerTime.Persistence.Migrations
                     b.Property<int>("CurrentStage")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CurrentUserStoryId")
-                        .HasColumnType("int");
-
                     b.Property<string>("FacilitatorHashedPassphrase")
                         .IsRequired()
                         .HasColumnType("char(64)")
@@ -124,8 +121,6 @@ namespace PokerTime.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CurrentUserStoryId");
-
                     b.ToTable("Session");
                 });
 
@@ -135,6 +130,9 @@ namespace PokerTime.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Order")
+                        .HasColumnType("int");
 
                     b.Property<int>("Type")
                         .HasColumnType("int");
@@ -150,12 +148,19 @@ namespace PokerTime.Persistence.Migrations
             modelBuilder.Entity("PokerTime.Domain.Entities.UserStory", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("SessionId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("SessionId");
 
                     b.ToTable("UserStory");
                 });
@@ -242,10 +247,6 @@ namespace PokerTime.Persistence.Migrations
 
             modelBuilder.Entity("PokerTime.Domain.Entities.Session", b =>
                 {
-                    b.HasOne("PokerTime.Domain.Entities.UserStory", "CurrentUserStory")
-                        .WithMany()
-                        .HasForeignKey("CurrentUserStoryId");
-
                     b.OwnsOne("PokerTime.Domain.ValueObjects.SessionIdentifier", "UrlId", b1 =>
                         {
                             b1.Property<int>("SessionId")
@@ -276,7 +277,7 @@ namespace PokerTime.Persistence.Migrations
                 {
                     b.HasOne("PokerTime.Domain.Entities.Session", "Session")
                         .WithMany()
-                        .HasForeignKey("Id")
+                        .HasForeignKey("SessionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

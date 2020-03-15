@@ -1,0 +1,73 @@
+@using PokerTime.Application.Sessions.Queries.GetSessionStatus
+@using PokerTime.Application.SessionWorkflows.Commands
+@inherits MediatorComponent
+
+<h3 class="retrospective-status-panel__next-step-title">Current step</h3>
+<SessionRolePanel>
+    <Facilitator>
+        <p>
+            Discuss the estimations with the participants.
+        </p>
+        
+        <NextStageInvocationForm TModel="InitiateDiscussionStageCommand"
+                                 Model="@this.NextUserStoryCommand"
+                                 OnContinue="@this.OnInvokeReestimate"
+                                 ButtonText="Re-estimate this user story" />
+
+        <hr/>
+
+        <NextStageInvocationForm TModel="InitiateDiscussionStageCommand"
+                                 Model="@this.NextUserStoryCommand"
+                                 OnContinue="@this.OnInvokeNextUserStory"
+                                 ButtonText="Estimate new user story">
+            <div class="field">
+                <div class="control">
+                    <label class="label" for="pokertime-userstory-title">User story title</label>
+                    <div class="control">
+                        <InputText id="pokertime-userstory-title" class="input" type="text" @bind-Value="@NextUserStoryCommand.UserStoryTitle" placeholder="" />
+                    </div>
+
+                    <ValidationMessage For="() => NextUserStoryCommand.UserStoryTitle"></ValidationMessage>
+                </div>
+            </div>
+        </NextStageInvocationForm>
+
+        <hr />
+
+        <NextStageInvocationForm TModel="InitiateFinishStageCommand"
+                                 Model="@this.FinishCommand"
+                                 OnContinue="@this.OnInvokeContinueToFinishStage"
+                                 ButtonText="End this estimation session" />
+    </Facilitator>
+    <Participant>
+        <p>
+            Come to a concensus with your team or re-estimate the user story.
+        </p>
+    </Participant>
+</SessionRolePanel>
+
+@code {
+    #nullable disable
+    
+    [CascadingParameter]
+    public SessionStatus SessionStatus { get; set; }
+
+    private InitiateEstimationDiscussionStageCommand FinishCommand { get; } = new InitiateEstimationDiscussionStageCommand();
+
+    private InitiateDiscussionStageCommand ReestimateCommand { get; } = new InitiateDiscussionStageCommand();
+
+    private InitiateDiscussionStageCommand NextUserStoryCommand { get; } = new InitiateDiscussionStageCommand();
+
+    private Task OnInvokeContinueToFinishStage(InitiateFinishStageCommand command) => this.Mediator.Send(this.FinishCommand);
+
+    private Task OnInvokeReestimate(InitiateDiscussionStageCommand command) => this.Mediator.Send(this.ReestimateCommand);
+    private Task OnInvokeNextUserStory(InitiateDiscussionStageCommand command) => this.Mediator.Send(this.ReestimateCommand);
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        this.ReestimateCommand.UserStoryTitle = this.SessionStatus.UserStory?.Title;
+    }
+
+}

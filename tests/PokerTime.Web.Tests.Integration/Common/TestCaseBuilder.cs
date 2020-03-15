@@ -188,7 +188,7 @@ namespace PokerTime.Web.Tests.Integration.Common {
                     TestContext.WriteLine($"[{nameof(TestCaseBuilder)}] Executing request [{request}] with participant {participantName}");
 
                     ParticipantInfo participantInfo = this.GetParticipatorInfo(participantName);
-                    this._scope.SetAuthenticationInfo(new CurrentParticipantModel(participantInfo.Id, participantInfo.Name, participantInfo.IsFacilitator));
+                    this._scope.SetAuthenticationInfo(new CurrentParticipantModel(participantInfo.Id, participantInfo.Name, participantInfo.Color.HexString, participantInfo.IsFacilitator));
                 }
 
                 try {

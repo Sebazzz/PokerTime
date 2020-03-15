@@ -22,8 +22,48 @@ namespace PokerTime.Application.App.Commands.SeedBaseData {
 
         public async Task SeedAllAsync(CancellationToken cancellationToken) {
             await this.SeedPredefinedParticipantColor(cancellationToken);
+            await this.SeedPokerCardSymbols(cancellationToken);
 
             await this._pokerTimeDbContext.SaveChangesAsync(cancellationToken);
+        }
+
+        private async Task SeedPokerCardSymbols(CancellationToken cancellationToken) {
+            if (await this._pokerTimeDbContext.Symbols.AnyAsync(cancellationToken)) {
+                return;
+            }
+
+            int order = 1;
+
+            void IntSymbol(int num) {
+                this._pokerTimeDbContext.Symbols.Add(new Symbol {
+                    Type = SymbolType.Number,
+                    ValueAsNumber = num,
+                    Order = order++
+                });
+            }
+
+            void TypeSymbol(SymbolType symbolType) {
+                this._pokerTimeDbContext.Symbols.Add(new Symbol {
+                    Type = symbolType,
+                    Order = order++
+                });
+            }
+
+            // Seed symbols
+            IntSymbol(0);
+            IntSymbol(1);
+            IntSymbol(2);
+            IntSymbol(3);
+            IntSymbol(5);
+            IntSymbol(8);
+            IntSymbol(13);
+            IntSymbol(20);
+            IntSymbol(40);
+            IntSymbol(100);
+
+            TypeSymbol(SymbolType.Break);
+            TypeSymbol(SymbolType.Infinite);
+            TypeSymbol(SymbolType.Unknown);
         }
 
         private async Task SeedPredefinedParticipantColor(CancellationToken cancellationToken) {

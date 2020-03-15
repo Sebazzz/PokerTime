@@ -1,11 +1,50 @@
+@inherits MediatorComponent
+@using PokerTime.Application.Common.Models
 @using PokerTime.Application.Sessions.Queries.GetSessionStatus
-<div class="columns">
-    
-</div>
+@using PokerTime.Application.Symbols.Queries
+
+@if (this.SessionStatus == null)
+{
+    return;
+}
+
+@if (this.SessionStatus.UserStory != null)
+{
+    <h2>@(this.SessionStatus.UserStory.Title ?? "User story")</h2>
+}
+
+@if (this.SessionStatus.IsStarted)
+{
+    <CardChooser AvailableSymbols="@this.AvailableSymbols" />
+
+    <EstimationOverview />
+}
+else
+{
+    <p>
+        Please wait for the facilitator to start this session.
+    </p>
+}
 
 @code {
-    #nullable disable
+#nullable disable
 
     [CascadingParameter]
     public SessionStatus SessionStatus { get; set; }
+
+    // Cache the symbols at the parent level to prevent lengthy (in a relative sense) component initialization
+    private ICollection<SymbolModel> AvailableSymbols { get; set; } = new List<SymbolModel>();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await base.OnParametersSetAsync();
+
+        if (this.AvailableSymbols.Count > 0)
+        {
+            return;
+        }
+
+        GetSymbolsQueryResponse response = await this.Mediator.Send(new GetSymbolsQuery());
+        this.AvailableSymbols = response.Symbols;
+    }
 }

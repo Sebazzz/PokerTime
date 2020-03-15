@@ -1,0 +1,27 @@
+@using PokerTime.Application.SessionWorkflows.Commands
+@inherits MediatorComponent
+
+<h3 class="retrospective-status-panel__next-step-title">Current step</h3>
+<SessionRolePanel>
+    <Facilitator>
+        <p>
+            The participants (and you) are now doing the estimations. The estimations are not visible to anyone else until you press the button below.
+        </p>
+
+        <NextStageInvocationForm TModel="InitiateEstimationDiscussionStageCommand"
+                                 Model="@this.Command"
+                                 OnContinue="@this.OnInvokeContinueToNextStage"
+                                 ButtonText="Show the given estimations"/>
+    </Facilitator>
+    <Participant>
+        <p>
+            Please estimate the user story.
+        </p>
+    </Participant>
+</SessionRolePanel>
+
+@code {
+    private InitiateEstimationDiscussionStageCommand Command { get; } = new InitiateEstimationDiscussionStageCommand();
+
+    private Task OnInvokeContinueToNextStage(InitiateEstimationDiscussionStageCommand command) => this.Mediator.Send(this.Command);
+}

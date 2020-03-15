@@ -1,0 +1,11 @@
+@using PokerTime.Application.Common.Models
+@inherits EstimationOverviewBase
+
+@if (this.SessionStatus == null || this.SessionStatus.CanViewEstimationPanel == false)
+{
+    return;
+}
+
+@foreach (EstimationModel estimation in this.Estimations.Values) {
+    <EstimationCard Estimation="@estimation"/>
+}

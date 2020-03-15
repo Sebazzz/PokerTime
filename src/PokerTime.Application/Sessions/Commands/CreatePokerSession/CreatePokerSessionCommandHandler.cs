@@ -57,7 +57,7 @@ namespace PokerTime.Application.Sessions.Commands.CreatePokerSession {
                 new QrCode(qrCodeGenerator.CreateQrCode(payload.ToString(), QRCodeGenerator.ECCLevel.L)),
                 retroLocation);
 
-            this._pokerTimeDbContext.Retrospectives.Add(retrospective);
+            this._pokerTimeDbContext.Sessions.Add(retrospective);
 
             await this._pokerTimeDbContext.SaveChangesAsync(cancellationToken);
 

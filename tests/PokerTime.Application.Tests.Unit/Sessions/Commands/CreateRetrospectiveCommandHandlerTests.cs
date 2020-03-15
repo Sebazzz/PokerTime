@@ -48,9 +48,9 @@ namespace PokerTime.Application.Tests.Unit.Sessions.Commands {
 
             // Then
             Assert.That(result.Identifier.StringId, Is.Not.Null);
-            Assert.That(this.Context.Retrospectives.Any(), Is.True);
-            Assert.That(this.Context.Retrospectives.First().FacilitatorHashedPassphrase, Is.EqualTo("facilitatorhash"));
-            Assert.That(this.Context.Retrospectives.First().CreationTimestamp, Is.EqualTo(DateTimeOffset.UnixEpoch));
+            Assert.That(this.Context.Sessions.Any(), Is.True);
+            Assert.That(this.Context.Sessions.First().FacilitatorHashedPassphrase, Is.EqualTo("facilitatorhash"));
+            Assert.That(this.Context.Sessions.First().CreationTimestamp, Is.EqualTo(DateTimeOffset.UnixEpoch));
         }
     }
 }

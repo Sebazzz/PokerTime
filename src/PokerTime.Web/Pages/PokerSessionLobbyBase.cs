@@ -81,7 +81,7 @@ namespace PokerTime.Web.Pages {
             CurrentParticipantModel currentParticipant = await this.CurrentParticipantService.GetParticipant();
 
             if (!currentParticipant.IsAuthenticated) {
-                this.NavigationManager.NavigateTo("/session/" + this.SessionId + "/join");
+                this.NavigationManager.NavigateTo("/pokertime-session/" + this.SessionId + "/join");
                 return;
             }
 

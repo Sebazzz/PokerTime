@@ -14,10 +14,12 @@ namespace PokerTime.Persistence.Configurations {
         public void Configure(EntityTypeBuilder<UserStory> builder) {
             builder.HasMany(x => x.Estimations)
                 .WithOne(x => x.UserStory)
-                .IsRequired();
+                .IsRequired()
+                .HasForeignKey(x => x.UserStoryId);
 
             builder.HasOne(x => x.Session)
                 .WithMany()
+                .HasForeignKey(x => x.SessionId)
                 .IsRequired();
         }
     }

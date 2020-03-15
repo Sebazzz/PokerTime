@@ -21,6 +21,9 @@ namespace PokerTime.Domain.Services {
                     return "∞";
                 case SymbolType.Break:
                     return "☕";
+                case SymbolType.Unknown:
+                    return "?";
+
                 default:
                     throw new ArgumentOutOfRangeException($"Unknown symbol type: {symbol.Type}");
             }

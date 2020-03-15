@@ -18,6 +18,7 @@ namespace PokerTime.Domain.Entities {
 
 #pragma warning disable CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.
         public Session Session { get; set; }
+        public int SessionId { get; set; }
 
         public ICollection<Estimation> Estimations => this._estimations ??= new List<Estimation>();
 

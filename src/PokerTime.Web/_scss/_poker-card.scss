@@ -1,0 +1,37 @@
+.poker-card {
+    display: inline-block;
+    border-radius: 10px;
+    min-height: 200px;
+    position: relative;
+
+    &--choosable {
+        cursor: pointer;
+        transition: transform ease 500ms;
+        transform: scale(1);
+        transform-origin: center;
+
+        &:hover {
+            transform: scale(1.2);
+        }
+    }
+
+    &--idle {
+        cursor: not-allowed;
+        opacity: 0.75;
+    }
+
+    &--estimated {
+    }
+
+    &__symbol {
+        font-size: 30px;
+
+        &--hidden {
+            filter: blur(20px);
+        }
+    }
+
+    & + .poker-card {
+        margin-left: 2em;
+    }
+}

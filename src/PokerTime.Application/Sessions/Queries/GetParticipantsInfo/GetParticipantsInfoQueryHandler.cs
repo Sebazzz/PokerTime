@@ -30,7 +30,7 @@ namespace PokerTime.Application.Sessions.Queries.GetParticipantsInfo {
 
             var returnValue = new ParticipantsInfoList();
             returnValue.Participants.AddRange(
-                await this._pokerTimeDbContext.Retrospectives
+                await this._pokerTimeDbContext.Sessions
                     .Where(r => r.UrlId.StringId == request.SessionId)
                     .SelectMany(r => r.Participants)
                     .ProjectTo<ParticipantInfo>(this._mapper.ConfigurationProvider)

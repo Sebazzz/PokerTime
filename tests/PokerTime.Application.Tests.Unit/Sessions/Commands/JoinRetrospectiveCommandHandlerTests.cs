@@ -42,7 +42,7 @@ namespace PokerTime.Application.Tests.Unit.Sessions.Commands {
                 HashedPassphrase = "abef"
             };
 
-            this.Context.Retrospectives.Add(retro);
+            this.Context.Sessions.Add(retro);
             await this.Context.SaveChangesAsync(CancellationToken.None);
 
             this._session = retro;
@@ -94,7 +94,7 @@ namespace PokerTime.Application.Tests.Unit.Sessions.Commands {
             currentParticipantService.ReceivedWithAnyArgs(Quantity.Exactly(1))
                 .SetParticipant(Arg.Any<CurrentParticipantModel>());
 
-            Session checkRetro = await this.Context.Retrospectives.AsNoTracking().
+            Session checkRetro = await this.Context.Sessions.AsNoTracking().
                 Include(x => x.Participants).
                 FindBySessionId(retro.UrlId.StringId, CancellationToken.None).
                 ConfigureAwait(false);
@@ -135,7 +135,7 @@ namespace PokerTime.Application.Tests.Unit.Sessions.Commands {
             await handler.Handle(command, CancellationToken.None);
 
             // Then
-            var participants = await this.Context.Retrospectives.
+            var participants = await this.Context.Sessions.
                  SelectMany(x => x.Participants).AsNoTracking().ToListAsync();
 
             Assert.That(participants.Count(x => x.Name == "Duplicate joiner"), Is.EqualTo(1));

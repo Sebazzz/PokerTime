@@ -30,7 +30,7 @@ namespace PokerTime.Application.Tests.Unit.PredefinedParticipantColors.Queries {
                 Participants = { new Participant { Name = "John", Color = Color.Gold } }
             };
             Trace.Assert(retro.UrlId.ToString() != null);
-            this.Context.Retrospectives.Add(retro);
+            this.Context.Sessions.Add(retro);
             await this.Context.SaveChangesAsync(CancellationToken.None);
 
             // When

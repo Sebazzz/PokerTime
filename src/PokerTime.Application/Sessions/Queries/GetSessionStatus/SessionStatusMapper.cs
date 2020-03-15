@@ -7,11 +7,13 @@
 
 namespace PokerTime.Application.Sessions.Queries.GetSessionStatus {
     using System;
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
     using Common.Abstractions;
+    using Common.Models;
     using Domain.Entities;
     using Microsoft.EntityFrameworkCore;
 
@@ -24,14 +26,19 @@ namespace PokerTime.Application.Sessions.Queries.GetSessionStatus {
         private readonly IMapper _mapper;
 
         public SessionStatusMapper(IPokerTimeDbContext pokerTimeDbContext, IMapper mapper) {
-            this._pokerTimeDbContext = pokerTimeDbContext;
             this._mapper = mapper;
+            this._pokerTimeDbContext = pokerTimeDbContext;
         }
 
         public Task<SessionStatus> GetSessionStatus(Session session, CancellationToken cancellationToken) {
             if (session == null) throw new ArgumentNullException(nameof(session));
 
-            var retrospectiveStatus = new SessionStatus(session.UrlId.StringId, session.Title, session.CurrentStage);
+            UserStory? currentUserStory = this._pokerTimeDbContext.UserStories.Where(x => x.SessionId == session.Id).
+                OrderByDescending(x => x.Id).
+                FirstOrDefault();
+
+            CurrentUserStoryModel? currentUserStoryModel = currentUserStory != null ? this._mapper.Map<CurrentUserStoryModel>(currentUserStory) : null;
+            var retrospectiveStatus = new SessionStatus(session.UrlId.StringId, session.Title, session.CurrentStage, currentUserStoryModel);
 
             return Task.FromResult(retrospectiveStatus);
         }

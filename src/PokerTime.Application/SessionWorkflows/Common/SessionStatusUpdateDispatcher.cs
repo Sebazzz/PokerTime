@@ -27,9 +27,9 @@ namespace PokerTime.Application.SessionWorkflows.Common {
         }
 
         public async Task DispatchUpdate(Session session, CancellationToken cancellationToken) {
-            SessionStatus SessionStatus = await this._sessionStatusMapper.GetSessionStatus(session, cancellationToken);
+            SessionStatus sessionStatus = await this._sessionStatusMapper.GetSessionStatus(session, cancellationToken);
 
-            await this._mediator.Publish(new SessionStatusUpdatedNotification(SessionStatus), cancellationToken);
+            await this._mediator.Publish(new SessionStatusUpdatedNotification(sessionStatus), cancellationToken);
         }
     }
 }

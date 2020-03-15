@@ -40,7 +40,7 @@ namespace PokerTime.Application.Tests.Unit.Sessions.Queries {
                 HashedPassphrase = "hello"
             };
             string sessionId = retrospective.UrlId.StringId;
-            this.Context.Retrospectives.Add(retrospective);
+            this.Context.Sessions.Add(retrospective);
             await this.Context.SaveChangesAsync(CancellationToken.None);
 
             var handler = new GetJoinPokerSessionInfoQueryHandler(this.Context, new NullLogger<GetJoinPokerSessionInfoQueryHandler>());

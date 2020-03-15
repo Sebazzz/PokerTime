@@ -38,7 +38,7 @@ namespace PokerTime.Application.Sessions.Commands.JoinPokerSession {
 
         public async Task<ParticipantInfo> Handle(JoinPokerSessionCommand request, CancellationToken cancellationToken) {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            Session Session = await this._pokerTimeDbContext.Retrospectives.FindBySessionId(request.SessionId, cancellationToken);
+            Session Session = await this._pokerTimeDbContext.Sessions.FindBySessionId(request.SessionId, cancellationToken);
 
             if (Session == null) {
                 throw new NotFoundException(nameof(Session), request.SessionId);
@@ -63,7 +63,7 @@ namespace PokerTime.Application.Sessions.Commands.JoinPokerSession {
             await this._pokerTimeDbContext.SaveChangesAsync(cancellationToken);
 
             // Update auth info
-            this._currentParticipantService.SetParticipant(new CurrentParticipantModel(participant.Id, participant.Name, request.JoiningAsFacilitator));
+            this._currentParticipantService.SetParticipant(new CurrentParticipantModel(participant.Id, participant.Name, participant.Color.ToHex(), request.JoiningAsFacilitator));
 
             // Broadcast
             var participantInfo = this._mapper.Map<ParticipantInfo>(participant);

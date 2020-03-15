@@ -31,7 +31,7 @@ namespace PokerTime.Application.Tests.Unit.Sessions.Queries {
                 HashedPassphrase = "abef"
             };
             this._retro1Id = retro.UrlId.StringId;
-            this.Context.Retrospectives.Add(retro);
+            this.Context.Sessions.Add(retro);
 
             var retro2 = new Session {
                 Title = "Who",
@@ -43,7 +43,7 @@ namespace PokerTime.Application.Tests.Unit.Sessions.Queries {
                 HashedPassphrase = "abef"
             };
             this._retro2Id = retro2.UrlId.StringId;
-            this.Context.Retrospectives.Add(retro2);
+            this.Context.Sessions.Add(retro2);
             await this.Context.SaveChangesAsync(CancellationToken.None);
         }
 

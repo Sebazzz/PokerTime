@@ -1,23 +1,25 @@
 ﻿// ******************************************************************************
 //  ©  Sebastiaan Dammann | damsteen.nl
 // 
-//  File:           : RetrospectiveWorkflowCommandTestBase.cs
+//  File:           : SessionWorkflowCommandTestBase.cs
 //  Project         : PokerTime.Application.Tests.Unit
 // ******************************************************************************
 
 namespace PokerTime.Application.Tests.Unit.SessionWorkflows.Commands {
     using System.Drawing;
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using Application.Common.Abstractions;
     using Application.SessionWorkflows.Common;
     using Domain.Entities;
+    using Microsoft.EntityFrameworkCore;
     using NSubstitute;
     using NUnit.Framework;
     using PokerTime.Common;
     using Support;
 
-    public abstract class RetrospectiveWorkflowCommandTestBase : CommandTestBase {
+    public abstract class SessionWorkflowCommandTestBase : CommandTestBase {
 #nullable disable
         protected Session Session { get; private set; }
         protected string SessionId { get; private set; }
@@ -27,7 +29,7 @@ namespace PokerTime.Application.Tests.Unit.SessionWorkflows.Commands {
 
         [OneTimeSetUp]
         public async Task OneTimeSetup() {
-            var retro = new Session {
+            var session = new Session {
                 Title = "Yet another test",
                 Participants =
                 {
@@ -38,11 +40,11 @@ namespace PokerTime.Application.Tests.Unit.SessionWorkflows.Commands {
                 CurrentStage = SessionStage.NotStarted
             };
 
-            this.SessionId = retro.UrlId.StringId;
-            this.Session = retro;
-            this.ConfigureRetrospective(retro);
+            this.SessionId = session.UrlId.StringId;
+            this.Session = session;
+            this.ConfigureRetrospective(session);
 
-            this.Context.Retrospectives.Add(retro);
+            this.Context.Sessions.Add(session);
             await this.Context.SaveChangesAsync(CancellationToken.None);
         }
 
@@ -54,7 +56,7 @@ namespace PokerTime.Application.Tests.Unit.SessionWorkflows.Commands {
 
         protected void RefreshObject() {
             using IPokerTimeDbContext newEditContext = this.Context.CreateForEditContext();
-            this.Session = newEditContext.Retrospectives.Find(this.Session.Id);
+            this.Session = newEditContext.Sessions.FirstOrDefault(x => x.Id == this.Session.Id);
         }
 
         protected virtual void ConfigureRetrospective(Session session) { }

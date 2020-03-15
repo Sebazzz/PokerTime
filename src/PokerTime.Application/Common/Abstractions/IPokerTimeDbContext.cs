@@ -14,8 +14,10 @@ namespace PokerTime.Application.Common.Abstractions {
 
     public interface IPokerTimeDbContext : IPokerTimeDbContextFactory, IDisposable {
         DbSet<PredefinedParticipantColor> PredefinedParticipantColors { get; set; }
-        DbSet<Session> Retrospectives { get; set; }
+        DbSet<Session> Sessions { get; set; }
         DbSet<Participant> Participants { get; set; }
+        DbSet<Estimation> Estimations { get; set; }
+        DbSet<Symbol> Symbols { get; set; }
         DbSet<UserStory> UserStories { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);

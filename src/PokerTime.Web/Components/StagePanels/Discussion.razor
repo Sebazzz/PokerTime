@@ -1,0 +1,27 @@
+@using PokerTime.Application.SessionWorkflows.Commands
+@inherits MediatorComponent
+
+<h3 class="retrospective-status-panel__next-step-title">Current step</h3>
+<SessionRolePanel>
+    <Facilitator>
+        <p>
+            Ensure the participants have enough information to make an estimation.
+        </p>
+
+        <NextStageInvocationForm TModel="InitiateEstimationStageCommand"
+                                 Model="@this.Command"
+                                 OnContinue="@this.OnInvokeContinueToNextStage"
+                                 ButtonText="Continue to estimations"/>
+    </Facilitator>
+    <Participant>
+        <p>
+            You'Il receive information you need to make an estimation.
+        </p>
+    </Participant>
+</SessionRolePanel>
+
+@code {
+    private InitiateEstimationStageCommand Command { get; } = new InitiateEstimationStageCommand();
+
+    private Task OnInvokeContinueToNextStage(InitiateEstimationStageCommand command) => this.Mediator.Send(this.Command);
+}

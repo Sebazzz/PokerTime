@@ -1,0 +1,66 @@
+@using PokerTime.Application.Common.Models
+@using PokerTime.Application.Poker.Commands
+@using PokerTime.Application.Sessions.Queries.GetSessionStatus
+@inherits MediatorComponent
+
+@if (this.SessionStatus == null)
+{
+    return;
+}
+
+@if (this.ShowErrorMessage)
+{
+    <ErrorMessage Text="Something went wrong executing your command. Please try again." />
+}
+
+<h2>@this.SessionStatus.UserStory?.Title</h2>
+<h3>Place your bets...</h3>
+
+<div>
+    @foreach (SymbolModel cardSymbol in this.AvailableSymbols)
+    {
+        <div class="poker-card @(this.SessionStatus.CanChooseCards ? "poker-card--chooseable" : "poker-card--idle")"
+             style="background-color: #@this.CurrentParticipant.HexColorString"
+             @onclick="() => this.ChooseCard(cardSymbol)">
+            <div class="poker-card__symbol">@cardSymbol.AsString</div>
+        </div>
+    }
+</div>
+
+@code {
+    #nullable disable
+
+    [CascadingParameter]
+    public SessionStatus SessionStatus { get; set; }
+
+    [CascadingParameter]
+    public CurrentParticipantModel CurrentParticipant { get; set; }
+
+    [Parameter]
+    public ICollection<SymbolModel> AvailableSymbols { get; set; } = new List<SymbolModel>(0);
+
+    private bool ShowErrorMessage { get; set; }
+
+    private async Task ChooseCard(SymbolModel symbol)
+    {
+        if (this.SessionStatus == null)
+        {
+            return;
+        }
+
+        if (!this.SessionStatus.CanChooseCards)
+        {
+            return;
+        }
+
+        try
+        {
+            this.ShowErrorMessage = false;
+            await this.Mediator.Send(new PlayCardCommand(this.SessionStatus.UserStory?.Id ?? 0, symbol));
+        }
+        catch (Exception)
+        {
+            this.ShowErrorMessage = true;
+        }
+}
+}

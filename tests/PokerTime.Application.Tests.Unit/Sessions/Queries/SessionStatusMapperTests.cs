@@ -19,7 +19,7 @@ namespace PokerTime.Application.Tests.Unit.Sessions.Queries {
         [Test]
         public void SessionStatusMapper_NullArgument_ThrowsArgumentNullException() {
             // Given
-            var mapper = new SessionStatusMapper(this.Context, this.Mapper);
+            var mapper = new SessionStatusMapper(this.Context,this.Mapper);
 
             // When
             TestDelegate action = () => mapper.GetSessionStatus(null, CancellationToken.None).GetAwaiter().GetResult();
@@ -31,7 +31,7 @@ namespace PokerTime.Application.Tests.Unit.Sessions.Queries {
         [Test]
         public async Task SessionStatusMapper_ReturnsSessionInfo() {
             // Given
-            var retro = new Session {
+            var session = new Session {
                 Title = "Yet another test",
                 Participants =
                 {
@@ -41,18 +41,18 @@ namespace PokerTime.Application.Tests.Unit.Sessions.Queries {
                 HashedPassphrase = "abef",
                 CurrentStage = SessionStage.Discussion
             };
-            string sessionId = retro.UrlId.StringId;
-            this.Context.Retrospectives.Add(retro);
+            string sessionId = session.UrlId.StringId;
+            this.Context.Sessions.Add(session);
             await this.Context.SaveChangesAsync(CancellationToken.None);
 
             var mapper = new SessionStatusMapper(this.Context, this.Mapper);
 
             // When
-            var result = await mapper.GetSessionStatus(retro, CancellationToken.None);
+            SessionStatus result = await mapper.GetSessionStatus(session, CancellationToken.None);
 
             // Then
             Assert.That(result.SessionId, Is.EqualTo(sessionId));
-            Assert.That(result.Title, Is.EqualTo(retro.Title));
+            Assert.That(result.Title, Is.EqualTo(session.Title));
         }
     }
 }

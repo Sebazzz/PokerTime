@@ -38,7 +38,7 @@ namespace PokerTime.Application.Sessions.Commands.RejoinPokerSession {
             }
 
             this._currentParticipantService.SetParticipant(
-                new CurrentParticipantModel(result.Id, result.Name, result.IsFacilitator));
+                new CurrentParticipantModel(result.Id, result.Name, result.Color.ToHex(), result.IsFacilitator));
 
             return Unit.Value;
         }

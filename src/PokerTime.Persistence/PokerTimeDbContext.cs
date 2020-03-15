@@ -15,7 +15,6 @@ namespace PokerTime.Persistence {
     using Application.Common.Abstractions;
     using Conventions;
     using Domain.Entities;
-    using Microsoft.Data.Sqlite;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.ChangeTracking;
     using Microsoft.EntityFrameworkCore.Metadata;
@@ -61,8 +60,10 @@ namespace PokerTime.Persistence {
 
         public DbSet<PredefinedParticipantColor> PredefinedParticipantColors { get; set; }
         public DbSet<Participant> Participants { get; set; }
+        public DbSet<Estimation> Estimations { get; set; }
+        public DbSet<Symbol> Symbols { get; set; }
         public DbSet<UserStory> UserStories { get; set; }
-        public DbSet<Session> Retrospectives { get; set; }
+        public DbSet<Session> Sessions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             if (modelBuilder == null) throw new ArgumentNullException(nameof(modelBuilder));

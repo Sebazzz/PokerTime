@@ -1,0 +1,30 @@
+@using PokerTime.Application.Common.Models
+@using PokerTime.Application.Sessions.Queries.GetSessionStatus
+
+@if (this.SessionStatus == null || this.Estimation == null)
+{
+    return;
+}
+
+<div class="poker-card poker-card--estimated" style="color: #@this.Estimation.ParticipantColor.HexString">
+    @if (this.SessionStatus.CanViewEstimations)
+    {
+        <div class="poker-card__symbol">@this.Estimation.Symbol.AsString</div>
+    }
+    else
+    {
+        <div class="poker-card__symbol poker-card__symbol--hidden">?</div>
+    }
+    
+    <div class="poker-card__author">@this.Estimation.ParticipantName</div>
+</div>
+
+@code {
+    #nullable disable
+
+    [CascadingParameter]
+    public SessionStatus SessionStatus { get; set; }
+
+    [Parameter]
+    public EstimationModel Estimation { get; set; }
+}

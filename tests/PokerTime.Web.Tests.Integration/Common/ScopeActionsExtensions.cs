@@ -33,7 +33,7 @@ namespace PokerTime.Web.Tests.Integration.Common {
         public static async Task SetRetrospective(this IServiceScope scope, string sessionId, Action<Session> action) {
             var dbContext = scope.ServiceProvider.GetRequiredService<IPokerTimeDbContext>();
 
-            Session Session = await dbContext.Retrospectives.FindBySessionId(sessionId, CancellationToken.None);
+            Session Session = await dbContext.Sessions.FindBySessionId(sessionId, CancellationToken.None);
             action.Invoke(Session);
             await dbContext.SaveChangesAsync(CancellationToken.None);
         }

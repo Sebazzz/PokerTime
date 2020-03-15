@@ -47,7 +47,7 @@ namespace PokerTime.Application.Sessions.Commands.JoinPokerSession {
             using IPokerTimeDbContext dbContext = this._pokerTimeDbContext.CreateForEditContext();
 
             Expression<Func<Session, string?>> property = isFacilitatorRole ? GetFacilitatorHash : GetParticipantHash;
-            string? hash = dbContext.Retrospectives.Where(x => x.UrlId.StringId == sessionId).Select(property).FirstOrDefault();
+            string? hash = dbContext.Sessions.Where(x => x.UrlId.StringId == sessionId).Select(property).FirstOrDefault();
 
             if (hash == null) {
                 return true;

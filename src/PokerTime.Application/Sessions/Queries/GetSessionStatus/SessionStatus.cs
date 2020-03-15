@@ -7,6 +7,7 @@
 
 namespace PokerTime.Application.Sessions.Queries.GetSessionStatus {
     using System;
+    using Common.Models;
     using Domain.Entities;
 
     public sealed class SessionStatus {
@@ -16,10 +17,23 @@ namespace PokerTime.Application.Sessions.Queries.GetSessionStatus {
 
         public SessionStage Stage { get; }
 
-        public SessionStatus(string sessionId, string title, SessionStage sessionStage) {
+        public CurrentUserStoryModel? UserStory { get; }
+
+        public bool CanChooseCards => this.Stage == SessionStage.Estimation;
+        public bool CanViewEstimationPanel => this.Stage != SessionStage.Discussion;
+        public bool CanViewEstimations => this.Stage == SessionStage.EstimationDiscussion;
+        public bool IsStarted => this.Stage != SessionStage.NotStarted;
+
+        public SessionStatus(
+            string sessionId,
+            string title,
+            SessionStage sessionStage,
+            CurrentUserStoryModel? currentUserStory
+        ) {
             this.SessionId = sessionId;
             this.Title = title;
             this.Stage = sessionStage;
+            this.UserStory = currentUserStory;
         }
 
         public SessionStatus() {

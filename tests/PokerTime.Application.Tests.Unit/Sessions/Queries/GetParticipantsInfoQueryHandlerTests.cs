@@ -44,7 +44,7 @@ namespace PokerTime.Application.Tests.Unit.Sessions.Queries {
                 HashedPassphrase = "abef"
             };
             string sessionId = retro.UrlId.StringId;
-            this.Context.Retrospectives.Add(retro);
+            this.Context.Sessions.Add(retro);
             await this.Context.SaveChangesAsync(CancellationToken.None);
 
             var query = new GetParticipantsInfoQuery(sessionId);

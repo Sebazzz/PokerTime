@@ -21,6 +21,7 @@ namespace PokerTime.Web.Services {
     public class CurrentParticipantService : ICurrentParticipantService {
         private const string ParticipantClaimType = ClaimTypes.NameIdentifier;
         private const string ParticipantNameClaimType = ClaimTypes.Name;
+        private const string ParticipantColorClaimType = ClaimTypes.Country;
         private const string FacilitatorClaimType = ClaimTypes.Role;
         private const string FacilitatorClaimContent = "Facilitator";
         private HttpContext? _httpContext;
@@ -36,16 +37,13 @@ namespace PokerTime.Web.Services {
         }
 
         private void OnAuthenticationStateChanged(Task<AuthenticationState> task) =>
-            task.ContinueWith(t =>
-                {
-                    if (t.IsCompletedSuccessfully)
-                    {
-                        this._currentClaimsPrincipal = t.Result?.User;
-                    }
-                }, TaskScheduler.Current);
+            task.ContinueWith(t => {
+                if (t.IsCompletedSuccessfully) {
+                    this._currentClaimsPrincipal = t.Result?.User;
+                }
+            }, TaskScheduler.Current);
 
-        internal void SetHttpContext(HttpContext httpContext)
-        {
+        internal void SetHttpContext(HttpContext httpContext) {
             this._httpContext = httpContext;
             this._hasNoHttpContext = false;
         }
@@ -59,11 +57,12 @@ namespace PokerTime.Web.Services {
                 return;
             }
 
-            ( int participantId, string? name, bool isFacilitator ) = currentParticipant;
+            (int participantId, string? name, string? color, bool isFacilitator) = currentParticipant;
 
             var identity = new ClaimsIdentity();
             identity.AddClaim(new Claim(ParticipantClaimType, participantId.ToString(Culture.Invariant), participantId.GetType().FullName));
             identity.AddClaim(new Claim(ParticipantNameClaimType, name, typeof(string).FullName));
+            identity.AddClaim(new Claim(ParticipantColorClaimType, color, typeof(string).FullName));
             if (isFacilitator) {
                 identity.AddClaim(new Claim(FacilitatorClaimType, FacilitatorClaimContent, FacilitatorClaimContent.GetType().FullName));
             }
@@ -73,13 +72,13 @@ namespace PokerTime.Web.Services {
             hostEnvProvider.SetAuthenticationState(Task.FromResult(new AuthenticationState(this._currentClaimsPrincipal)));
         }
 
-        public async ValueTask<CurrentParticipantModel> GetParticipant()
-        {
+        public async ValueTask<CurrentParticipantModel> GetParticipant() {
             ClaimsPrincipal user = await this.GetUser().ConfigureAwait(false);
 
             return new CurrentParticipantModel(
                 GetParticipantId(user),
                 GetNameLocal(user),
+                GetColor(user),
                 IsFacilitator(user)
             );
         }
@@ -108,28 +107,24 @@ namespace PokerTime.Web.Services {
         }
 
         private static string GetNameLocal(ClaimsPrincipal user) => user.FindFirstValue(ParticipantNameClaimType);
+        private static string GetColor(ClaimsPrincipal user) => user.FindFirstValue(ParticipantColorClaimType);
 
-        private static bool IsFacilitator(ClaimsPrincipal user)
-        {
+        private static bool IsFacilitator(ClaimsPrincipal user) {
             string? rawParticipantId = user.FindFirstValue(FacilitatorClaimType);
-            if (String.IsNullOrEmpty(rawParticipantId))
-            {
+            if (String.IsNullOrEmpty(rawParticipantId)) {
                 return default;
             }
 
             return String.Equals(rawParticipantId, FacilitatorClaimContent, StringComparison.Ordinal);
         }
 
-        private static int GetParticipantId(ClaimsPrincipal user)
-        {
+        private static int GetParticipantId(ClaimsPrincipal user) {
             string? rawParticipantId = user.FindFirstValue(ParticipantClaimType);
-            if (String.IsNullOrEmpty(rawParticipantId))
-            {
+            if (String.IsNullOrEmpty(rawParticipantId)) {
                 return default;
             }
 
-            if (!Int32.TryParse(rawParticipantId, out int participantId))
-            {
+            if (!Int32.TryParse(rawParticipantId, out int participantId)) {
                 return default;
             }
 

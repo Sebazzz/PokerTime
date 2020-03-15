@@ -12,6 +12,8 @@ namespace PokerTime.Domain.Entities {
         public int ValueAsNumber { get; set; }
 
         public SymbolType Type { get; set; }
+
+        public int Order { get; set; }
     }
 
     public enum SymbolType {
@@ -19,6 +21,8 @@ namespace PokerTime.Domain.Entities {
 
         Infinite,
 
-        Break
+        Break,
+
+        Unknown
     }
 }

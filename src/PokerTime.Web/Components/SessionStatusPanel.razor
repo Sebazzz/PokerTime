@@ -31,23 +31,23 @@
 
         @* Each stage has its own panel and controls *@
         <SessionStagePanel ApplicableTo="@SessionStage.NotStarted">
-            <PokerTime.Components.StagePanels.NotStarted/>
+            <PokerTime.Web.Components.StagePanels.NotStarted/>
         </SessionStagePanel>
 
         <SessionStagePanel ApplicableTo="@SessionStage.Discussion">
-            <span></span>
+            <PokerTime.Web.Components.StagePanels.Discussion />
         </SessionStagePanel>
 
         <SessionStagePanel ApplicableTo="@SessionStage.Estimation">
-            <span></span>
+            <PokerTime.Web.Components.StagePanels.Estimation />
         </SessionStagePanel>
 
         <SessionStagePanel ApplicableTo="@SessionStage.EstimationDiscussion">
-            <span></span>
+            <PokerTime.Web.Components.StagePanels.EstimationDiscussion />
         </SessionStagePanel>
 
         <SessionStagePanel ApplicableTo="@SessionStage.Finished">
-            <span></span>
+            <PokerTime.Web.Components.StagePanels.Finished />
         </SessionStagePanel>
     </div>
 </article>

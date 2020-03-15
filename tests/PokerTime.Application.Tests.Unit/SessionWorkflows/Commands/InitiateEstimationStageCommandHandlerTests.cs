@@ -16,7 +16,7 @@ namespace PokerTime.Application.Tests.Unit.SessionWorkflows.Commands {
     using NUnit.Framework;
 
     [TestFixture]
-    public sealed class InitiateEstimationStageCommandHandlerTests : RetrospectiveWorkflowCommandTestBase {
+    public sealed class InitiateEstimationStageCommandHandlerTests : SessionWorkflowCommandTestBase {
         [Test]
         public void InitiateEstimationStageCommandHandler_InvalidSessionId_ThrowsNotFoundException() {
             // Given

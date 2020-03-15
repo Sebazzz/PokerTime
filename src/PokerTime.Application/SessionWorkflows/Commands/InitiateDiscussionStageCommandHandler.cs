@@ -27,12 +27,10 @@ namespace PokerTime.Application.SessionWorkflows.Commands {
 
             session.CurrentStage = SessionStage.Discussion;
 
-            var userStory = new UserStory
-            {
+            var userStory = new UserStory {
                 Session = session,
                 Title = String.IsNullOrEmpty(request.UserStoryTitle) ? null : request.UserStoryTitle
             };
-            session.CurrentUserStory = userStory;
 
             this.DbContext.UserStories.Add(userStory);
 
