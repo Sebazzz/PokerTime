@@ -6,8 +6,8 @@
     return;
 }
 
-<div class="poker-card poker-card--estimated" style="color: #@this.Estimation.ParticipantColor.HexString">
-    @if (this.SessionStatus.CanViewEstimations)
+<div class="poker-card poker-card--estimated" style="background-color: #@this.Estimation.ParticipantColor.HexString">
+    @if (this.SessionStatus.CanViewEstimations || this.Estimation.ParticipantId == this.CurrentParticipant.Id)
     {
         <div class="poker-card__symbol">@this.Estimation.Symbol.AsString</div>
     }
@@ -24,6 +24,9 @@
 
     [CascadingParameter]
     public SessionStatus SessionStatus { get; set; }
+
+    [CascadingParameter]
+    public CurrentParticipantModel CurrentParticipant { get; set; }
 
     [Parameter]
     public EstimationModel Estimation { get; set; }

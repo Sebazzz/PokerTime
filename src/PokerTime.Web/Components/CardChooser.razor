@@ -1,7 +1,9 @@
+@using Microsoft.Extensions.Logging
 @using PokerTime.Application.Common.Models
 @using PokerTime.Application.Poker.Commands
 @using PokerTime.Application.Sessions.Queries.GetSessionStatus
 @inherits MediatorComponent
+@inject ILogger<CardChooser> Logger
 
 @if (this.SessionStatus == null)
 {
@@ -13,8 +15,14 @@
     <ErrorMessage Text="Something went wrong executing your command. Please try again." />
 }
 
-<h2>@this.SessionStatus.UserStory?.Title</h2>
-<h3>Place your bets...</h3>
+@if (this.SessionStatus.CanChooseCards)
+{
+    <h3 class="title is-size-5">Place your bets...</h3>
+}
+else
+{
+    <h3 class="title is-size-5">These are your cards...</h3>
+}
 
 <div>
     @foreach (SymbolModel cardSymbol in this.AvailableSymbols)
@@ -28,7 +36,7 @@
 </div>
 
 @code {
-    #nullable disable
+#nullable disable
 
     [CascadingParameter]
     public SessionStatus SessionStatus { get; set; }
@@ -58,9 +66,11 @@
             this.ShowErrorMessage = false;
             await this.Mediator.Send(new PlayCardCommand(this.SessionStatus.UserStory?.Id ?? 0, symbol));
         }
-        catch (Exception)
+        catch (Exception ex)
         {
+            this.Logger.LogError(ex, $"Unable to choose card: {symbol.AsString}");
+
             this.ShowErrorMessage = true;
         }
-}
+    }
 }

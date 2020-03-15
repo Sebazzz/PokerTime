@@ -10,7 +10,7 @@
 
 @if (this.SessionStatus.UserStory != null)
 {
-    <h2>@(this.SessionStatus.UserStory.Title ?? "User story")</h2>
+    <h2 class="title is-size-4">Estimation for: @(this.SessionStatus.UserStory.Title ?? "User story")</h2>
 }
 
 @if (this.SessionStatus.IsStarted)

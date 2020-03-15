@@ -105,8 +105,11 @@ namespace PokerTime.Web.Pages {
             }
 
             this.SessionStatus = sessionStatus;
-            this.Layout?.Update(new PokerSessionLayoutInfo(sessionStatus.Title, sessionStatus.Stage));
-            this.StateHasChanged();
+
+            this.InvokeAsync(() => {
+                this.Layout?.Update(new PokerSessionLayoutInfo(sessionStatus.Title, sessionStatus.Stage));
+                this.StateHasChanged();
+            });
 
             return Task.CompletedTask;
         }

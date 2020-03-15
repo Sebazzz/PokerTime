@@ -34,5 +34,5 @@
 @code {
     private InitiateDiscussionStageCommand Command { get; } = new InitiateDiscussionStageCommand();
 
-    private Task OnInvokeContinueToNextStage(InitiateDiscussionStageCommand command) => this.Mediator.Send(this.Command);
+    private Task OnInvokeContinueToNextStage(InitiateDiscussionStageCommand command) => this.Mediator.Send(command);
 }

@@ -7,6 +7,7 @@
 
 namespace PokerTime.Application.Poker.Commands {
     using System;
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using AutoMapper;
@@ -44,6 +45,7 @@ namespace PokerTime.Application.Poker.Commands {
             if (estimation == null) {
                 estimation = new Estimation {
                     ParticipantId = currentParticipantInfo.Id,
+                    Participant = dbContext.Participants.First(x => x.Id == currentParticipantInfo.Id),
                     UserStoryId = request.UserStoryId,
                     Symbol = await dbContext.Symbols.FirstAsync(x => x.Id == request.Symbol.Id, cancellationToken)
                 };
@@ -60,7 +62,7 @@ namespace PokerTime.Application.Poker.Commands {
                 this._mapper.Map<EstimationModel>(estimation)
             );
 
-            await this._mediator.Send(estimationNotification, cancellationToken);
+            await this._mediator.Publish(estimationNotification, cancellationToken);
 
             return Unit.Value;
         }

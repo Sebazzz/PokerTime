@@ -52,16 +52,15 @@
     [CascadingParameter]
     public SessionStatus SessionStatus { get; set; }
 
-    private InitiateEstimationDiscussionStageCommand FinishCommand { get; } = new InitiateEstimationDiscussionStageCommand();
+    private InitiateFinishStageCommand FinishCommand { get; } = new InitiateFinishStageCommand();
 
     private InitiateDiscussionStageCommand ReestimateCommand { get; } = new InitiateDiscussionStageCommand();
 
     private InitiateDiscussionStageCommand NextUserStoryCommand { get; } = new InitiateDiscussionStageCommand();
 
-    private Task OnInvokeContinueToFinishStage(InitiateFinishStageCommand command) => this.Mediator.Send(this.FinishCommand);
-
-    private Task OnInvokeReestimate(InitiateDiscussionStageCommand command) => this.Mediator.Send(this.ReestimateCommand);
-    private Task OnInvokeNextUserStory(InitiateDiscussionStageCommand command) => this.Mediator.Send(this.ReestimateCommand);
+    private Task OnInvokeContinueToFinishStage(InitiateFinishStageCommand command) => this.Mediator.Send(command);
+    private Task OnInvokeReestimate(InitiateDiscussionStageCommand command) => this.Mediator.Send(command);
+    private Task OnInvokeNextUserStory(InitiateDiscussionStageCommand command) => this.Mediator.Send(command);
 
     protected override void OnParametersSet()
     {

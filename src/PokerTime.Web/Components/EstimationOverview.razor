@@ -6,6 +6,13 @@
     return;
 }
 
+<h3 class="title is-size-5">Estimations of your team</h3>
+
 @foreach (EstimationModel estimation in this.Estimations.Values) {
     <EstimationCard Estimation="@estimation"/>
+}
+
+@if (this.Estimations.Count == 0)
+{
+    <p>No one has placed any estimations yet...</p>
 }

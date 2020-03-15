@@ -1,10 +1,14 @@
 .poker-card {
     display: inline-block;
     border-radius: 10px;
-    min-height: 200px;
+    min-height: 150px;
+    width: 100px;
     position: relative;
+    margin-right: 2em;
+    margin-bottom: 2em;
+    user-select: none;
 
-    &--choosable {
+    &--chooseable {
         cursor: pointer;
         transition: transform ease 500ms;
         transform: scale(1);
@@ -18,6 +22,12 @@
     &--idle {
         cursor: not-allowed;
         opacity: 0.75;
+        filter: blur(2px);
+    }
+
+    &--choosable,
+    &--idle {
+        min-height: 100px;
     }
 
     &--estimated {
@@ -25,13 +35,28 @@
 
     &__symbol {
         font-size: 30px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 0;
+        right: 0;
+        text-align: center;
+        color: #fff;
+        text-shadow: 1px 1px 2px #000;
 
         &--hidden {
-            filter: blur(20px);
+            filter: blur(3px);
+            font-size: 40px;
         }
     }
 
-    & + .poker-card {
-        margin-left: 2em;
+    &__author {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        text-align: center;
+        color: #fff;
+        text-shadow: 1px 1px 2px #000;
     }
 }

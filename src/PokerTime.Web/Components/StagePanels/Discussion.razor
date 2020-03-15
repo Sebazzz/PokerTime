@@ -23,5 +23,5 @@
 @code {
     private InitiateEstimationStageCommand Command { get; } = new InitiateEstimationStageCommand();
 
-    private Task OnInvokeContinueToNextStage(InitiateEstimationStageCommand command) => this.Mediator.Send(this.Command);
+    private Task OnInvokeContinueToNextStage(InitiateEstimationStageCommand command) => this.Mediator.Send(command);
 }
