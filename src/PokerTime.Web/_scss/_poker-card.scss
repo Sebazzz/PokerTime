@@ -7,6 +7,7 @@
     margin-right: 2em;
     margin-bottom: 2em;
     user-select: none;
+    filter: grayscale(25%);
 
     &--chooseable {
         cursor: pointer;
@@ -22,7 +23,7 @@
     &--idle {
         cursor: not-allowed;
         opacity: 0.75;
-        filter: blur(2px);
+        filter: grayscale(25%), blur(2px);
     }
 
     &--choosable,
@@ -45,7 +46,7 @@
         text-shadow: 1px 1px 2px #000;
 
         &--hidden {
-            filter: blur(3px);
+            filter: grayscale(25%), blur(3px);
             font-size: 40px;
         }
     }
