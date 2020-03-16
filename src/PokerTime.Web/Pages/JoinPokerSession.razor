@@ -18,36 +18,36 @@
     <h1 class="title">Session not found</h1>
 
     <p class="form-explanation">
-        Sorry, I can't find that retrospective. Please check if the URL is correct.
+        Sorry, I can't find that planning poker session. Please check if the URL is correct.
     </p>
 }
 else
 {
-    <h1 class="title">Join retrospective: @this.SessionInfo.Title</h1>
-    <h2 class="subtitle">A safe space to reflect on the past sprint</h2>
+    <h1 class="title">Join planning poker session: @this.SessionInfo.Title</h1>
+    <h2 class="subtitle">To estimate your next moves</h2>
 
     <div class="columns">
         <div class="column is-three-quarters">
             <p class="form-explanation">
-                Join the retrospective "@this.SessionInfo.Title" by filling in the necessary information on the form below.
+                Join the planning poker session "@this.SessionInfo.Title" by filling in the necessary information on the form below.
             </p>
 
             @if (this.SessionInfo.IsFinished)
             {
                 <Notification Type="Notification.NotificationType.Warning">
-                    This retrospective has already finished. You can log in and view the past results but you won't be able to participate anymore.
+                    This session has already finished. You can log in and view the past results but you won't be able to participate anymore.
                 </Notification>
             }
             else if (this.SessionInfo.IsStarted)
             {
                 <Notification Type="Notification.NotificationType.Info">
-                    This retrospective has already started. Hurry up!
+                    This session has already started. Hurry up!
                 </Notification>
             }
 
             @if (ShowErrorMessage)
             {
-                <ErrorMessage Text="Something went wrong joining the retrospective. Please try again." />
+                <ErrorMessage Text="Something went wrong joining the session. Please try again." />
             }
 
             <EditForm Model="@Model" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
@@ -67,7 +67,7 @@ else
                     <ValidationMessage For="() => Model.Name"></ValidationMessage>
                     @if (this.ShowParticipantAlreadyJoinedWarning)
                     {
-                        <p class="help is-info">@Model.Name has already joined the planning poker session. If this was not you, please choose a different name.</p>
+                        <p class="help is-info">@Model.Name has already joined the session. If this was not you, please choose a different name.</p>
                     }
                 </div>
 
@@ -129,7 +129,7 @@ else
                         </div>
 
                         <ValidationMessage For="() => Model.Passphrase"></ValidationMessage>
-                        <p class="help">You should have set this password yourself. If you've lost it, create a new planning poker  instead.</p>
+                        <p class="help">You should have set this password yourself. If you've lost it, create a new planning poker instead.</p>
                     </div>
                 }
                 else if (this.SessionInfo.NeedsParticipantPassphrase)
@@ -251,7 +251,7 @@ else
         {
             this.ShowErrorMessage = true;
 
-            Logger.LogError(ex, $"Error joining retrospective {this.SessionId} with name {this.Model.Name}");
+            Logger.LogError(ex, $"Error joining planning poker session {this.SessionId} with name {this.Model.Name}");
             return;
         }
 
