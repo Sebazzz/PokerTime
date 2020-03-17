@@ -24,25 +24,19 @@ else
     <h3 class="title is-size-5">These are your cards...</h3>
 }
 
-<div>
+<div data-test-element-id="card-chooser">
     @foreach (SymbolModel cardSymbol in this.AvailableSymbols)
     {
-        <div class="poker-card @(this.SessionStatus.CanChooseCards ? "poker-card--chooseable" : "poker-card--idle")"
-             style="background-color: #@this.CurrentParticipant.HexColorString"
-             @onclick="() => this.ChooseCard(cardSymbol)">
-            <div class="poker-card__symbol">@cardSymbol.AsString</div>
-        </div>
+        // There is no need to use @key here as this is always the same list: within the same session it won't change
+
+        <UserCard Symbol="cardSymbol" OnClick="symbol => this.ChooseCard(symbol)"/>
     }
 </div>
 
 @code {
 #nullable disable
-
     [CascadingParameter]
     public SessionStatus SessionStatus { get; set; }
-
-    [CascadingParameter]
-    public CurrentParticipantModel CurrentParticipant { get; set; }
 
     [Parameter]
     public ICollection<SymbolModel> AvailableSymbols { get; set; } = new List<SymbolModel>(0);

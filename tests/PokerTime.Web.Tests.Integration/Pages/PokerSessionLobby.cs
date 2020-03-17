@@ -13,13 +13,14 @@ namespace PokerTime.Web.Tests.Integration.Pages {
     using OpenQA.Selenium;
 
     public sealed class PokerSessionLobby : PageObject {
-        public IWebElement TimeInMinutesInput => this.WebDriver.FindElementByTestElementId("time-in-minutes-input");
-        public IWebElement VoteCountInput => this.WebDriver.FindElementByTestElementId("vote-count-input");
         public IWebElement WorkflowContinueButton => this.WebDriver.FindElementByTestElementId("workflow-continue-button");
-        public IWebElement ToggleViewButton => this.WebDriver.FindElementByTestElementId("toggle-view-button");
-        public IWebElement TimerText => this.WebDriver.FindElementByTestElementId("timer");
-        public ReadOnlyCollection<IWebElement> NoteLaneElements => this.WebDriver.FindElementsByTestElementId("note-lane");
-        public VoteStatusPanelComponent VoteStatus => new VoteStatusPanelComponent(this.WebDriver.FindVisibleElement(By.ClassName("vote-status-panel")));
+
+        public IWebElement WaitForStartMessageElement => this.WebDriver.FindElementByTestElementId("wait-for-start-message");
+        public IWebElement CardChooserElement => this.WebDriver.FindElementByTestElementId("card-chooser");
+        public IWebElement EstimationOverviewElement => this.WebDriver.FindElementByTestElementId("estimation-overview");
+
+        public CardChooserComponent CardChooser => new CardChooserComponent(this.CardChooserElement);
+        public EstimationOverview EstimationOverview => new EstimationOverview(this.EstimationOverviewElement);
 
         public void InvokeContinueWorkflow() {
             this.WorkflowContinueButton.Click();

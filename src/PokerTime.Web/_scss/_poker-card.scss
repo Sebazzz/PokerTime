@@ -9,7 +9,7 @@
     user-select: none;
     filter: grayscale(25%);
 
-    &--chooseable {
+    &--choosable {
         cursor: pointer;
         transition: transform ease 500ms;
         transform: scale(1);

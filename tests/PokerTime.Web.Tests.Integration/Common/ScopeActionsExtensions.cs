@@ -33,8 +33,19 @@ namespace PokerTime.Web.Tests.Integration.Common {
         public static async Task SetRetrospective(this IServiceScope scope, string sessionId, Action<Session> action) {
             var dbContext = scope.ServiceProvider.GetRequiredService<IPokerTimeDbContext>();
 
-            Session Session = await dbContext.Sessions.FindBySessionId(sessionId, CancellationToken.None);
-            action.Invoke(Session);
+            Session session = await dbContext.Sessions.FindBySessionId(sessionId, CancellationToken.None);
+            action.Invoke(session);
+            await dbContext.SaveChangesAsync(CancellationToken.None);
+        }
+
+        public static async Task SetCurrentUserStory(this IServiceScope scope, string sessionId, Action<UserStory> action = null) {
+            var dbContext = scope.ServiceProvider.GetRequiredService<IPokerTimeDbContext>();
+
+            Session session = await dbContext.Sessions.FindBySessionId(sessionId, CancellationToken.None);
+            var userStory = new UserStory { Session = session };
+            action?.Invoke(userStory);
+            dbContext.UserStories.Add(userStory);
+
             await dbContext.SaveChangesAsync(CancellationToken.None);
         }
 

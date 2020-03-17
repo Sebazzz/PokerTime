@@ -6,7 +6,11 @@
     return;
 }
 
-<div class="poker-card poker-card--estimated" style="background-color: #@this.Estimation.ParticipantColor.HexString">
+<div class="poker-card poker-card--estimated" 
+     data-test-element-id="estimation-card"
+     data-id="@this.Estimation.Id"
+     data-participant-id="@this.Estimation.ParticipantId"
+     style="background-color: #@this.Estimation.ParticipantColor.HexString">
     @if (this.SessionStatus.CanViewEstimations || this.Estimation.ParticipantId == this.CurrentParticipant.Id)
     {
         <div class="poker-card__symbol">@this.Estimation.Symbol.AsString</div>

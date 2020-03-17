@@ -1,0 +1,25 @@
+@using PokerTime.Application.Common.Models
+@using PokerTime.Application.Sessions.Queries.GetSessionStatus
+
+<div class="poker-card @(this.SessionStatus.CanChooseCards ? "poker-card--choosable" : "poker-card--idle")"
+     style="background-color: #@this.CurrentParticipant.HexColorString"
+     data-test-element-id="user-poker-card"
+     data-id="@this.Symbol.Id"
+     @onclick="() => this.OnClick?.Invoke(this.Symbol)">
+    <div class="poker-card__symbol">@this.Symbol.AsString</div>
+</div>
+@code {
+#nullable disable
+
+    [CascadingParameter]
+    public SessionStatus SessionStatus { get; set; }
+
+    [CascadingParameter]
+    public CurrentParticipantModel CurrentParticipant { get; set; }
+
+    [Parameter]
+    public SymbolModel Symbol { get; set; }
+
+    [Parameter]
+    public Func<SymbolModel, Task> OnClick { get; set; }
+}

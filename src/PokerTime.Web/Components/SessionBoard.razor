@@ -8,20 +8,20 @@
     return;
 }
 
-@if (this.SessionStatus.UserStory != null)
-{
-    <h2 class="title is-size-4">Estimation for: @(this.SessionStatus.UserStory.Title ?? "User story")</h2>
-}
-
 @if (this.SessionStatus.IsStarted)
 {
+    @if (this.SessionStatus.UserStory != null)
+    {
+        <h2 class="title is-size-4">Estimation for: @(this.SessionStatus.UserStory.Title ?? "User story")</h2>
+    }
+
     <CardChooser AvailableSymbols="@this.AvailableSymbols" />
 
     <EstimationOverview />
 }
 else
 {
-    <p>
+    <p data-test-element-id="wait-for-start-message">
         Please wait for the facilitator to start this session.
     </p>
 }

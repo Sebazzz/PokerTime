@@ -8,9 +8,12 @@
 
 <h3 class="title is-size-5">Estimations of your team</h3>
 
-@foreach (EstimationModel estimation in this.Estimations.Values) {
-    <EstimationCard Estimation="@estimation"/>
-}
+<div data-test-element-id="estimation-overview">
+    @foreach (EstimationModel estimation in this.Estimations.Values)
+    {
+        <EstimationCard Estimation="@estimation" />
+    }
+</div>
 
 @if (this.Estimations.Count == 0)
 {
