@@ -1,6 +1,6 @@
 @using PokerTime.Domain.Entities
 
-<article class="message retrospective-status-panel">
+<article class="message poker-status-panel">
     <div class="message-header">
         @* Each stage has its own title *@
         <SessionStageText ApplicableTo="@SessionStage.NotStarted"
@@ -16,7 +16,7 @@
     </div>
     <div class="message-body">
         @* Each stage has its own explanation *@
-        <p class="retrospective-status-panel__primary-explanation">
+        <p class="poker-status-panel__primary-explanation">
             <SessionStageText ApplicableTo="@SessionStage.NotStarted"
                                     Text="We are waiting for the facilitator to start the planning poker session." />
             <SessionStageText ApplicableTo="@SessionStage.Discussion"

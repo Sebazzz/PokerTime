@@ -1,6 +1,6 @@
 @using PokerTime.Domain.Entities
 
-<div class="retrospective-progress__item @this.CssClass">
+<div class="poker-progress__item @this.CssClass">
     <span>
         @this.Text
     </span>
@@ -25,15 +25,15 @@
         {
             if (this.IsCurrent)
             {
-                return "retrospective-progress__item--is-current";
+                return "poker-progress__item--is-current";
             }
 
             if (this.IsPrevious)
             {
-                return "retrospective-progress__item--is-previous";
+                return "poker-progress__item--is-previous";
             }
 
-            return "retrospective-progress__item--future";
+            return "poker-progress__item--future";
         }
     }
 

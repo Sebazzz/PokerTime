@@ -17,7 +17,7 @@ namespace PokerTime.Web.Tests.Integration.Components {
             this._webDriver = webDriver;
         }
 
-        public IEnumerable<IWebElement> OnlineListItems => this._webDriver.FindElements(By.CssSelector("#retrospective-online-list span[data-participant-id]"));
-        public IWebElement GetListItem(int id) => this._webDriver.FindVisibleElement(By.CssSelector($"#retrospective-online-list span[data-participant-id=\"{id}\"]"));
+        public IEnumerable<IWebElement> OnlineListItems => this._webDriver.FindElements(By.CssSelector("#poker-online-list span[data-participant-id]"));
+        public IWebElement GetListItem(int id) => this._webDriver.FindVisibleElement(By.CssSelector($"#poker-online-list span[data-participant-id=\"{id}\"]"));
     }
 }

@@ -2,15 +2,15 @@
 
 <aside class="menu">
     <TopMenu BrandIsClickable="false">
-        <div class="navbar-start navbar-retrospective-start">
+        <div class="navbar-start navbar-poker-start">
             <div class="navbar-item">
-                <h1 class="retrospective-title">@this._layoutInfo.Title</h1>
+                <h1 class="poker-title">@this._layoutInfo.Title</h1>
             </div>
         </div>
 
         <div class="navbar-end">
-            <div class="navbar-item retrospective-progress-container">
-                <div class="retrospective-progress @(this.CurrentStage == SessionStage.NotStarted ? "retrospective-progress--inactive" : String.Empty)">
+            <div class="navbar-item poker-progress-container">
+                <div class="poker-progress @(this.CurrentStage == SessionStage.NotStarted ? "poker-progress--inactive" : String.Empty)">
                     <PokerSessionProgressItem 
                         CurrentStage="@this.CurrentStage"
                         ApplicableTo="@SessionStage.Discussion"

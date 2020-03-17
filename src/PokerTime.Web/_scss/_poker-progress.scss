@@ -1,18 +1,18 @@
-$retro-progress-arrow-width: 12px;
-$retro-progress-arrow-height-modifier: 36px / 2;
-$retro-progress-active-color: $grey-dark;
-$retro-progress-previous-color: $grey-light;
+$poker-progress-arrow-width: 12px;
+$poker-progress-arrow-height-modifier: 36px / 2;
+$poker-progress-active-color: $grey-dark;
+$poker-progress-previous-color: $grey-light;
 
-.retrospective-title {
+.poker-title {
     font-weight: bold;
     font-size: 1.3rem;
 }
 
-.retrospective-progress-container {
+.poker-progress-container {
     align-self: stretch;
 }
 
-.retrospective-progress {
+.poker-progress {
     height: 100%;
     cursor: default;
     user-select: none;
@@ -30,9 +30,9 @@ $retro-progress-previous-color: $grey-light;
         position: relative;
         align-content: center;
         height: 100%;
-        padding: 0.25rem (2 * $retro-progress-arrow-width);
-        padding-left: (3 * $retro-progress-arrow-width);
-        margin-right: -$retro-progress-arrow-width;
+        padding: 0.25rem (2 * $poker-progress-arrow-width);
+        padding-left: (3 * $poker-progress-arrow-width);
+        margin-right: -$poker-progress-arrow-width;
         transition-property: background-color, color;
         transition-timing-function: ease;
         transition-duration: 500ms;
@@ -42,9 +42,9 @@ $retro-progress-previous-color: $grey-light;
             position: absolute;
             top: 0;
             border: 0 solid transparent;
-            border-top-width: $retro-progress-arrow-height-modifier;
-            border-bottom-width: $retro-progress-arrow-height-modifier;
-            border-left-width: $retro-progress-arrow-width;
+            border-top-width: $poker-progress-arrow-height-modifier;
+            border-bottom-width: $poker-progress-arrow-height-modifier;
+            border-left-width: $poker-progress-arrow-width;
             display: block;
             content: '';
             transition-property: border-left-color, border-right-color;
@@ -57,15 +57,15 @@ $retro-progress-previous-color: $grey-light;
         }
 
         &::after {
-            right: (-1 * $retro-progress-arrow-width);
+            right: (-1 * $poker-progress-arrow-width);
         }
 
         &--is-current {
-            background-color: $retro-progress-active-color;
+            background-color: $poker-progress-active-color;
             color: $white-ter;
 
             &::after {
-                border-left-color: $retro-progress-active-color;
+                border-left-color: $poker-progress-active-color;
             }
         }
 
@@ -74,15 +74,15 @@ $retro-progress-previous-color: $grey-light;
         }
 
         &--is-previous {
-            background-color: $retro-progress-previous-color;
+            background-color: $poker-progress-previous-color;
 
             &::after {
-                border-left-color: $retro-progress-previous-color;
+                border-left-color: $poker-progress-previous-color;
             }
         }
 
         &--is-previous + &::before {
-            border-left-color: $retro-progress-previous-color;
+            border-left-color: $poker-progress-previous-color;
         }
 
         &--future {
