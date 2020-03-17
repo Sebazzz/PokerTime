@@ -15,9 +15,11 @@ namespace PokerTime.Web.Tests.Integration.Common {
     using System.Threading.Tasks;
     using Application.Common.Abstractions;
     using Application.Common.Models;
+    using Application.Poker.Commands;
     using Application.PredefinedParticipantColors.Queries.GetAvailablePredefinedParticipantColors;
     using Application.Sessions.Commands.JoinPokerSession;
     using Application.Sessions.Queries.GetParticipantsInfo;
+    using Application.Symbols.Queries;
     using Domain.Entities;
     using MediatR;
     using Microsoft.EntityFrameworkCore;
@@ -27,16 +29,16 @@ namespace PokerTime.Web.Tests.Integration.Common {
 
     public sealed class TestCaseBuilder {
         private readonly IServiceScope _scope;
-        private readonly string _retrospectiveId;
+        private readonly string _sessionId;
         private readonly Queue<Func<Task>> _actions;
         private readonly Dictionary<string, ParticipantInfo> _participators;
         private readonly FriendlyIdEntityDictionary _entityIds;
 
         private (Type Type, int Id) _lastAddedItem;
 
-        public TestCaseBuilder(IServiceScope scope, string retrospectiveId) {
+        public TestCaseBuilder(IServiceScope scope, string sessionId) {
             this._scope = scope;
-            this._retrospectiveId = retrospectiveId;
+            this._sessionId = sessionId;
             this._actions = new Queue<Func<Task>>();
             this._participators = new Dictionary<string, ParticipantInfo>(StringComparer.InvariantCultureIgnoreCase);
             this._entityIds = new FriendlyIdEntityDictionary();
@@ -47,7 +49,7 @@ namespace PokerTime.Web.Tests.Integration.Common {
                 TestContext.WriteLine($"[{nameof(TestCaseBuilder)}] attempting to record presence of existing participant [{participantName}]");
 
                 var dbContext = this._scope.ServiceProvider.GetRequiredService<IPokerTimeDbContext>();
-                Participant participant = await dbContext.Participants.FirstAsync(x => x.Name == participantName && x.Session.UrlId.StringId == this._retrospectiveId);
+                Participant participant = await dbContext.Participants.FirstAsync(x => x.Name == participantName && x.Session.UrlId.StringId == this._sessionId);
 
                 this._participators.Add(participant.Name, new ParticipantInfo {
                     Id = participant.Id,
@@ -75,7 +77,7 @@ namespace PokerTime.Web.Tests.Integration.Common {
                     B = Color.Yellow.B,
                 };
 
-                IList<AvailableParticipantColorModel> response = await this._scope.Send(new GetAvailablePredefinedParticipantColorsQuery(this._retrospectiveId));
+                IList<AvailableParticipantColorModel> response = await this._scope.Send(new GetAvailablePredefinedParticipantColorsQuery(this._sessionId));
                 availableParticipantColor = response.FirstOrDefault(x => !x.HasSameColors(yellowColor)); // Yellow is a bad color for testing
             });
 
@@ -84,7 +86,7 @@ namespace PokerTime.Web.Tests.Integration.Common {
                 Color = availableParticipantColor?.HexString ?? (RandomByte() + RandomByte() + RandomByte()),
                 JoiningAsFacilitator = isFacilitator,
                 Passphrase = passphrase,
-                SessionId = this._retrospectiveId
+                SessionId = this._sessionId
             }, p => {
                 if (this._participators.ContainsKey(p.Name)) {
                     Assert.Inconclusive($"Trying to register existing participant: {p.Name}");
@@ -93,6 +95,37 @@ namespace PokerTime.Web.Tests.Integration.Common {
                 this.RecordAddedId<ParticipantInfo>(p.Id);
                 this._participators.Add(p.Name, p);
             });
+        }
+
+        public TestCaseBuilder PlayCard(string participantName, string stringValue) {
+            ICollection<SymbolModel> symbols = null;
+            this.EnqueueMediatorAction(participantName, () => new GetSymbolsQuery(), r => symbols = r.Symbols);
+
+            this.EnqueueMediatorAction(participantName,
+                () => {
+                    if (symbols == null) {
+                        throw new InvalidOperationException("Symbols query didn't return a response");
+                    }
+
+                    SymbolModel requestedSymbol = symbols.FirstOrDefault(x => x.AsString == stringValue);
+                    if (requestedSymbol == null) {
+                        throw new InvalidOperationException(
+                            $"Unable to find symbol '{stringValue}' in list of symbols: {String.Join("|", symbols.Select(x => x.AsString))}");
+                    }
+
+                    IPokerTimeDbContext dbContext =
+                        this._scope.ServiceProvider.GetRequiredService<IPokerTimeDbContext>();
+                    int userStoryId = dbContext.UserStories.
+                        Where(x => x.Session.UrlId.StringId == this._sessionId).
+                        OrderByDescending(x => x.Id).
+                        Select(x => x.Id).
+                        FirstOrDefault();
+
+                    return new PlayCardCommand(this._sessionId, userStoryId, requestedSymbol.Id);
+                },
+                _ => Task.CompletedTask);
+
+            return this;
         }
 
         public TestCaseBuilder OutputId(Action<int> callback) {
@@ -168,7 +201,7 @@ namespace PokerTime.Web.Tests.Integration.Common {
         }
 
         private TestCaseBuilder EnqueueRetrospectiveAction(Action<Session> action) {
-            this._actions.Enqueue(() => this._scope.SetRetrospective(this._retrospectiveId, action));
+            this._actions.Enqueue(() => this._scope.SetRetrospective(this._sessionId, action));
 
             return this;
         }

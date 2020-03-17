@@ -19,6 +19,8 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         public IWebElement CardChooserElement => this.WebDriver.FindElementByTestElementId("card-chooser");
         public IWebElement EstimationOverviewElement => this.WebDriver.FindElementByTestElementId("estimation-overview");
 
+        public IWebElement UserStoryTitleInput => this.WebDriver.FindElement(By.Id("pokertime-userstory-title"));
+
         public CardChooserComponent CardChooser => new CardChooserComponent(this.CardChooserElement);
         public EstimationOverview EstimationOverview => new EstimationOverview(this.EstimationOverviewElement);
 
@@ -27,6 +29,10 @@ namespace PokerTime.Web.Tests.Integration.Pages {
 
             // Insert sleep for AppVeyor and slower CI
             Thread.Sleep(1000);
+        }
+
+        public void SetUserStoryTitle(string title) {
+            this.UserStoryTitleInput.SendKeys(title);
         }
     }
 }
