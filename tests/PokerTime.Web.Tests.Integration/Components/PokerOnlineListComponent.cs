@@ -10,10 +10,10 @@ namespace PokerTime.Web.Tests.Integration.Components {
     using Common;
     using OpenQA.Selenium;
 
-    public class RetrospectiveOnlineListComponent {
+    public class PokerOnlineListComponent {
         private readonly IWebDriver _webDriver;
 
-        public RetrospectiveOnlineListComponent(IWebDriver webDriver) {
+        public PokerOnlineListComponent(IWebDriver webDriver) {
             this._webDriver = webDriver;
         }
 

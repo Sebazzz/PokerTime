@@ -223,6 +223,6 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         public ReadOnlyCollection<IWebElement> GetValidationMessages() => this.WebDriver.FindElements(By.ClassName("validation-message"));
         public void Navigate(ReturnAppFactory app, string sessionId) => this.WebDriver.NavigateToBlazorPage(app.CreateUri($"pokertime-session/{sessionId}/join"));
 
-        public RetrospectiveOnlineListComponent OnlineList => new RetrospectiveOnlineListComponent(this.WebDriver);
+        public PokerOnlineListComponent OnlineList => new PokerOnlineListComponent(this.WebDriver);
     }
 }
