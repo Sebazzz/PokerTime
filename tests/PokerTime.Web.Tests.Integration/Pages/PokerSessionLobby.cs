@@ -10,7 +10,6 @@ namespace PokerTime.Web.Tests.Integration.Pages {
     using System.Threading;
     using Common;
     using Components;
-    using Domain.Entities;
     using OpenQA.Selenium;
 
     public sealed class PokerSessionLobby : PageObject {

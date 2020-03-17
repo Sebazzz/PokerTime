@@ -20,7 +20,6 @@ namespace PokerTime.Web.Tests.Integration.Pages {
     using Components;
     using Domain.Entities;
     using Domain.Services;
-    using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.Extensions.DependencyInjection;
     using NUnit.Framework;
     using OpenQA.Selenium;
@@ -104,7 +103,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
             this.Page.Submit();
 
             // Then
-            Assert.That(() => this.Page.WebDriver.Url, Does.Match("/session/" + sessionId + "/lobby").Retry());
+            Assert.That(() => this.Page.WebDriver.Url, Does.Match("/pokertime-session/" + sessionId + "/lobby").Retry());
         }
 
         [Test]
@@ -222,7 +221,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         public void Submit() => this.SubmitButton.Click();
 
         public ReadOnlyCollection<IWebElement> GetValidationMessages() => this.WebDriver.FindElements(By.ClassName("validation-message"));
-        public void Navigate(ReturnAppFactory app, string sessionId) => this.WebDriver.NavigateToBlazorPage(app.CreateUri($"retrospective/{sessionId}/join"));
+        public void Navigate(ReturnAppFactory app, string sessionId) => this.WebDriver.NavigateToBlazorPage(app.CreateUri($"pokertime-session/{sessionId}/join"));
 
         public RetrospectiveOnlineListComponent OnlineList => new RetrospectiveOnlineListComponent(this.WebDriver);
     }

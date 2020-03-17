@@ -51,7 +51,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
             this.Page.Submit();
 
             // Then
-            Assert.That(this.Page.GetUrlShown(), Does.Match(@"http://localhost:\d+/session/([A-z0-9]+)/join"));
+            Assert.That(this.Page.GetUrlShown(), Does.Match(@"http://localhost:\d+/pokertime-session/([A-z0-9]+)/join"));
 
             Assert.That(this.Page.FacilitatorInstructions.Text, Contains.Substring("my secret facilitator password"));
             Assert.That(this.Page.ParticipatorInstructions.Text, Contains.Substring("the participator password"));
@@ -69,7 +69,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
             this.Page.Submit();
 
             // Then
-            Assert.That(this.Page.GetUrlShown(), Does.Match(@"http://localhost:\d+/session/([A-z0-9]+)/join"));
+            Assert.That(this.Page.GetUrlShown(), Does.Match(@"http://localhost:\d+/pokertime-session/([A-z0-9]+)/join"));
 
             Assert.That(this.Page.FacilitatorInstructions.Text, Contains.Substring("my secret facilitator password"));
             Assert.That(this.Page.ParticipatorInstructions.Text, Contains.Substring("no password is required"));
@@ -87,7 +87,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         public IWebElement ParticipatorInstructions => this.WebDriver.FindElementByTestElementId("participator instructions");
         public IWebElement FacilitatorInstructions => this.WebDriver.FindElementByTestElementId("facilitator instructions");
 
-        public void Navigate(ReturnAppFactory app) => this.WebDriver.NavigateToBlazorPage(app.CreateUri("create-retro"));
+        public void Navigate(ReturnAppFactory app) => this.WebDriver.NavigateToBlazorPage(app.CreateUri("create-poker-session"));
         public void Submit() => this.SubmitButton.Click();
 
         public string GetUrlShown() => this.WebDriver.Retry(_ => this.UrlLocationInput.GetAttribute("value"));
