@@ -64,7 +64,7 @@ else
         try
         {
             this.ShowErrorMessage = false;
-            await this.Mediator.Send(new PlayCardCommand(this.SessionStatus.UserStory?.Id ?? 0, symbol));
+            await this.Mediator.Send(new PlayCardCommand(this.SessionStatus.SessionId, this.SessionStatus.UserStory?.Id ?? 0, symbol.Id));
         }
         catch (Exception ex)
         {

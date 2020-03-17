@@ -15,7 +15,7 @@ namespace PokerTime.Application.Poker.Commands {
     public sealed class PlayCardCommandValidator : AbstractValidator<PlayCardCommand> {
         public PlayCardCommandValidator() {
             this.RuleFor(x => x.UserStoryId).NotEmpty();
-            this.RuleFor(x => x.Symbol).NotNull();
+            this.RuleFor(x => x.SymbolId).NotEmpty();
         }
     }
 }

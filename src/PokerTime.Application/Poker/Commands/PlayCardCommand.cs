@@ -6,17 +6,19 @@
 // ******************************************************************************
 
 namespace PokerTime.Application.Poker.Commands {
-    using Common.Models;
     using MediatR;
 
     public sealed class PlayCardCommand : IRequest {
+        public string SessionId { get; }
+
         public int UserStoryId { get; }
 
-        public SymbolModel Symbol { get; }
+        public int SymbolId { get; }
 
-        public PlayCardCommand(int userStoryId, SymbolModel symbol) {
+        public PlayCardCommand(string sessionId, int userStoryId, int symbolId) {
+            this.SessionId = sessionId;
             this.UserStoryId = userStoryId;
-            this.Symbol = symbol;
+            this.SymbolId = symbolId;
         }
     }
 }
