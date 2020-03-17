@@ -10,13 +10,10 @@ Licensed: GNU GPL v3.0
 
 ## Features
 
--   Realtime retrospective app, ideal for remote teams
--   Shortcut support:
-    -   Ctrl + lane number for adding notes or groups
-    -   Ctrl + delete for deleting focused note
--   Create password protected retrospectives
--   As facilitator, lead the retrospective through the writing, grouping and voting phase.
--   Overview with highest voted items
+-   Realtime planning poker app, ideal for remote teams
+-   Create password protected planning poker sessions
+-   As facilitator, lead the planning poker session through the discussion, estimation and consolidation stages
+-   Easy to use
 
 ### Browser Support
 
