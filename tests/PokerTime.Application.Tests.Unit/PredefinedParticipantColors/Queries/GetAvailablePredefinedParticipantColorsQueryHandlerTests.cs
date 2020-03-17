@@ -23,20 +23,20 @@ namespace PokerTime.Application.Tests.Unit.PredefinedParticipantColors.Queries {
         [Test]
         public async Task GetAvailablePredefinedParticipantColorsTest() {
             // Given
-            var retro = new Domain.Entities.Session {
+            var pokerSession = new Session {
                 CreationTimestamp = DateTimeOffset.UtcNow,
                 FacilitatorHashedPassphrase = "xxx",
                 Title = "xxx",
                 Participants = { new Participant { Name = "John", Color = Color.Gold } }
             };
-            Trace.Assert(retro.UrlId.ToString() != null);
-            this.Context.Sessions.Add(retro);
+            Trace.Assert(pokerSession.UrlId.ToString() != null);
+            this.Context.Sessions.Add(pokerSession);
             await this.Context.SaveChangesAsync(CancellationToken.None);
 
             // When
             var command = new GetAvailablePredefinedParticipantColorsQueryHandler(this.Context, this.Mapper);
 
-            IList<AvailableParticipantColorModel> result = await command.Handle(new GetAvailablePredefinedParticipantColorsQuery(retro.UrlId.StringId), CancellationToken.None);
+            IList<AvailableParticipantColorModel> result = await command.Handle(new GetAvailablePredefinedParticipantColorsQuery(pokerSession.UrlId.StringId), CancellationToken.None);
 
             // Then
             List<int> colors = result.Select(x => Color.FromArgb(255, x.R, x.G, x.B).ToArgb()).ToList();
