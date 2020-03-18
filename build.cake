@@ -283,7 +283,7 @@ void WindowsPublishTask(string taskId, string versionId, string description) {
 		.IsDependentOn("Publish-Common")
 		.Does(() => PublishSelfContained(versionId, $"{versionId}/app"));
 
-	var output = publishDir + File($"return-web-{versionId}.zip");
+	var output = publishDir + File($"poker-time-{versionId}.zip");
 	Task(taskName)
 		.IsDependentOn(internalTaskName)
 		.Description($"Publish for {description}, output to {output}")
@@ -308,7 +308,7 @@ void UbuntuPublishTask(string taskId, string versionId, string description) {
 		.IsDependentOn("Publish-Common")
 		.Does(() => PublishSelfContained(versionId, $"{versionId}/app"));
 
-	var output = publishDir + File($"return-web-{versionId}.tar.gz");
+	var output = publishDir + File($"poker-time-{versionId}.tar.gz");
 	Task(taskName)
 		.IsDependentOn(internalTaskName)
 		.Description($"Publish for {description}, output to {output}")
