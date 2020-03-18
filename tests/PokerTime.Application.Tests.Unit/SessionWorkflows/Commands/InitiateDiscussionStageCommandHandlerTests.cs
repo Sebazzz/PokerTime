@@ -22,7 +22,7 @@ namespace PokerTime.Application.Tests.Unit.SessionWorkflows.Commands {
         public void InitiateDiscussionStageCommandHandler_InvalidSessionId_ThrowsNotFoundException() {
             // Given
             const string sessionId = "not found surely :)";
-            var handler = new InitiateDiscussionStageCommandHandler(this.Context, this.SessionStatusUpdateDispatcherMock, this.SystemClockMock);
+            var handler = new InitiateDiscussionStageCommandHandler(this.Context, this.SessionStatusUpdateDispatcherMock);
             var request = new InitiateDiscussionStageCommand { SessionId = sessionId };
 
             // When
@@ -35,7 +35,7 @@ namespace PokerTime.Application.Tests.Unit.SessionWorkflows.Commands {
         [Test]
         public async Task InitiateDiscussionStageCommandHandler_OnStatusChange_UpdatesStageAndInvokesNotification() {
             // Given
-            var handler = new InitiateDiscussionStageCommandHandler(this.Context, this.SessionStatusUpdateDispatcherMock, this.SystemClockMock);
+            var handler = new InitiateDiscussionStageCommandHandler(this.Context, this.SessionStatusUpdateDispatcherMock);
             var request = new InitiateDiscussionStageCommand { SessionId = this.SessionId };
 
             this.SystemClockMock.CurrentTimeOffset.Returns(DateTimeOffset.UnixEpoch);
@@ -51,6 +51,30 @@ namespace PokerTime.Application.Tests.Unit.SessionWorkflows.Commands {
 
             // Then
             Assert.That(this.Session.CurrentStage, Is.EqualTo(SessionStage.Discussion));
+            Assert.That(newUserStory?.Id, Is.Not.EqualTo(userStory?.Id), "Expected new user story to be assigned");
+
+            await this.SessionStatusUpdateDispatcherMock.Received().DispatchUpdate(Arg.Any<Session>(), CancellationToken.None);
+        }
+
+        [Test]
+        public async Task InitiateDiscussionStageCommandHandler_OnReestimationStatusChange_UpdatesStageAndInvokesNotification() {
+            // Given
+            var handler = new InitiateDiscussionStageCommandHandler(this.Context, this.SessionStatusUpdateDispatcherMock);
+            var request = new InitiateDiscussionStageCommand { SessionId = this.SessionId, IsReestimation = true };
+
+            this.SystemClockMock.CurrentTimeOffset.Returns(DateTimeOffset.UnixEpoch);
+
+            // When
+            UserStory userStory = this.Context.UserStories.OrderByDescending(x => x.Id).FirstOrDefault();
+
+            await handler.Handle(request, CancellationToken.None);
+
+            this.RefreshObject();
+
+            UserStory newUserStory = this.Context.UserStories.OrderByDescending(x => x.Id).FirstOrDefault();
+
+            // Then
+            Assert.That(this.Session.CurrentStage, Is.EqualTo(SessionStage.Estimation));
             Assert.That(newUserStory?.Id, Is.Not.EqualTo(userStory?.Id), "Expected new user story to be assigned");
 
             await this.SessionStatusUpdateDispatcherMock.Received().DispatchUpdate(Arg.Any<Session>(), CancellationToken.None);

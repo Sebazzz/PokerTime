@@ -54,7 +54,7 @@
 
     private InitiateFinishStageCommand FinishCommand { get; } = new InitiateFinishStageCommand();
 
-    private InitiateDiscussionStageCommand ReestimateCommand { get; } = new InitiateDiscussionStageCommand();
+    private InitiateDiscussionStageCommand ReestimateCommand { get; } = new InitiateDiscussionStageCommand { IsReestimation = true };
 
     private InitiateDiscussionStageCommand NextUserStoryCommand { get; } = new InitiateDiscussionStageCommand();
 

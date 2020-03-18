@@ -10,5 +10,8 @@ namespace PokerTime.Application.SessionWorkflows.Commands {
 
     public sealed class InitiateDiscussionStageCommand : AbstractStageCommand, IRequest {
         public string? UserStoryTitle { get; set; }
+
+        public bool IsReestimation { get; set; }
     }
+
 }
