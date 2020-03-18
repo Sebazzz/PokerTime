@@ -15,7 +15,6 @@ $symbol-offset-transform: translateY(-50%);
         transition: transform ease 500ms;
         transform: scale(1);
         transform-origin: center;
-
         animation: 800ms ease 0s 1 normal forwards running poker-card-choosable-anim;
 
         &:hover {
@@ -52,6 +51,13 @@ $symbol-offset-transform: translateY(-50%);
         margin-right: 2em;
         margin-bottom: 2em;
     }
+
+    &--pending {
+        filter: blur(2px);
+        background-color: #ccc;
+        border: 1px solid #666;
+    }
+
     /* Estimated cards */
     &--estimation {
         transform-style: preserve-3d;

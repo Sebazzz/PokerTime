@@ -15,9 +15,16 @@
             <EstimationCard Estimation="@estimation" />
         </Revealable>
     }
-</div>
 
-@if (this.Estimations.Count == 0)
-{
-    <p>No one has placed any estimations yet...</p>
-}
+    @if (this.SessionStatus.CanChooseCards)
+    {
+        @foreach (string participantWithoutEstimation in this.ParticipantsWithoutEstimation)
+        {
+            <Revealable Inline="true" CssClass="poker-card-container">
+                <div class="poker-card poker-card--pending" title="Estimation needed from: @participantWithoutEstimation">
+                    
+                </div>
+            </Revealable>
+        }
+    }
+</div>

@@ -8,15 +8,19 @@
 namespace PokerTime.Web.Components {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
     using Application.Common.Models;
     using Application.Estimations.Queries;
+    using Application.Notifications;
     using Application.Notifications.EstimationGiven;
+    using Application.Notifications.SessionJoined;
+    using Application.Sessions.Queries.GetParticipantsInfo;
     using Application.Sessions.Queries.GetSessionStatus;
     using Microsoft.AspNetCore.Components;
 
-    public abstract class EstimationOverviewBase : MediatorComponent, IEstimationGivenSubscriber {
+    public abstract class EstimationOverviewBase : MediatorComponent, IDisposable, IEstimationGivenSubscriber, ISessionJoinedSubscriber {
         private int _userStoryId;
 
 #nullable disable
@@ -24,10 +28,28 @@ namespace PokerTime.Web.Components {
         public SessionStatus SessionStatus { get; set; }
 
         [Inject]
-        public EstimationGivenNotificationDispatcher EstimationGivenNotificationDispatcher { get; set; }
+        public INotificationSubscription<IEstimationGivenSubscriber> EstimationGivenSubscriber { get; set; }
+
+        [Inject]
+        public INotificationSubscription<ISessionJoinedSubscriber> SessionJoinedSubscriber { get; set; }
 
         public Guid UniqueId { get; } = Guid.NewGuid();
 
+        private ParticipantsInfoList ParticipantList { get; set; }
+
+        protected IEnumerable<string> ParticipantsWithoutEstimation {
+            get {
+                if (this.ParticipantList == null || this.Estimations == null) {
+                    yield break;
+                }
+
+                foreach (ParticipantInfo participant in this.ParticipantList.Participants) {
+                    if (!this.Estimations.ContainsKey(participant.Id)) {
+                        yield return participant.Name;
+                    }
+                }
+            }
+        }
 
 #nullable restore
 
@@ -47,7 +69,12 @@ namespace PokerTime.Web.Components {
         protected override void OnInitialized() {
             base.OnInitialized();
 
-            this.EstimationGivenNotificationDispatcher.Subscribe(this);
+            this.EstimationGivenSubscriber.Subscribe(this);
+        }
+
+        protected override async Task OnInitializedAsync() {
+            this.ParticipantList = await this.Mediator.Send(new GetParticipantsInfoQuery(this.SessionStatus.SessionId));
+            Debug.Assert(this.ParticipantList != null);
         }
 
         protected override Task OnParametersSetAsync() {
@@ -72,6 +99,36 @@ namespace PokerTime.Web.Components {
             }
 
             return LoadCore();
+        }
+
+        public Task OnParticipantJoinedRetrospective(SessionEvent<ParticipantInfo> eventArgs) {
+            if (eventArgs == null) throw new ArgumentNullException(nameof(eventArgs));
+
+            if (eventArgs.SessionId != this.SessionStatus?.SessionId) {
+                return Task.CompletedTask;
+            }
+
+            ParticipantInfo participantInfo = eventArgs.Argument;
+
+            return this.InvokeAsync(() => {
+                this.ParticipantList.Participants.Add(participantInfo);
+                this.ParticipantList.Participants.Sort((a, b) => StringComparer.CurrentCulture.Compare(a.Name, b.Name));
+
+                this.StateHasChanged();
+            });
+        }
+
+        protected virtual void Dispose(bool disposing) {
+            if (disposing) {
+                this.EstimationGivenSubscriber?.Unsubscribe(this);
+                this.SessionJoinedSubscriber?.Unsubscribe(this);
+            }
+        }
+
+        public void Dispose() {
+            this.Dispose(true);
+
+            GC.SuppressFinalize(this);
         }
     }
 }
