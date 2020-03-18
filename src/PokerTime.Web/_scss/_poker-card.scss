@@ -37,7 +37,6 @@ $symbol-offset-transform: translateY(-50%);
             font-size: 40px;
         }
     }
-
     /* User poker cards */
     &--idle {
         cursor: not-allowed;
@@ -51,22 +50,20 @@ $symbol-offset-transform: translateY(-50%);
         margin-right: 2em;
         margin-bottom: 2em;
     }
-
     /* Estimated cards */
     &--estimation {
         transform-style: preserve-3d;
         transform-origin: center right;
-
         transition: transform 500ms ease;
+
+        // Move the filter to the container, otherwise the transform gets messed up
+        filter: none;
     }
 
     &__face {
         position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: inherit;
+        height: 100%;
+        width: 100%;
         border-radius: $poker-card-border-radius;
         backface-visibility: hidden;
         transition: transform 500ms ease;
@@ -75,11 +72,7 @@ $symbol-offset-transform: translateY(-50%);
         }
 
         &--back {
-            transform: scaleX(-1);
-
-            .poker-card--shown & {
-                transform: rotateY(180deg);
-            }
+            transform: rotateY(180deg);
         }
     }
 
@@ -108,4 +101,6 @@ $symbol-offset-transform: translateY(-50%);
     margin-bottom: 2em;
 
     border-radius: $poker-card-border-radius;
+
+    filter: grayscale(25%);
 }

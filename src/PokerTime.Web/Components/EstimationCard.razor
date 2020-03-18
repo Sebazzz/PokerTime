@@ -10,10 +10,10 @@
          data-test-element-id="estimation-card"
          data-id="@this.Estimation.Id"
          data-symbol-id="@this.Estimation.Symbol.Id"
-         data-participant-id="@this.Estimation.ParticipantId"
-         style="background-color: #@this.Estimation.ParticipantColor.HexString">
+         data-participant-id="@this.Estimation.ParticipantId">
 
-        <div class="poker-card__face poker-card__face--front">
+        <div class="poker-card__face poker-card__face--front"
+             style="background-color: #@this.Estimation.ParticipantColor.HexString">
             @if (IsShown)
             {
                 <div class="poker-card__symbol">@this.Estimation.Symbol.AsString</div>
@@ -27,7 +27,8 @@
 
             <div class="poker-card__author">@this.Estimation.ParticipantName</div>
         </div>
-        <div class="poker-card__face poker-card__face--back">
+        <div class="poker-card__face poker-card__face--back"
+             style="background-color: #@this.Estimation.ParticipantColor.HexString">
             <div class="poker-card__symbol poker-card__symbol--hidden poker-card__symbol--backside">?</div>
             
             <div class="poker-card__author">@this.Estimation.ParticipantName</div>
