@@ -64,7 +64,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
             createRetroPage.WebDriver.TryCreateScreenshot();
 
             // Then
-            CreateDocScreenshot(createRetroPage.WebDriver, "create-retro");
+            CreateDocScreenshot(createRetroPage.WebDriver, "create-session");
 
             createRetroPage.Submit();
 
