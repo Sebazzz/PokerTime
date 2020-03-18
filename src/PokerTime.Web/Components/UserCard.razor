@@ -21,6 +21,7 @@
     [Parameter]
     public SymbolModel Symbol { get; set; }
 
+    // This is not a Blazor event because we have no interest in re-rendering the parent component
     [Parameter]
     public Func<SymbolModel, Task> OnClick { get; set; }
 }
