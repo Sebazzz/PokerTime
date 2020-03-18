@@ -11,6 +11,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
     using Common;
     using Components;
     using OpenQA.Selenium;
+    using OpenQA.Selenium.Interactions;
 
     public sealed class PokerSessionLobby : PageObject {
         public IWebElement WorkflowContinueButton => this.WebDriver.FindElementByTestElementId("workflow-continue-button");
@@ -31,8 +32,11 @@ namespace PokerTime.Web.Tests.Integration.Pages {
             Thread.Sleep(1000);
         }
 
-        public void SetUserStoryTitle(string title) {
-            this.UserStoryTitleInput.SendKeys(title);
-        }
+        public void SetUserStoryTitle(string title) =>
+            new Actions(this.WebDriver)
+                .Click(this.UserStoryTitleInput)
+                .SendKeys(title)
+                .SendKeys(Keys.Home)
+                .Perform();
     }
 }
