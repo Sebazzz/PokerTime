@@ -1,4 +1,4 @@
-@using PokerTime.Application.Common.Models
+﻿@using PokerTime.Application.Common.Models
 @using PokerTime.Application.Sessions.Queries.GetSessionStatus
 
 @if (this.SessionStatus == null || this.Estimation == null)
@@ -6,23 +6,33 @@
     return;
 }
 
-<div class="poker-card poker-card--estimated" 
-     data-test-element-id="estimation-card"
-     data-id="@this.Estimation.Id"
-     data-symbol-id="@this.Estimation.Symbol.Id"
-     data-participant-id="@this.Estimation.ParticipantId"
-     style="background-color: #@this.Estimation.ParticipantColor.HexString">
-    @if (this.SessionStatus.CanViewEstimations || this.Estimation.ParticipantId == this.CurrentParticipant.Id)
-    {
-        <div class="poker-card__symbol">@this.Estimation.Symbol.AsString</div>
-    }
-    else
-    {
-        <div class="poker-card__symbol poker-card__symbol--hidden">?</div>
-    }
-    
-    <div class="poker-card__author">@this.Estimation.ParticipantName</div>
-</div>
+    <div class="poker-card poker-card--estimation @(IsShown ? "poker-card--shown" : "poker-card--hidden")"
+         data-test-element-id="estimation-card"
+         data-id="@this.Estimation.Id"
+         data-symbol-id="@this.Estimation.Symbol.Id"
+         data-participant-id="@this.Estimation.ParticipantId"
+         style="background-color: #@this.Estimation.ParticipantColor.HexString">
+
+        <div class="poker-card__face poker-card__face--front">
+            @if (IsShown)
+            {
+                <div class="poker-card__symbol">@this.Estimation.Symbol.AsString</div>
+            }
+            else
+            {
+                // This is the HTML for the hidden back-side - not shown
+
+                <div class="poker-card__symbol">🎈</div>
+            }
+
+            <div class="poker-card__author">@this.Estimation.ParticipantName</div>
+        </div>
+        <div class="poker-card__face poker-card__face--back">
+            <div class="poker-card__symbol poker-card__symbol--hidden poker-card__symbol--backside">?</div>
+            
+            <div class="poker-card__author">@this.Estimation.ParticipantName</div>
+        </div>
+    </div>
 
 @code {
     #nullable disable
@@ -35,4 +45,7 @@
 
     [Parameter]
     public EstimationModel Estimation { get; set; }
+
+
+    private bool IsShown => this.SessionStatus.CanViewEstimations || this.Estimation.ParticipantId == this.CurrentParticipant.Id;
 }

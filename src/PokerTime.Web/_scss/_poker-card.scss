@@ -1,4 +1,5 @@
 $poker-card-border-radius: 10px;
+$symbol-offset-transform: translateY(-50%);
 
 .poker-card {
     display: inline-block;
@@ -19,7 +20,25 @@ $poker-card-border-radius: 10px;
             transform: scale(1.2);
         }
     }
+    /* Symbol */
+    &__symbol {
+        font-size: 30px;
+        position: absolute;
+        top: 50%;
+        transform: $symbol-offset-transform;
+        left: 0;
+        right: 0;
+        text-align: center;
+        color: #fff;
+        text-shadow: 1px 1px 2px #000;
 
+        &--hidden {
+            filter: grayscale(25%) blur(3px);
+            font-size: 40px;
+        }
+    }
+
+    /* User poker cards */
     &--idle {
         cursor: not-allowed;
         opacity: 0.75;
@@ -33,24 +52,43 @@ $poker-card-border-radius: 10px;
         margin-bottom: 2em;
     }
 
-    &--estimated {
+    /* Estimated cards */
+    &--estimation {
+        transform-style: preserve-3d;
+        transform-origin: center right;
+
+        transition: transform 500ms ease;
     }
 
-    &__symbol {
-        font-size: 30px;
+    &__face {
         position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
+        top: 0;
         left: 0;
         right: 0;
-        text-align: center;
-        color: #fff;
-        text-shadow: 1px 1px 2px #000;
+        bottom: 0;
+        background-color: inherit;
+        border-radius: $poker-card-border-radius;
+        backface-visibility: hidden;
+        transition: transform 500ms ease;
 
-        &--hidden {
-            filter: grayscale(25%) blur(3px);
-            font-size: 40px;
+        &--front {
         }
+
+        &--back {
+            transform: scaleX(-1);
+
+            .poker-card--shown & {
+                transform: rotateY(180deg);
+            }
+        }
+    }
+
+    &--shown {
+        transform: rotateY(0deg);
+    }
+
+    &--hidden {
+        transform: translateX(-100%) rotateY(180deg);
     }
 
     &__author {
