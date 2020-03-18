@@ -4,6 +4,7 @@
 <div class="poker-card @(this.SessionStatus.CanChooseCards ? "poker-card--choosable" : "poker-card--idle")"
      style="background-color: #@this.CurrentParticipant.HexColorString"
      data-test-element-id="user-poker-card"
+     data-symbol-id="@this.Symbol.Id"
      data-id="@this.Symbol.Id"
      @onclick="() => this.OnClick?.Invoke(this.Symbol)">
     <div class="poker-card__symbol">@this.Symbol.AsString</div>

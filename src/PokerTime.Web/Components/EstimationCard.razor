@@ -9,6 +9,7 @@
 <div class="poker-card poker-card--estimated" 
      data-test-element-id="estimation-card"
      data-id="@this.Estimation.Id"
+     data-symbol-id="@this.Estimation.Symbol.Id"
      data-participant-id="@this.Estimation.ParticipantId"
      style="background-color: #@this.Estimation.ParticipantColor.HexString">
     @if (this.SessionStatus.CanViewEstimations || this.Estimation.ParticipantId == this.CurrentParticipant.Id)
