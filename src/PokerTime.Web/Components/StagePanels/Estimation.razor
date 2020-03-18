@@ -5,17 +5,17 @@
 <SessionRolePanel>
     <Facilitator>
         <p>
-            The participants (and you) are now doing the estimations. The estimations are not visible to anyone else until you press the button below.
+            The participants (and you) are now able to make an estimate. The estimations are not visible to anyone else until you press the button below.
         </p>
 
         <NextStageInvocationForm TModel="InitiateEstimationDiscussionStageCommand"
                                  Model="@this.Command"
                                  OnContinue="@this.OnInvokeContinueToNextStage"
-                                 ButtonText="Show the given estimations"/>
+                                 ButtonText="Show estimations"/>
     </Facilitator>
     <Participant>
         <p>
-            Please estimate the user story.
+            Please estimate the user story by clicking one of the cards.
         </p>
     </Participant>
 </SessionRolePanel>

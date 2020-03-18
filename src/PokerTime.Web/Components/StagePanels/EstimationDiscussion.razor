@@ -6,7 +6,7 @@
 <SessionRolePanel>
     <Facilitator>
         <p>
-            Discuss the estimations with the participants.
+            Discuss the estimations with the participants and come to a concensus.
         </p>
         
         <NextStageInvocationForm TModel="InitiateDiscussionStageCommand"
@@ -19,7 +19,7 @@
         <NextStageInvocationForm TModel="InitiateDiscussionStageCommand"
                                  Model="@this.NextUserStoryCommand"
                                  OnContinue="@this.OnInvokeNextUserStory"
-                                 ButtonText="Estimate new user story">
+                                 ButtonText="New user story">
             <div class="field">
                 <div class="control">
                     <label class="label" for="pokertime-userstory-title">User story title</label>
@@ -37,11 +37,11 @@
         <NextStageInvocationForm TModel="InitiateFinishStageCommand"
                                  Model="@this.FinishCommand"
                                  OnContinue="@this.OnInvokeContinueToFinishStage"
-                                 ButtonText="End this estimation session" />
+                                 ButtonText="End session" />
     </Facilitator>
     <Participant>
         <p>
-            Come to a concensus with your team or re-estimate the user story.
+            Come to a consensus with your team or re-estimate the user story.
         </p>
     </Participant>
 </SessionRolePanel>
