@@ -1,0 +1,16 @@
+<div class="reveal @CssClass @(this.Inline ? "reveal--inline" : String.Empty)">
+    <div class="reveal__contents">@ChildContent</div>
+</div>
+
+@code {
+#nullable disable
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public string CssClass { get; set; }
+
+    [Parameter]
+    public bool Inline { get; set; }
+}

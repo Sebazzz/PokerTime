@@ -11,7 +11,9 @@
 <div data-test-element-id="estimation-overview">
     @foreach (EstimationModel estimation in this.Estimations.Values)
     {
-        <EstimationCard Estimation="@estimation" />
+        <Revealable @key="@estimation.ParticipantId" Inline="true" CssClass="poker-card-container">
+            <EstimationCard Estimation="@estimation" />
+        </Revealable>
     }
 </div>
 
