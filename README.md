@@ -36,7 +36,23 @@ If you prefer to build the application yourself, please follow the [compilation 
 
 ## Screenshots
 
-_to-do_
+**Create a planning poker session**
+
+![Create a planning poker session](doc/create-session.png)
+
+**Join a planning poker session**
+
+![Join a planning poker session](doc/join-poker-session.png)
+
+**Discussion stage**
+
+![Discussion stage](doc/discussion.png)
+
+**Estimation**
+![Estimation](doc/estimation.png)
+
+**Coming to a consensus**
+![Estimation discussion](doc/estimation-discussion.png)
 
 ## Contributions
 
