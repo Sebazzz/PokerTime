@@ -1,8 +1,11 @@
 @page "/create-poker-session"
 @inherits MediatorComponent
 @using Microsoft.Extensions.Logging
+@using Microsoft.Extensions.Options
+@using PokerTime.Application.Common.Settings
 @using PokerTime.Application.Sessions.Commands.CreatePokerSession
 @inject ILogger<CreatePokerSession> Logger
+@inject IOptions<SecuritySettings> SecuritySettingsAccessor
 
 @if (ShowCompletionMessage)
 {
@@ -38,7 +41,7 @@
         if (!String.IsNullOrEmpty(Model.Passphrase))
         {
             <p data-test-element-id="participator instructions">
-                To enter the planning poker, the participants need to enter the following password: <code >@Model.Passphrase</code>.
+                To enter the planning poker, the participants need to enter the following password: <code>@Model.Passphrase</code>.
             </p>
         }
         else
@@ -68,11 +71,11 @@ else
 
     if (ShowErrorMessage)
     {
-        <ErrorMessage Text="Something went wrong creating the planning poker session. Please try again."/>
+        <ErrorMessage Text="Something went wrong creating the planning poker session. Please try again." />
     }
 
     <EditForm Model="@Model" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
-        <Blazored.FluentValidation.FluentValidationValidator  />
+        <Blazored.FluentValidation.FluentValidationValidator />
 
         <div class="field">
             <label class="label" for="pokertime-title">Title</label>
@@ -106,6 +109,18 @@ else
                 </div>
             </div>
         </div>
+        
+        @if (SecuritySettingsAccessor.Value.LobbyCreationNeedsPassphrase)
+        {
+            <div class="field">
+                <label class="label" for="pokertime-lobby-creation-passphrase">Session creation passphrase</label>
+                <div class="control">
+                    <InputText id="pokertime-lobby-creation-passphrase" class="input" type="password" @bind-Value="@Model.LobbyCreationPassphrase" />
+                </div>
+
+                <ValidationMessage For="() => Model.LobbyCreationPassphrase"></ValidationMessage>
+            </div>
+        }
 
         <div class="field is-grouped">
             <div class="control">
