@@ -137,6 +137,35 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         }
 
         [Test]
+        public async Task PokerLobby_JoiningWithInProgress_UpdatesUnestimatedCardSection() {
+            await this.SetCurrentUserStory();
+            await this.SetRetrospective(s => s.CurrentStage = SessionStage.Estimation);
+
+            // Given
+            string client1Name = Name.Create();
+
+            this.Join(this.Client1, true, client1Name);
+            WaitNavigatedToLobby(this.Client1);
+
+            Assume.That(() => this.Client1.EstimationOverviewElement, Has.Property(nameof(IWebElement.Displayed)).EqualTo(true).Retry(),
+                "The estimation overview is not displayed");
+            Assume.That(() => this.Client1.EstimationOverview.UnestimatedCards, Contains.Item(client1Name).Retry(),
+                "Expected unestimated cards to include the client 1 name");
+
+            // When
+            string client2Name = Name.Create();
+
+            this.Join(this.Client2, false, client2Name);
+            WaitNavigatedToLobby(this.Client2);
+
+            // Then
+            this.MultiAssert(client => {
+                Assert.That(() => client.EstimationOverview.UnestimatedCards, Contains.Item(client2Name).Retry(),
+                    $"Expected the unestimated cards now to include the just joined client '{client2Name}'");
+            });
+        }
+
+        [Test]
         public async Task PokerLobby_CardEstimationDiscussion_CardsBecomeNonChoosable() {
             await this.SetCurrentUserStory();
             await this.SetRetrospective(s => s.CurrentStage = SessionStage.Estimation);

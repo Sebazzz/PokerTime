@@ -82,7 +82,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
             return scope.SetCurrentUserStory(this.SessionId, action);
         }
 
-        private static void WaitNavigatedToLobby(PokerSessionLobby pageObject) {
+        protected static void WaitNavigatedToLobby(PokerSessionLobby pageObject) {
             var sw = new Stopwatch();
             sw.Start();
 

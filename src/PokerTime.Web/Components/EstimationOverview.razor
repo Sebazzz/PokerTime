@@ -21,7 +21,10 @@
         @foreach (string participantWithoutEstimation in this.ParticipantsWithoutEstimation)
         {
             <Revealable Inline="true" CssClass="poker-card-container">
-                <div class="poker-card poker-card--pending" title="Estimation needed from: @participantWithoutEstimation">
+                <div class="poker-card poker-card--pending" 
+                     data-test-element-id="unestimated-card"
+                     data-participant-name="@participantWithoutEstimation" 
+                     title="Estimation needed from: @participantWithoutEstimation">
                     
                 </div>
             </Revealable>

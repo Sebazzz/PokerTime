@@ -70,6 +70,7 @@ namespace PokerTime.Web.Components {
             base.OnInitialized();
 
             this.EstimationGivenSubscriber.Subscribe(this);
+            this.SessionJoinedSubscriber.Subscribe(this);
         }
 
         protected override async Task OnInitializedAsync() {
