@@ -59,9 +59,9 @@ Section parts and key-value pairs are concatenated by using two underscores. For
 Configuration files are searched on platform-specific paths:
 
 -   Windows
-    -   Common application data (usually `C:\ProgramData\return-retro\config.<extension>`)
+    -   Common application data (usually `C:\ProgramData\pokertime\config.<extension>`)
 -   Unix / Linux - excluding MacOS
-    -   `/etc/return-retro/config.<extension>`
+    -   `/etc/pokertime/config.<extension>`
 
 You can use either `.json` or `.ini` files to configure the application. Using both is not recommended.
 
@@ -170,7 +170,7 @@ Options in the connection string will override manual "simple" configured option
 
 ### Application installation
 
-Unpack the application on any location, for instance `/opt/return-retro`.
+Unpack the application on any location, for instance `/opt/pokertime`.
 
 Modify the connection string in `launch.conf`.
 
