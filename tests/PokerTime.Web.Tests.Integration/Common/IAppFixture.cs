@@ -11,5 +11,6 @@ namespace PokerTime.Web.Tests.Integration.Common {
     public interface IAppFixture {
         ReturnAppFactory App { get; set; }
         void OnInitialized() { }
+        void OnConfiguringTestServices(IServiceCollection services) { }
     }
 }

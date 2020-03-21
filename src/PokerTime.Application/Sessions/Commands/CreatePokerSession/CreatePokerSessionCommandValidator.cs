@@ -23,7 +23,7 @@ namespace PokerTime.Application.Sessions.Commands.CreatePokerSession {
             this.RuleFor(x => x.LobbyCreationPassphrase)
                 .Equal(securitySettingsAccessor.Value.LobbyCreationPassphrase)
                 .When(_ => securitySettingsAccessor.Value.LobbyCreationNeedsPassphrase)
-                .WithMessage("Invalid passphrase entered needed for creating a session");
+                .WithMessage("Invalid pre-shared passphrase entered needed for creating a session");
         }
     }
 }

@@ -54,6 +54,15 @@ namespace PokerTime.Web.Tests.Integration.Common {
             });
         }
 
+        public static IWebElement FindHiddenElement(this IWebDriver webDriver, By selector) {
+            if (webDriver == null) throw new ArgumentNullException(nameof(webDriver));
+
+            return webDriver.Retry(wd => {
+                IWebElement el = wd.FindElement(selector);
+                return el != null && !el.Displayed ? el : null;
+            });
+        }
+
         public static void NavigateToBlazorPage(this IWebDriver webDriver, Uri uri) {
             webDriver.Navigate().GoToUrl(uri);
 

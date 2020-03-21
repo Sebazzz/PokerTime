@@ -74,6 +74,8 @@ namespace PokerTime.Web.Tests.Integration.Pages {
             Assert.That(this.Page.FacilitatorInstructions.Text, Contains.Substring("my secret facilitator password"));
             Assert.That(this.Page.ParticipatorInstructions.Text, Contains.Substring("no password is required"));
         }
+
+
     }
 
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global", Justification = "Dynamically instantiated")]
@@ -82,13 +84,20 @@ namespace PokerTime.Web.Tests.Integration.Pages {
         public IWebElement FacilitatorPassphraseInput => this.WebDriver.FindVisibleElement(By.Id("pokertime-facilitator-passphrase"));
         public IWebElement ParticipantPassphraseInput => this.WebDriver.FindVisibleElement(By.Id("pokertime-passphrase"));
         public IWebElement SubmitButton => this.WebDriver.FindVisibleElement(By.Id("create-pokertime-button"));
+        public IWebElement ModalSubmitButton => this.WebDriver.FindVisibleElement(By.Id("modal-create-pokertime-button"));
 
         public IWebElement UrlLocationInput => this.WebDriver.FindVisibleElement(By.Id("pokertime-location"));
         public IWebElement ParticipatorInstructions => this.WebDriver.FindElementByTestElementId("participator instructions");
         public IWebElement FacilitatorInstructions => this.WebDriver.FindElementByTestElementId("facilitator instructions");
 
+        public IWebElement LobbyCreationPassphraseInput => this.WebDriver.FindVisibleElement(By.Id("pokertime-lobby-creation-passphrase"));
+        public IWebElement LobbyCreationPassphraseModal => this.WebDriver.FindElementByTestElementId("lobby-creation-passphrase-modal");
+
+        public bool LobbyCreationPassphraseModalIsDisplayed => this.WebDriver.FindElement(By.CssSelector("[data-test-element-id=\"lobby-creation-passphrase-modal\"]")).Displayed;
+
         public void Navigate(ReturnAppFactory app) => this.WebDriver.NavigateToBlazorPage(app.CreateUri("create-poker-session"));
         public void Submit() => this.SubmitButton.Click();
+        public void ModalSubmit() => this.ModalSubmitButton.Click();
 
         public string GetUrlShown() => this.WebDriver.Retry(_ => this.UrlLocationInput.GetAttribute("value"));
         public ReadOnlyCollection<IWebElement> GetValidationMessages() => this.WebDriver.FindElements(By.ClassName("validation-message"));

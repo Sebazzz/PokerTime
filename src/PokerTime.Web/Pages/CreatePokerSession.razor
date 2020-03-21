@@ -113,7 +113,7 @@ else
         @if (SecuritySettingsAccessor.Value.LobbyCreationNeedsPassphrase)
         {
             <Modal IsShown="@this.ShowPasswordModal">
-                <div class="box">
+                <div class="box" data-test-element-id="lobby-creation-passphrase-modal">
                     <div class="field">
                         <label class="label" for="pokertime-lobby-creation-passphrase">Session creation passphrase</label>
                         <div class="control">
@@ -123,7 +123,7 @@ else
                         <ValidationMessage For="() => Model.LobbyCreationPassphrase"></ValidationMessage>
                     </div>
 
-                    <button class="button is-link" id="create-pokertime-button">Submit</button>
+                    <button class="button is-link" id="modal-create-pokertime-button">Submit</button>
                 </div>
             </Modal>
         }
