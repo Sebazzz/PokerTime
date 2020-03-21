@@ -28,7 +28,7 @@ Developed and tested on:
 
 Download the release for your OS from the [releases tab](https://github.com/Sebazzz/PokerTime/releases) or download the cutting edge builds from [AppVeyor](https://ci.appveyor.com/project/Sebazzz/PokerTime).
 
-[Follow the installation instructions](docs/Installation.md) in the documentation to install it.
+[Follow the installation instructions](doc/Installation.md) in the documentation to install it.
 
 ## Building PokerTime from sources
 
