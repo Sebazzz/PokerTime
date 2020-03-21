@@ -20,7 +20,7 @@ namespace PokerTime.Web.Tests.Integration.Common {
         public void BeforeTest(ITest test) {
             TestContext.WriteLine("Setting up server and initial webdriver");
 
-            ServerInstance = new ReturnAppFactory();
+            ServerInstance = new PokerTimeAppFactory();
             ServerInstance.InitializeBaseData();
         }
 
@@ -33,6 +33,6 @@ namespace PokerTime.Web.Tests.Integration.Common {
 
         public ActionTargets Targets => ActionTargets.Suite;
 
-        internal static ReturnAppFactory ServerInstance;
+        internal static PokerTimeAppFactory ServerInstance;
     }
 }

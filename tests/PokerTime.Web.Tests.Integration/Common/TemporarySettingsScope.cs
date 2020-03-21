@@ -17,11 +17,11 @@ namespace PokerTime.Web.Tests.Integration.Common {
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public sealed class TemporarySettingsScope<T> where T : class, new() {
-        private readonly ReturnAppFactory _app;
+        private readonly PokerTimeAppFactory _app;
         private readonly IMapper _mapper;
         private T _savedSettings;
 
-        public TemporarySettingsScope(ReturnAppFactory app) {
+        public TemporarySettingsScope(PokerTimeAppFactory app) {
             this._app = app;
 
             var config =

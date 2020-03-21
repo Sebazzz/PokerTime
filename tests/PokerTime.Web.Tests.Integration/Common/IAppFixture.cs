@@ -9,7 +9,7 @@ namespace PokerTime.Web.Tests.Integration.Common {
     using Microsoft.Extensions.DependencyInjection;
 
     public interface IAppFixture {
-        ReturnAppFactory App { get; set; }
+        PokerTimeAppFactory App { get; set; }
         void OnInitialized() { }
         void OnConfiguringTestServices(IServiceCollection services) { }
     }

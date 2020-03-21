@@ -10,10 +10,10 @@ namespace PokerTime.Web.Tests.Integration.Common {
     using OpenQA.Selenium;
 
     public sealed class WebDriverContainer : IDisposable {
-        private readonly ReturnAppFactory _owner;
+        private readonly PokerTimeAppFactory _owner;
         private IWebDriver _webDriver;
 
-        internal WebDriverContainer(IWebDriver webDriver, ReturnAppFactory owner) {
+        internal WebDriverContainer(IWebDriver webDriver, PokerTimeAppFactory owner) {
             this._webDriver = webDriver;
             this._owner = owner;
         }

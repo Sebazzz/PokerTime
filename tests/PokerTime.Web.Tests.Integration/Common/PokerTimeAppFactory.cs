@@ -19,10 +19,10 @@ namespace PokerTime.Web.Tests.Integration.Common {
     using OpenQA.Selenium.Support.Events;
     using Persistence;
 
-    public sealed class ReturnAppFactory : CustomWebApplicationFactory<Startup> {
+    public sealed class PokerTimeAppFactory : CustomWebApplicationFactory<Startup> {
         private WebDriverPool _webDriverPool;
 
-        public ReturnAppFactory() {
+        public PokerTimeAppFactory() {
             this._webDriverPool = new WebDriverPool(this.CreateWebDriver);
         }
 

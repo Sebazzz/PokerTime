@@ -95,7 +95,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
 
         public bool LobbyCreationPassphraseModalIsDisplayed => this.WebDriver.FindElement(By.CssSelector("[data-test-element-id=\"lobby-creation-passphrase-modal\"]")).Displayed;
 
-        public void Navigate(ReturnAppFactory app) => this.WebDriver.NavigateToBlazorPage(app.CreateUri("create-poker-session"));
+        public void Navigate(PokerTimeAppFactory app) => this.WebDriver.NavigateToBlazorPage(app.CreateUri("create-poker-session"));
         public void Submit() => this.SubmitButton.Click();
         public void ModalSubmit() => this.ModalSubmitButton.Click();
 

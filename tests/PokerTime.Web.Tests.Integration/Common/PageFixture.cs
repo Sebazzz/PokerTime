@@ -72,7 +72,7 @@ namespace PokerTime.Web.Tests.Integration.Common {
     [UseRunningApp]
     [CleanupDisposables]
     public abstract class ScopedFixture : IAppFixture {
-        public ReturnAppFactory App { get; set; }
+        public PokerTimeAppFactory App { get; set; }
         public virtual void OnInitialized() { }
 
         protected IServiceScope ServiceScope { get; private set; }
