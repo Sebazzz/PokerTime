@@ -58,7 +58,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
             SetResolution(this.Client2.WebDriver);
 
             // When
-            createRetroPage.RetrospectiveTitleInput.SendKeys("Sprint 1: Initial prototype");
+            createRetroPage.SessionTitleInput.SendKeys("Sprint 1: Initial prototype");
             createRetroPage.FacilitatorPassphraseInput.SendKeys("scrummaster");
             createRetroPage.ParticipantPassphraseInput.SendKeys("secret");
             createRetroPage.WebDriver.TryCreateScreenshot();

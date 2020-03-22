@@ -38,7 +38,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
             this.Page.Navigate(this.App);
 
             // When
-            this.Page.RetrospectiveTitleInput.SendKeys(TestContext.CurrentContext.Test.FullName);
+            this.Page.SessionTitleInput.SendKeys(TestContext.CurrentContext.Test.FullName);
             this.Page.FacilitatorPassphraseInput.SendKeys("my secret facilitator password");
 
             this.Page.Submit();
@@ -54,7 +54,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
             this.Page.Navigate(this.App);
 
             // When
-            this.Page.RetrospectiveTitleInput.SendKeys(TestContext.CurrentContext.Test.FullName);
+            this.Page.SessionTitleInput.SendKeys(TestContext.CurrentContext.Test.FullName);
             this.Page.FacilitatorPassphraseInput.SendKeys("my secret facilitator password");
 
             this.Page.Submit();
@@ -85,7 +85,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
             this.Page.Navigate(this.App);
 
             // When
-            this.Page.RetrospectiveTitleInput.SendKeys(TestContext.CurrentContext.Test.FullName);
+            this.Page.SessionTitleInput.SendKeys(TestContext.CurrentContext.Test.FullName);
             this.Page.FacilitatorPassphraseInput.SendKeys("my secret facilitator password");
 
             this.Page.Submit();

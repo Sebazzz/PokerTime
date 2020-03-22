@@ -44,7 +44,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
             this.Page.Navigate(this.App);
 
             // When
-            this.Page.RetrospectiveTitleInput.SendKeys(TestContext.CurrentContext.Test.FullName);
+            this.Page.SessionTitleInput.SendKeys(TestContext.CurrentContext.Test.FullName);
             this.Page.FacilitatorPassphraseInput.SendKeys("my secret facilitator password");
             this.Page.ParticipantPassphraseInput.SendKeys("the participator password");
 
@@ -63,7 +63,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
             this.Page.Navigate(this.App);
 
             // When
-            this.Page.RetrospectiveTitleInput.SendKeys(TestContext.CurrentContext.Test.FullName);
+            this.Page.SessionTitleInput.SendKeys(TestContext.CurrentContext.Test.FullName);
             this.Page.FacilitatorPassphraseInput.SendKeys("my secret facilitator password");
 
             this.Page.Submit();
@@ -80,7 +80,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
 
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global", Justification = "Dynamically instantiated")]
     public sealed class CreatePokerSessionPage : PageObject {
-        public IWebElement RetrospectiveTitleInput => this.WebDriver.FindVisibleElement(By.Id("pokertime-title"));
+        public IWebElement SessionTitleInput => this.WebDriver.FindVisibleElement(By.Id("pokertime-title"));
         public IWebElement FacilitatorPassphraseInput => this.WebDriver.FindVisibleElement(By.Id("pokertime-facilitator-passphrase"));
         public IWebElement ParticipantPassphraseInput => this.WebDriver.FindVisibleElement(By.Id("pokertime-passphrase"));
         public IWebElement SubmitButton => this.WebDriver.FindVisibleElement(By.Id("create-pokertime-button"));
