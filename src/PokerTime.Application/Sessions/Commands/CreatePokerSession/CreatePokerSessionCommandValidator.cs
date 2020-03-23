@@ -19,6 +19,7 @@ namespace PokerTime.Application.Sessions.Commands.CreatePokerSession {
             this.RuleFor(x => x.Title).NotEmpty().MaximumLength(256);
             this.RuleFor(x => x.Passphrase).MaximumLength(512);
             this.RuleFor(x => x.FacilitatorPassphrase).NotEmpty().MaximumLength(512);
+            this.RuleFor(x => x.SymbolSetId).NotEmpty();
 
             this.RuleFor(x => x.LobbyCreationPassphrase)
                 .Equal(securitySettingsAccessor.Value.LobbyCreationPassphrase)

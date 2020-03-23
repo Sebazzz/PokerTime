@@ -6,7 +6,9 @@
 // ******************************************************************************
 
 namespace PokerTime.Application.App.Commands.SeedBaseData {
+    using System;
     using System.Drawing;
+    using System.Globalization;
     using System.Threading;
     using System.Threading.Tasks;
     using Common.Abstractions;
@@ -28,42 +30,87 @@ namespace PokerTime.Application.App.Commands.SeedBaseData {
         }
 
         private async Task SeedPokerCardSymbols(CancellationToken cancellationToken) {
-            if (await this._pokerTimeDbContext.Symbols.AnyAsync(cancellationToken)) {
-                return;
-            }
-
             int order = 1;
 
-            void IntSymbol(int num) {
+            async Task SeedSymbolSet(string name, Action<SymbolSet> callback) {
+                SymbolSet symbolSet = await this._pokerTimeDbContext.SymbolSets.FirstOrDefaultAsync(x => x.Name == name, cancellationToken);
+
+                if (symbolSet == null) {
+                    // Reset order
+                    order = 1;
+
+                    // Callback to create new one
+                    symbolSet = new SymbolSet { Name = name };
+                    callback.Invoke(symbolSet);
+                }
+            }
+
+            void IntSymbol(int num, SymbolSet symbolSet) {
                 this._pokerTimeDbContext.Symbols.Add(new Symbol {
                     Type = SymbolType.Number,
+                    SymbolSet = symbolSet,
                     ValueAsNumber = num,
+                    ValueAsString = num.ToString(CultureInfo.InvariantCulture),
                     Order = order++
                 });
             }
 
-            void TypeSymbol(SymbolType symbolType) {
+            void StringSymbol(string str, SymbolSet symbolSet, int? intValue = null) {
+                this._pokerTimeDbContext.Symbols.Add(new Symbol {
+                    Type = SymbolType.Characters,
+                    SymbolSet = symbolSet,
+                    ValueAsString = str,
+                    ValueAsNumber = intValue,
+                    Order = order++
+                });
+            }
+
+            void TypeSymbol(SymbolType symbolType, SymbolSet symbolSet) {
+                string symbolString = symbolType switch
+                {
+                    SymbolType.Break => "☕",
+                    SymbolType.Infinite => "∞",
+                    _ => throw new ArgumentOutOfRangeException(nameof(symbolType), symbolType, null)
+                };
+
                 this._pokerTimeDbContext.Symbols.Add(new Symbol {
                     Type = symbolType,
+                    SymbolSet = symbolSet,
+                    ValueAsString = symbolString,
                     Order = order++
                 });
             }
 
-            // Seed symbols
-            IntSymbol(0);
-            IntSymbol(1);
-            IntSymbol(2);
-            IntSymbol(3);
-            IntSymbol(5);
-            IntSymbol(8);
-            IntSymbol(13);
-            IntSymbol(20);
-            IntSymbol(40);
-            IntSymbol(100);
+            // Seed symbol sets - note: when changing the default names a migration is necessary to prevent reseeding
+            // ... default
+            await SeedSymbolSet("Default", symbolSet => {
+                IntSymbol(0, symbolSet);
+                IntSymbol(1, symbolSet);
+                IntSymbol(2, symbolSet);
+                IntSymbol(3, symbolSet);
+                IntSymbol(5, symbolSet);
+                IntSymbol(8, symbolSet);
+                IntSymbol(13, symbolSet);
+                IntSymbol(20, symbolSet);
+                IntSymbol(40, symbolSet);
+                IntSymbol(100, symbolSet);
 
-            TypeSymbol(SymbolType.Break);
-            TypeSymbol(SymbolType.Infinite);
-            TypeSymbol(SymbolType.Unknown);
+                TypeSymbol(SymbolType.Break, symbolSet);
+                TypeSymbol(SymbolType.Infinite, symbolSet);
+                StringSymbol("?", symbolSet);
+            });
+
+            // ... t-shirt sizes
+            await SeedSymbolSet("T-shirt sizes", symbolSet => {
+                StringSymbol("XS", symbolSet, 1);
+                StringSymbol("S", symbolSet, 2);
+                StringSymbol("M", symbolSet, 3);
+                StringSymbol("L", symbolSet, 4);
+                StringSymbol("XL", symbolSet, 5);
+
+                TypeSymbol(SymbolType.Break, symbolSet);
+                StringSymbol("?", symbolSet);
+            });
         }
 
         private async Task SeedPredefinedParticipantColor(CancellationToken cancellationToken) {

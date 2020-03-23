@@ -15,6 +15,9 @@ namespace PokerTime.Application.Sessions.Commands.CreatePokerSession {
         public string FacilitatorPassphrase { get; set; }
 
 #nullable enable
+
+        public int SymbolSetId { get; set; }
+
         public string? Passphrase { get; set; }
 
         public string? LobbyCreationPassphrase { get; set; }

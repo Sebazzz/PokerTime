@@ -47,6 +47,10 @@ namespace PokerTime.Domain.Entities {
         /// Gets the passphrase used for the facilitator to log into the retrospective lobby
         /// </summary>
         public string FacilitatorHashedPassphrase { get; set; }
+
+        public SymbolSet SymbolSet { get; set; }
+
+        public int SymbolSetId { get; set; }
 #pragma warning restore CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.
 
         public ICollection<Participant> Participants => this._participants ??= new Collection<Participant>();

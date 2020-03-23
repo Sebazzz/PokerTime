@@ -34,6 +34,11 @@ namespace PokerTime.Persistence.Configurations {
                 IsRequired().
                 OnDelete(DeleteBehavior.Cascade);
 
+            builder.HasOne(e => e.SymbolSet)
+                   .WithMany()
+                   .IsRequired()
+                   .OnDelete(DeleteBehavior.Restrict);
+
             builder.UsePropertyAccessMode(PropertyAccessMode.PreferProperty);
         }
     }

@@ -62,6 +62,7 @@ namespace PokerTime.Persistence {
         public DbSet<Participant> Participants { get; set; }
         public DbSet<Estimation> Estimations { get; set; }
         public DbSet<Symbol> Symbols { get; set; }
+        public DbSet<SymbolSet> SymbolSets { get; set; }
         public DbSet<UserStory> UserStories { get; set; }
         public DbSet<Session> Sessions { get; set; }
 
