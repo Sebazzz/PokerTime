@@ -13,6 +13,7 @@ namespace PokerTime.Web.Tests.Integration.Common {
     using Application.Sessions.Commands.CreatePokerSession;
     using Application.Services;
     using Domain.Entities;
+    using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
     using NUnit.Framework;
 
@@ -23,7 +24,7 @@ namespace PokerTime.Web.Tests.Integration.Common {
             var command = new CreatePokerSessionCommand {
                 Title = TestContext.CurrentContext.Test.FullName,
                 FacilitatorPassphrase = facilitatorPassphrase,
-                SymbolSetId = 1 // FIXME: might want to do a manual lookup via DbContext...
+                SymbolSetId = (await scope.ServiceProvider.GetRequiredService<IPokerTimeDbContext>().SymbolSets.FirstAsync()).Id
             };
 
             CreatePokerSessionCommandResponse result = await scope.Send(command);
