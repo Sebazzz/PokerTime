@@ -7,7 +7,7 @@
      data-symbol-id="@this.Symbol.Id"
      data-id="@this.Symbol.Id"
      @onclick="() => this.OnClick?.Invoke(this.Symbol)">
-    <div class="user-card__symbol">@this.Symbol.AsString</div>
+    <div class="user-card__symbol" data-test-element-id="symbol">@this.Symbol.AsString</div>
 </div>
 @code {
 #nullable disable
