@@ -7,8 +7,10 @@
 
 namespace PokerTime.Web.Tests.Integration.Pages {
     using System.Linq;
+    using System.Threading;
     using System.Threading.Tasks;
     using Application.Common.Abstractions;
+    using Application.Services;
     using Common;
     using Domain.Entities;
     using Microsoft.Extensions.DependencyInjection;
@@ -85,7 +87,8 @@ namespace PokerTime.Web.Tests.Integration.Pages {
 
             // Then
             IPokerTimeDbContext dbContext = this.ServiceScope.ServiceProvider.GetRequiredService<IPokerTimeDbContext>();
-            var dbCardIds = dbContext.Symbols.Select(x => x.Id).ToList();
+            Session currentSession = await dbContext.Sessions.FindBySessionId(this.SessionId, CancellationToken.None);
+            var dbCardIds = dbContext.Symbols.Where(x => x.SymbolSetId == currentSession.SymbolSetId).Select(x => x.Id).ToList();
 
             this.MultiAssert(client => {
                 Assert.That(() => client.CardChooserElement, Has.Property(nameof(IWebElement.Displayed)).EqualTo(true).Retry(),
