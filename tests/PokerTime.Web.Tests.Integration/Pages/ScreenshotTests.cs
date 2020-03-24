@@ -82,7 +82,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
 
             // Given
             using (IServiceScope scope = this.App.CreateTestServiceScope()) {
-                await scope.SetRetrospective(this.SessionId, r => r.HashedPassphrase = null);
+                await scope.SetSession(this.SessionId, r => r.HashedPassphrase = null);
             }
 
             this.Join(this.Client1, true, "Roger", colorName: "Driver", submitCallback: () => CreateDocScreenshot(this.Client1.WebDriver, "join-poker-session"));

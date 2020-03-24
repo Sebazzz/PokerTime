@@ -10,10 +10,8 @@ namespace PokerTime.Web.Tests.Integration.Pages {
     using System.Diagnostics.CodeAnalysis;
     using System.Threading;
     using System.Threading.Tasks;
-    using Application.Common.Abstractions;
     using Common;
     using Domain.Entities;
-    using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
     using NUnit.Framework;
     using OpenQA.Selenium.Support.UI;
@@ -74,7 +72,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
 
         protected Task SetRetrospective(Action<Session> action) {
             using IServiceScope scope = this.App.CreateTestServiceScope();
-            return scope.SetRetrospective(this.SessionId, action);
+            return scope.SetSession(this.SessionId, action);
         }
 
         protected Task SetCurrentUserStory(Action<UserStory> action = null) {

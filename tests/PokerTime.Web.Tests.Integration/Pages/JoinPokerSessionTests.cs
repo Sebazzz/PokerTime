@@ -192,7 +192,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
 
         private Task SetRetrospective(string sessionId, Action<Session> action) {
             using IServiceScope scope = this.App.CreateTestServiceScope();
-            return scope.SetRetrospective(sessionId, action);
+            return scope.SetSession(sessionId, action);
         }
         private async Task<string> CreatePokerSession(string facilitatorPassword, string password) {
             var command = new CreatePokerSessionCommand {
