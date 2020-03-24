@@ -66,7 +66,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
                     return client.CardChooser.Cards.Select(x => x.Id);
                 }, Is.EquivalentTo(dbCardIds).And.Not.Empty.Retry(), "Not all poker cards are shown");
 
-                Assert.That(() => client.CardChooser.Cards.All(x => x.IsChoosable == false),
+                Assert.That(() => client.CardChooser.Cards.All(x => x.IsEnabled == false),
                     Is.True.Retry(), "Some cards are interactable in this stage, which shouldn't be the case");
             });
         }
@@ -102,7 +102,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
                     return client.CardChooser.Cards.Select(x => x.Id);
                 }, Is.EquivalentTo(dbCardIds).And.Not.Empty.Retry(), "Not all poker cards are shown");
 
-                Assert.That(() => client.CardChooser.Cards.All(x => x.IsChoosable == true),
+                Assert.That(() => client.CardChooser.Cards.All(x => x.IsEnabled == true),
                     Is.True.Retry(), "Some cards are not interactable in this stage, all should be interactable");
             });
         }
@@ -189,7 +189,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
             this.Client1.WorkflowContinueButton.Click();
 
             this.MultiAssert(client => {
-                Assert.That(() => client.CardChooser.Cards.All(x => x.IsChoosable == false),
+                Assert.That(() => client.CardChooser.Cards.All(x => x.IsEnabled == false),
                     Is.True.Retry(), "Some cards are interactable in this stage, which shouldn't be the case");
             });
         }
