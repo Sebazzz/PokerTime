@@ -1,0 +1,39 @@
+$preview-card-color: darken($beige-light, 10%);
+
+.preview-card {
+    @include poker-card-base(50px);
+
+    background-color: $preview-card-color;
+    margin-right: 1em;
+
+    &--disabled {
+        cursor: not-allowed;
+        opacity: 0.75;
+        filter: grayscale(25%) blur(2px);
+        min-height: 100px;
+    }
+
+    &--enabled {
+        cursor: pointer;
+        transition: transform ease 500ms;
+        transform: scale(1);
+        transform-origin: center;
+        animation: 800ms ease 0s 1 normal forwards running estimated-card-flip-anim;
+
+        &:hover {
+            transform: scale(1.2);
+        }
+    }
+}
+
+.poker-card-preview-container {
+    margin-bottom: 1.5em;
+    display: inline-block;
+
+    &__title {
+        font-weight: bold;
+        font-size: 0.8em;
+
+        margin: -10px 5px 5px -8px;
+    }
+}

@@ -11,8 +11,8 @@
 <div data-test-element-id="estimation-overview">
     @foreach (EstimationModel estimation in this.Estimations.Values)
     {
-        <Revealable @key="@estimation.ParticipantId" Inline="true" CssClass="poker-card-container">
-            <EstimationCard Estimation="@estimation" />
+        <Revealable @key="@estimation.ParticipantId" Inline="true" CssClass="estimated-card-container">
+            <EstimatedCard Estimation="@estimation" />
         </Revealable>
     }
 
@@ -20,8 +20,8 @@
     {
         @foreach (string participantWithoutEstimation in this.ParticipantsWithoutEstimation)
         {
-            <Revealable Inline="true" CssClass="poker-card-container">
-                <div class="poker-card poker-card--pending" 
+            <Revealable Inline="true" CssClass="estimated-card-container">
+                <div class="estimated-card estimated-card--pending" 
                      data-test-element-id="unestimated-card"
                      data-participant-name="@participantWithoutEstimation" 
                      title="Estimation needed from: @participantWithoutEstimation">
