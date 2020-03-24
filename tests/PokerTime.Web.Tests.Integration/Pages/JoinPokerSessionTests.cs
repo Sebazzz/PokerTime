@@ -13,6 +13,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
+    using Application.Common.Abstractions;
     using Application.PredefinedParticipantColors.Queries.GetAvailablePredefinedParticipantColors;
     using Application.Sessions.Commands.CreatePokerSession;
     using Application.Sessions.Queries.GetParticipantsInfo;
@@ -20,6 +21,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
     using Components;
     using Domain.Entities;
     using Domain.Services;
+    using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
     using NUnit.Framework;
     using OpenQA.Selenium;
@@ -192,13 +194,14 @@ namespace PokerTime.Web.Tests.Integration.Pages {
 
         private Task SetRetrospective(string sessionId, Action<Session> action) {
             using IServiceScope scope = this.App.CreateTestServiceScope();
-            return scope.SetRetrospective(sessionId, action);
+            return scope.SetSession(sessionId, action);
         }
         private async Task<string> CreatePokerSession(string facilitatorPassword, string password) {
             var command = new CreatePokerSessionCommand {
                 Title = TestContext.CurrentContext.Test.FullName,
                 FacilitatorPassphrase = facilitatorPassword,
-                Passphrase = password
+                Passphrase = password,
+                SymbolSetId = (await this.ServiceScope.ServiceProvider.GetRequiredService<IPokerTimeDbContext>().SymbolSets.FirstAsync()).Id
             };
 
             this.ServiceScope.SetNoAuthenticationInfo();

@@ -11,6 +11,7 @@ namespace PokerTime.Application.Tests.Unit.Sessions.Commands {
     using System.Threading;
     using System.Threading.Tasks;
     using Application.Sessions.Commands.CreatePokerSession;
+    using Domain.Entities;
     using Domain.Services;
     using Domain.ValueObjects;
     using Microsoft.Extensions.Logging.Abstractions;
@@ -23,7 +24,7 @@ namespace PokerTime.Application.Tests.Unit.Sessions.Commands {
     [TestFixture]
     public sealed class CreatePokerSessionCommandHandlerTests : CommandTestBase {
         [Test]
-        public async Task Handle_GivenValidRequest_ShouldSaveRetrospectiveWithHash() {
+        public async Task Handle_GivenValidRequest_ShouldSaveSessionWithHash() {
             // Given
             var passphraseService = Substitute.For<IPassphraseService>();
             var systemClock = Substitute.For<ISystemClock>();
@@ -33,14 +34,22 @@ namespace PokerTime.Application.Tests.Unit.Sessions.Commands {
             passphraseService.CreateHashedPassphrase("anything").Returns("myhash");
             passphraseService.CreateHashedPassphrase("facilitator password").Returns("facilitatorhash");
 
-            urlGenerator.GenerateUrlToPokerSessionLobby(Arg.Any<SessionIdentifier>()).Returns(new Uri("https://example.com/retro/1"));
+            urlGenerator.GenerateUrlToPokerSessionLobby(Arg.Any<SessionIdentifier>()).Returns(new Uri("https://example.com/session/1"));
 
             systemClock.CurrentTimeOffset.Returns(DateTimeOffset.UnixEpoch);
+
+            var symbolSet = new SymbolSet
+            {
+                Name = "Test123"
+            };
+            this.Context.SymbolSets.Add(symbolSet);
+            await this.Context.SaveChangesAsync(CancellationToken.None);
 
             var request = new CreatePokerSessionCommand {
                 Passphrase = "anything",
                 FacilitatorPassphrase = "facilitator password",
-                Title = "Hello"
+                Title = "Hello",
+                SymbolSetId = symbolSet.Id
             };
 
             // When

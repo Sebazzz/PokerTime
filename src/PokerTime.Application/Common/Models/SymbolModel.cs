@@ -9,9 +9,7 @@ namespace PokerTime.Application.Common.Models {
     using System;
     using AutoMapper;
     using Domain.Entities;
-    using Domain.Services;
     using Mapping;
-    using MediatR;
 
     public sealed class SymbolModel : IMapFrom<Symbol> {
         public int Id { get; set; }
@@ -26,7 +24,7 @@ namespace PokerTime.Application.Common.Models {
             if (profile == null) throw new ArgumentNullException(nameof(profile));
             profile.CreateMap<Symbol, SymbolModel>().
                 ForMember(x => x.AsString,
-                    m => m.MapFrom(x => x.GetValueAsString()));
+                    m => m.MapFrom(x => x.ValueAsString));
         }
     }
 }

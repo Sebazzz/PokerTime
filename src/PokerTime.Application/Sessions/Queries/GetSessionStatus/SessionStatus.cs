@@ -13,6 +13,8 @@ namespace PokerTime.Application.Sessions.Queries.GetSessionStatus {
     public sealed class SessionStatus {
         public string SessionId { get; }
 
+        public int SymbolSetId { get; }
+
         public string Title { get; }
 
         public SessionStage Stage { get; }
@@ -28,10 +30,12 @@ namespace PokerTime.Application.Sessions.Queries.GetSessionStatus {
             string sessionId,
             string title,
             SessionStage sessionStage,
+            int symbolSetId,
             CurrentUserStoryModel? currentUserStory
         ) {
             this.SessionId = sessionId;
             this.Title = title;
+            this.SymbolSetId = symbolSetId;
             this.Stage = sessionStage;
             this.UserStory = currentUserStory;
         }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PokerTime.Persistence;
 
 namespace PokerTime.Persistence.Migrations
 {
     [DbContext(typeof(PokerTimeDbContext))]
-    partial class PokerTimeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200323211733_AddSymbolSets")]
+    partial class AddSymbolSets
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -145,12 +147,8 @@ namespace PokerTime.Persistence.Migrations
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ValueAsNumber")
+                    b.Property<int>("ValueAsNumber")
                         .HasColumnType("int");
-
-                    b.Property<string>("ValueAsString")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

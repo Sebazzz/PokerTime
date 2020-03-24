@@ -30,7 +30,7 @@ namespace PokerTime.Application.Symbols.Queries {
         public async Task<GetSymbolsQueryResponse> Handle(GetSymbolsQuery request, CancellationToken cancellationToken) {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
-            IEnumerable<Symbol> allSymbols = await this._pokerTimeDbContext.Symbols.OrderBy(x => x.Order).ToListAsync(cancellationToken);
+            IEnumerable<Symbol> allSymbols = await this._pokerTimeDbContext.Symbols.Where(x => x.SymbolSetId == request.SymbolSetId).OrderBy(x => x.Order).ToListAsync(cancellationToken);
 
             return new GetSymbolsQueryResponse(this._mapper.Map<List<SymbolModel>>(allSymbols));
         }

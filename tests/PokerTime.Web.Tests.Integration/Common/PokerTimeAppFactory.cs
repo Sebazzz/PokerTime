@@ -46,16 +46,24 @@ namespace PokerTime.Web.Tests.Integration.Common {
                 AcceptInsecureCertificates = true,
             };
 
+            const int windowWidth = 1680, windowHeight = 1050;
+
             if (!String.IsNullOrEmpty(Environment.GetEnvironmentVariable("MOZ_HEADLESS"))) {
                 TestContext.WriteLine("Going to run Chrome headless");
-                webDriverOptions.AddArguments("--headless");
+                webDriverOptions.AddArgument("headless");
+
+                TestContext.WriteLine($"Going to run Chrome at {windowWidth}x{windowHeight}");
+                webDriverOptions.AddArgument($"window-size={windowWidth},{windowHeight}");
+
+                webDriverOptions.AddArgument("shm-size=1gb");
             }
 
             var webDriver = new ChromeDriver(webDriverOptions);
 
             var window = webDriver.Manage().Window;
             try {
-                window.Size = new Size(1920, 1080);
+                TestContext.WriteLine($"Setting window size in WebDriver at {windowWidth}x{windowHeight}");
+                window.Size = new Size(windowWidth, windowHeight);
             }
             catch (Exception ex) {
                 TestContext.WriteLine($"Setting driver window size not supported: {ex}");

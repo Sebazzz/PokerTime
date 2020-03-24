@@ -18,6 +18,7 @@ namespace PokerTime.Application.Common.Abstractions {
         DbSet<Participant> Participants { get; set; }
         DbSet<Estimation> Estimations { get; set; }
         DbSet<Symbol> Symbols { get; set; }
+        DbSet<SymbolSet> SymbolSets { get; set; }
         DbSet<UserStory> UserStories { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);

@@ -13,6 +13,7 @@ namespace PokerTime.Web.Tests.Integration.Common {
     using Application.Sessions.Commands.CreatePokerSession;
     using Application.Services;
     using Domain.Entities;
+    using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
     using NUnit.Framework;
 
@@ -22,7 +23,8 @@ namespace PokerTime.Web.Tests.Integration.Common {
 
             var command = new CreatePokerSessionCommand {
                 Title = TestContext.CurrentContext.Test.FullName,
-                FacilitatorPassphrase = facilitatorPassphrase
+                FacilitatorPassphrase = facilitatorPassphrase,
+                SymbolSetId = (await scope.ServiceProvider.GetRequiredService<IPokerTimeDbContext>().SymbolSets.FirstAsync()).Id
             };
 
             CreatePokerSessionCommandResponse result = await scope.Send(command);
@@ -30,7 +32,7 @@ namespace PokerTime.Web.Tests.Integration.Common {
             return result.Identifier.StringId;
         }
 
-        public static async Task SetRetrospective(this IServiceScope scope, string sessionId, Action<Session> action) {
+        public static async Task SetSession(this IServiceScope scope, string sessionId, Action<Session> action) {
             var dbContext = scope.ServiceProvider.GetRequiredService<IPokerTimeDbContext>();
 
             Session session = await dbContext.Sessions.FindBySessionId(sessionId, CancellationToken.None);
@@ -49,6 +51,6 @@ namespace PokerTime.Web.Tests.Integration.Common {
             await dbContext.SaveChangesAsync(CancellationToken.None);
         }
 
-        public static TestCaseBuilder TestCaseBuilder(this IServiceScope scope, string retrospectiveId) => new TestCaseBuilder(scope, retrospectiveId);
+        public static TestCaseBuilder TestCaseBuilder(this IServiceScope scope, string sessionId) => new TestCaseBuilder(scope, sessionId);
     }
 }

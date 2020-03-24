@@ -1,4 +1,4 @@
-﻿@using PokerTime.Application.Common.Models
+@using PokerTime.Application.Common.Models
 @using PokerTime.Application.Sessions.Queries.GetSessionStatus
 
 @if (this.SessionStatus == null || this.Estimation == null)
@@ -6,32 +6,32 @@
     return;
 }
 
-    <div class="poker-card poker-card--estimation @(IsShown ? "poker-card--shown" : "poker-card--hidden")"
+    <div class="estimated-card @(IsShown ? "estimated-card--shown" : "estimated-card--hidden")"
          data-test-element-id="estimation-card"
          data-id="@this.Estimation.Id"
          data-symbol-id="@this.Estimation.Symbol.Id"
          data-participant-id="@this.Estimation.ParticipantId">
 
-        <div class="poker-card__face poker-card__face--front"
+        <div class="estimated-card__face estimated-card__face--front"
              style="background-color: #@this.Estimation.ParticipantColor.HexString">
             @if (IsShown)
             {
-                <div class="poker-card__symbol">@this.Estimation.Symbol.AsString</div>
+                <div class="estimated-card__symbol">@this.Estimation.Symbol.AsString</div>
             }
             else
             {
                 // This is the HTML for the hidden back-side - not shown
 
-                <div class="poker-card__symbol">🎈</div>
+                <div class="estimated-card__symbol">🎈</div>
             }
 
-            <div class="poker-card__author">@this.Estimation.ParticipantName</div>
+            <div class="estimated-card__author">@this.Estimation.ParticipantName</div>
         </div>
-        <div class="poker-card__face poker-card__face--back"
+        <div class="estimated-card__face estimated-card__face--back"
              style="background-color: #@this.Estimation.ParticipantColor.HexString">
-            <div class="poker-card__symbol poker-card__symbol--hidden poker-card__symbol--backside">?</div>
+            <div class="estimated-card__symbol estimated-card__symbol--hidden estimated-card__symbol--backside">?</div>
             
-            <div class="poker-card__author">@this.Estimation.ParticipantName</div>
+            <div class="estimated-card__author">@this.Estimation.ParticipantName</div>
         </div>
     </div>
 

@@ -1,0 +1,13 @@
+@using PokerTime.Application.Common.Models
+
+<div class="preview-card"
+     data-test-element-id="preview-poker-card"
+     data-id="@this.Symbol.Id">
+    <div class="preview-card__symbol">@this.Symbol.AsString</div>
+</div>
+
+@code {
+    #nullable disable
+    [Parameter]
+    public SymbolModel Symbol { get; set; }
+}

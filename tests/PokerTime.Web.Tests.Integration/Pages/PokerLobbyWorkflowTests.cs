@@ -7,8 +7,10 @@
 
 namespace PokerTime.Web.Tests.Integration.Pages {
     using System.Linq;
+    using System.Threading;
     using System.Threading.Tasks;
     using Application.Common.Abstractions;
+    using Application.Services;
     using Common;
     using Domain.Entities;
     using Microsoft.Extensions.DependencyInjection;
@@ -53,7 +55,8 @@ namespace PokerTime.Web.Tests.Integration.Pages {
 
             // Then
             IPokerTimeDbContext dbContext = this.ServiceScope.ServiceProvider.GetRequiredService<IPokerTimeDbContext>();
-            var dbCardIds = dbContext.Symbols.Select(x => x.Id).ToList();
+            Session currentSession = await dbContext.Sessions.FindBySessionId(this.SessionId, CancellationToken.None);
+            var dbCardIds = dbContext.Symbols.Where(x => x.SymbolSetId == currentSession.SymbolSetId).Select(x => x.Id).ToList();
 
             this.MultiAssert(client => {
                 Assert.That(() => client.CardChooserElement, Has.Property(nameof(IWebElement.Displayed)).EqualTo(true).Retry(),
@@ -63,7 +66,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
                     return client.CardChooser.Cards.Select(x => x.Id);
                 }, Is.EquivalentTo(dbCardIds).And.Not.Empty.Retry(), "Not all poker cards are shown");
 
-                Assert.That(() => client.CardChooser.Cards.All(x => x.IsChoosable == false),
+                Assert.That(() => client.CardChooser.Cards.All(x => x.IsEnabled == false),
                     Is.True.Retry(), "Some cards are interactable in this stage, which shouldn't be the case");
             });
         }
@@ -85,7 +88,8 @@ namespace PokerTime.Web.Tests.Integration.Pages {
 
             // Then
             IPokerTimeDbContext dbContext = this.ServiceScope.ServiceProvider.GetRequiredService<IPokerTimeDbContext>();
-            var dbCardIds = dbContext.Symbols.Select(x => x.Id).ToList();
+            Session currentSession = await dbContext.Sessions.FindBySessionId(this.SessionId, CancellationToken.None);
+            var dbCardIds = dbContext.Symbols.Where(x => x.SymbolSetId == currentSession.SymbolSetId).Select(x => x.Id).ToList();
 
             this.MultiAssert(client => {
                 Assert.That(() => client.CardChooserElement, Has.Property(nameof(IWebElement.Displayed)).EqualTo(true).Retry(),
@@ -98,7 +102,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
                     return client.CardChooser.Cards.Select(x => x.Id);
                 }, Is.EquivalentTo(dbCardIds).And.Not.Empty.Retry(), "Not all poker cards are shown");
 
-                Assert.That(() => client.CardChooser.Cards.All(x => x.IsChoosable == true),
+                Assert.That(() => client.CardChooser.Cards.All(x => x.IsEnabled == true),
                     Is.True.Retry(), "Some cards are not interactable in this stage, all should be interactable");
             });
         }
@@ -185,7 +189,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
             this.Client1.WorkflowContinueButton.Click();
 
             this.MultiAssert(client => {
-                Assert.That(() => client.CardChooser.Cards.All(x => x.IsChoosable == false),
+                Assert.That(() => client.CardChooser.Cards.All(x => x.IsEnabled == false),
                     Is.True.Retry(), "Some cards are interactable in this stage, which shouldn't be the case");
             });
         }

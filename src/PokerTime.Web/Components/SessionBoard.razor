@@ -44,7 +44,7 @@ else
             return;
         }
 
-        GetSymbolsQueryResponse response = await this.Mediator.Send(new GetSymbolsQuery());
+        GetSymbolsQueryResponse response = await this.Mediator.Send(new GetSymbolsQuery(this.SessionStatus.SymbolSetId));
         this.AvailableSymbols = response.Symbols;
     }
 }

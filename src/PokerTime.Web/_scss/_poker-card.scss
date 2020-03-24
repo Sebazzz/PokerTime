@@ -1,29 +1,23 @@
 $poker-card-border-radius: 10px;
+$poker-card-height-ratio: 1.5;
+$poker-card-font-size-divider: 2.5;
+
 $symbol-offset-transform: translateY(-50%);
 
-.poker-card {
+@mixin poker-card-base($base-width) {
+    $symbol-font-size: $base-width / $poker-card-font-size-divider;
+    $height: $base-width * $poker-card-height-ratio;
+
     display: inline-block;
     border-radius: $poker-card-border-radius;
-    min-height: 150px;
-    width: 100px;
+    height: $height;
+    width: $base-width;
     position: relative;
     user-select: none;
-    filter: grayscale(25%);
 
-    &--choosable {
-        cursor: pointer;
-        transition: transform ease 500ms;
-        transform: scale(1);
-        transform-origin: center;
-        animation: 800ms ease 0s 1 normal forwards running poker-card-choosable-anim;
-
-        &:hover {
-            transform: scale(1.2);
-        }
-    }
-    /* Symbol */
+    // Text displayed on the card
     &__symbol {
-        font-size: 30px;
+        font-size: $symbol-font-size;
         position: absolute;
         top: 50%;
         transform: $symbol-offset-transform;
@@ -32,100 +26,5 @@ $symbol-offset-transform: translateY(-50%);
         text-align: center;
         color: #fff;
         text-shadow: 1px 1px 2px #000;
-
-        &--hidden {
-            filter: grayscale(25%) blur(3px);
-            font-size: 40px;
-        }
-    }
-    /* User poker cards */
-    &--idle {
-        cursor: not-allowed;
-        opacity: 0.75;
-        filter: grayscale(25%) blur(2px);
-        min-height: 100px;
-    }
-
-    &--choosable,
-    &--idle {
-        margin-right: 2em;
-        margin-bottom: 2em;
-    }
-
-    &--pending {
-        filter: blur(2px);
-        background-color: #ccc;
-        border: 1px solid #666;
-    }
-
-    /* Estimated cards */
-    &--estimation {
-        transform-style: preserve-3d;
-        transform-origin: center right;
-        transition: transform 500ms ease;
-        // Move the filter to the container, otherwise the transform gets messed up
-        filter: none;
-    }
-
-    &__face {
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        border-radius: $poker-card-border-radius;
-        backface-visibility: hidden;
-        transition: transform 500ms ease;
-
-        &--front {
-        }
-
-        &--back {
-            transform: rotateY(180deg);
-        }
-    }
-
-    &--shown {
-        transform: rotateY(0deg);
-    }
-
-    &--hidden {
-        transform: translateX(-100%) rotateY(180deg);
-    }
-
-    &__author {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        text-align: center;
-        color: #fff;
-        text-shadow: 1px 1px 2px #000;
-        text-overflow: ellipsis;
-    }
-}
-
-.poker-card-container {
-    margin-right: 2em;
-    margin-bottom: 2em;
-
-    border-radius: $poker-card-border-radius;
-
-    filter: grayscale(25%);
-}
-
-@keyframes poker-card-choosable-anim {
-    0% {
-        box-shadow: 0px 0px 0px $poker-card-shadow-color;
-    }
-
-    25% {
-        box-shadow: 0px 0px $poker-card-shadow-spread $poker-card-shadow-size $poker-card-shadow-color;
-    }
-
-    50% {
-        box-shadow: 0px 0px $poker-card-shadow-spread $poker-card-shadow-size $poker-card-shadow-color;
-    }
-
-    100% {
-        box-shadow: 0px 0px 0px 0px $poker-card-shadow-color;
     }
 }
