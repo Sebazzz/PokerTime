@@ -17,11 +17,11 @@
 
 @if (this.SessionStatus.CanChooseCards)
 {
-    <h3 class="title is-size-5">Place your bets...</h3>
+    <h3 class="title is-size-5"><span class="icon"><i class="fas fa-exclamation-circle"></i></span> Place your bets...</h3>
 }
 else
 {
-    <h3 class="title is-size-5">These are your cards...</h3>
+    <h3 class="title is-size-5">Waiting for the facilitator...</h3>
 }
 
 <div data-test-element-id="card-chooser">
