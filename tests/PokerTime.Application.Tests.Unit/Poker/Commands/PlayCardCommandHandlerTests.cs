@@ -6,6 +6,7 @@
 // ******************************************************************************
 
 namespace PokerTime.Application.Tests.Unit.Poker.Commands {
+    using System;
     using System.Drawing;
     using System.Linq;
     using System.Threading;
@@ -31,6 +32,10 @@ namespace PokerTime.Application.Tests.Unit.Poker.Commands {
 
         [OneTimeSetUp]
         public async Task OneTimeSetUp() {
+            var symbolSet = new SymbolSet {
+                Name = "New"
+            };
+
             var session = new Session {
                 Title = "What",
                 Participants =
@@ -38,19 +43,22 @@ namespace PokerTime.Application.Tests.Unit.Poker.Commands {
                     new Participant {Name = "John", Color = Color.BlueViolet},
                     new Participant {Name = "Jane", Color = Color.Aqua},
                 },
-                HashedPassphrase = "abef"
+                HashedPassphrase = "abef",
+                SymbolSet = symbolSet
             };
 
             this.Context.Sessions.Add(session);
 
             this.Context.Symbols.Add(new Symbol {
                 Type = SymbolType.Number,
-                ValueAsNumber = 1
+                ValueAsNumber = 1,
+                SymbolSet = symbolSet
             });
 
             this.Context.Symbols.Add(new Symbol {
                 Type = SymbolType.Number,
-                ValueAsNumber = 2
+                ValueAsNumber = 2,
+                SymbolSet = symbolSet
             });
 
             this.Context.UserStories.Add(new UserStory {
@@ -110,6 +118,43 @@ namespace PokerTime.Application.Tests.Unit.Poker.Commands {
         }
 
         [Test]
+        public async Task PlayCardCommandHandler_ThrowsException_ForEstimationInWrongSymbolSet() {
+            // Given
+            var mediator = Substitute.For<IMediator>();
+            var currentParticipantService = Substitute.For<ICurrentParticipantService>();
+
+            currentParticipantService.GetParticipant().
+                Returns(new ValueTask<CurrentParticipantModel>(
+                    new CurrentParticipantModel(this._participantId, null, null, false)
+                ));
+
+            Symbol symbol = this.Context.Symbols.Add(new Symbol {
+                Type = SymbolType.Number,
+                ValueAsNumber = 1,
+                SymbolSet = new SymbolSet { Name = "wrong " }
+            }).Entity;
+
+            await this.Context.SaveChangesAsync();
+
+            var command = new PlayCardCommand(
+                this._session.UrlId.StringId,
+                (await this.Context.UserStories.FirstAsync()).Id,
+                symbol.Id
+            );
+
+            var handler = new PlayCardCommandHandler(mediator,
+                this.Context,
+                currentParticipantService,
+                Substitute.For<IMapper>());
+
+            // When
+            TestDelegate action = () => handler.Handle(command, CancellationToken.None).GetAwaiter().GetResult();
+
+            // Then
+            Assert.That(action, Throws.InstanceOf<InvalidOperationException>());
+        }
+
+        [Test]
         public async Task PlayCardCommandHandler_AddsEstimationAndBroadcast_ForNewEstimation() {
             // Given
             var mediator = Substitute.For<IMediator>();
@@ -123,7 +168,7 @@ namespace PokerTime.Application.Tests.Unit.Poker.Commands {
             var command = new PlayCardCommand(
                 this._session.UrlId.StringId,
                 (await this.Context.UserStories.FirstAsync()).Id,
-                (await this.Context.Symbols.FirstAsync()).Id
+                (await this.Context.Symbols.Where(x => x.SymbolSetId == this._session.SymbolSetId).FirstAsync()).Id
             );
             var handler = new PlayCardCommandHandler(mediator,
                 this.Context,

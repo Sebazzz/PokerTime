@@ -53,6 +53,10 @@ namespace PokerTime.Application.Poker.Commands {
                 throw new NotFoundException(nameof(Symbol), request.SymbolId);
             }
 
+            if (desiredSymbol.SymbolSetId != session.SymbolSetId) {
+                throw new InvalidOperationException($"The chosen symbol #{request.SymbolId} is not part of symbol set #{session.SymbolSetId}");
+            }
+
             CurrentParticipantModel currentParticipantInfo = await this._currentParticipantService.GetParticipant();
 
             // Add or update estimation

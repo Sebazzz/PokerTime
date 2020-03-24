@@ -18,16 +18,15 @@ namespace PokerTime.Application.Tests.Unit.Symbols.Queries {
         [Test]
         public async Task GetSymbolsQueryHandlerTest_ReturnsSymbols() {
             // Given
-            var query = new GetSymbolsQuery();
+            int symbolSetId = this.Context.SymbolSets.First().Id;
+            var query = new GetSymbolsQuery(symbolSetId);
             var handler = new GetSymbolsQueryHandler(this.Context, this.Mapper);
 
             // When
-            var command = new GetSymbolsQuery();
-
-            var result = await handler.Handle(command, CancellationToken.None);
+            var result = await handler.Handle(query, CancellationToken.None);
 
             // Then
-            Assert.That(result.Symbols.Select(x => x.Id), Is.EquivalentTo(this.Context.Symbols.Select(x => x.Id)));
+            Assert.That(result.Symbols.Select(x => x.Id), Is.EquivalentTo(this.Context.Symbols.Where(x => x.SymbolSetId == symbolSetId).Select(x => x.Id)));
         }
     }
 }

@@ -99,7 +99,14 @@ namespace PokerTime.Web.Tests.Integration.Common {
 
         public TestCaseBuilder PlayCard(string participantName, string stringValue) {
             ICollection<SymbolModel> symbols = null;
-            this.EnqueueMediatorAction(participantName, () => new GetSymbolsQuery(), r => symbols = r.Symbols);
+            this.EnqueueMediatorAction(participantName, () => {
+                IPokerTimeDbContext dbContext =
+                    this._scope.ServiceProvider.GetRequiredService<IPokerTimeDbContext>();
+
+                Session session = dbContext.Sessions.First(x => x.UrlId.StringId == this._sessionId);
+
+                return new GetSymbolsQuery(session.SymbolSetId);
+            }, r => symbols = r.Symbols);
 
             this.EnqueueMediatorAction(participantName,
                 () => {
