@@ -26,7 +26,7 @@ namespace PokerTime.Web {
     using Services;
 
     public static class Program {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>")]
+        [SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>")]
         public static async Task Main(string[] args) {
             IWebHost host = CreateWebHostBuilder(args: args).Build();
 
@@ -37,10 +37,10 @@ namespace PokerTime.Web {
                     var currentParticipantService = (CurrentParticipantService)services.GetRequiredService<ICurrentParticipantService>();
                     currentParticipantService.SetNoHttpContext();
 
-                    var returnDbContext = services.GetRequiredService<PokerTimeDbContext>();
-                    returnDbContext.Initialize();
+                    PokerTimeDbContext dbContext = services.GetRequiredService<PokerTimeDbContext>();
+                    dbContext.Initialize();
 
-                    var mediator = services.GetRequiredService<IMediator>();
+                    IMediator mediator = services.GetRequiredService<IMediator>();
                     await mediator.Send(new SeedBaseDataCommand());
                 }
                 catch (Exception ex) {

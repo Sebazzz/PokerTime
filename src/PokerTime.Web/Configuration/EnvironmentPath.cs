@@ -11,7 +11,7 @@ namespace PokerTime.Web.Configuration {
     using System.Runtime.InteropServices;
 
     public static class EnvironmentPath {
-        private const string AppSpecificFolder = "return-retro";
+        private const string AppSpecificFolder = "pokertime";
 
         public static string CreatePath(string subPath) {
             if (RuntimeInformation.IsOSPlatform(osPlatform: OSPlatform.Windows)) {
