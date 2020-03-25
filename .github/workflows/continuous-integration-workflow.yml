@@ -48,10 +48,18 @@ jobs:
                   CIRCLECI: 1
               run: ${{ matrix.script_name }} --target=test --verbosity=verbose
 
-            - name: Upload artifacts
+            - name: Upload test logs (trx)
               uses: actions/upload-artifact@v1
               if: always()
               continue-on-error: true
               with:
-                  name: logs
+                  name: test results (trx)
                   path: build/testresults
+
+            - name: Upload test supplemental files
+              uses: actions/upload-artifact@v1
+              if: always()
+              continue-on-error: true
+              with:
+                  name: test screenshots
+                  path: build/testresults/artifacts/**/*.*
