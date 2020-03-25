@@ -11,9 +11,7 @@ namespace PokerTime.Web.Tests.Integration.Common {
     using NUnit.Framework;
 
     public sealed class TestContextLoggerProvider : ILoggerProvider {
-        public void Dispose() {
-            TestContext.WriteLine($"{typeof(TestContextLogger)}: Dispose");
-        }
+        public void Dispose() => TestContext.WriteLine($"{typeof(TestContextLogger)}: Dispose");
 
         public ILogger CreateLogger(string categoryName) => new TestContextLogger(categoryName);
     }

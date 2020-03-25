@@ -51,7 +51,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
             createRetroPage.Navigate(this.App);
 
             void SetResolution(IWebDriver webDriver) {
-                webDriver.Manage().Window.Size = new Size(1280, 1024);
+                webDriver.Manage().Window.Size = new Size(1450, 1024);
             }
 
             SetResolution(this.Client1.WebDriver);
