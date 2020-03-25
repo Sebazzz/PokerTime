@@ -13,6 +13,10 @@ $estimated-card-margin: 2em;
     transform-origin: center right;
     transition: transform 500ms ease;
 
+    @media (max-width: 1200px) {
+        @include poker-card-base(80px);
+    }
+
     &__face {
         position: absolute;
         height: 100%;
