@@ -47,7 +47,7 @@ namespace PokerTime.Application.Tests.Unit.SymbolSets.Queries {
 
             // Then
             // Note that two are seeded by default in the test database context as well
-            Assert.That(response.SymbolSets.Select(x => x.Name), Is.EquivalentTo(new[] { "Default", "T-shirt sizes", "ABC", "DEF" }));
+            Assert.That(response.SymbolSets.Select(x => x.Name), Is.EquivalentTo(new[] { "Default", "T-shirt sizes", "Fibonacci", "Powers of two", "ABC", "DEF" }));
         }
 
     }

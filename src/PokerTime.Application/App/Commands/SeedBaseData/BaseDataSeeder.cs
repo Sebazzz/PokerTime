@@ -111,6 +111,39 @@ namespace PokerTime.Application.App.Commands.SeedBaseData {
                 TypeSymbol(SymbolType.Break, symbolSet);
                 StringSymbol("?", symbolSet);
             });
+
+            // ... fibonacci
+            await SeedSymbolSet("Fibonacci", symbolSet => {
+                IntSymbol(0, symbolSet);
+                IntSymbol(1, symbolSet);
+                IntSymbol(2, symbolSet);
+                IntSymbol(3, symbolSet);
+                IntSymbol(5, symbolSet);
+                IntSymbol(8, symbolSet);
+                IntSymbol(13, symbolSet);
+                IntSymbol(21, symbolSet);
+                IntSymbol(34, symbolSet);
+                IntSymbol(55, symbolSet);
+                IntSymbol(89, symbolSet);
+
+                TypeSymbol(SymbolType.Break, symbolSet);
+                StringSymbol("?", symbolSet);
+            });
+
+            // ... p²
+            await SeedSymbolSet("Powers of two", symbolSet => {
+                IntSymbol(0, symbolSet);
+                IntSymbol(1, symbolSet);
+                IntSymbol(2, symbolSet);
+                IntSymbol(4, symbolSet);
+                IntSymbol(8, symbolSet);
+                IntSymbol(16, symbolSet);
+                IntSymbol(32, symbolSet);
+                IntSymbol(64, symbolSet);
+
+                TypeSymbol(SymbolType.Break, symbolSet);
+                StringSymbol("?", symbolSet);
+            });
         }
 
         private async Task SeedPredefinedParticipantColor(CancellationToken cancellationToken) {
