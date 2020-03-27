@@ -11,7 +11,7 @@ apt-get -qq update && apt-get -qqy --no-install-recommends install wget gnupg gi
 ensure_success
 
 echo "Install node.js itself"
-curl -sL https://deb.nodesource.com/setup_10.x | bash -
+curl -sL https://deb.nodesource.com/setup_12.x | bash -
 ensure_success
 
 apt-get install --no-install-recommends -y gcc g++ make build-essential nodejs
