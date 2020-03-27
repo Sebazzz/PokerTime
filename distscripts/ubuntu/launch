@@ -13,7 +13,7 @@ function run {
 	
 	echo Starting application
 	cd $POKERTIME_APP_DIR
-	./App
+	./PokerTime.Web
 	
 	exit $?
 }

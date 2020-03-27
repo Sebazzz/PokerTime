@@ -63,6 +63,7 @@ namespace PokerTime.Web {
                     }
 
                     cfg.AddOperatingSpecificConfigurationFolders();
+                    cfg.AddEnvironmentVariables();
                 })
                 .ConfigureLogging((wc, logging) => {
                     IWebHostEnvironment env = wc.HostingEnvironment;

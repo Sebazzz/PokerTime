@@ -26,21 +26,11 @@ On Ubuntu install:
 
 In addition, for Ubuntu 16.x:
 
-    sudo apt-get install libicu55
-
-For Ubuntu 17.x:
-
-    sudo apt-get install libicu57
+    sudo apt-get install libicu55 libgdiplus
 
 For Ubuntu 18.x:
 
-    sudo apt-get install libicu57
-
-For QR code support in two-factor-authentication:
-
-        sudo apt-get install libgdiplus
-        cd /usr/lib
-        sudo ln -s libgdiplus.so gdiplus.dll
+    sudo apt-get install libicu57 libgdiplus
 
 ## Installation
 
