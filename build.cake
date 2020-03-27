@@ -9,6 +9,7 @@
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 var verbosity = Argument<Verbosity>("verbosity", Verbosity.Minimal);
+var skipCompression = Argument<bool>("skip-compression", false);
 
 //////////////////////////////////////////////////////////////////////
 // PREPARATION
@@ -302,7 +303,7 @@ void WindowsPublishTask(string taskId, string versionId, string description) {
 		.IsDependentOn(internalTaskName)
 		.Description($"Publish for {description}, output to {output}")
 		.Does(() => {
-		   ZipCompress(publishDir + Directory($"{versionId}/"), output);
+		   if (!skipCompression) ZipCompress(publishDir + Directory($"{versionId}/"), output);
 		});
 	
 	windowsAllPublishTask.IsDependentOn(taskName);
@@ -329,7 +330,7 @@ void UbuntuPublishTask(string taskId, string versionId, string description) {
 		.Does(() => {
 		   CopyFile(File("./distscripts/ubuntu/launch"), publishDir + File($"{versionId}/launch"));
 		   CopyFile(File("./distscripts/ubuntu/launch.conf"), publishDir + File($"{versionId}/launch.conf.example"));
-		   GZipCompress(publishDir + Directory($"{versionId}/"), output);
+		   if (!skipCompression) GZipCompress(publishDir + Directory($"{versionId}/"), output);
 		});
 	
 	ubuntuAllPublishTask.IsDependentOn(taskName);

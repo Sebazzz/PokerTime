@@ -2,6 +2,12 @@
 
 If you like to build PokerTime from sources, you can follow the instructions below.
 
+## Docker
+
+If using docker, simply run:
+
+    docker build -t pokertime .
+
 ## Prequisites
 
 -   [.NET Core 3.1 SDK](https://www.microsoft.com/net/download/core).
