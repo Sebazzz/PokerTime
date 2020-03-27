@@ -35,13 +35,22 @@ jobs:
             - run:
                   name: Install Yarn
                   command: |
-                      curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.16.0
-                      echo 'export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"' >> $BASH_ENV
+                      curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+                      echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+                      apt update
+                      apt install --no-install-recommends yarn
 
             - run:
                   name: Fix TERM var for CIRCLECI builds
                   command: |
                       echo 'export TERM=dumb' >> $BASH_ENV
+
+            - run:
+                  name: Workaround libgit2sharp library load error
+                  command: |
+                      dotnet tool install -g GitVersion.Tool --version 5.2.4
+                      echo 'export LD_LIBRARY_PATH=/root/.dotnet/tools/.store/gitversion.tool/5.2.4/gitversion.tool/5.2.4/tools/netcoreapp3.1/any/runtimes/debian.9-x64/native/' >> $BASH_ENV
+                      echo 'export PATH="/root/.dotnet/tools:$PATH"' >> $BASH_ENV
 
             - run:
                   name: Output important software versions
