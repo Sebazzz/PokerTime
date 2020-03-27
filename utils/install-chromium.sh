@@ -1,3 +1,5 @@
+#!/bin/bash
+
 function ensure_success {
 	exit_status=$?
 	if [ $exit_status -ne 0 ]; then
