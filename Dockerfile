@@ -30,7 +30,7 @@ COPY tests/Common.props tests/
 COPY *.sln .
 RUN dotnet restore
 
-# ... run tests
+# ... run tests - TODO: check if we can use multistage with docker repository build [https://github.com/dotnet/dotnet-docker/blob/master/samples/complexapp/Dockerfile]
 # ./build.sh --target=Test
 
 # ... run publish
