@@ -40,5 +40,5 @@ jobs:
               uses: actions/upload-artifact@v1
               continue-on-error: true
               with:
-                  name: test results (trx)
-                  path: build/publish/*.*
+                  name: installation packages
+                  path: build/publish/ # We upload *everything*, but I'd rather upload just the zip files
