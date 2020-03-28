@@ -4,13 +4,24 @@ This guide will help you in installation of the application. The application is 
 
 **Note:** This installation guide covers very basic installation, just enough to get the application up and running. It does _not_ cover installation of the application as a systemd or Windows Service, nor setting it up behind any reverse proxy. Please refer to [hosting as a Windows service](https://docs.microsoft.com/nl-nl/aspnet/core/hosting/windows-service), [hosting in Windows IIS](https://docs.microsoft.com/nl-nl/aspnet/core/publishing/iis?tabs=aspnetcore2x) or [hosting on Linux](https://docs.microsoft.com/nl-nl/aspnet/core/publishing/linuxproduction?tabs=aspnetcore2x) pages on the official Microsoft docs for more information.
 
-**Note:** PokerTime features also experimental SQLite support.
+**Note:** PokerTime also features experimental SQLite support.
 
-## Getting a release
+## Manual installation
+### Using Docker
+PokerTime is available as a docker image. Simply pull it from the Docker hub, and run it:
+
+    docker pull sebazzz/pokertime:latest
+	docker run -p 80:80 sebazzz/pokertime
+	
+For further configuration you may want to mount a directory with [the configuration](#Configuration):
+
+    docker run -p 80:80 -v /path/to/my/configuration/directory:/etc/pokertime sebazzz/pokertime
+
+### Getting a release
 
 Download a release from the [releases](https://github.com/Sebazzz/PokerTime/releases) tab. You may also [build the application from sources](Building-from-sources.md) if you like or get a build from AppVeyor.
 
-## Prequisites
+### Prequisites
 
 To run the application you'Il need:
 
@@ -32,7 +43,7 @@ For Ubuntu 18.x:
 
     sudo apt-get install libicu57 libgdiplus
 
-## Installation
+## Configuration
 
 You can configure the application via environment variables or configuration files.
 
@@ -158,7 +169,7 @@ Set the connection string using:
 
 Options in the connection string will override manual "simple" configured options above.
 
-### Application installation
+## Application installation
 
 Unpack the application on any location, for instance `/opt/pokertime`.
 
@@ -176,7 +187,7 @@ View other options:
 
     ./launch --help
 
-### Run
+## Run
 
 To run the application after installation, simply run:
 

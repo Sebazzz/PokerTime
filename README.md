@@ -25,7 +25,18 @@ Developed and tested on:
 -   Mozilla Firefox
 
 ## Download
+### Docker
 
+PokerTime is available as a docker image. Simply pull it from the Docker hub, and run it:
+
+    docker pull sebazzz/pokertime:latest
+	docker run -p 80:80 sebazzz/pokertime
+	
+For further configuration you may want to mount a directory with [the configuration](doc/Installation.md#Configuration):
+
+    docker run -p 80:80 -v /path/to/my/configuration/directory:/etc/pokertime sebazzz/pokertime
+
+### Manual installation
 Download the release for your OS from the [releases tab](https://github.com/Sebazzz/PokerTime/releases) or download the cutting edge builds from [AppVeyor](https://ci.appveyor.com/project/Sebazzz/PokerTime).
 
 [Follow the installation instructions](doc/Installation.md) in the documentation to install it.
