@@ -46,6 +46,7 @@ jobs:
               env:
                   MOZ_HEADLESS: 1
                   CIRCLECI: 1
+                  CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
               run: ${{ matrix.script_name }} --target=test --use-code-coverage=true --verbosity=verbose
 
             - name: Upload test logs (trx)
