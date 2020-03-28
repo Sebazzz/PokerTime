@@ -27,6 +27,9 @@ jobs:
               with:
                   dotnet-version: '3.1.103'
 
+            - name: Restore .NET Core tools
+              run: dotnet tool restore
+
             - name: Build - restore nuget packages
               run: ${{ matrix.script_name }} --target=restore-nuget-packages --verbosity=verbose
 
