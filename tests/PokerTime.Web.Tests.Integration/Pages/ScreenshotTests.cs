@@ -21,6 +21,7 @@ namespace PokerTime.Web.Tests.Integration.Pages {
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
     using NUnit.Framework;
+    using NUnit.Framework.Interfaces;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Interactions;
     using OpenQA.Selenium.Support.Extensions;
@@ -35,9 +36,10 @@ namespace PokerTime.Web.Tests.Integration.Pages {
     /// </remarks>
     [TestFixture]
     public sealed class ScreenshotTests : PokerSessionLobbyTestsBase {
-        [SetUp]
+        [TearDown]
         public void SkipOnAppVeyor() {
-            if (String.Equals(Environment.GetEnvironmentVariable("APPVEYOR"), Boolean.TrueString, StringComparison.OrdinalIgnoreCase)) {
+            if (TestContext.CurrentContext.Result.Outcome != ResultState.Success &&
+                String.Equals(Environment.GetEnvironmentVariable("APPVEYOR"), Boolean.TrueString, StringComparison.OrdinalIgnoreCase)) {
                 throw new IgnoreException("AppVeyor is too slow to run this test fixture - this test is skipped on AppVeyor");
             }
         }

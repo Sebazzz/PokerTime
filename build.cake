@@ -350,7 +350,8 @@ UbuntuPublishTask("18.04-x64", "ubuntu.18.04-x64", "Ubuntu 18.04 64-bit");
 Task("Publish")
     .IsDependentOn("Publish-Windows")
     .IsDependentOn("Publish-Ubuntu");
-	
+
+List<string> codeCoveragePaths = null;
 void TestTask(string name, string projectName, Func<bool> criteria = null) {
 	CreateDirectory(testResultsDir);
 	CreateDirectory(testArtifactsDir);
@@ -416,10 +417,26 @@ void TestTask(string name, string projectName, Func<bool> criteria = null) {
 				if (!FileExists(codeCoverageResultsFile)) {
 					Warning($"Code coverage file result not found in path: {codeCoverageOutputDirectory} - expected to file {codeCoverageResultsFile}");
 				} else {
-					Codecov(codeCoverageResultsFile);
+					Verbose($"Registering for code coverage upload: {codeCoverageResultsFile}");
+					codeCoveragePaths.Add(codeCoverageResultsFile);
 				}
 			}
 		});
+
+	if (codeCoveragePaths == null) {
+		Debug("Setup code coverage upload task. Skipping...");
+
+		codeCoveragePaths = new List<string>();
+		Teardown(context =>	{
+			// Upload all reports consolidated - this prevents half coverage reports from being uploaded
+			if (codeCoveragePaths.Count > 0) {
+				Information($"Uploading {codeCoveragePaths.Count} code coverage results...");
+				Codecov(codeCoveragePaths.ToArray());
+			} else if (useCodeCoverage) {
+				Warning("No code coverage has been collected.");
+			}
+		});
+	}
 }
 
 TestTask("Unit-Application", $"{baseName}.Application.Tests.Unit");

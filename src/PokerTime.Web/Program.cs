@@ -25,6 +25,7 @@ namespace PokerTime.Web {
     using Persistence;
     using Services;
 
+    [ExcludeFromCodeCoverage]
     public static class Program {
         [SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>")]
         public static async Task Main(string[] args) {
