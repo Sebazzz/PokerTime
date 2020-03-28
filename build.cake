@@ -10,6 +10,7 @@ var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 var verbosity = Argument<Verbosity>("verbosity", Verbosity.Minimal);
 var skipCompression = Argument<bool>("skip-compression", false);
+var skipGitVersionDetection = Argument<bool>("skip-git-version-detection", false);
 
 //////////////////////////////////////////////////////////////////////
 // PREPARATION
@@ -282,6 +283,8 @@ Task("Publish-Common")
 	.IsDependentOn("Run-FrontendBuild");
 	
 string GetVersionString() {
+	if (skipGitVersionDetection) return "0.0.0-null";
+
 	var version = GitVersioningGetVersion();
 	
 	return version.SemVer1;

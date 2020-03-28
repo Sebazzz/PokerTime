@@ -28,14 +28,25 @@ COPY tests/PokerTime.Web.Tests.Integration/*.csproj tests/PokerTime.Web.Tests.In
 COPY tests/Common.props tests/
 
 COPY *.sln .
+COPY dotnet-tools.json .
 RUN dotnet restore
+RUN dotnet tool restore
+
+# Yarn (although it isn't as large, still worth caching)
+COPY src/PokerTime.Web/package.json src/PokerTime.Web/
+COPY src/PokerTime.Web/yarn.lock src/PokerTime.Web/
+RUN yarn --cwd src/PokerTime.Web/
+
+## Skip build script pre-warm
+## This causes later invocations of the build script to fail with "Failed to uninstall tool package 'cake.tool': Invalid cross-device link"
+#COPY build.* .
+#RUN ./build.sh --target=restore-node-packages
 
 # ... run tests - TODO: check if we can use multistage with docker repository build [https://github.com/dotnet/dotnet-docker/blob/master/samples/complexapp/Dockerfile]
 # ./build.sh --target=Test
 
 # ... run publish
 COPY . .
-RUN dotnet tool restore
 RUN ./build.sh --target=Publish-Ubuntu-18.04-x64 --verbosity=verbose --skip-compression=true
 
 ### RUNTIME IMAGE
