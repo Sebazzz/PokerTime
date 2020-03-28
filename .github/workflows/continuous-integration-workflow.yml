@@ -46,7 +46,7 @@ jobs:
               env:
                   MOZ_HEADLESS: 1
                   CIRCLECI: 1
-              run: ${{ matrix.script_name }} --target=test --verbosity=verbose
+              run: ${{ matrix.script_name }} --target=test --use-code-coverage=true --verbosity=verbose
 
             - name: Upload test logs (trx)
               uses: actions/upload-artifact@v1

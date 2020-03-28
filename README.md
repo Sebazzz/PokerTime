@@ -4,12 +4,12 @@ Remote planning poker tool built in ASP.NET Core and Blazor
 
 Licensed: GNU GPL v3.0
 
-
-|       | master  | develop          |
-| ------------ | ------- | ---------------- |
-| **AppVeyor CI**  | [![Build status](https://ci.appveyor.com/api/projects/status/mlwomeg23hqb0r3j/branch/master?svg=true)](https://ci.appveyor.com/project/Sebazzz/PokerTime/branch/master)  | [![Build status](https://ci.appveyor.com/api/projects/status/mlwomeg23hqb0r3j/branch/develop?svg=true)](https://ci.appveyor.com/project/Sebazzz/PokerTime/branch/develop) |
-| **CircleCI**     | [![CircleCI](https://circleci.com/gh/Sebazzz/PokerTime/tree/master.svg?style=shield)](https://circleci.com/gh/Sebazzz/PokerTime/tree/master) | [![CircleCI](https://circleci.com/gh/Sebazzz/PokerTime/tree/develop.svg?style=shield)](https://circleci.com/gh/Sebazzz/PokerTime/tree/develop) |
-| **Github actions**    | [![Github CI](https://github.com/sebazzz/PokerTime/workflows/Continuous%20integration/badge.svg?branch=master)](https://github.com/Sebazzz/PokerTime/actions?workflow=Continuous+integration&branch=master) | [![Github CI](https://github.com/sebazzz/PokerTime/workflows/Continuous%20integration/badge.svg?branch=develop)](https://github.com/Sebazzz/PokerTime/actions?workflow=Continuous+integration&branch=develop) |
+|                    | master                                                                                                                                                                                                      | develop                                                                                                                                                                                                       |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **AppVeyor CI**    | [![Build status](https://ci.appveyor.com/api/projects/status/mlwomeg23hqb0r3j/branch/master?svg=true)](https://ci.appveyor.com/project/Sebazzz/PokerTime/branch/master)                                     | [![Build status](https://ci.appveyor.com/api/projects/status/mlwomeg23hqb0r3j/branch/develop?svg=true)](https://ci.appveyor.com/project/Sebazzz/PokerTime/branch/develop)                                     |
+| **CircleCI**       | [![CircleCI](https://circleci.com/gh/Sebazzz/PokerTime/tree/master.svg?style=shield)](https://circleci.com/gh/Sebazzz/PokerTime/tree/master)                                                                | [![CircleCI](https://circleci.com/gh/Sebazzz/PokerTime/tree/develop.svg?style=shield)](https://circleci.com/gh/Sebazzz/PokerTime/tree/develop)                                                                |
+| **Github actions** | [![Github CI](https://github.com/sebazzz/PokerTime/workflows/Continuous%20integration/badge.svg?branch=master)](https://github.com/Sebazzz/PokerTime/actions?workflow=Continuous+integration&branch=master) | [![Github CI](https://github.com/sebazzz/PokerTime/workflows/Continuous%20integration/badge.svg?branch=develop)](https://github.com/Sebazzz/PokerTime/actions?workflow=Continuous+integration&branch=develop) |
+| **Codeconv**       | [![codecov](https://codecov.io/gh/Sebazzz/PokerTime/branch/master/graph/badge.svg)](https://codecov.io/gh/Sebazzz/PokerTime)                                                                                | [![codecov](https://codecov.io/gh/Sebazzz/PokerTime/branch/develop/graph/badge.svg)](https://codecov.io/gh/Sebazzz/PokerTime)                                                                                 |
 
 ## Features
 
@@ -28,18 +28,20 @@ Developed and tested on:
 -   Mozilla Firefox
 
 ## Download
+
 ### Docker
 
 PokerTime is available as a docker image. Simply pull it from the Docker hub, and run it:
 
     docker pull sebazzz/pokertime:latest
-	docker run -p 80:80 sebazzz/pokertime
-	
+    docker run -p 80:80 sebazzz/pokertime
+
 For further configuration you may want to mount a directory with [the configuration](doc/Installation.md#Configuration):
 
     docker run -p 80:80 -v /path/to/my/configuration/directory:/etc/pokertime sebazzz/pokertime
 
 ### Manual installation
+
 Download the release for your OS from the [releases tab](https://github.com/Sebazzz/PokerTime/releases) or download the cutting edge builds from [AppVeyor](https://ci.appveyor.com/project/Sebazzz/PokerTime).
 
 [Follow the installation instructions](doc/Installation.md) in the documentation to install it.

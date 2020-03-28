@@ -1,6 +1,9 @@
 #addin nuget:?package=Cake.Compression&version=0.2.4
 #addin nuget:?package=SharpZipLib&version=1.2.0
 #addin nuget:?package=Cake.GitVersioning&version=3.1.71
+#addin nuget:?package=Cake.Codecov&version=0.8.0
+#addin nuget:?package=Cake.Coverlet&version=2.4.2
+#tool nuget:?package=Codecov&version=1.10.0
 
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
@@ -11,6 +14,7 @@ var configuration = Argument("configuration", "Release");
 var verbosity = Argument<Verbosity>("verbosity", Verbosity.Minimal);
 var skipCompression = Argument<bool>("skip-compression", false);
 var skipGitVersionDetection = Argument<bool>("skip-git-version-detection", false);
+var useCodeCoverage = Argument<bool>("use-code-coverage", false);
 
 //////////////////////////////////////////////////////////////////////
 // PREPARATION
@@ -354,6 +358,9 @@ void TestTask(string name, string projectName, Func<bool> criteria = null) {
 	criteria = criteria ?? new Func<bool>(() => true);
 	
 	var logFilePath = MakeAbsolute(testResultsDir + File($"test-{name}-log.trx"));
+	var codeCoverageOutputDirectory = testArtifactsDir + Directory($"code-coverage-{projectName}");
+	var codeCoverageResultsFileName = $"code-coverage-{projectName}.xml";
+	var codeCoverageResultsFile = codeCoverageOutputDirectory + File(codeCoverageResultsFileName);
 	
 	Task($"Test-CS-{name}")
 		.IsDependentOn("Restore-NuGet-Packages")
@@ -365,11 +372,30 @@ void TestTask(string name, string projectName, Func<bool> criteria = null) {
 		.Does(() => {
 			Information($"Running tests for {projectName} - logging to {logFilePath} - artifacts dumped to {testArtifactsDir}");
 
+			CreateDirectory(testArtifactsDir);
+			CreateDirectory(codeCoverageOutputDirectory);
+			
 			System.Environment.SetEnvironmentVariable("TEST_ARTIFACT_DIR", MakeAbsolute(testArtifactsDir).ToString());
-			DotNetCoreTest($"./tests/{projectName}/{projectName}.csproj", new DotNetCoreTestSettings {
+	
+			var testPath = $"./tests/{projectName}/{projectName}.csproj";
+			var testSettings = new DotNetCoreTestSettings {
 				ArgumentCustomization = (args) => args.AppendQuoted($"--logger:trx;LogFileName={logFilePath}")
-													  .Append("--logger:\"console;verbosity=normal;noprogress=true\"")
-			});
+													  .Append("--logger:\"console;verbosity=normal;noprogress=true\"") 
+			};
+
+			if (!useCodeCoverage) {
+				DotNetCoreTest(testPath, testSettings);
+			} else {
+				var coverletSettings = new CoverletSettings {
+					CollectCoverage = true,
+					CoverletOutputFormat = CoverletOutputFormat.opencover,
+					CoverletOutputDirectory = codeCoverageOutputDirectory,
+					CoverletOutputName = codeCoverageResultsFileName
+				}.WithFilter("+[PokerTime]*")
+				 .WithFilter("-[PokerTime.*.Tests.*]*");
+
+				DotNetCoreTest(testPath, testSettings, coverletSettings);
+			}
 		})
 		.Finally(() => {
 			if (AppVeyor.IsRunningOnAppVeyor && FileExists(logFilePath)) {
@@ -382,6 +408,14 @@ void TestTask(string name, string projectName, Func<bool> criteria = null) {
 				
 				Information("Uploading test results from {0} to {1}", fullTestResultsPath, url);
 				wc.UploadFile(url, fullTestResultsPath);
+			}
+
+			if (useCodeCoverage) {
+				if (!FileExists(codeCoverageResultsFile)) {
+					Warning($"Code coverage file result not found in path: {codeCoverageOutputDirectory} - expected to file {codeCoverageResultsFile}");
+				} else {
+					Codecov(codeCoverageResultsFile);
+				}
 			}
 		});
 }
