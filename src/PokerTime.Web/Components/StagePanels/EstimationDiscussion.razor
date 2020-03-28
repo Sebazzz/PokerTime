@@ -37,7 +37,8 @@
         <NextStageInvocationForm TModel="InitiateFinishStageCommand"
                                  Model="@this.FinishCommand"
                                  OnContinue="@this.OnInvokeContinueToFinishStage"
-                                 ButtonText="End session" />
+                                 ButtonText="End session" 
+                                 TestButtonId="workflow-end-button"/>
     </Facilitator>
     <Participant>
         <p>

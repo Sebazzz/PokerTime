@@ -193,5 +193,25 @@ namespace PokerTime.Web.Tests.Integration.Pages {
                     Is.True.Retry(), "Some cards are interactable in this stage, which shouldn't be the case");
             });
         }
+
+        [Test]
+        public async Task PokerLobby_CardFinished_EndMessageBecomesVisible() {
+            await this.SetCurrentUserStory();
+            await this.SetRetrospective(s => s.CurrentStage = SessionStage.EstimationDiscussion);
+
+            // Given
+            await Task.WhenAll(
+                Task.Run(() => this.Join(this.Client1, true)),
+                Task.Run(() => this.Join(this.Client2, false))
+            );
+
+            // When
+            this.Client1.WorkflowEndButton.Click();
+
+            this.MultiAssert(client => {
+                Assume.That(() => client.SessionFinishedElement, Has.Property(nameof(IWebElement.Displayed)).EqualTo(true).Retry(),
+                    "The end message is not displayed");
+            });
+        }
     }
 }

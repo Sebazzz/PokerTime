@@ -6,21 +6,13 @@
 // ******************************************************************************
 
 namespace PokerTime.Application.Estimations.Queries {
-    using Common.Models;
+    using MediatR;
 
-    public sealed class GetEstimationsOverviewQuery {
+    public sealed class GetEstimationsOverviewQuery : IRequest<GetEstimationsOverviewQueryResponse> {
         public string SessionId { get; }
 
         public GetEstimationsOverviewQuery(string sessionId) {
             this.SessionId = sessionId;
         }
-    }
-
-    public sealed class GetEstimationsOverviewQueryResponse {
-
-    }
-
-    public sealed class UserStoryEstimation {
-        public UserStoryModel
     }
 }

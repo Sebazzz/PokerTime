@@ -12,6 +12,7 @@ namespace PokerTime.Application.Tests.Unit {
     using Application.PredefinedParticipantColors.Queries.GetAvailablePredefinedParticipantColors;
     using Application.Sessions.Queries.GetParticipantsInfo;
     using Domain.Entities;
+    using Estimations.Queries;
     using NUnit.Framework;
     using Support;
 
@@ -73,6 +74,51 @@ namespace PokerTime.Application.Tests.Unit {
 
             Assert.That(mapped.Id, Is.EqualTo(entity.Id));
             Assert.That(mapped.Title, Is.EqualTo(entity.Title));
+        }
+
+        [Test]
+        public void ShouldMap_UserStory_ToUserStoryEstimationsModel() {
+            // Given
+            Estimation GetEstimationForSymbol(int symbolId) {
+                return new Estimation {
+                    Symbol = new Symbol {
+                        Id = symbolId,
+                        Order = TestContext.CurrentContext.Random.Next()
+                    }
+                };
+            }
+
+            var entity = new UserStory {
+                Id = 3,
+                Title = "ABCD",
+                Estimations =
+                {
+                    GetEstimationForSymbol(1),
+                    GetEstimationForSymbol(2),
+                    GetEstimationForSymbol(3),
+                    GetEstimationForSymbol(3),
+                    GetEstimationForSymbol(3),
+                    GetEstimationForSymbol(3),
+                    GetEstimationForSymbol(4),
+                    GetEstimationForSymbol(4),
+                    GetEstimationForSymbol(4),
+                    GetEstimationForSymbol(5),
+                    GetEstimationForSymbol(5),
+                }
+            };
+
+            // When
+            var mapped = this.Mapper.Map<UserStoryEstimation>(entity);
+
+            // Then
+            Assert.That(mapped, Is.Not.Null);
+
+            Assert.That(mapped.Id, Is.EqualTo(entity.Id));
+            Assert.That(mapped.Title, Is.EqualTo(entity.Title));
+            Assert.That(mapped.Estimations, Has.Count.EqualTo(entity.Estimations.Count));
+
+            Assert.That(mapped.Estimations.Select(x => x.Symbol.Id).ToArray(), Is.EqualTo(new[] { 3, 3, 3, 3, 4, 4, 4, 5, 5, 1, 2 }));
+
         }
 
         [Test]

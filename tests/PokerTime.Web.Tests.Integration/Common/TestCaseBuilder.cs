@@ -19,6 +19,7 @@ namespace PokerTime.Web.Tests.Integration.Common {
     using Application.PredefinedParticipantColors.Queries.GetAvailablePredefinedParticipantColors;
     using Application.Sessions.Commands.JoinPokerSession;
     using Application.Sessions.Queries.GetParticipantsInfo;
+    using Application.SessionWorkflows.Commands;
     using Application.Symbols.Queries;
     using Domain.Entities;
     using MediatR;
@@ -58,6 +59,8 @@ namespace PokerTime.Web.Tests.Integration.Common {
                     IsFacilitator = participant.IsFacilitator
                 });
 
+                this.RecordAddedId<Participant>(participant.Id);
+
                 TestContext.WriteLine($"[{nameof(TestCaseBuilder)}] recorded presence of existing participant [{participantName}] with ID #{participant.Id}");
             });
             return this;
@@ -96,6 +99,23 @@ namespace PokerTime.Web.Tests.Integration.Common {
                 this._participators.Add(p.Name, p);
             });
         }
+
+        public TestCaseBuilder NewRound(string title) {
+            this.EnqueueMediatorAction(
+                () => new InitiateDiscussionStageCommand { UserStoryTitle = title, SessionId = this._sessionId },
+                _ => Task.CompletedTask);
+
+            return this.EnqueueMediatorAction(
+                () => new InitiateEstimationStageCommand { SessionId = this._sessionId },
+                _ => Task.CompletedTask);
+        }
+
+        public TestCaseBuilder CloseEstimationPhase() {
+            return this.EnqueueMediatorAction(
+                () => new InitiateEstimationDiscussionStageCommand { SessionId = this._sessionId },
+                _ => Task.CompletedTask);
+        }
+
 
         public TestCaseBuilder PlayCard(string participantName, string stringValue) {
             ICollection<SymbolModel> symbols = null;

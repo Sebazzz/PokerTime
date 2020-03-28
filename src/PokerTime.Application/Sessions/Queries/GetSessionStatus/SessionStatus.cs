@@ -21,9 +21,11 @@ namespace PokerTime.Application.Sessions.Queries.GetSessionStatus {
 
         public UserStoryModel? UserStory { get; }
 
+        public bool CanViewOwnCards => this.Stage != SessionStage.Finished && this.Stage != SessionStage.NotStarted;
         public bool CanChooseCards => this.Stage == SessionStage.Estimation;
-        public bool CanViewEstimationPanel => this.Stage != SessionStage.Discussion;
-        public bool CanViewEstimations => this.Stage == SessionStage.EstimationDiscussion;
+        public bool CanViewEstimationPanel => this.Stage != SessionStage.Discussion && this.Stage != SessionStage.Finished && this.Stage != SessionStage.NotStarted;
+        public bool CanViewEstimations => this.Stage == SessionStage.EstimationDiscussion || this.Stage == SessionStage.Finished;
+        public bool ShowUserStoriesOverview => this.Stage == SessionStage.Finished;
         public bool IsStarted => this.Stage != SessionStage.NotStarted;
 
         public SessionStatus(
