@@ -380,6 +380,7 @@ void TestTask(string name, string projectName, Func<bool> criteria = null) {
 	
 			var testPath = $"./tests/{projectName}/{projectName}.csproj";
 			var testSettings = new DotNetCoreTestSettings {
+				Configuration = configuration,
 				ArgumentCustomization = (args) => args.AppendQuoted($"--logger:trx;LogFileName={logFilePath}")
 													  .Append("--logger:\"console;verbosity=normal;noprogress=true\"") 
 			};
