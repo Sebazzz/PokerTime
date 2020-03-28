@@ -1,0 +1,38 @@
+name: Build installation packages
+on: push
+
+jobs:
+    build:
+        name: Build installation packages on ${{ matrix.os }}
+        runs-on: ${{ matrix.os }}
+        strategy:
+            matrix:
+                os: [windows-2019, ubuntu-16.04]
+                include:
+                    - os: windows-2019
+                      script_name: .\build.cmd
+                    - os: ubuntu-16.04
+                      script_name: ./build.sh
+        steps:
+            - name: checkout
+              uses: actions/checkout@v1
+
+            - name: Download and install node.js
+              uses: actions/setup-node@v1
+              with:
+                  node-version: '10.x'
+
+            - name: Install .NET 3.x SDK for build
+              uses: actions/setup-dotnet@v1
+              with:
+                  dotnet-version: '3.1.103'
+
+            - name: Publish
+              run: ${{ matrix.script_name }} --target=Publish --verbosity=verbose
+
+            - name: Upload built packages
+              uses: actions/upload-artifact@v1
+              continue-on-error: true
+              with:
+                  name: test results (trx)
+                  path: build/publish/*.*
