@@ -392,7 +392,9 @@ void TestTask(string name, string projectName, Func<bool> criteria = null) {
 					CoverletOutputDirectory = codeCoverageOutputDirectory,
 					CoverletOutputName = codeCoverageResultsFileName
 				}.WithFilter("+[PokerTime]*")
-				 .WithFilter("-[PokerTime.*.Tests.*]*");
+				 .WithFilter("-[PokerTime.*.Tests.*]*")
+				 .WithFilter("-[PokerTime.Persistence]PokerTime.Persistence.Migrations*")
+				 ;
 
 				DotNetCoreTest(testPath, testSettings, coverletSettings);
 			}

@@ -1,7 +1,9 @@
 ﻿namespace PokerTime.Persistence {
+    using System.Diagnostics.CodeAnalysis;
     using Microsoft.Data.Sqlite;
     using Microsoft.EntityFrameworkCore;
 
+    [ExcludeFromCodeCoverage]
     internal static class SqliteConfigurator {
         private static SqliteConnection? InMemoryConnection;
 
