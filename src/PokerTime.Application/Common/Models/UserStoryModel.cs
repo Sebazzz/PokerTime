@@ -11,13 +11,13 @@ namespace PokerTime.Application.Common.Models {
     using Domain.Entities;
     using Mapping;
 
-    public sealed class CurrentUserStoryModel : IMapFrom<UserStory> {
+    public sealed class UserStoryModel : IMapFrom<UserStory> {
         public int Id { get; set; }
         public string? Title { get; set; }
 
         public void Mapping(Profile profile) {
             if (profile == null) throw new ArgumentNullException(nameof(profile));
-            profile.CreateMap<UserStory, CurrentUserStoryModel>();
+            profile.CreateMap<UserStory, UserStoryModel>();
         }
     }
 }

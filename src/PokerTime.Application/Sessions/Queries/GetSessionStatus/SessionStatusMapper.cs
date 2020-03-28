@@ -35,7 +35,7 @@ namespace PokerTime.Application.Sessions.Queries.GetSessionStatus {
                 OrderByDescending(x => x.Id).
                 FirstOrDefault();
 
-            CurrentUserStoryModel? currentUserStoryModel = currentUserStory != null ? this._mapper.Map<CurrentUserStoryModel>(currentUserStory) : null;
+            UserStoryModel? currentUserStoryModel = currentUserStory != null ? this._mapper.Map<UserStoryModel>(currentUserStory) : null;
             var sessionStatus = new SessionStatus(session.UrlId.StringId, session.Title, session.CurrentStage, session.SymbolSetId, currentUserStoryModel);
 
             return Task.FromResult(sessionStatus);

@@ -19,7 +19,7 @@ namespace PokerTime.Application.Sessions.Queries.GetSessionStatus {
 
         public SessionStage Stage { get; }
 
-        public CurrentUserStoryModel? UserStory { get; }
+        public UserStoryModel? UserStory { get; }
 
         public bool CanChooseCards => this.Stage == SessionStage.Estimation;
         public bool CanViewEstimationPanel => this.Stage != SessionStage.Discussion;
@@ -31,7 +31,7 @@ namespace PokerTime.Application.Sessions.Queries.GetSessionStatus {
             string title,
             SessionStage sessionStage,
             int symbolSetId,
-            CurrentUserStoryModel? currentUserStory
+            UserStoryModel? currentUserStory
         ) {
             this.SessionId = sessionId;
             this.Title = title;

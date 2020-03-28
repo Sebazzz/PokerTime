@@ -66,7 +66,7 @@ namespace PokerTime.Application.Tests.Unit {
             };
 
             // When
-            var mapped = this.Mapper.Map<CurrentUserStoryModel>(entity);
+            var mapped = this.Mapper.Map<UserStoryModel>(entity);
 
             // Then
             Assert.That(mapped, Is.Not.Null);
