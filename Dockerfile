@@ -69,6 +69,9 @@ VOLUME ["/etc/pokertime"]
 ENV DATABASE__DATABASE "/app/data.db"
 ENV DATABASE__DATABASEPROVIDER Sqlite
 
+# ... enable proxy mode
+ENV SECURITY__ENABLEPROXYMODE True
+
 # ... health check
 HEALTHCHECK CMD curl --fail http://localhost/health || exit
 

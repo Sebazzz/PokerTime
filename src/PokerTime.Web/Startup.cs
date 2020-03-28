@@ -77,7 +77,7 @@ namespace PokerTime.Web {
             }
 
             // Set-up application pipeline
-            app.UseMiddleware<SiteUrlDetectionMiddleware>();
+            app.UseRequestEnvironmentDetection();
             app.UseCurrentParticipantService();
 
             if (env.IsDevelopment()) {

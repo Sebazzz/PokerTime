@@ -119,6 +119,8 @@ To configure logging to a file:
 
 `LobbyCreationPassphrase`: Passphrase to create a lobby. Prevents anyone without this passphrase from creating retrospectives.
 
+`EnableProxyMode`: Whether to detect (`True`) or ignore (`False`) headers sent by reverse proxies.
+
 ### Database set-up - `Database`
 
 Create an new empty database with a case insensitive collation (`SQL_Latin1_General_CP1_CI_AS` is preferred).
