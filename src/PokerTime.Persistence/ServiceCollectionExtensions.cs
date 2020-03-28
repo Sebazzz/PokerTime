@@ -19,6 +19,8 @@ namespace PokerTime.Persistence {
             services.ChainInterfaceImplementation<IEntityStateFacilitator, PokerTimeDbContext>();
             services.ChainInterfaceImplementation<IPokerTimeDbContextFactory, PokerTimeDbContext>();
 
+            services.AddHealthChecks().AddDbContextCheck<PokerTimeDbContext>();
+
             return services;
         }
     }

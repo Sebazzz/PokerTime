@@ -93,6 +93,8 @@ namespace PokerTime.Web {
             app.UseRouting();
 
             app.UseEndpoints(endpoints => {
+                endpoints.MapHealthChecks("/health");
+
                 endpoints.MapBlazorHub();
 
                 endpoints.MapFallbackToPage("/_Host");

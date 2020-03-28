@@ -10,5 +10,5 @@ function ensure_success {
 
 echo "Installing app prerequisites..."
 apt-get -qqy update
-apt-get -qqy install libgdiplus
+apt-get -qqy install libgdiplus curl
 ensure_success

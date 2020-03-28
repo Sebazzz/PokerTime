@@ -57,4 +57,8 @@ VOLUME ["/etc/pokertime"]
 # Set some defaults for a "direct run" experience
 ENV DATABASE__DATABASE "/app/data.db"
 ENV DATABASE__DATABASEPROVIDER Sqlite
+
+# ... health check
+HEALTHCHECK CMD curl --fail http://localhost/health || exit
+
 ENTRYPOINT [ "./launch", "run" ]
