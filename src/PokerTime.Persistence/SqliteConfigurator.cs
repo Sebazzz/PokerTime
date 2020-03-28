@@ -22,7 +22,7 @@
                 optionsBuilder.UseSqlite(connString);
             }
             else {
-                // Create a connection ourselve because we run into timeouts when seeding
+                // Create a connection ourselves because we run into timeouts when seeding
                 // https://github.com/aspnet/EntityFrameworkCore/issues/18607
 
                 var conn = new SqliteConnection(connString) {

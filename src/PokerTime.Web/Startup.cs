@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace PokerTime.Web {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using Application;
     using Application.Common.Abstractions;
     using Application.Common.Settings;
@@ -17,12 +18,12 @@ namespace PokerTime.Web {
     using MediatR;
     using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.Options;
-    using Middleware;
     using Middleware.Https;
     using Persistence;
     using Services;
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "ASP.NET Core conventions")]
+    [ExcludeFromCodeCoverage]
+    [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "ASP.NET Core conventions")]
     public class Startup {
         public Startup(IConfiguration configuration) {
             this.Configuration = configuration;
