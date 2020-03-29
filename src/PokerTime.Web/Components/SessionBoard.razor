@@ -3,11 +3,6 @@
 @using PokerTime.Application.Sessions.Queries.GetSessionStatus
 @using PokerTime.Application.Symbols.Queries
 
-@if (this.SessionStatus == null)
-{
-    return;
-}
-
 @if (this.SessionStatus.CanViewOwnCards)
 {
     if (this.SessionStatus.UserStory != null)
@@ -47,15 +42,8 @@ else if (this.SessionStatus.ShowUserStoriesOverview)
     // Cache the symbols at the parent level to prevent lengthy (in a relative sense) component initialization
     private ICollection<SymbolModel> AvailableSymbols { get; set; } = new List<SymbolModel>();
 
-    protected override async Task OnParametersSetAsync()
+    protected override async Task OnInitializedAsync()
     {
-        await base.OnParametersSetAsync();
-
-        if (this.AvailableSymbols.Count > 0)
-        {
-            return;
-        }
-
         GetSymbolsQueryResponse response = await this.Mediator.Send(new GetSymbolsQuery(this.SessionStatus.SymbolSetId));
         this.AvailableSymbols = response.Symbols;
     }

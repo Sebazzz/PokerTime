@@ -5,11 +5,6 @@
 @using PokerTime.Application.Estimations.Queries
 @using PokerTime.Application.Sessions.Queries.GetSessionStatus
 
-@if (this.SessionStatus == null)
-{
-    return;
-}
-
 @if (this.ShowErrorMessage)
 {
     <ErrorMessage />
@@ -47,7 +42,7 @@
 </table>
 
 @code {
-    #nullable disable
+#nullable disable
 
     [CascadingParameter]
     public SessionStatus SessionStatus { get; set; }
@@ -55,18 +50,15 @@
     private bool ShowErrorMessage { get; set; }
     private ICollection<UserStoryEstimation> Estimations { get; set; } = Array.Empty<UserStoryEstimation>();
 
-    protected override async Task OnParametersSetAsync()
+    protected override async Task OnInitializedAsync()
     {
-        try
-        {
-            var response = await this.Mediator.Send(new GetEstimationsOverviewQuery(this.SessionStatus.SessionId));
+        try {
+            GetEstimationsOverviewQueryResponse response = await this.Mediator.Send(new GetEstimationsOverviewQuery(this.SessionStatus.SessionId));
             this.Estimations = response.UserStoryEstimations;
         }
-        catch (Exception ex)
-        {
+        catch (Exception ex) {
             this.ShowErrorMessage = true;
             this.Logger.LogError(ex, "Unable to load estimations overview: " + ex.Message);
         }
     }
-
 }
