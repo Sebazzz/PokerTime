@@ -12,9 +12,9 @@ namespace PokerTime.Application.Estimations.Queries {
     using System.Threading;
     using System.Threading.Tasks;
     using AutoMapper;
-    using AutoMapper.QueryableExtensions;
     using Common;
     using Common.Abstractions;
+    using Common.Models;
     using Domain.Entities;
     using MediatR;
     using Microsoft.EntityFrameworkCore;

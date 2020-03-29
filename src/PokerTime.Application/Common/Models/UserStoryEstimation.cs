@@ -5,13 +5,12 @@
 //  Project         : PokerTime.Application
 // ******************************************************************************
 
-namespace PokerTime.Application.Estimations.Queries {
+namespace PokerTime.Application.Common.Models {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Common.Mapping;
-    using Common.Models;
     using Domain.Entities;
+    using Mapping;
 
     public sealed class UserStoryEstimation : IMapFrom<UserStory> {
         public int Id { get; }
