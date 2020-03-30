@@ -1,5 +1,5 @@
 ### BUILD
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1.201 AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1.201 AS build-env
 WORKDIR /source
 
 # Prerequisites
@@ -42,8 +42,15 @@ RUN yarn --cwd src/PokerTime.Web/
 #COPY build.* .
 #RUN ./build.sh --target=restore-node-packages
 
-# ... run tests - TODO: check if we can use multistage with docker repository build [https://github.com/dotnet/dotnet-docker/blob/master/samples/complexapp/Dockerfile]
-# ./build.sh --target=Test
+### TEST
+FROM build-env AS test
+
+# ... run tests
+COPY . .
+RUN ./build.sh --target=test
+
+### PUBLISHING
+FROM build-env AS publish
 
 # ... run publish
 COPY . .
@@ -58,7 +65,7 @@ COPY utils/install-app-prereqs.sh utils/
 RUN bash utils/install-app-prereqs.sh
 
 # ... Copy published app
-COPY --from=build /source/publish/ubuntu.18.04-x64/ .
+COPY --from=publish /source/publish/ubuntu.18.04-x64/ .
 
 ENV ASPNETCORE_ENVIRONMENT Production
 
