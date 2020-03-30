@@ -24,7 +24,7 @@ var baseName = "PokerTime";
 var buildDir = Directory("./build");
 var testResultsDir = buildDir + Directory("./testresults");
 var testArtifactsDir = buildDir + Directory("./testresults/artifacts");
-var publishDir = Directory("./build/publish");
+var publishDir = Directory(Argument("publish-dir", "./build/publish"));
 var assemblyInfoFile = Directory($"./src/{baseName}/Properties") + File("AssemblyInfo.cs");
 var nodeEnv = configuration == "Release" ? "production" : "development";
 var persistenceProjectPath = Directory($"./src/{baseName}.Persistence");
