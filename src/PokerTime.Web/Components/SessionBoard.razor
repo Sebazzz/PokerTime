@@ -3,27 +3,34 @@
 @using PokerTime.Application.Sessions.Queries.GetSessionStatus
 @using PokerTime.Application.Symbols.Queries
 
-@if (this.SessionStatus == null)
+@if (this.SessionStatus.CanViewOwnCards)
 {
-    return;
-}
-
-@if (this.SessionStatus.IsStarted)
-{
-    @if (this.SessionStatus.UserStory != null)
+    if (this.SessionStatus.UserStory != null)
     {
         <h2 class="title is-size-4">Estimation for: @(this.SessionStatus.UserStory.Title ?? "User story")</h2>
     }
 
     <CardChooser AvailableSymbols="@this.AvailableSymbols" />
+}
 
+@if (this.SessionStatus.CanViewEstimationPanel)
+{
     <EstimationOverview />
 }
-else
+else if (!this.SessionStatus.IsStarted)
 {
+
     <p data-test-element-id="wait-for-start-message">
         Please wait for the facilitator to start this session.
     </p>
+}
+else if (this.SessionStatus.ShowUserStoriesOverview)
+{
+    <p data-test-element-id="session-finished-message">
+        This planning poker session has concluded. You can find an overview of the estimations below.
+    </p>
+
+    <SessionOverview />
 }
 
 @code {
@@ -35,15 +42,8 @@ else
     // Cache the symbols at the parent level to prevent lengthy (in a relative sense) component initialization
     private ICollection<SymbolModel> AvailableSymbols { get; set; } = new List<SymbolModel>();
 
-    protected override async Task OnParametersSetAsync()
+    protected override async Task OnInitializedAsync()
     {
-        await base.OnParametersSetAsync();
-
-        if (this.AvailableSymbols.Count > 0)
-        {
-            return;
-        }
-
         GetSymbolsQueryResponse response = await this.Mediator.Send(new GetSymbolsQuery(this.SessionStatus.SymbolSetId));
         this.AvailableSymbols = response.Symbols;
     }

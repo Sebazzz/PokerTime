@@ -71,6 +71,9 @@ If you prefer to build the application yourself, please follow the [compilation 
 **Coming to a consensus**
 ![Estimation discussion](doc/estimation-discussion.png)
 
+**Session conclusion**
+![Conclusion](doc/finished.png)
+
 ## Contributions
 
 Contributions are allowed and encouraged. In general the rules are: same code style (simply use the included `.editorconfig`), and write automated tests for the changes.

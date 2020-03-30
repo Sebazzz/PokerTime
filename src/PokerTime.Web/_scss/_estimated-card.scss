@@ -17,6 +17,18 @@ $estimated-card-margin: 2em;
         @include poker-card-base(80px);
     }
 
+    &--small {
+        @include poker-card-base(40px);
+    }
+
+    &--small &__symbol {
+        font-size: 20px;
+    }
+
+    &--small &__author {
+        display: none;
+    }
+
     &__face {
         position: absolute;
         height: 100%;

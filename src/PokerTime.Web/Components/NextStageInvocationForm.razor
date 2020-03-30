@@ -22,13 +22,16 @@
 
     <div class="field">
         <div class="control">
-            <button type="submit" class="button is-primary is-large" data-test-element-id="workflow-continue-button">@ButtonText</button>
+            <button type="submit" class="button is-primary is-large" data-test-element-id="@TestButtonId">@ButtonText</button>
         </div>
     </div>
 </EditForm>
 
 @code {
 #nullable disable
+
+    [Parameter]
+    public string TestButtonId { get; set; } = "workflow-continue-button";
 
     [Parameter]
     public string ButtonText { get; set; }

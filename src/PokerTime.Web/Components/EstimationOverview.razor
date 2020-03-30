@@ -1,11 +1,6 @@
 @using PokerTime.Application.Common.Models
 @inherits EstimationOverviewBase
 
-@if (this.SessionStatus == null || this.SessionStatus.CanViewEstimationPanel == false)
-{
-    return;
-}
-
 <h3 class="title is-size-5">Estimations of your team</h3>
 
 <div data-test-element-id="estimation-overview">

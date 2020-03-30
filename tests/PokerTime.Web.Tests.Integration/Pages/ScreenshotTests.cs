@@ -151,9 +151,61 @@ namespace PokerTime.Web.Tests.Integration.Pages {
 
             // When
             CreateDocScreenshot(this.Client1.WebDriver, "estimation-discussion");
+        }
+
+        [Test]
+        [Order((int)SessionStage.Finished)]
+        public async Task Screenshot_Finished() {
+            // Play some rounds
+            using (IServiceScope scope = this.App.CreateTestServiceScope()) {
+                await scope.TestCaseBuilder(this.SessionId).
+                    HasExistingParticipant("Roger").
+                    HasExistingParticipant("Hong").
+                    HasExistingParticipant("Aaron").
+                    HasExistingParticipant("Josh").
+                    HasExistingParticipant("Patrick").
+                    HasExistingParticipant("Sarah").
+                    NewRound("9346: As a user I want to change my password").
+                    PlayCard("Roger", "5").
+                    PlayCard("Hong", "3").
+                    PlayCard("Aaron", "3").
+                    PlayCard("Josh", "2").
+                    PlayCard("Patrick", "8").
+                    PlayCard("Sarah", "☕").
+                    CloseEstimationPhase().
+                    NewRound("9347: As a user I want to use two-factor authentication").
+                    PlayCard("Roger", "8").
+                    PlayCard("Hong", "8").
+                    PlayCard("Aaron", "13").
+                    PlayCard("Josh", "13").
+                    PlayCard("Patrick", "?").
+                    PlayCard("Sarah", "20").
+                    CloseEstimationPhase().
+                    NewRound("9348: As a user I want to change my e-mail address").
+                    PlayCard("Roger", "3").
+                    PlayCard("Hong", "2").
+                    PlayCard("Aaron", "2").
+                    PlayCard("Josh", "5").
+                    PlayCard("Patrick", "2").
+                    PlayCard("Sarah", "5").
+                    CloseEstimationPhase().
+                    NewRound("9347: As a user I want to reset my recovery code").
+                    PlayCard("Roger", "8").
+                    PlayCard("Hong", "8").
+                    PlayCard("Aaron", "20").
+                    PlayCard("Josh", "5").
+                    PlayCard("Patrick", "5").
+                    PlayCard("Sarah", "8").
+                    CloseEstimationPhase().
+                    Build();
+            }
+
+            // When
+            this.Client1.InvokeEndWorkflow();
+            this.EnsureSessionInStage(SessionStage.Finished);
 
             // Then
-            this.Client1.InvokeContinueWorkflow();
+            CreateDocScreenshot(this.Client1.WebDriver, "finished");
         }
 
         private static void CreateDocScreenshot(IWebDriver webDriver, string name) {

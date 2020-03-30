@@ -1,0 +1,64 @@
+@inherits MediatorComponent
+@inject ILogger<SessionOverview> Logger
+@using Microsoft.Extensions.Logging
+@using PokerTime.Application.Common.Models
+@using PokerTime.Application.Estimations.Queries
+@using PokerTime.Application.Sessions.Queries.GetSessionStatus
+
+@if (this.ShowErrorMessage)
+{
+    <ErrorMessage />
+}
+
+<table class="table is-fullwidth is-striped session-overview-table">
+    <thead>
+    <tr>
+        <th>User story</th>
+        <th>Estimations</th>
+    </tr>
+    </thead>
+        @foreach (UserStoryEstimation userStoryEstimation in this.Estimations)
+        {
+            <tr>
+                <td>@userStoryEstimation.Title</td>
+                
+                <td class="session-overview-table__estimation-card-list">
+                    @foreach (EstimationModel estimationCard in userStoryEstimation.Estimations)
+                    {
+                        <EstimatedCard Estimation="@estimationCard" IsSmall="true"/>
+                    }
+                </td>
+            </tr>
+        }
+    
+        @if (this.Estimations.Count == 0)
+        {
+            <tr>
+                <td colspan="2">You have estimated no user stories in this session.</td>
+            </tr>
+        }
+    <tbody>
+    </tbody>
+</table>
+
+@code {
+#nullable disable
+
+    [CascadingParameter]
+    public SessionStatus SessionStatus { get; set; }
+
+    private bool ShowErrorMessage { get; set; }
+    private ICollection<UserStoryEstimation> Estimations { get; set; } = Array.Empty<UserStoryEstimation>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        try {
+            GetEstimationsOverviewQueryResponse response = await this.Mediator.Send(new GetEstimationsOverviewQuery(this.SessionStatus.SessionId));
+            this.Estimations = response.UserStoryEstimations;
+        }
+        catch (Exception ex) {
+            this.ShowErrorMessage = true;
+            this.Logger.LogError(ex, "Unable to load estimations overview: " + ex.Message);
+        }
+    }
+}

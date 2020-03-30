@@ -6,7 +6,6 @@
 // ******************************************************************************
 
 namespace PokerTime.Web.Tests.Integration.Pages {
-    using System.Collections.ObjectModel;
     using System.Threading;
     using Common;
     using Components;
@@ -15,9 +14,11 @@ namespace PokerTime.Web.Tests.Integration.Pages {
 
     public sealed class PokerSessionLobby : PageObject {
         public IWebElement WorkflowContinueButton => this.WebDriver.FindElementByTestElementId("workflow-continue-button");
+        public IWebElement WorkflowEndButton => this.WebDriver.FindElementByTestElementId("workflow-end-button");
 
         public IWebElement WaitForStartMessageElement => this.WebDriver.FindElementByTestElementId("wait-for-start-message");
         public IWebElement CardChooserElement => this.WebDriver.FindElementByTestElementId("card-chooser");
+        public IWebElement SessionFinishedElement => this.WebDriver.FindElementByTestElementId("session-finished-message");
         public IWebElement EstimationOverviewElement => this.WebDriver.FindElementByTestElementId("estimation-overview");
 
         public IWebElement UserStoryTitleInput => this.WebDriver.FindElement(By.Id("pokertime-userstory-title"));
@@ -27,6 +28,13 @@ namespace PokerTime.Web.Tests.Integration.Pages {
 
         public void InvokeContinueWorkflow() {
             this.WorkflowContinueButton.Click();
+
+            // Insert sleep for AppVeyor and slower CI
+            Thread.Sleep(1000);
+        }
+
+        public void InvokeEndWorkflow() {
+            this.WorkflowEndButton.Click();
 
             // Insert sleep for AppVeyor and slower CI
             Thread.Sleep(1000);

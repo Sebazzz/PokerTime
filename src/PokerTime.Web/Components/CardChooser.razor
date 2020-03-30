@@ -5,11 +5,6 @@
 @inherits MediatorComponent
 @inject ILogger<CardChooser> Logger
 
-@if (this.SessionStatus == null)
-{
-    return;
-}
-
 @if (this.ShowErrorMessage)
 {
     <ErrorMessage Text="Something went wrong executing your command. Please try again." />

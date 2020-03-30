@@ -6,7 +6,7 @@
     return;
 }
 
-    <div class="estimated-card @(IsShown ? "estimated-card--shown" : "estimated-card--hidden")"
+    <div class="estimated-card @(IsShown ? "estimated-card--shown" : "estimated-card--hidden") @(IsSmall ? "estimated-card--small" : "estimated-card--normal")"
          data-test-element-id="estimation-card"
          data-id="@this.Estimation.Id"
          data-symbol-id="@this.Estimation.Symbol.Id"
@@ -47,6 +47,8 @@
     [Parameter]
     public EstimationModel Estimation { get; set; }
 
+    [Parameter]
+    public bool IsSmall { get; set; }
 
     private bool IsShown => this.SessionStatus.CanViewEstimations || this.Estimation.ParticipantId == this.CurrentParticipant.Id;
 }
