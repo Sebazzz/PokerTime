@@ -443,7 +443,7 @@ void TestTask(string name, string projectName, Func<bool> criteria = null) {
 TestTask("Unit-Application", $"{baseName}.Application.Tests.Unit");
 TestTask("Unit-Domain", $"{baseName}.Domain.Tests.Unit");
 TestTask("Unit-Web", $"{baseName}.Web.Tests.Unit");
-TestTask("Integration-Web", $"{baseName}.Web.Tests.Integration", () => HasEnvironmentVariable("CIRCLECI") == false /* Headless tests are unstable on CircleCI*/);
+TestTask("Integration-Web", $"{baseName}.Web.Tests.Integration");
 
 Task("Test-CS")
     .Description("Test backend-end compiled code");
