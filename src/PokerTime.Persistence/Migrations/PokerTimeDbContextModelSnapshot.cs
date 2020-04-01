@@ -8,6 +8,9 @@ using PokerTime.Persistence;
 
 namespace PokerTime.Persistence.Migrations
 {
+    using System.Diagnostics.CodeAnalysis;
+
+    [ExcludeFromCodeCoverage]
     [DbContext(typeof(PokerTimeDbContext))]
     partial class PokerTimeDbContextModelSnapshot : ModelSnapshot
     {

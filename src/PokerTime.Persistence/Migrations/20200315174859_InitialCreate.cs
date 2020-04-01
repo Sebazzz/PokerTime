@@ -1,16 +1,15 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace PokerTime.Persistence.Migrations
-{
-    public partial class InitialCreate : Migration
-    {
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
+namespace PokerTime.Persistence.Migrations {
+    using System.Diagnostics.CodeAnalysis;
+
+    [ExcludeFromCodeCoverage]
+    public partial class InitialCreate : Migration {
+        protected override void Up(MigrationBuilder migrationBuilder) {
             migrationBuilder.CreateTable(
                 name: "PredefinedParticipantColor",
-                columns: table => new
-                {
+                columns: table => new {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 128, nullable: false),
@@ -18,15 +17,13 @@ namespace PokerTime.Persistence.Migrations
                     Color_G = table.Column<byte>(nullable: true),
                     Color_B = table.Column<byte>(nullable: true)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_PredefinedParticipantColor", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Session",
-                columns: table => new
-                {
+                columns: table => new {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UrlId_StringId = table.Column<string>(unicode: false, maxLength: 32, nullable: true),
@@ -36,30 +33,26 @@ namespace PokerTime.Persistence.Migrations
                     FacilitatorHashedPassphrase = table.Column<string>(unicode: false, fixedLength: true, maxLength: 64, nullable: false),
                     CreationTimestamp = table.Column<DateTimeOffset>(nullable: false)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_Session", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Symbol",
-                columns: table => new
-                {
+                columns: table => new {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ValueAsNumber = table.Column<int>(nullable: false),
                     Type = table.Column<int>(nullable: false),
                     Order = table.Column<int>(nullable: false)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_Symbol", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Participant",
-                columns: table => new
-                {
+                columns: table => new {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Color_R = table.Column<byte>(nullable: true),
@@ -69,8 +62,7 @@ namespace PokerTime.Persistence.Migrations
                     Name = table.Column<string>(maxLength: 256, nullable: false),
                     IsFacilitator = table.Column<bool>(nullable: false)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_Participant", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Participant_Session_SessionId",
@@ -82,15 +74,13 @@ namespace PokerTime.Persistence.Migrations
 
             migrationBuilder.CreateTable(
                 name: "UserStory",
-                columns: table => new
-                {
+                columns: table => new {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SessionId = table.Column<int>(nullable: false),
                     Title = table.Column<string>(nullable: true)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_UserStory", x => x.Id);
                     table.ForeignKey(
                         name: "FK_UserStory_Session_SessionId",
@@ -102,16 +92,14 @@ namespace PokerTime.Persistence.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Estimation",
-                columns: table => new
-                {
+                columns: table => new {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserStoryId = table.Column<int>(nullable: false),
                     ParticipantId = table.Column<int>(nullable: false),
                     SymbolId = table.Column<int>(nullable: true)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_Estimation", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Estimation_Participant_ParticipantId",
@@ -166,8 +154,7 @@ namespace PokerTime.Persistence.Migrations
                 column: "SessionId");
         }
 
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
+        protected override void Down(MigrationBuilder migrationBuilder) {
             migrationBuilder.DropTable(
                 name: "Estimation");
 

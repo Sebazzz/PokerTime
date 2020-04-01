@@ -1,6 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PokerTime.Persistence.Migrations {
+    using System.Diagnostics.CodeAnalysis;
+
+    [ExcludeFromCodeCoverage]
     public partial class AddSymbolSets : Migration {
         protected override void Up(MigrationBuilder migrationBuilder) {
             migrationBuilder.CreateTable(
