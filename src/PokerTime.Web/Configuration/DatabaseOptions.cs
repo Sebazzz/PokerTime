@@ -7,10 +7,12 @@
 
 namespace PokerTime.Web.Configuration {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using Microsoft.Data.SqlClient;
     using Microsoft.Data.Sqlite;
     using Persistence;
 
+    [ExcludeFromCodeCoverage] // Configuration does not need to be automated tested
     public class DatabaseOptions : IDatabaseOptions {
         private string? _cachedConnectionString;
 

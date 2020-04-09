@@ -7,9 +7,11 @@
 
 namespace PokerTime.Web.Configuration {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Runtime.InteropServices;
 
+    [ExcludeFromCodeCoverage] // Configuration does not need to be automated tested
     public static class EnvironmentPath {
         private const string AppSpecificFolder = "pokertime";
 

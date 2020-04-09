@@ -6,6 +6,9 @@
 // ******************************************************************************
 
 namespace PokerTime.Web.Configuration {
+    using System.Diagnostics.CodeAnalysis;
+
+    [ExcludeFromCodeCoverage] // Configuration does not need to be automated tested
     public sealed class HttpsServerOptions {
         public string? CertificatePath { get; set; }
         public string? CertificatePassword { get; set; }

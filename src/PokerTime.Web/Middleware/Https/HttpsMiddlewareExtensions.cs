@@ -7,6 +7,7 @@
 
 namespace PokerTime.Web.Middleware.Https {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using Configuration;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Http;
@@ -14,6 +15,7 @@ namespace PokerTime.Web.Middleware.Https {
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Options;
 
+    [ExcludeFromCodeCoverage] // Configuration does not need to be automated tested
     public static class ApplicationBuilderExtensions {
         public static IApplicationBuilder UseHttps(this IApplicationBuilder app, IHostEnvironment hostEnvironment) {
             if (app == null) throw new ArgumentNullException(nameof(app));
