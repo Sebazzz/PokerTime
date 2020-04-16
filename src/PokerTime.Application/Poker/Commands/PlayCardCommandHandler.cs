@@ -82,6 +82,7 @@ namespace PokerTime.Application.Poker.Commands {
             await dbContext.SaveChangesAsync(cancellationToken);
 
             var estimationNotification = new EstimationGivenNotification(
+                session.UrlId.StringId,
                 this._mapper.Map<EstimationModel>(estimation)
             );
 

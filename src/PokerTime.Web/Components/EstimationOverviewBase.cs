@@ -39,7 +39,7 @@ namespace PokerTime.Web.Components {
 
         protected IEnumerable<string> ParticipantsWithoutEstimation {
             get {
-                if (this.ParticipantList == null || this.Estimations == null) {
+                if (this.ParticipantList == null) {
                     yield break;
                 }
 
@@ -56,9 +56,14 @@ namespace PokerTime.Web.Components {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2227:Collection properties should be read only", Justification = "<Pending>")]
         protected IDictionary<int, EstimationModel> Estimations { get; set; } = new Dictionary<int, EstimationModel>();
 
-        public Task OnEstimationGiven(EstimationModel estimation) {
+        public Task OnEstimationGiven(EstimationGivenNotification notification) {
+            if (notification == null) throw new ArgumentNullException(nameof(notification));
+            if (notification.SessionId != this.SessionStatus.SessionId) {
+                return Task.CompletedTask;
+            }
+
             this.InvokeAsync(() => {
-                this.Estimations[estimation.ParticipantId] = estimation;
+                this.Estimations[notification.Estimation.ParticipantId] = notification.Estimation;
 
                 this.StateHasChanged();
             });

@@ -12,7 +12,10 @@ namespace PokerTime.Application.Notifications.EstimationGiven {
     public sealed class EstimationGivenNotification : INotification {
         public EstimationModel Estimation { get; }
 
-        public EstimationGivenNotification(EstimationModel estimation) {
+        public string SessionId { get; }
+
+        public EstimationGivenNotification(string sessionId, EstimationModel estimation) {
+            this.SessionId = sessionId;
             this.Estimation = estimation;
         }
     }

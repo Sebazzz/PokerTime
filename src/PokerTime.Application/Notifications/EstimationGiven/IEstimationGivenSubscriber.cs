@@ -7,9 +7,8 @@
 
 namespace PokerTime.Application.Notifications.EstimationGiven {
     using System.Threading.Tasks;
-    using Common.Models;
 
     public interface IEstimationGivenSubscriber : ISubscriber {
-        Task OnEstimationGiven(EstimationModel estimation);
+        Task OnEstimationGiven(EstimationGivenNotification notification);
     }
 }

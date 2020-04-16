@@ -100,7 +100,7 @@ namespace PokerTime.Web.Pages {
         }
 
         public Task OnSessionStatusUpdated(SessionStatus sessionStatus) {
-            if (this.SessionStatus?.SessionId != this.SessionId) {
+            if (sessionStatus.SessionId != this.SessionId) {
                 return Task.CompletedTask;
             }
 

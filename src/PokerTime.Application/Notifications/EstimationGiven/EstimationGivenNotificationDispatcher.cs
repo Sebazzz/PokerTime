@@ -16,6 +16,6 @@ namespace PokerTime.Application.Notifications.EstimationGiven {
         protected override Task DispatchCore(
             IEstimationGivenSubscriber subscriber,
             EstimationGivenNotification notification
-        ) => subscriber.OnEstimationGiven(notification.Estimation);
+        ) => subscriber.OnEstimationGiven(notification);
     }
 }

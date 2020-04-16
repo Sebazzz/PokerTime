@@ -15,7 +15,7 @@ namespace PokerTime.Application.SessionWorkflows.Commands {
     using MediatR;
 
     public sealed class InitiateEstimationDiscussionStageCommandHandler : AbstractStageCommandHandler<InitiateEstimationDiscussionStageCommand> {
-        public InitiateEstimationDiscussionStageCommandHandler(IPokerTimeDbContextFactory pokerTimeDbContext, ISessionStatusUpdateDispatcher retrospectiveStatusUpdateDispatcher) : base(pokerTimeDbContext, retrospectiveStatusUpdateDispatcher) {
+        public InitiateEstimationDiscussionStageCommandHandler(IPokerTimeDbContextFactory pokerTimeDbContext, ISessionStatusUpdateDispatcher sessionStatusUpdateDispatcher) : base(pokerTimeDbContext, sessionStatusUpdateDispatcher) {
         }
 
         protected override async Task<Unit> HandleCore(InitiateEstimationDiscussionStageCommand request, Session session, CancellationToken cancellationToken) {

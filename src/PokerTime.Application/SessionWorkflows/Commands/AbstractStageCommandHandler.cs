@@ -17,16 +17,16 @@ namespace PokerTime.Application.SessionWorkflows.Commands {
     using Services;
 
     public abstract class AbstractStageCommandHandler<TRequest> : IRequestHandler<TRequest> where TRequest : AbstractStageCommand, IRequest {
-        private readonly ISessionStatusUpdateDispatcher _retrospectiveStatusUpdateDispatcher;
+        private readonly ISessionStatusUpdateDispatcher _sessionStatusUpdateDispatcher;
         private readonly IPokerTimeDbContextFactory _dbContextFactory;
 
 #nullable disable
         protected IPokerTimeDbContext DbContext { get; private set; }
 #nullable enable
 
-        protected AbstractStageCommandHandler(IPokerTimeDbContextFactory pokerTimeDbContext, ISessionStatusUpdateDispatcher retrospectiveStatusUpdateDispatcher) {
+        protected AbstractStageCommandHandler(IPokerTimeDbContextFactory pokerTimeDbContext, ISessionStatusUpdateDispatcher sessionStatusUpdateDispatcher) {
             this._dbContextFactory = pokerTimeDbContext;
-            this._retrospectiveStatusUpdateDispatcher = retrospectiveStatusUpdateDispatcher;
+            this._sessionStatusUpdateDispatcher = sessionStatusUpdateDispatcher;
         }
 
         public async Task<Unit> Handle(TRequest request, CancellationToken cancellationToken) {
@@ -49,6 +49,6 @@ namespace PokerTime.Application.SessionWorkflows.Commands {
 
         protected abstract Task<Unit> HandleCore(TRequest request, Session session, CancellationToken cancellationToken);
 
-        protected Task DispatchUpdate(Session session, CancellationToken cancellationToken) => this._retrospectiveStatusUpdateDispatcher.DispatchUpdate(session, cancellationToken);
+        protected Task DispatchUpdate(Session session, CancellationToken cancellationToken) => this._sessionStatusUpdateDispatcher.DispatchUpdate(session, cancellationToken);
     }
 }
