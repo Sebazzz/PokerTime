@@ -215,11 +215,7 @@ Task("Run-FrontendBuild")
 			throw new CakeException($"'yarn run build' returned exit code {exitCode} (0x{exitCode:x2})");
 		}
 	});
-	
-Task("Run-DotnetFormatToolInstall")
-	.Does(() => {
-	StartProcess("dotnet", "tool install --tool-path .dotnet/ dotnet-format");
-});
+
 
 IEnumerable<string> GetModifiedFilePaths() {
 	IEnumerable<string> stdErr, stdOut;
@@ -253,32 +249,6 @@ Task("Set-HeadlessEnvironment")
 		System.Environment.SetEnvironmentVariable("MOZ_HEADLESS", "1");
 	});
 	
-Task("Run-Precommit-Tasks")
-	.Does(() => {
-	{
-		int exitCode = StartProjectDirProcess("yarn pre-commit--pretty-quick");
-		if (exitCode != 0) {
-			throw new CakeException($"pretty-quick exited with code {exitCode}");
-		}
-	}
-	
-	{
-		string filePaths = String.Join(",", GetModifiedFilePaths());
-		
-		if (String.IsNullOrEmpty(filePaths)) {
-			Information("No changed files to reformat");
-			return;
-		}
-		
-		int exitCode = StartProcess("dotnet", new ProcessSettings()
-			.UseWorkingDirectory(mainProjectPath)
-			.WithArguments(args => args.Append("format").Append("--files").AppendQuoted(filePaths)));
-			
-		if (exitCode != 0) {
-			throw new CakeException($"dotnet-format exited with code {exitCode}");
-		}
-	}
-});
 
 Task("Publish-Common")
 	.Description("Internal task - do not use")
