@@ -6,7 +6,7 @@
      data-test-element-id="user-poker-card"
      data-symbol-id="@this.Symbol.Id"
      data-id="@this.Symbol.Id"
-     @onclick="() => this.OnClick?.Invoke(this.Symbol)">
+     @onclick="() => this.OnClick?.Invoke(this.Symbol)!">
     <div class="user-card__symbol" data-test-element-id="symbol">@this.Symbol.AsString</div>
 </div>
 
