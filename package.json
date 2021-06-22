@@ -1,0 +1,19 @@
+{
+    "name": "pokertime",
+    "version": "1.0.0",
+    "description": "PokerTime application",
+    "repository": "https://github.com/Sebazzz/PokerTime",
+    "author": "Sebazzz",
+    "license": "GPLv3",
+    "private": true,
+    "devDependencies": {
+        "husky": "^4.3.8",
+        "lint-staged": "10.5.4",
+        "prettier": "^2.2.1",
+        "pretty-quick": "^3.1.0"
+    },
+    "lint-staged": {
+        "*.cs": "dotnet format --include",
+        "*.{js,ts,tsx,scss,html,json,xml}": "prettier --write"
+    }
+}

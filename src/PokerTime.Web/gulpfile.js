@@ -1,40 +1,64 @@
 /// <binding ProjectOpened='sass:watch' />
 'use strict';
 
+const del = require('del');
 const gulp = require('gulp');
-const sass = require('gulp-sass');
+const gulpif = require('gulp-if');
+const sass = require('gulp-dart-sass');
 const autoprefixer = require('gulp-autoprefixer');
+const sourcemaps = require('gulp-sourcemaps');
 
-sass.compiler = require('node-sass');
+// Do certain stuff only in a dev build
+const devBuild = (process.env.NODE_ENV || 'development').trim().toLowerCase() === 'development';
 
-gulp.task('sass', function() {
+function onlyInDevBuild(input) {
+    return gulpif(devBuild, input);
+}
+
+// Set-up SASS compiler
+const sassOptions = {
+    outputStyle: devBuild ? 'expanded' : 'compressed',
+
+    sourceMapEmbed: devBuild,
+    sourceMapContents: devBuild,
+    sourceMap: devBuild,
+};
+sass.compiler = require('sass');
+
+gulp.task('sass-main', function () {
     return gulp
         .src('./_scss/main.scss')
-        .pipe(sass().on('error', sass.logError))
+        .pipe(onlyInDevBuild(sourcemaps.init()))
+        .pipe(sass(sassOptions).on('error', sass.logError))
         .pipe(autoprefixer({ cascade: false }))
+        .pipe(onlyInDevBuild(sourcemaps.write()))
         .pipe(gulp.dest('./wwwroot/build/css/'));
 });
 
-gulp.task('copy-fonts', function() {
+gulp.task('sass-swagger', function () {
+    return gulp
+        .src('./_scss/swagger.scss')
+        .pipe(onlyInDevBuild(sourcemaps.init()))
+        .pipe(sass(sassOptions).on('error', sass.logError))
+        .pipe(autoprefixer({ cascade: false }))
+        .pipe(onlyInDevBuild(sourcemaps.write()))
+        .pipe(gulp.dest('./wwwroot/build/css/'));
+});
+
+gulp.task('copy-fonts', function () {
     return gulp
         .src('./node_modules/@fortawesome/fontawesome-free/webfonts/*')
         .pipe(gulp.dest('./wwwroot/build/fonts/'));
 });
 
-gulp.task('copy-js-deps', function() {
-    return gulp
-        .src('./node_modules/blazor.polyfill/blazor.polyfill.min.js')
-        .pipe(gulp.dest('./wwwroot/build/js/compat'));
+gulp.task('sass:watch', function () {
+    gulp.watch('./_scss/**/*.scss', gulp.series('sass-main', 'sass-swagger'));
 });
 
-gulp.task('sass:watch', function() {
-    gulp.watch('./_scss/**/*.scss', gulp.series('sass'));
+gulp.task('clean', function (cb) {
+    return del(['./wwwroot/build'], cb);
 });
 
-gulp.task('clean', function(cb) {
-    del(['./wwwroot/build'], cb);
-});
-
-gulp.task('build', gulp.parallel('sass', 'copy-fonts', 'copy-js-deps'));
+gulp.task('build', gulp.parallel('sass-main', 'sass-swagger', 'copy-fonts'));
 
 gulp.task('default', gulp.series('clean', 'build'));
