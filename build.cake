@@ -287,7 +287,6 @@ void WindowsPublishTask(string taskId, string versionId, string description) {
 }
 
 WindowsPublishTask("10-x64", "win10-x64", "Windows 10 / Windows Server 2016 64-bit");
-WindowsPublishTask("8-x64", "win81-x64", "Windows 8.1 / Windows Server 2012 R2 64-bit");
 
 var ubuntuAllPublishTask = Task("Publish-Ubuntu");
 
@@ -313,9 +312,8 @@ void UbuntuPublishTask(string taskId, string versionId, string description) {
 	ubuntuAllPublishTask.IsDependentOn(taskName);
 }
 
-UbuntuPublishTask("16.10-x64", "ubuntu.16.10-x64", "Ubuntu 16.10/17.04 64-bit");
-UbuntuPublishTask("18.04-x64", "ubuntu.18.04-x64", "Ubuntu 18.04 64-bit");
-//UbuntuPublishTask("16.10-x64-ngen", "ubuntu.16.10-x64-corert", "Ubuntu 16.10/17.04 64-bit - experimental ahead-of-time compiled version");
+UbuntuPublishTask("20.04-x64", "ubuntu.20.04-x64", "Ubuntu 20.04 64-bit");
+UbuntuPublishTask("21.04-x64", "ubuntu.21.04-x64", "Ubuntu 21.04 64-bit");
 
 Task("Publish")
     .IsDependentOn("Publish-Windows")
