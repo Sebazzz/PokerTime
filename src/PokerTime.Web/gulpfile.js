@@ -35,16 +35,6 @@ gulp.task('sass-main', function () {
         .pipe(gulp.dest('./wwwroot/build/css/'));
 });
 
-gulp.task('sass-swagger', function () {
-    return gulp
-        .src('./_scss/swagger.scss')
-        .pipe(onlyInDevBuild(sourcemaps.init()))
-        .pipe(sass(sassOptions).on('error', sass.logError))
-        .pipe(autoprefixer({ cascade: false }))
-        .pipe(onlyInDevBuild(sourcemaps.write()))
-        .pipe(gulp.dest('./wwwroot/build/css/'));
-});
-
 gulp.task('copy-fonts', function () {
     return gulp
         .src('./node_modules/@fortawesome/fontawesome-free/webfonts/*')
@@ -52,13 +42,13 @@ gulp.task('copy-fonts', function () {
 });
 
 gulp.task('sass:watch', function () {
-    gulp.watch('./_scss/**/*.scss', gulp.series('sass-main', 'sass-swagger'));
+    gulp.watch('./_scss/**/*.scss', gulp.series('sass-main'));
 });
 
 gulp.task('clean', function (cb) {
     return del(['./wwwroot/build'], cb);
 });
 
-gulp.task('build', gulp.parallel('sass-main', 'sass-swagger', 'copy-fonts'));
+gulp.task('build', gulp.parallel('sass-main', 'copy-fonts'));
 
 gulp.task('default', gulp.series('clean', 'build'));
