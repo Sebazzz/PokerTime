@@ -1,6 +1,5 @@
 {
     "hooks": {
-        "pre-commit": "lint-staged --relative",
-        "pre-push": "./pre-push-test.cmd"
+        "pre-commit": "lint-staged --relative"
     }
 }
