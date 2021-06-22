@@ -1,14 +1,10 @@
 ### BUILD
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1.201 AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build-env
 WORKDIR /source
 
 # Prerequisites
 COPY utils/* utils/
 RUN utils/install-all-prereqs.sh
-
-# ... libgit2sharp debian 10.x support
-RUN dotnet tool install -g GitVersion.Tool --version 5.2.4
-ENV LD_LIBRARY_PATH=/root/.dotnet/tools/.store/gitversion.tool/5.2.4/gitversion.tool/5.2.4/tools/netcoreapp3.1/any/runtimes/debian.9-x64/native/
 
 # Copy csproj and restore as distinct layers
 # ... sources
@@ -54,10 +50,10 @@ FROM build-env AS publish
 
 # ... run publish
 COPY . .
-RUN ./build.sh --target=Publish-Ubuntu-18.04-x64 --publish-dir=publish --verbosity=verbose --skip-compression=true
+RUN ./build.sh --target=Publish-Ubuntu-20.04-x64 --publish-dir=publish --verbosity=verbose --skip-compression=true
 
 ### RUNTIME IMAGE
-FROM mcr.microsoft.com/dotnet/core/runtime-deps:3.1
+FROM mcr.microsoft.com/dotnet/runtime-deps:5.0
 WORKDIR /app
 
 # ... Run libgdi install
@@ -65,7 +61,7 @@ COPY utils/install-app-prereqs.sh utils/
 RUN bash utils/install-app-prereqs.sh
 
 # ... Copy published app
-COPY --from=publish /source/publish/ubuntu.18.04-x64/ .
+COPY --from=publish /source/publish/ubuntu.20.04-x64/ .
 
 ENV ASPNETCORE_ENVIRONMENT Production
 

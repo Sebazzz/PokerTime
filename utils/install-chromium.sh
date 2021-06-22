@@ -13,6 +13,10 @@ apt-get -qqy update
 apt-get -qqy install lsb-release libappindicator3-1
 ensure_success
 
+echo "Downloading Chromium debian package key..."
+curl -sS https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+ensure_success
+
 echo "Downloading Chromium debian package..."
 curl -L -o google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 ensure_success
