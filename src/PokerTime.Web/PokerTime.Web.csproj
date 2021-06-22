@@ -3,6 +3,7 @@
     <KeepOutputPath>True</KeepOutputPath>
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
   </PropertyGroup>
+  
   <Import Project="../Common.props" />
 
   <PropertyGroup>
