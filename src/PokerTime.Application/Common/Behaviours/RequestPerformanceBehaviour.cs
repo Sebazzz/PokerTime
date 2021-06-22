@@ -14,7 +14,7 @@ namespace PokerTime.Application.Common.Behaviours {
     using MediatR;
     using Microsoft.Extensions.Logging;
 
-    public sealed class RequestPerformanceBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> {
+    public sealed class RequestPerformanceBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull {
         private readonly ICurrentParticipantService _currentParticipantService;
         private readonly ILogger<TRequest> _logger;
         private readonly Stopwatch _timer;

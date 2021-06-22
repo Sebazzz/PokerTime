@@ -16,8 +16,7 @@ namespace PokerTime.Application.Common.Behaviours {
     using MediatR;
     using ValidationException = PokerTime.Application.Common.ValidationException;
 
-    public sealed class RequestValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-        where TRequest : IRequest<TResponse> {
+    public sealed class RequestValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull, IRequest<TResponse> {
         private readonly IEnumerable<IValidator<TRequest>> _validators;
 
         public RequestValidationBehaviour(IEnumerable<IValidator<TRequest>> validators) {
@@ -30,7 +29,7 @@ namespace PokerTime.Application.Common.Behaviours {
             RequestHandlerDelegate<TResponse> next
         ) {
             if (next == null) throw new ArgumentNullException(nameof(next));
-            var context = new ValidationContext(instanceToValidate: request);
+            var context = new ValidationContext<TRequest>(request);
 
             List<ValidationFailure> failures = this._validators.Select(selector: v => v.Validate(context: context)).
                 SelectMany(selector: result => result.Errors).
