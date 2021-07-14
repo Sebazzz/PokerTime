@@ -34,7 +34,7 @@
         </PackageReference>
 
         <!-- Fixes CS8034: Unable to load Analyzer assembly [...] Microsoft.AspNetCore.Components.Analyzers.dll : Assembly with same name is already loaded -->
-        <PackageReference Include="Microsoft.AspNetCore.Components.Analyzers" Version="5.0.7" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Analyzers" Version="5.0.8" />
 
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
     </ItemGroup>
